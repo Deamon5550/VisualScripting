@@ -103,7 +103,7 @@ public abstract class Node implements INode
         return insertLocal(mv, localsIndex);
     }
     
-    protected abstract int insertLocal(MethodVisitor mv, int localsIndex);
+    protected abstract int insertLocal(MethodVisitor mv, int localsIndex) throws GraphCompilationException;
 
     @Override
     public boolean isExecutable()

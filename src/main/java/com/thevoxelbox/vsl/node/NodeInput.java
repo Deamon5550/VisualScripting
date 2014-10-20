@@ -83,6 +83,10 @@ public class NodeInput
         switch(this.type)
         {
         case INTEGER:
+            if(this.defaultValue == null)
+            {
+                throw new GraphCompilationException("Default value was null for a type not supporting null");
+            }
             long value = (long) this.defaultValue;
             if (value <= Byte.MAX_VALUE && value >= Byte.MIN_VALUE)
             {
@@ -110,6 +114,10 @@ public class NodeInput
             }
             break;
         case FLOAT:
+            if(this.defaultValue == null)
+            {
+                throw new GraphCompilationException("Default value was null for a type not supporting null");
+            }
             //TODO
             break;
         case VOID:
@@ -119,12 +127,16 @@ public class NodeInput
             //TODO
             break;
         case STRING:
+            if(this.defaultValue == null)
+            {
+                throw new GraphCompilationException("Default value was null for a type not supporting null");
+            }
             mv.visitLdcInsn(defaultValue.toString());
             mv.visitVarInsn(Opcodes.ASTORE, init);
             init+=1;
             break;
         default:
-            throw new GraphCompilationException("Unknown type for default value in " + this.name); //TODO identification name is fairly useless...
+            throw new GraphCompilationException("Unknown type for default value in " + this.name); //TODO identification name is fairly useless for debugging...
         }
         return init;
     }

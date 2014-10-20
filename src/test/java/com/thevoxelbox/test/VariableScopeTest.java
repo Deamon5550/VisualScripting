@@ -2,10 +2,22 @@ package com.thevoxelbox.test;
 
 import static org.junit.Assert.assertEquals;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
 import org.junit.Before;
 import org.junit.Test;
 
 import com.thevoxelbox.vsl.VariableScope;
+import com.thevoxelbox.vsl.api.INodeGraph;
+import com.thevoxelbox.vsl.classloader.ASMClassLoader;
+import com.thevoxelbox.vsl.error.GraphCompilationException;
+import com.thevoxelbox.vsl.error.InvalidNodeTypeException;
+import com.thevoxelbox.vsl.node.NodeGraph;
+import com.thevoxelbox.vsl.node.debug.PrintNode;
+import com.thevoxelbox.vsl.node.variables.StringValueNode;
+import com.thevoxelbox.vsl.node.variables.VariableGetNode;
+import com.thevoxelbox.vsl.node.variables.VariableSetNode;
 
 public class VariableScopeTest
 {
@@ -38,5 +50,34 @@ public class VariableScopeTest
     {
         assertEquals(child, child2.getParent());
         assertEquals(parent, child2.getHighestParent());
+    }
+    
+    @Test
+    public void testVariableNodes() throws NullPointerException, InvalidNodeTypeException, GraphCompilationException, InstantiationException, IllegalAccessException
+    {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        PrintStream out = new PrintStream(baos);
+        PrintStream oldOut = System.out;
+        System.setOut(out);
+        
+        StringValueNode value = new StringValueNode("Hello World");
+        VariableSetNode set = new VariableSetNode("name");
+        set.mapInput("value", value.getOutput("value"));
+        VariableGetNode get = new VariableGetNode("name");
+        PrintNode print = new PrintNode();
+        print.mapInput("msg", get.getOutput("value"));
+        set.setNextNode(print);
+        
+        INodeGraph tree = new NodeGraph("Test Graph");
+        tree.setStartNode(set);
+        tree.compile(ASMClassLoader.getGlobalClassLoader());
+        tree.run(this.child);
+        
+        
+        String s = new String(baos.toByteArray());
+        s = s.replace("\n", "");
+        s = s.replace("\r", "");
+        assertEquals("Hello World", s);
+        System.setOut(oldOut);
     }
 }

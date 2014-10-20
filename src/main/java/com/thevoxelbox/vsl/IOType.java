@@ -6,5 +6,6 @@ public enum IOType
     INTEGER(),
     FLOAT(),
     VOID(),
-    OBJECT();
+    OBJECT(),
+    BOOLEAN;
 }
