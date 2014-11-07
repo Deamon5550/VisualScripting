@@ -20,7 +20,7 @@ public class PrintNode extends ExecutableNode
         int msg_i = getInput("msg").getSource().get();
         mv.visitFieldInsn(Opcodes.GETSTATIC, "java/lang/System", "out", "Ljava/io/PrintStream;");
         mv.visitVarInsn(Opcodes.ALOAD, msg_i);
-        mv.visitMethodInsn(Opcodes.INVOKEVIRTUAL, "java/io/PrintStream", "println", "(Ljava/lang/String;)V", false);
+        mv.visitMethodInsn(Opcodes.INVOKEVIRTUAL, "java/io/PrintStream", "print", "(Ljava/lang/String;)V", false);
         return localsIndex;
     }
 }
