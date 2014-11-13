@@ -5,7 +5,6 @@ public enum IOType
     STRING(),
     INTEGER(),
     FLOAT(),
-    VOID(),
-    OBJECT(),
-    BOOLEAN;
+    WILD(),
+    BOOLEAN();
 }
