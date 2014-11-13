@@ -50,7 +50,11 @@ public abstract class Node implements INode
         {
             throw new NullPointerException("Attempted to map to unknown input " + input);
         }
-        if(inputs.get(input).getType() != source.getType())
+        if(source == null)
+        {
+            throw new NullPointerException("Attempted to map from null output");
+        }
+        if(inputs.get(input).getType() != source.getType() && inputs.get(input).getType() != IOType.WILD)
         {
             throw new InvalidNodeTypeException("Invalid type " + source.getType().name() + " expected " + inputs.get(input).getType().name());
         }
@@ -81,23 +85,20 @@ public abstract class Node implements INode
         int init = localsIndex;
         for(String n: inputs.keySet())
         {
-            if(inputs.get(n).getSource().get() == -1)
+            if(inputs.get(n).getSource() == null)
             {
-                if(inputs.get(n).getSource() == null)
+                if(inputs.get(n).isRequired())
                 {
-                    if(inputs.get(n).isRequired())
-                    {
-                        throw new GraphCompilationException("Unfilled required input " + n + " " + this.name);
-                    }
-                    else
-                    {
-                        init = inputs.get(n).insertDefaultValue(mv, init);
-                    }
+                    throw new GraphCompilationException("Unfilled required input " + n + " " + this.name);
                 }
                 else
                 {
-                    init = inputs.get(n).getSource().getParent().insert(mv, init);
+                    init = inputs.get(n).insertDefaultValue(mv, init);
                 }
+            }
+            else if(inputs.get(n).getSource().get() == -1)
+            {
+                init = inputs.get(n).getSource().getParent().insert(mv, init);
             }
         }
         return insertLocal(mv, localsIndex);
