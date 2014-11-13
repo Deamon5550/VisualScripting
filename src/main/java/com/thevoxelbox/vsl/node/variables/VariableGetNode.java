@@ -13,14 +13,14 @@ public class VariableGetNode extends Node
     public VariableGetNode()
     {
         super("Variable Get", "variables");
-        addOutput("value", IOType.STRING, this);
+        addOutput("value", IOType.WILD, this);
         addInput("name", IOType.STRING, true, null);
     }
 
     public VariableGetNode(String name)
     {
         super("Variable Get", "variables");
-        addOutput("value", IOType.STRING, this);
+        addOutput("value", IOType.WILD, this);
         addInput("name", IOType.STRING, false, name);
     }
 
@@ -34,14 +34,14 @@ public class VariableGetNode extends Node
         ASTORE i
          */
         int name_i;
-        if(getInput("start").getSource() == null)
+        if(getInput("name").getSource() == null)
         {
             name_i = localsIndex;
             localsIndex = getInput("name").insertDefaultValue(mv, localsIndex);
         }
         else
         {
-            name_i = getInput("start").getSource().get();
+            name_i = getInput("name").getSource().get();
         }
         mv.visitVarInsn(Opcodes.ALOAD, 1);
         mv.visitVarInsn(Opcodes.ALOAD, name_i);

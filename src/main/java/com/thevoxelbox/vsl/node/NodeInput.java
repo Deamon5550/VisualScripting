@@ -120,10 +120,7 @@ public class NodeInput
             }
             //TODO
             break;
-        case VOID:
-            //uhhh...
-            break;
-        case OBJECT:
+        case WILD:
             //TODO
             break;
         case STRING:

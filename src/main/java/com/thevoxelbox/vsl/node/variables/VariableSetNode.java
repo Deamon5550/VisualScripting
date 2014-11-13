@@ -13,14 +13,14 @@ public class VariableSetNode extends ExecutableNode
     public VariableSetNode()
     {
         super("Variable Set", "variables");
-        addInput("value", IOType.OBJECT, true, null);
+        addInput("value", IOType.WILD, true, null);
         addInput("name", IOType.STRING, true, null);
     }
     
     public VariableSetNode(String var)
     {
         super("Variable Set", "variables");
-        addInput("value", IOType.OBJECT, true, null);
+        addInput("value", IOType.WILD, true, null);
         addInput("name", IOType.STRING, false, var);
     }
 
@@ -34,14 +34,14 @@ public class VariableSetNode extends ExecutableNode
         INVOKEINTERFACE IVariableHolder.set (String, Object) : void
          */
         int name_i;
-        if(getInput("start").getSource() == null)
+        if(getInput("name").getSource() == null)
         {
             name_i = localsIndex;
             localsIndex = getInput("name").insertDefaultValue(mv, localsIndex);
         }
         else
         {
-            name_i = getInput("start").getSource().get();
+            name_i = getInput("name").getSource().get();
         }
         int obj_i = getInput("value").getSource().get();
         mv.visitVarInsn(Opcodes.ALOAD, 1);

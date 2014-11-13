@@ -15,6 +15,7 @@ import com.thevoxelbox.vsl.error.GraphCompilationException;
 import com.thevoxelbox.vsl.error.InvalidNodeTypeException;
 import com.thevoxelbox.vsl.node.NodeGraph;
 import com.thevoxelbox.vsl.node.debug.PrintNode;
+import com.thevoxelbox.vsl.node.string.ToStringNode;
 import com.thevoxelbox.vsl.node.variables.StringValueNode;
 import com.thevoxelbox.vsl.node.variables.VariableGetNode;
 import com.thevoxelbox.vsl.node.variables.VariableSetNode;
@@ -64,8 +65,10 @@ public class VariableScopeTest
         VariableSetNode set = new VariableSetNode("name");
         set.mapInput("value", value.getOutput("value"));
         VariableGetNode get = new VariableGetNode("name");
+        ToStringNode toString = new ToStringNode();
+        toString.mapInput("value", get.getOutput("value"));
         PrintNode print = new PrintNode();
-        print.mapInput("msg", get.getOutput("value"));
+        print.mapInput("msg", toString.getOutput("result"));
         set.setNextNode(print);
         
         INodeGraph tree = new NodeGraph("Test Graph");
