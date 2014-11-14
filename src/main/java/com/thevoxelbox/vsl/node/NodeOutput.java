@@ -10,24 +10,24 @@ public class NodeOutput
     private final IOType type;
     private final INode parent;
     private boolean chained = false;
-    
+
     public NodeOutput(String n, IOType t, INode parent)
     {
         this.name = n;
         this.type = t;
         this.parent = parent;
     }
-    
+
     public INode getParent()
     {
         return this.parent;
     }
-    
+
     public String getName()
     {
         return this.name;
     }
-    
+
     public IOType getType()
     {
         return this.type;
@@ -37,7 +37,7 @@ public class NodeOutput
     {
         this.i = i;
     }
-    
+
     public int get()
     {
         return this.i;

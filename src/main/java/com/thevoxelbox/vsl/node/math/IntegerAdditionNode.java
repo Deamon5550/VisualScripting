@@ -33,7 +33,7 @@ public class IntegerAdditionNode extends Node implements Opcodes
         mv.visitInsn(IADD);
         mv.visitVarInsn(ISTORE, localsIndex);
         setOutput("result", localsIndex);
-        return localsIndex+1;
+        return localsIndex + 1;
     }
 
 }

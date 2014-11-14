@@ -12,13 +12,13 @@ import com.thevoxelbox.vsl.error.GraphCompilationException;
 
 public class NodeGraph implements INodeGraph, Opcodes
 {
-    
+
     private String name;
     private int c = 0;
     private ExecutableNode start;
-    
+
     private Class<? extends IRunnableGraph> compiled = null;
-    
+
     public NodeGraph(String name)
     {
         this.name = name.replace(" ", "");
@@ -34,28 +34,29 @@ public class NodeGraph implements INodeGraph, Opcodes
     @Override
     public Class<? extends IRunnableGraph> compile(ASMClassLoader cl) throws NullPointerException, GraphCompilationException
     {
-        if(start == null)
+        if (start == null)
         {
             throw new NullPointerException("Start node is null");
         }
-        if(compiled != null)
+        if (compiled != null)
         {
-            
+
         }
-        while(cl.isClassLoaded("com.thevoxelbox.custom." + this.name + this.c))
+        while (cl.isClassLoaded("com.thevoxelbox.custom." + this.name + this.c))
         {
             this.c++;
         }
         compiled = (Class<? extends IRunnableGraph>) cl.defineClass("com.thevoxelbox.custom." + this.name + this.c, createClass());
         return compiled;
     }
-    
+
     private byte[] createClass() throws GraphCompilationException
     {
         ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_FRAMES);
         MethodVisitor mv;
 
-        cw.visit(V1_7, ACC_PUBLIC + ACC_SUPER, "com/thevoxelbox/custom/" + this.name + this.c, null, "java/lang/Object", new String[]{ "com/thevoxelbox/vsl/api/IRunnableGraph" });
+        cw.visit(V1_7, ACC_PUBLIC + ACC_SUPER, "com/thevoxelbox/custom/" + this.name + this.c, null, "java/lang/Object",
+                new String[] { "com/thevoxelbox/vsl/api/IRunnableGraph" });
 
         cw.visitSource(this.name + this.c + ".java", null);
 
@@ -71,15 +72,15 @@ public class NodeGraph implements INodeGraph, Opcodes
         {
             mv = cw.visitMethod(ACC_PUBLIC, "run", "(Lcom/thevoxelbox/vsl/api/IVariableHolder;)V", null, null);
             mv.visitCode();
-            
+
             int index = 2;
             ExecutableNode current = start;
-            while(current != null)
+            while (current != null)
             {
                 current.insert(mv, index);
                 current = current.getNextNode();
             }
-            
+
             mv.visitInsn(RETURN);
             mv.visitMaxs(0, 0);
             mv.visitEnd();
@@ -92,7 +93,7 @@ public class NodeGraph implements INodeGraph, Opcodes
     @Override
     public void run(IVariableHolder vars) throws InstantiationException, IllegalAccessException
     {
-        if(compiled == null)
+        if (compiled == null)
         {
             throw new RuntimeException("Attempted to run graph without compilation");
         }
@@ -105,5 +106,5 @@ public class NodeGraph implements INodeGraph, Opcodes
     {
         return this.name + this.c;
     }
-    
+
 }

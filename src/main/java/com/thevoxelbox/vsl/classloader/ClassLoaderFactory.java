@@ -7,18 +7,18 @@ import com.thevoxelbox.vsl.api.IClassLoaderFactory;
 
 public class ClassLoaderFactory implements IClassLoaderFactory
 {
-    
+
     Map<Object, ASMClassLoader> loaders = new WeakHashMap<Object, ASMClassLoader>();
-    
+
     public ClassLoaderFactory()
     {
-        
+
     }
 
     @Override
     public ASMClassLoader getClassLoader(Object target)
     {
-        if(!loaders.containsKey(target))
+        if (!loaders.containsKey(target))
         {
             loaders.put(target, new ASMClassLoader());
         }
@@ -30,5 +30,5 @@ public class ClassLoaderFactory implements IClassLoaderFactory
     {
         loaders.remove(target);
     }
-    
+
 }

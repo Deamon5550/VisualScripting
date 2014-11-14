@@ -29,7 +29,7 @@ public class ToStringNode extends Node implements Opcodes
         mv.visitMethodInsn(INVOKESTATIC, "java/lang/String", "valueOf", "(Ljava/lang/Object;)Ljava/lang/String;", false);
         mv.visitVarInsn(ASTORE, localsIndex);
         setOutput("result", localsIndex);
-        return localsIndex+1;
+        return localsIndex + 1;
     }
 
 }

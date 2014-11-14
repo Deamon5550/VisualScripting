@@ -8,5 +8,5 @@ public class InvalidNodeTypeException extends Exception
     {
         super(msg);
     }
-    
+
 }

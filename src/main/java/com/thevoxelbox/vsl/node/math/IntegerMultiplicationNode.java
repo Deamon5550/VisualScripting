@@ -33,7 +33,7 @@ public class IntegerMultiplicationNode extends Node implements Opcodes
         mv.visitInsn(IMUL);
         mv.visitVarInsn(ISTORE, localsIndex);
         setOutput("result", localsIndex);
-        return localsIndex+1;
+        return localsIndex + 1;
     }
 
 }

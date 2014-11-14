@@ -23,22 +23,20 @@ public class SubStringNode extends Node
     protected int insertLocal(MethodVisitor mv, int localsIndex) throws GraphCompilationException
     {
         int start_i;
-        if(getInput("start").getSource() == null)
+        if (getInput("start").getSource() == null)
         {
             start_i = localsIndex;
             localsIndex = getInput("start").insertDefaultValue(mv, localsIndex);
-        }
-        else
+        } else
         {
             start_i = getInput("start").getSource().get();
         }
         int end_i;
-        if(getInput("end").getSource() == null)
+        if (getInput("end").getSource() == null)
         {
             end_i = localsIndex;
             localsIndex = getInput("end").insertDefaultValue(mv, localsIndex);
-        }
-        else
+        } else
         {
             end_i = getInput("end").getSource().get();
         }
@@ -49,7 +47,7 @@ public class SubStringNode extends Node
         mv.visitMethodInsn(Opcodes.INVOKEVIRTUAL, "java/lang/String", "substring", "(II)Ljava/lang/String;", false);
         mv.visitVarInsn(Opcodes.ASTORE, localsIndex);
         setOutput("result", localsIndex);
-        return localsIndex+1;
+        return localsIndex + 1;
     }
 
 }

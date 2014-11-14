@@ -28,15 +28,16 @@ public class NodeGraphTest
     {
         vars = new VariableScope();
     }
-    
+
     @Test
-    public void testStringNodes() throws IOException, NullPointerException, InvalidNodeTypeException, InstantiationException, IllegalAccessException, GraphCompilationException
+    public void testStringNodes() throws IOException, NullPointerException, InvalidNodeTypeException, InstantiationException, IllegalAccessException,
+            GraphCompilationException
     {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         PrintStream out = new PrintStream(baos);
         PrintStream oldOut = System.out;
         System.setOut(out);
-        
+
         StringValueNode string = new StringValueNode("Hello");
         StringValueNode string2 = new StringValueNode(" World");
         PrintNode print = new PrintNode();
@@ -44,18 +45,17 @@ public class NodeGraphTest
         print.mapInput("msg", string.getOutput("value"));
         print2.mapInput("msg", string2.getOutput("value"));
         print.setNextNode(print2);
-        
+
         INodeGraph tree = new NodeGraph("Test Graph");
         tree.setStartNode(print);
         tree.compile(ASMClassLoader.getGlobalClassLoader());
         tree.run(this.vars);
-        
-        
+
         String s = new String(baos.toByteArray());
         s = s.replace("\n", "");
         s = s.replace("\r", "");
         assertEquals("Hello World", s);
         System.setOut(oldOut);
     }
-    
+
 }

@@ -8,11 +8,11 @@ import com.thevoxelbox.vsl.node.ExecutableNode;
 
 public class PrintNode extends ExecutableNode
 {
-	public PrintNode()
-	{
-	    super("Print String", "debug");
-		addInput("msg", IOType.STRING, true, null);
-	}
+    public PrintNode()
+    {
+        super("Print String", "debug");
+        addInput("msg", IOType.STRING, true, null);
+    }
 
     @Override
     protected int insertLocal(MethodVisitor mv, int localsIndex)

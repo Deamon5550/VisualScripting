@@ -33,7 +33,7 @@ public class FloatModuloNode extends Node implements Opcodes
         mv.visitInsn(FREM);
         mv.visitVarInsn(FSTORE, localsIndex);
         setOutput("result", localsIndex);
-        return localsIndex+1;
+        return localsIndex + 1;
     }
 
 }

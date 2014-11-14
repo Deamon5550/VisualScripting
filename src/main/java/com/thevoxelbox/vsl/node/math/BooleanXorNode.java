@@ -33,7 +33,7 @@ public class BooleanXorNode extends Node implements Opcodes
         mv.visitInsn(IXOR);
         mv.visitVarInsn(ISTORE, localsIndex);
         setOutput("result", localsIndex);
-        return localsIndex+1;
+        return localsIndex + 1;
     }
 
 }

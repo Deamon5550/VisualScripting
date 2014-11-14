@@ -12,7 +12,7 @@ public class BooleanNotNode extends Node implements Opcodes
 
     public BooleanNotNode()
     {
-        super("Boolean Not", "math");   
+        super("Boolean Not", "math");
         addInput("a", IOType.BOOLEAN, true, null);
         addOutput("result", IOType.BOOLEAN, this);
     }
@@ -42,7 +42,7 @@ public class BooleanNotNode extends Node implements Opcodes
         mv.visitLabel(l2);
         mv.visitVarInsn(ISTORE, localsIndex);
         setOutput("result", localsIndex);
-        return localsIndex+1;
+        return localsIndex + 1;
     }
 
 }

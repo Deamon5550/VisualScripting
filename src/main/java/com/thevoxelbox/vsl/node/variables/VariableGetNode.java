@@ -9,7 +9,7 @@ import com.thevoxelbox.vsl.node.Node;
 
 public class VariableGetNode extends Node
 {
-    
+
     public VariableGetNode()
     {
         super("Variable Get", "variables");
@@ -34,12 +34,11 @@ public class VariableGetNode extends Node
         ASTORE i
          */
         int name_i;
-        if(getInput("name").getSource() == null)
+        if (getInput("name").getSource() == null)
         {
             name_i = localsIndex;
             localsIndex = getInput("name").insertDefaultValue(mv, localsIndex);
-        }
-        else
+        } else
         {
             name_i = getInput("name").getSource().get();
         }
@@ -48,6 +47,6 @@ public class VariableGetNode extends Node
         mv.visitMethodInsn(Opcodes.INVOKEINTERFACE, "com/thevoxelbox/vsl/api/IVariableHolder", "get", "(Ljava/lang/String;)Ljava/lang/Object;", true);
         mv.visitVarInsn(Opcodes.ASTORE, localsIndex);
         setOutput("value", localsIndex);
-        return localsIndex+1;
+        return localsIndex + 1;
     }
 }

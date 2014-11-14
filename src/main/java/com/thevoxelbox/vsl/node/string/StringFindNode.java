@@ -13,7 +13,7 @@ import com.thevoxelbox.vsl.node.Node;
 
 public class StringFindNode extends Node implements Opcodes
 {
-    
+
     public StringFindNode()
     {
         super("String find", "string");
@@ -61,6 +61,6 @@ public class StringFindNode extends Node implements Opcodes
         mv.visitVarInsn(ISTORE, localsIndex);
         mv.visitLabel(l2);
         setOutput("result", localsIndex);
-        return localsIndex+1;
+        return localsIndex + 1;
     }
 }

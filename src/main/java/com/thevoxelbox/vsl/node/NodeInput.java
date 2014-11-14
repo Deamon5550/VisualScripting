@@ -14,12 +14,12 @@ public class NodeInput
     private boolean chained = false;
     private boolean required;
     private Object defaultValue;
-    
+
     public NodeInput(String n, IOType t)
     {
         this(n, t, true, null);
     }
-    
+
     public NodeInput(String n, IOType t, boolean r, Object d)
     {
         this.name = n;
@@ -27,22 +27,22 @@ public class NodeInput
         this.required = r;
         this.defaultValue = d;
     }
-    
+
     public void setSource(NodeOutput o)
     {
         this.out = o;
     }
-    
+
     public NodeOutput getSource()
     {
         return this.out;
     }
-    
+
     public String getName()
     {
         return this.name;
     }
-    
+
     public IOType getType()
     {
         return this.type;
@@ -80,10 +80,10 @@ public class NodeInput
 
     public int insertDefaultValue(MethodVisitor mv, int init) throws GraphCompilationException
     {
-        switch(this.type)
+        switch (this.type)
         {
         case INTEGER:
-            if(this.defaultValue == null)
+            if (this.defaultValue == null)
             {
                 throw new GraphCompilationException("Default value was null for a type not supporting null");
             }
@@ -93,20 +93,17 @@ public class NodeInput
                 mv.visitIntInsn(Opcodes.BIPUSH, (byte) value);
                 mv.visitVarInsn(Opcodes.ISTORE, init);
                 init++;
-            }
-            else if (value <= Short.MAX_VALUE && value >= Short.MIN_VALUE)
+            } else if (value <= Short.MAX_VALUE && value >= Short.MIN_VALUE)
             {
                 mv.visitIntInsn(Opcodes.SIPUSH, (short) value);
                 mv.visitVarInsn(Opcodes.ISTORE, init);
                 init++;
-            }
-            else if(value <= Integer.MAX_VALUE && value >= Integer.MIN_VALUE)
+            } else if (value <= Integer.MAX_VALUE && value >= Integer.MIN_VALUE)
             {
                 mv.visitLdcInsn(new Integer((int) value));
                 mv.visitVarInsn(Opcodes.ISTORE, init);
                 init++;
-            }
-            else
+            } else
             {
                 mv.visitLdcInsn(new Long(value));
                 mv.visitVarInsn(Opcodes.LSTORE, init);
@@ -114,7 +111,7 @@ public class NodeInput
             }
             break;
         case FLOAT:
-            if(this.defaultValue == null)
+            if (this.defaultValue == null)
             {
                 throw new GraphCompilationException("Default value was null for a type not supporting null");
             }
@@ -124,13 +121,13 @@ public class NodeInput
             //TODO
             break;
         case STRING:
-            if(this.defaultValue == null)
+            if (this.defaultValue == null)
             {
                 throw new GraphCompilationException("Default value was null for a type not supporting null");
             }
             mv.visitLdcInsn(defaultValue.toString());
             mv.visitVarInsn(Opcodes.ASTORE, init);
-            init+=1;
+            init += 1;
             break;
         default:
             throw new GraphCompilationException("Unknown type for default value in " + this.name); //TODO identification name is fairly useless for debugging...

@@ -9,15 +9,15 @@ import com.thevoxelbox.vsl.api.IVariableScope;
 public class VariableScope implements IVariableScope, Serializable
 {
     private static final long serialVersionUID = 9032180603411264823L;
-    
+
     private transient IVariableScope parent = null;
     private final Map<String, Object> vars = new HashMap<String, Object>();
-    
+
     public VariableScope()
     {
-        
+
     }
-    
+
     public VariableScope(IVariableScope parent)
     {
         this.parent = parent;
@@ -26,11 +26,10 @@ public class VariableScope implements IVariableScope, Serializable
     @Override
     public Object get(String name)
     {
-        if(this.vars.containsKey(name))
+        if (this.vars.containsKey(name))
         {
             return this.vars.get(name);
-        }
-        else if(this.parent != null)
+        } else if (this.parent != null)
         {
             return this.parent.get(name);
         }
@@ -59,7 +58,7 @@ public class VariableScope implements IVariableScope, Serializable
     public IVariableScope getHighestParent()
     {
         IVariableScope next = this.parent;
-        while(next.getParent() != null)
+        while (next.getParent() != null)
         {
             next = next.getParent();
         }

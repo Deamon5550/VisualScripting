@@ -25,42 +25,43 @@ public class VariableScopeTest
     private VariableScope parent;
     private VariableScope child;
     private VariableScope child2;
-    
+
     @Before
     public void setup()
     {
         parent = new VariableScope();
         child = new VariableScope(parent);
         child2 = new VariableScope(child);
-        
+
         parent.set("a", "a");
         parent.set("b", "b");
-        
+
         child.set("b", "c");
     }
-    
+
     @Test
     public void testInheritence()
     {
         assertEquals("a", child.get("a"));
         assertEquals("c", child.get("b"));
     }
-    
+
     @Test
     public void testParenthood()
     {
         assertEquals(child, child2.getParent());
         assertEquals(parent, child2.getHighestParent());
     }
-    
+
     @Test
-    public void testVariableNodes() throws NullPointerException, InvalidNodeTypeException, GraphCompilationException, InstantiationException, IllegalAccessException
+    public void testVariableNodes() throws NullPointerException, InvalidNodeTypeException, GraphCompilationException, InstantiationException,
+            IllegalAccessException
     {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         PrintStream out = new PrintStream(baos);
         PrintStream oldOut = System.out;
         System.setOut(out);
-        
+
         StringValueNode value = new StringValueNode("Hello World");
         VariableSetNode set = new VariableSetNode("name");
         set.mapInput("value", value.getOutput("value"));
@@ -70,13 +71,12 @@ public class VariableScopeTest
         PrintNode print = new PrintNode();
         print.mapInput("msg", toString.getOutput("result"));
         set.setNextNode(print);
-        
+
         INodeGraph tree = new NodeGraph("Test Graph");
         tree.setStartNode(set);
         tree.compile(ASMClassLoader.getGlobalClassLoader());
         tree.run(this.child);
-        
-        
+
         String s = new String(baos.toByteArray());
         s = s.replace("\n", "");
         s = s.replace("\r", "");

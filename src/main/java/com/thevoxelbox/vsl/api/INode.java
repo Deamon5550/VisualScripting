@@ -11,22 +11,22 @@ import com.thevoxelbox.vsl.node.NodeOutput;
 public interface INode
 {
     void addInput(String name, IOType type, boolean required, Object defaultValue);
-    
+
     void addOutput(String name, IOType type, INode parent);
-    
+
     void mapInput(String input, NodeOutput source) throws InvalidNodeTypeException, NullPointerException;
-    
+
     NodeOutput getOutput(String name);
-    
+
     NodeInput getInput(String name);
-    
+
     void setOutput(String name, int localIndex);
-    
+
     int insert(MethodVisitor mv, int localsIndex) throws GraphCompilationException;
-    
+
     boolean isExecutable();
-    
+
     String getName();
-    
+
     String getPackage();
 }

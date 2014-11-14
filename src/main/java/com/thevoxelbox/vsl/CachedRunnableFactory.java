@@ -6,10 +6,10 @@ import com.thevoxelbox.vsl.api.IRunnableGraph;
 
 public class CachedRunnableFactory implements ICachedRunnableFactory
 {
-    
+
     public CachedRunnableFactory()
     {
-        
+
     }
 
     @Override
@@ -37,14 +37,14 @@ public class CachedRunnableFactory implements ICachedRunnableFactory
     public void registerGraph(String name, INodeGraph program)
     {
         // TODO Auto-generated method stub
-        
+
     }
 
     @Override
     public void registerGraph(String name, Class<? extends IRunnableGraph> cls)
     {
         // TODO Auto-generated method stub
-        
+
     }
 
     @Override
@@ -58,7 +58,7 @@ public class CachedRunnableFactory implements ICachedRunnableFactory
     public void clearCache()
     {
         // TODO Auto-generated method stub
-        
+
     }
 
 }

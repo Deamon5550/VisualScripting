@@ -6,10 +6,10 @@ import com.thevoxelbox.vsl.api.IRunnableGraph;
 
 public class RunnableFactory implements IRunnableFactory
 {
-    
+
     public RunnableFactory()
     {
-        
+
     }
 
     @Override

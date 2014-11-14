@@ -33,7 +33,7 @@ public class FloatMultiplicationNode extends Node implements Opcodes
         mv.visitInsn(FMUL);
         mv.visitVarInsn(FSTORE, localsIndex);
         setOutput("result", localsIndex);
-        return localsIndex+1;
+        return localsIndex + 1;
     }
 
 }

@@ -8,9 +8,9 @@ import com.thevoxelbox.vsl.node.Node;
 
 public class StringValueNode extends Node
 {
-    
+
     String value;
-    
+
     public StringValueNode(String value)
     {
         super("String Value", "variables");
@@ -24,6 +24,6 @@ public class StringValueNode extends Node
         mv.visitLdcInsn(value.toString());
         mv.visitVarInsn(Opcodes.ASTORE, localsIndex);
         setOutput("value", localsIndex);
-        return localsIndex+1;
+        return localsIndex + 1;
     }
 }

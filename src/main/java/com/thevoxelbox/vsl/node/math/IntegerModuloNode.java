@@ -33,7 +33,7 @@ public class IntegerModuloNode extends Node implements Opcodes
         mv.visitInsn(IREM);
         mv.visitVarInsn(ISTORE, localsIndex);
         setOutput("result", localsIndex);
-        return localsIndex+1;
+        return localsIndex + 1;
     }
 
 }

@@ -43,7 +43,7 @@ public class StringConcatenationNode extends Node implements Opcodes
         mv.visitMethodInsn(INVOKEVIRTUAL, "java/lang/StringBuilder", "toString", "()Ljava/lang/String;", false);
         mv.visitVarInsn(ASTORE, localsIndex);
         setOutput("result", localsIndex);
-        return localsIndex+1;
+        return localsIndex + 1;
     }
 
 }
