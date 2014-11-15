@@ -5,8 +5,10 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import com.thevoxelbox.vsl.api.IGraphCompiler;
 import com.thevoxelbox.vsl.api.INodeGraph;
 import com.thevoxelbox.vsl.classloader.ASMClassLoader;
+import com.thevoxelbox.vsl.classloader.NodeGraphCompiler;
 import com.thevoxelbox.vsl.error.GraphCompilationException;
 import com.thevoxelbox.vsl.error.InvalidNodeTypeException;
 import com.thevoxelbox.vsl.node.NodeGraph;
@@ -18,6 +20,7 @@ public class LoadTest
     public static void main(String[] args) throws Exception
     {
         System.out.println("Starting load test in 5 seconds");
+        IGraphCompiler compiler = new NodeGraphCompiler();
         Thread.sleep(5000);
         List<WeakReference<Class<?>>> classes = new ArrayList<WeakReference<Class<?>>>();
         for (int i = 0; i < 1000; i++)
@@ -26,7 +29,7 @@ public class LoadTest
             checkClasses(classes);
             for (int o = 0; o < 100; o++)
             {
-                classes.add(new WeakReference<Class<?>>(createClass()));
+                classes.add(new WeakReference<Class<?>>(createClass(compiler)));
             }
             System.out.println(((i + 1) * 100) + " classes created " + classes.size() + " classes still loaded");
         }
@@ -52,7 +55,7 @@ public class LoadTest
 
     }
 
-    public static Class<?> createClass() throws NullPointerException, InvalidNodeTypeException, GraphCompilationException
+    public static Class<?> createClass(IGraphCompiler compiler) throws NullPointerException, InvalidNodeTypeException, GraphCompilationException
     {
         StringValueNode string = new StringValueNode("Hello World");
         PrintNode print = new PrintNode();
@@ -60,6 +63,6 @@ public class LoadTest
 
         INodeGraph tree = new NodeGraph("Test Graph");
         tree.setStartNode(print);
-        return tree.compile(ASMClassLoader.getGlobalClassLoader());
+        return compiler.compile(ASMClassLoader.getGlobalClassLoader(), tree);
     }
 }

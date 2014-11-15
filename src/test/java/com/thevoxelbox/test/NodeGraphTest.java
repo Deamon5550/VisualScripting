@@ -10,9 +10,12 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.thevoxelbox.vsl.VariableScope;
+import com.thevoxelbox.vsl.api.IGraphCompiler;
 import com.thevoxelbox.vsl.api.INodeGraph;
+import com.thevoxelbox.vsl.api.IRunnableGraph;
 import com.thevoxelbox.vsl.api.IVariableHolder;
 import com.thevoxelbox.vsl.classloader.ASMClassLoader;
+import com.thevoxelbox.vsl.classloader.NodeGraphCompiler;
 import com.thevoxelbox.vsl.error.GraphCompilationException;
 import com.thevoxelbox.vsl.error.InvalidNodeTypeException;
 import com.thevoxelbox.vsl.node.NodeGraph;
@@ -22,11 +25,13 @@ import com.thevoxelbox.vsl.node.variables.StringValueNode;
 public class NodeGraphTest
 {
     IVariableHolder vars;
+    IGraphCompiler compiler;
 
     @Before
     public void setup()
     {
         vars = new VariableScope();
+        compiler = new NodeGraphCompiler();
     }
 
     @Test
@@ -48,8 +53,10 @@ public class NodeGraphTest
 
         INodeGraph tree = new NodeGraph("Test Graph");
         tree.setStartNode(print);
-        tree.compile(ASMClassLoader.getGlobalClassLoader());
-        tree.run(this.vars);
+        @SuppressWarnings("unchecked")
+        Class<? extends IRunnableGraph> compiled = (Class<? extends IRunnableGraph>) compiler.compile(ASMClassLoader.getGlobalClassLoader(), tree);
+        IRunnableGraph graph = compiled.newInstance();
+        graph.run(vars);
 
         String s = new String(baos.toByteArray());
         s = s.replace("\n", "");

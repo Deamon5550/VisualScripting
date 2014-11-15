@@ -9,8 +9,11 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.thevoxelbox.vsl.VariableScope;
+import com.thevoxelbox.vsl.api.IGraphCompiler;
 import com.thevoxelbox.vsl.api.INodeGraph;
+import com.thevoxelbox.vsl.api.IRunnableGraph;
 import com.thevoxelbox.vsl.classloader.ASMClassLoader;
+import com.thevoxelbox.vsl.classloader.NodeGraphCompiler;
 import com.thevoxelbox.vsl.error.GraphCompilationException;
 import com.thevoxelbox.vsl.error.InvalidNodeTypeException;
 import com.thevoxelbox.vsl.node.NodeGraph;
@@ -74,8 +77,11 @@ public class VariableScopeTest
 
         INodeGraph tree = new NodeGraph("Test Graph");
         tree.setStartNode(set);
-        tree.compile(ASMClassLoader.getGlobalClassLoader());
-        tree.run(this.child);
+        IGraphCompiler compiler = new NodeGraphCompiler();
+        @SuppressWarnings("unchecked")
+        Class<? extends IRunnableGraph> compiled = (Class<? extends IRunnableGraph>) compiler.compile(ASMClassLoader.getGlobalClassLoader(), tree);
+        IRunnableGraph graph = compiled.newInstance();
+        graph.run(child);
 
         String s = new String(baos.toByteArray());
         s = s.replace("\n", "");

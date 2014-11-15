@@ -1,8 +1,5 @@
 package com.thevoxelbox.vsl.node.string;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import org.objectweb.asm.Label;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
