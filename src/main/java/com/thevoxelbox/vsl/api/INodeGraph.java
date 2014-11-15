@@ -8,7 +8,7 @@ public interface INodeGraph
 {
     void setStartNode(ExecutableNode start);
 
-    Class<?> compile(ASMClassLoader cl) throws NullPointerException, GraphCompilationException;
+    Class<? extends IRunnableGraph> compile(ASMClassLoader cl) throws NullPointerException, GraphCompilationException;
 
     void run(IVariableHolder vars) throws InstantiationException, IllegalAccessException;
 

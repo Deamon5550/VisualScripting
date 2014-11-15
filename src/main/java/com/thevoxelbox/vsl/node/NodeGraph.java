@@ -70,6 +70,14 @@ public class NodeGraph implements INodeGraph, Opcodes
             mv.visitEnd();
         }
         {
+            mv = cw.visitMethod(ACC_PUBLIC, "getName", "()Ljava/lang/String;", null, null);
+            mv.visitCode();
+            mv.visitLdcInsn(this.name);
+            mv.visitInsn(ARETURN);
+            mv.visitMaxs(0, 0);
+            mv.visitEnd();
+        }
+        {
             mv = cw.visitMethod(ACC_PUBLIC, "run", "(Lcom/thevoxelbox/vsl/api/IVariableHolder;)V", null, null);
             mv.visitCode();
 
