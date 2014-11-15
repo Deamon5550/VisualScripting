@@ -2,6 +2,16 @@ package com.thevoxelbox.vsl.classloader;
 
 public class ASMClassLoader extends ClassLoader
 {
+    
+    public ASMClassLoader()
+    {
+        
+    }
+    
+    public ASMClassLoader(ClassLoader parent)
+    {
+        super(parent);
+    }
 
     public Class<?> defineClass(String name, byte[] cls)
     {
