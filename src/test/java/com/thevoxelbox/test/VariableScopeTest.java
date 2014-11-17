@@ -9,7 +9,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.thevoxelbox.vsl.VariableScope;
-import com.thevoxelbox.vsl.api.IGraphCompiler;
 import com.thevoxelbox.vsl.api.INodeGraph;
 import com.thevoxelbox.vsl.api.IRunnableGraph;
 import com.thevoxelbox.vsl.classloader.ASMClassLoader;
@@ -28,10 +27,14 @@ public class VariableScopeTest
     private VariableScope parent;
     private VariableScope child;
     private VariableScope child2;
+    
+    ASMClassLoader classloader;
 
     @Before
     public void setup()
     {
+        classloader = new ASMClassLoader(this.getClass().getClassLoader(), new NodeGraphCompiler());
+        
         parent = new VariableScope();
         child = new VariableScope(parent);
         child2 = new VariableScope(child);
@@ -77,9 +80,8 @@ public class VariableScopeTest
 
         INodeGraph tree = new NodeGraph("Test Graph");
         tree.setStartNode(set);
-        IGraphCompiler compiler = new NodeGraphCompiler();
         @SuppressWarnings("unchecked")
-        Class<? extends IRunnableGraph> compiled = (Class<? extends IRunnableGraph>) compiler.compile(ASMClassLoader.getGlobalClassLoader(), tree);
+        Class<? extends IRunnableGraph> compiled = (Class<? extends IRunnableGraph>) classloader.getCompiler().compile(classloader, tree);
         IRunnableGraph graph = compiled.newInstance();
         graph.run(child);
 

@@ -1,16 +1,25 @@
 package com.thevoxelbox.vsl.classloader;
 
+import com.thevoxelbox.vsl.api.IGraphCompiler;
+
 public class ASMClassLoader extends ClassLoader
 {
+    IGraphCompiler compiler;
     
-    public ASMClassLoader()
-    {
-        
-    }
-    
-    public ASMClassLoader(ClassLoader parent)
+    public ASMClassLoader(ClassLoader parent, IGraphCompiler compiler)
     {
         super(parent);
+        this.compiler = compiler;
+    }
+    
+    public IGraphCompiler getCompiler()
+    {
+        return this.compiler;
+    }
+    
+    public void setCompiler(IGraphCompiler compiler)
+    {
+        this.compiler = compiler;
     }
 
     public Class<?> defineClass(String name, byte[] cls)
@@ -21,22 +30,5 @@ public class ASMClassLoader extends ClassLoader
     public boolean isClassLoaded(String name)
     {
         return findLoadedClass(name) != null;
-    }
-
-    private static ASMClassLoader GLOBAL = null;
-
-    public static ASMClassLoader getGlobalClassLoader()
-    {
-        if (GLOBAL == null)
-        {
-            GLOBAL = new ASMClassLoader();
-        }
-        return GLOBAL;
-    }
-
-    public static void resetGlobalClassLoader()
-    {
-        GLOBAL = new ASMClassLoader();
-        System.gc();
     }
 }
