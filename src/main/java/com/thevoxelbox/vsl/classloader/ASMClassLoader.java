@@ -1,25 +1,26 @@
 package com.thevoxelbox.vsl.classloader;
 
 import com.thevoxelbox.vsl.api.IGraphCompiler;
+import com.thevoxelbox.vsl.api.IGraphCompilerFactory;
 
 public class ASMClassLoader extends ClassLoader
 {
-    IGraphCompiler compiler;
+    IGraphCompilerFactory compiler;
     
-    public ASMClassLoader(ClassLoader parent, IGraphCompiler compiler)
+    public ASMClassLoader(ClassLoader parent, IGraphCompilerFactory compiler)
     {
         super(parent);
         this.compiler = compiler;
     }
     
-    public IGraphCompiler getCompiler()
+    public IGraphCompilerFactory getCompilerFactory()
     {
         return this.compiler;
     }
     
-    public void setCompiler(IGraphCompiler compiler)
+    public IGraphCompiler getCompiler(Class<?> cls)
     {
-        this.compiler = compiler;
+        return this.compiler.getCompilerForClass(cls);  
     }
 
     public Class<?> defineClass(String name, byte[] cls)
