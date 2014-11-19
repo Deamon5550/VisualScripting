@@ -4,6 +4,7 @@ import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
 
+import com.thevoxelbox.vsl.api.IChainableNodeGraph;
 import com.thevoxelbox.vsl.api.IGraphCompiler;
 import com.thevoxelbox.vsl.api.INodeGraph;
 import com.thevoxelbox.vsl.api.IRunnableGraph;
@@ -25,7 +26,8 @@ public class NodeGraphCompiler implements IGraphCompiler, Opcodes
         {
             graph.incrementName();
         }
-        return (Class<? extends IRunnableGraph>) cl.defineClass("com.thevoxelbox.custom." + graph.getName() + graph.getIncrement(), createClass(graph));
+        return (Class<? extends IRunnableGraph>) cl.defineClass("com.thevoxelbox.custom." + graph.getName() + graph.getIncrement(),
+                createClass(graph));
     }
 
     private byte[] createClass(INodeGraph graph) throws GraphCompilationException
@@ -65,6 +67,17 @@ public class NodeGraphCompiler implements IGraphCompiler, Opcodes
             {
                 current.insert(mv, index);
                 current = current.getNextNode();
+                if (current == null)
+                {
+                    if (graph instanceof IChainableNodeGraph)
+                    {
+                        if (((IChainableNodeGraph) graph).getNextGraph() != null)
+                        {
+                            current = ((IChainableNodeGraph) graph).getNextGraph().getStart();
+                            graph = ((IChainableNodeGraph) graph).getNextGraph();
+                        }
+                    }
+                }
             }
 
             mv.visitInsn(RETURN);
@@ -75,5 +88,5 @@ public class NodeGraphCompiler implements IGraphCompiler, Opcodes
 
         return cw.toByteArray();
     }
-    
+
 }

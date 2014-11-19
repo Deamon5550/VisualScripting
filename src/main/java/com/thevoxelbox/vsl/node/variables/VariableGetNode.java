@@ -2,26 +2,30 @@ package com.thevoxelbox.vsl.node.variables;
 
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
+import org.objectweb.asm.Type;
 
-import com.thevoxelbox.vsl.IOType;
 import com.thevoxelbox.vsl.error.GraphCompilationException;
 import com.thevoxelbox.vsl.node.Node;
 
 public class VariableGetNode extends Node
 {
+    
+    private Class<?> type;
 
-    public VariableGetNode()
+    public VariableGetNode(Class<?> type)
     {
         super("Variable Get", "variables");
-        addOutput("value", IOType.WILD, this);
-        addInput("name", IOType.STRING, true, null);
+        addOutput("value", type, this);
+        addInput("name", String.class, true, null);
+        this.type = type;
     }
 
-    public VariableGetNode(String name)
+    public VariableGetNode(String name, Class<?> type)
     {
         super("Variable Get", "variables");
-        addOutput("value", IOType.WILD, this);
-        addInput("name", IOType.STRING, false, name);
+        addOutput("value", type, this);
+        addInput("name", String.class, false, name);
+        this.type = type;
     }
 
     @Override
@@ -45,6 +49,7 @@ public class VariableGetNode extends Node
         mv.visitVarInsn(Opcodes.ALOAD, 1);
         mv.visitVarInsn(Opcodes.ALOAD, name_i);
         mv.visitMethodInsn(Opcodes.INVOKEINTERFACE, "com/thevoxelbox/vsl/api/IVariableHolder", "get", "(Ljava/lang/String;)Ljava/lang/Object;", true);
+        mv.visitTypeInsn(Opcodes.CHECKCAST, Type.getInternalName(type));
         mv.visitVarInsn(Opcodes.ASTORE, localsIndex);
         setOutput("value", localsIndex);
         return localsIndex + 1;

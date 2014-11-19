@@ -3,7 +3,6 @@ package com.thevoxelbox.vsl.node.math;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
 
-import com.thevoxelbox.vsl.IOType;
 import com.thevoxelbox.vsl.node.Node;
 
 public class BooleanXorNode extends Node implements Opcodes
@@ -12,9 +11,9 @@ public class BooleanXorNode extends Node implements Opcodes
     public BooleanXorNode()
     {
         super("Boolean Xor", "math");
-        addInput("a", IOType.BOOLEAN, true, null);
-        addInput("b", IOType.BOOLEAN, true, null);
-        addOutput("result", IOType.BOOLEAN, this);
+        addInput("a", boolean.class, true, null);
+        addInput("b", boolean.class, true, null);
+        addOutput("result", boolean.class, this);
     }
 
     @Override

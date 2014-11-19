@@ -3,25 +3,24 @@ package com.thevoxelbox.vsl.node.variables;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
 
-import com.thevoxelbox.vsl.IOType;
 import com.thevoxelbox.vsl.error.GraphCompilationException;
 import com.thevoxelbox.vsl.node.ExecutableNode;
 
 public class VariableSetNode extends ExecutableNode
 {
 
-    public VariableSetNode()
+    public VariableSetNode(Class<?> type)
     {
         super("Variable Set", "variables");
-        addInput("value", IOType.WILD, true, null);
-        addInput("name", IOType.STRING, true, null);
+        addInput("value", type, true, null);
+        addInput("name", String.class, true, null);
     }
 
-    public VariableSetNode(String var)
+    public VariableSetNode(String var, Class<?> type)
     {
         super("Variable Set", "variables");
-        addInput("value", IOType.WILD, true, null);
-        addInput("name", IOType.STRING, false, var);
+        addInput("value", type, true, null);
+        addInput("name", String.class, false, var);
     }
 
     @Override

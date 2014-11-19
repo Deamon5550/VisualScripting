@@ -1,10 +1,23 @@
 package com.thevoxelbox.vsl.api;
 
-public interface IChainableNodeGraph
+import java.util.Map;
+
+import com.thevoxelbox.vsl.error.GraphCompilationException;
+
+public interface IChainableNodeGraph extends INodeGraph
 {
     boolean doInputsMatch(IChainableNodeGraph nextGraph);
 
-    void setInputAsChainable(String name);
+    void chain(IChainableNodeGraph name) throws GraphCompilationException;
+    
+    void addChainedInput(String name, Class<?> type);
+    
+    void addChainedOutput(String name, Class<?> type);
+    
+    Map<String, Class<?>> getInputs();
+    
+    Map<String, Class<?>> getOutputs();
 
-    void setOutputAsChainable(String name);
+    IChainableNodeGraph getNextGraph();
+    
 }

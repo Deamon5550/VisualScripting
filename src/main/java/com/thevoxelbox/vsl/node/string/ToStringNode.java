@@ -3,7 +3,6 @@ package com.thevoxelbox.vsl.node.string;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
 
-import com.thevoxelbox.vsl.IOType;
 import com.thevoxelbox.vsl.node.Node;
 
 public class ToStringNode extends Node implements Opcodes
@@ -11,9 +10,9 @@ public class ToStringNode extends Node implements Opcodes
 
     public ToStringNode()
     {
-        super("String Concatenation", "string");
-        addInput("value", IOType.WILD, true, null);
-        addOutput("result", IOType.STRING, this);
+        super("toString", "string");
+        addInput("value", Object.class, true, null);
+        addOutput("result", String.class, this);
     }
 
     @Override

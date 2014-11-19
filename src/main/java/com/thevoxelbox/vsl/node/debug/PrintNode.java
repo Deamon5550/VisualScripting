@@ -3,7 +3,6 @@ package com.thevoxelbox.vsl.node.debug;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
 
-import com.thevoxelbox.vsl.IOType;
 import com.thevoxelbox.vsl.node.ExecutableNode;
 
 public class PrintNode extends ExecutableNode
@@ -11,7 +10,7 @@ public class PrintNode extends ExecutableNode
     public PrintNode()
     {
         super("Print String", "debug");
-        addInput("msg", IOType.STRING, true, null);
+        addInput("msg", String.class, true, null);
     }
 
     @Override

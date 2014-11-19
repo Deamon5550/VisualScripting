@@ -1,17 +1,15 @@
 package com.thevoxelbox.vsl.node;
 
-import com.thevoxelbox.vsl.IOType;
 import com.thevoxelbox.vsl.api.INode;
 
 public class NodeOutput
 {
     private int i = -1;
     private final String name;
-    private final IOType type;
+    private final Class<?> type;
     private final INode parent;
-    private boolean chained = false;
 
-    public NodeOutput(String n, IOType t, INode parent)
+    public NodeOutput(String n, Class<?> t, INode parent)
     {
         this.name = n;
         this.type = t;
@@ -28,7 +26,7 @@ public class NodeOutput
         return this.name;
     }
 
-    public IOType getType()
+    public Class<?> getType()
     {
         return this.type;
     }
@@ -41,15 +39,5 @@ public class NodeOutput
     public int get()
     {
         return this.i;
-    }
-
-    public boolean isChained()
-    {
-        return chained;
-    }
-
-    public void setChained(boolean chained)
-    {
-        this.chained = chained;
     }
 }

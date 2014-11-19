@@ -69,9 +69,9 @@ public class VariableScopeTest
         System.setOut(out);
 
         StringValueNode value = new StringValueNode("Hello World");
-        VariableSetNode set = new VariableSetNode("name");
+        VariableSetNode set = new VariableSetNode("name", String.class);
         set.mapInput("value", value.getOutput("value"));
-        VariableGetNode get = new VariableGetNode("name");
+        VariableGetNode get = new VariableGetNode("name", String.class);
         ToStringNode toString = new ToStringNode();
         toString.mapInput("value", get.getOutput("value"));
         PrintNode print = new PrintNode();

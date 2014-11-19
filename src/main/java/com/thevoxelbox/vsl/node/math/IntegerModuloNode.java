@@ -3,7 +3,6 @@ package com.thevoxelbox.vsl.node.math;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
 
-import com.thevoxelbox.vsl.IOType;
 import com.thevoxelbox.vsl.node.Node;
 
 public class IntegerModuloNode extends Node implements Opcodes
@@ -12,9 +11,9 @@ public class IntegerModuloNode extends Node implements Opcodes
     public IntegerModuloNode()
     {
         super("Integer Modulo", "math");
-        addInput("a", IOType.INTEGER, true, null);
-        addInput("b", IOType.INTEGER, true, null);
-        addOutput("result", IOType.INTEGER, this);
+        addInput("a", int.class, true, null);
+        addInput("b", int.class, true, null);
+        addOutput("result", int.class, this);
     }
 
     @Override

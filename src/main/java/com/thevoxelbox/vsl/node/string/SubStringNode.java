@@ -3,7 +3,6 @@ package com.thevoxelbox.vsl.node.string;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
 
-import com.thevoxelbox.vsl.IOType;
 import com.thevoxelbox.vsl.error.GraphCompilationException;
 import com.thevoxelbox.vsl.node.Node;
 
@@ -13,10 +12,10 @@ public class SubStringNode extends Node
     public SubStringNode()
     {
         super("Substring", "string");
-        addInput("string", IOType.STRING, true, null);
-        addInput("start", IOType.INTEGER, false, 0);
-        addInput("end", IOType.INTEGER, false, 0);
-        addOutput("result", IOType.STRING, this);
+        addInput("string", String.class, true, null);
+        addInput("start", int.class, false, 0);
+        addInput("end", int.class, false, 0);
+        addOutput("result", String.class, this);
     }
 
     @Override
