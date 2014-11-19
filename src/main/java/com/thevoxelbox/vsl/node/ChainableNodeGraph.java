@@ -5,14 +5,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.thevoxelbox.vsl.api.IChainableNodeGraph;
-import com.thevoxelbox.vsl.error.GraphCompilationException;
 
 public class ChainableNodeGraph extends NodeGraph implements IChainableNodeGraph
 {
     private Map<String, Class<?>> inputs;
     private Map<String, Class<?>> outputs;
-    
-    private IChainableNodeGraph next = null;
 
     public ChainableNodeGraph(String name)
     {
@@ -41,19 +38,6 @@ public class ChainableNodeGraph extends NodeGraph implements IChainableNodeGraph
     }
 
     @Override
-    public void chain(IChainableNodeGraph next) throws GraphCompilationException
-    {
-        if(doInputsMatch(next))
-        {
-            this.next = next;
-        }
-        else
-        {
-            throw new GraphCompilationException("Inputs/Outputs of chained node graphs do not match!");
-        }
-    }
-
-    @Override
     public void addChainedInput(String name, Class<?> type)
     {
         this.inputs.put(name, type);
@@ -75,12 +59,6 @@ public class ChainableNodeGraph extends NodeGraph implements IChainableNodeGraph
     public Map<String, Class<?>> getOutputs()
     {
         return Collections.unmodifiableMap(this.outputs);
-    }
-
-    @Override
-    public IChainableNodeGraph getNextGraph()
-    {
-        return this.next;
     }
 
 }

@@ -65,19 +65,8 @@ public class NodeGraphCompiler implements IGraphCompiler, Opcodes
             ExecutableNode current = graph.getStart();
             while (current != null)
             {
-                current.insert(mv, index);
+                index = current.insert(mv, index);
                 current = current.getNextNode();
-                if (current == null)
-                {
-                    if (graph instanceof IChainableNodeGraph)
-                    {
-                        if (((IChainableNodeGraph) graph).getNextGraph() != null)
-                        {
-                            current = ((IChainableNodeGraph) graph).getNextGraph().getStart();
-                            graph = ((IChainableNodeGraph) graph).getNextGraph();
-                        }
-                    }
-                }
             }
 
             mv.visitInsn(RETURN);
