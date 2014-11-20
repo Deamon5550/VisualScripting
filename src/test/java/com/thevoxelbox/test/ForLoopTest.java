@@ -45,17 +45,18 @@ public class ForLoopTest
 
         StringArrayValueNode array = new StringArrayValueNode("Hel", "lo ", "Wor", "ld");
         PrintNode print = new PrintNode();
-        
+
         ForEachLoopNode forloop = new ForEachLoopNode(print, String.class);
         forloop.mapInput("array", array.getOutput("value"));
         print.mapInput("msg", forloop.getOutput("next"));
         forloop.setBody(print);
-        
+
         INodeGraph tree = new NodeGraph("Test Graph");
         tree.setStartNode(forloop);
         @SuppressWarnings("unchecked")
-        Class<? extends IRunnableGraph> compiled = (Class<? extends IRunnableGraph>) classloader.getCompiler(INodeGraph.class).compile(classloader, tree);
-        
+        Class<? extends IRunnableGraph> compiled =
+                (Class<? extends IRunnableGraph>) classloader.getCompiler(INodeGraph.class).compile(classloader, tree);
+
         IRunnableGraph graph = compiled.newInstance();
         graph.run(vars);
 
@@ -65,5 +66,5 @@ public class ForLoopTest
         assertEquals("Hello World", s);
         System.setOut(oldOut);
     }
-    
+
 }

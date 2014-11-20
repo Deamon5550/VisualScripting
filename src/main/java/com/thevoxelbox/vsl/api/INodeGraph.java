@@ -9,8 +9,8 @@ public interface INodeGraph
     String getName();
 
     ExecutableNode getStart();
-    
+
     int getIncrement();
-    
+
     void incrementName();
 }

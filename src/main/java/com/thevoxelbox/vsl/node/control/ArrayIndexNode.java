@@ -27,12 +27,11 @@ public class ArrayIndexNode extends Node implements Opcodes
     {
         int array = getInput("array").getSource().get();
         int index;
-        if(getInput("index").getSource() == null)
+        if (getInput("index").getSource() == null)
         {
             index = localsIndex;
             localsIndex = getInput("index").insertDefaultValue(mv, localsIndex);
-        }
-        else
+        } else
         {
             index = getInput("index").getSource().get();
         }
@@ -41,13 +40,13 @@ public class ArrayIndexNode extends Node implements Opcodes
         mv.visitInsn(AALOAD);
         mv.visitVarInsn(ASTORE, localsIndex);
         setOutput("value", localsIndex);
-        return localsIndex+1;
+        return localsIndex + 1;
     }
-    
+
     public void t()
     {
         String[] s = null;
-        
+
         String v = s[0];
     }
 

@@ -9,7 +9,7 @@ import com.thevoxelbox.vsl.node.Node;
 
 public class VariableGetNode extends Node
 {
-    
+
     private Class<?> type;
 
     public VariableGetNode(Class<?> type)

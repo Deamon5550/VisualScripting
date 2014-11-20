@@ -29,7 +29,7 @@ public class VariableScopeTest
     private VariableScope parent;
     private VariableScope child;
     private VariableScope child2;
-    
+
     ASMClassLoader classloader;
 
     @Before
@@ -38,7 +38,7 @@ public class VariableScopeTest
         IGraphCompilerFactory factory = new GraphCompilerFactory();
         factory.registerCompiler(INodeGraph.class, new NodeGraphCompiler());
         classloader = new ASMClassLoader(this.getClass().getClassLoader(), factory);
-        
+
         parent = new VariableScope();
         child = new VariableScope(parent);
         child2 = new VariableScope(child);
@@ -85,7 +85,8 @@ public class VariableScopeTest
         INodeGraph tree = new NodeGraph("Test Graph");
         tree.setStartNode(set);
         @SuppressWarnings("unchecked")
-        Class<? extends IRunnableGraph> compiled = (Class<? extends IRunnableGraph>) classloader.getCompiler(INodeGraph.class).compile(classloader, tree);
+        Class<? extends IRunnableGraph> compiled =
+                (Class<? extends IRunnableGraph>) classloader.getCompiler(INodeGraph.class).compile(classloader, tree);
         IRunnableGraph graph = compiled.newInstance();
         graph.run(child);
 

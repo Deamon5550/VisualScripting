@@ -9,7 +9,7 @@ import com.thevoxelbox.vsl.node.ExecutableNode;
 
 public class ForEachLoopNode extends ExecutableNode implements Opcodes
 {
-    
+
     private ExecutableNode body;
 
     public ForEachLoopNode(ExecutableNode body, Class<?> type)
@@ -20,7 +20,7 @@ public class ForEachLoopNode extends ExecutableNode implements Opcodes
         addOutput("index", int.class, this);
         this.body = body;
     }
-    
+
     public void setBody(ExecutableNode body)
     {
         this.body = body;
@@ -37,7 +37,7 @@ public class ForEachLoopNode extends ExecutableNode implements Opcodes
          ARRAYLENGTH
          ISTORE i+1
          GOTO L2
-       L1
+        L1
          ALOAD array
          ILOAD i
          AALOAD
@@ -46,22 +46,22 @@ public class ForEachLoopNode extends ExecutableNode implements Opcodes
          insert body nodes here
          
          IINC i 1
-       L2
+        L2
          ILOAD i
          ILOAD i+1
          IF_ICMPLT L1
          
          */
-        if(body == null)
+        if (body == null)
         {
             return localsIndex;
         }
-        
+
         int array = getInput("array").getSource().get();
         int i = localsIndex++;
         int target = localsIndex++;
         int next = localsIndex++;
-        
+
         mv.visitVarInsn(ALOAD, array); // [arrayref]
         mv.visitInsn(ARRAYLENGTH); // [integer]
         mv.visitVarInsn(ISTORE, target); // []
@@ -78,7 +78,7 @@ public class ForEachLoopNode extends ExecutableNode implements Opcodes
         setOutput("next", next);
         setOutput("index", i);
         ExecutableNode current = this.body;
-        while(current != null)
+        while (current != null)
         {
             localsIndex = current.insert(mv, localsIndex);
             current = current.getNextNode();
@@ -88,9 +88,7 @@ public class ForEachLoopNode extends ExecutableNode implements Opcodes
         mv.visitVarInsn(ILOAD, i); // [integer]
         mv.visitVarInsn(ILOAD, target); // [integer, integer]
         mv.visitJumpInsn(IF_ICMPLT, l3); // []
-        
-        
-        
+
         /*mv.visitInsn(ICONST_0);
         mv.visitVarInsn(ISTORE, i);
         mv.visitVarInsn(ALOAD, array);
@@ -119,11 +117,11 @@ public class ForEachLoopNode extends ExecutableNode implements Opcodes
         mv.visitJumpInsn(IF_ICMPLT, l1);*/
         return localsIndex;
     }
-    
+
     public void t()
     {
-        String[] s = new String[]{"a", "b", "c"};
-        for(String i: s)
+        String[] s = new String[] { "a", "b", "c" };
+        for (String i : s)
         {
             System.out.println(i);
         }

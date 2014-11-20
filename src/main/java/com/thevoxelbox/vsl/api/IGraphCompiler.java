@@ -7,5 +7,5 @@ public interface IGraphCompiler
 {
 
     Class<?> compile(ASMClassLoader cl, INodeGraph graph) throws NullPointerException, GraphCompilationException;
-    
+
 }

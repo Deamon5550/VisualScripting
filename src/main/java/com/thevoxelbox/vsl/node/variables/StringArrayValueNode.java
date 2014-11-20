@@ -34,10 +34,10 @@ public class StringArrayValueNode extends Node implements Opcodes
          ASTORE value
          
          */
-        
+
         mv.visitIntInsn(BIPUSH, value.length);
         mv.visitTypeInsn(ANEWARRAY, "java/lang/String");
-        for(int i = 0; i < value.length; i++)
+        for (int i = 0; i < value.length; i++)
         {
             mv.visitInsn(DUP);
             mv.visitIntInsn(BIPUSH, i);
@@ -45,7 +45,7 @@ public class StringArrayValueNode extends Node implements Opcodes
             mv.visitInsn(AASTORE);
         }
         mv.visitVarInsn(ASTORE, localsIndex++);
-        setOutput("value", localsIndex-1);
+        setOutput("value", localsIndex - 1);
         return localsIndex;
     }
 }

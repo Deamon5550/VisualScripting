@@ -9,7 +9,7 @@ import com.thevoxelbox.vsl.api.IGraphCompilerFactory;
 public class GraphCompilerFactory implements IGraphCompilerFactory
 {
     private Map<Class<?>, IGraphCompiler> compilers;
-    
+
     public GraphCompilerFactory()
     {
         this.compilers = new HashMap<Class<?>, IGraphCompiler>();

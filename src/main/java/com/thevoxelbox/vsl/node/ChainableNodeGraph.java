@@ -22,13 +22,13 @@ public class ChainableNodeGraph extends NodeGraph implements IChainableNodeGraph
     public boolean doInputsMatch(IChainableNodeGraph nextGraph)
     {
         Map<String, Class<?>> nextInputs = nextGraph.getInputs();
-        for(String n: this.outputs.keySet())
+        for (String n : this.outputs.keySet())
         {
-            if(nextInputs.containsKey(n))
+            if (nextInputs.containsKey(n))
             {
                 Class<?> outCls = this.outputs.get(n);
                 Class<?> inCls = nextInputs.get(n);
-                if(outCls != inCls)
+                if (outCls != inCls)
                 {
                     return false;
                 }

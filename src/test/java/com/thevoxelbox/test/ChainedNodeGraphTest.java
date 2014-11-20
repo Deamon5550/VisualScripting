@@ -40,7 +40,8 @@ public class ChainedNodeGraphTest
     }
 
     @Test
-    public void test() throws NullPointerException, InvalidNodeTypeException, InstantiationException, IllegalAccessException, GraphCompilationException
+    public void test() throws NullPointerException, InvalidNodeTypeException, InstantiationException, IllegalAccessException,
+            GraphCompilationException
     {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         PrintStream out = new PrintStream(baos);
@@ -58,8 +59,9 @@ public class ChainedNodeGraphTest
         IChainableNodeGraph tree1 = new ChainableNodeGraph("Chained Graph 1");
         tree1.setStartNode(out1);
         @SuppressWarnings("unchecked")
-        Class<? extends IChainedRunnableGraph> chain1 = (Class<? extends IChainedRunnableGraph>) classloader.getCompiler(IChainableNodeGraph.class).compile(classloader, tree1);
-        
+        Class<? extends IChainedRunnableGraph> chain1 =
+                (Class<? extends IChainedRunnableGraph>) classloader.getCompiler(IChainableNodeGraph.class).compile(classloader, tree1);
+
         ChainedInputNode in1 = new ChainedInputNode("first", String.class);
         ChainedInputNode in2 = new ChainedInputNode("second", String.class);
         PrintNode print = new PrintNode();
@@ -67,16 +69,17 @@ public class ChainedNodeGraphTest
         print.mapInput("msg", in1.getOutput("value"));
         print2.mapInput("msg", in2.getOutput("value"));
         print.setNextNode(print2);
-        
+
         IChainableNodeGraph tree2 = new ChainableNodeGraph("Chained Graph 2");
         tree2.setStartNode(print);
         @SuppressWarnings("unchecked")
-        Class<? extends IChainedRunnableGraph> chain2 = (Class<? extends IChainedRunnableGraph>) classloader.getCompiler(IChainableNodeGraph.class).compile(classloader, tree2);
-        
+        Class<? extends IChainedRunnableGraph> chain2 =
+                (Class<? extends IChainedRunnableGraph>) classloader.getCompiler(IChainableNodeGraph.class).compile(classloader, tree2);
+
         IChainedRunnableGraph graph1 = chain1.newInstance();
         IChainedRunnableGraph graph2 = chain2.newInstance();
         graph1.chain(graph2);
-        
+
         graph1.run(vars);
 
         String s = new String(baos.toByteArray());
@@ -85,5 +88,5 @@ public class ChainedNodeGraphTest
         assertEquals("Hello World", s);
         System.setOut(oldOut);
     }
-    
+
 }

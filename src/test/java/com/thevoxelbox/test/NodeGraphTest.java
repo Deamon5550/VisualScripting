@@ -57,7 +57,8 @@ public class NodeGraphTest
         INodeGraph tree = new NodeGraph("Test Graph");
         tree.setStartNode(print);
         @SuppressWarnings("unchecked")
-        Class<? extends IRunnableGraph> compiled = (Class<? extends IRunnableGraph>) classloader.getCompiler(INodeGraph.class).compile(classloader, tree);
+        Class<? extends IRunnableGraph> compiled =
+                (Class<? extends IRunnableGraph>) classloader.getCompiler(INodeGraph.class).compile(classloader, tree);
         IRunnableGraph graph = compiled.newInstance();
         graph.run(vars);
 

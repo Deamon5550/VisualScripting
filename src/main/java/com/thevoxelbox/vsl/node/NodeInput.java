@@ -68,7 +68,7 @@ public class NodeInput
 
     public int insertDefaultValue(MethodVisitor mv, int init) throws GraphCompilationException
     {
-        if(this.type == int.class)
+        if (this.type == int.class)
         {
             if (this.defaultValue == null)
             {
@@ -96,8 +96,7 @@ public class NodeInput
                 mv.visitVarInsn(Opcodes.LSTORE, init);
                 init += 2;
             }
-        }
-        else if(this.type == String.class)
+        } else if (this.type == String.class)
         {
             if (this.defaultValue == null)
             {
@@ -106,8 +105,7 @@ public class NodeInput
             mv.visitLdcInsn(defaultValue.toString());
             mv.visitVarInsn(Opcodes.ASTORE, init);
             init += 1;
-        }
-        else
+        } else
         {
             throw new GraphCompilationException("Unknown type " + this.type.getName() + " for default value in " + this.name); //TODO identification name is fairly useless for debugging...
         }

@@ -79,7 +79,8 @@ public class ChainableGraphCompiler implements IGraphCompiler, Opcodes
             mv.visitCode();
             mv.visitVarInsn(ALOAD, 0);
             mv.visitVarInsn(ALOAD, 1);
-            mv.visitFieldInsn(PUTFIELD, "com/thevoxelbox/custom/" + graph.getName() + graph.getIncrement(), "next", "Lcom/thevoxelbox/vsl/api/IChainedRunnableGraph;");
+            mv.visitFieldInsn(PUTFIELD, "com/thevoxelbox/custom/" + graph.getName() + graph.getIncrement(), "next",
+                    "Lcom/thevoxelbox/vsl/api/IChainedRunnableGraph;");
             mv.visitInsn(RETURN);
             mv.visitMaxs(0, 0);
             mv.visitEnd();
