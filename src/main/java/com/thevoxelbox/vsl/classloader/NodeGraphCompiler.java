@@ -30,7 +30,7 @@ public class NodeGraphCompiler implements IGraphCompiler, Opcodes
                 createClass(graph));
     }
 
-    private byte[] createClass(INodeGraph graph) throws GraphCompilationException
+    public byte[] createClass(INodeGraph graph) throws GraphCompilationException
     {
         ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_FRAMES);
         MethodVisitor mv;

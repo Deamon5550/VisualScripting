@@ -38,7 +38,7 @@ public class ChainableGraphCompiler implements IGraphCompiler, Opcodes
                 createClass(cgraph));
     }
 
-    private byte[] createClass(IChainableNodeGraph graph) throws GraphCompilationException
+    protected byte[] createClass(IChainableNodeGraph graph) throws GraphCompilationException
     {
         ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_FRAMES);
         MethodVisitor mv;

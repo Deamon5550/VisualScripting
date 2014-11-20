@@ -89,16 +89,13 @@ public abstract class Node implements INode
                 if (inputs.get(n).isRequired())
                 {
                     throw new GraphCompilationException("Unfilled required input " + n + " " + this.name);
-                } else
-                {
-                    init = inputs.get(n).insertDefaultValue(mv, init);
                 }
             } else if (inputs.get(n).getSource().get() == -1)
             {
                 init = inputs.get(n).getSource().getParent().insert(mv, init);
             }
         }
-        return insertLocal(mv, localsIndex);
+        return insertLocal(mv, init);
     }
 
     protected abstract int insertLocal(MethodVisitor mv, int localsIndex) throws GraphCompilationException;
