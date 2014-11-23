@@ -5,22 +5,23 @@ import org.objectweb.asm.Opcodes;
 
 import com.thevoxelbox.vsl.error.GraphCompilationException;
 import com.thevoxelbox.vsl.node.ExecutableNode;
+import com.thevoxelbox.vsl.type.Type;
 
 public class VariableSetNode extends ExecutableNode
 {
 
-    public VariableSetNode(Class<?> type)
+    public VariableSetNode(Type type)
     {
         super("Variable Set", "variables");
         addInput("value", type, true, null);
-        addInput("name", String.class, true, null);
+        addInput("name", Type.STRING, true, null);
     }
 
-    public VariableSetNode(String var, Class<?> type)
+    public VariableSetNode(String var, Type type)
     {
         super("Variable Set", "variables");
         addInput("value", type, true, null);
-        addInput("name", String.class, false, var);
+        addInput("name", Type.STRING, false, var);
     }
 
     @Override

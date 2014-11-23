@@ -1,15 +1,16 @@
 package com.thevoxelbox.vsl.node;
 
 import com.thevoxelbox.vsl.api.INode;
+import com.thevoxelbox.vsl.type.Type;
 
 public class NodeOutput
 {
     private int i = -1;
     private final String name;
-    private final Class<?> type;
+    private final Type type;
     private final INode parent;
 
-    public NodeOutput(String n, Class<?> t, INode parent)
+    public NodeOutput(String n, Type t, INode parent)
     {
         this.name = n;
         this.type = t;
@@ -26,7 +27,7 @@ public class NodeOutput
         return this.name;
     }
 
-    public Class<?> getType()
+    public Type getType()
     {
         return this.type;
     }

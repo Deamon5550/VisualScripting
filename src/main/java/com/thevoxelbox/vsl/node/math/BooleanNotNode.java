@@ -5,6 +5,7 @@ import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
 
 import com.thevoxelbox.vsl.node.Node;
+import com.thevoxelbox.vsl.type.Type;
 
 public class BooleanNotNode extends Node implements Opcodes
 {
@@ -12,8 +13,8 @@ public class BooleanNotNode extends Node implements Opcodes
     public BooleanNotNode()
     {
         super("Boolean Not", "math");
-        addInput("a", boolean.class, true, null);
-        addOutput("result", boolean.class, this);
+        addInput("a", Type.BOOLEAN, true, null);
+        addOutput("result", Type.BOOLEAN, this);
     }
 
     @Override

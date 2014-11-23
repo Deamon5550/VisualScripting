@@ -6,12 +6,13 @@ import com.thevoxelbox.vsl.error.GraphCompilationException;
 import com.thevoxelbox.vsl.error.InvalidNodeTypeException;
 import com.thevoxelbox.vsl.node.NodeInput;
 import com.thevoxelbox.vsl.node.NodeOutput;
+import com.thevoxelbox.vsl.type.Type;
 
 public interface INode
 {
-    void addInput(String name, Class<?> type, boolean required, Object defaultValue);
+    void addInput(String name, Type type, boolean required, Object defaultValue);
 
-    void addOutput(String name, Class<?> type, INode parent);
+    void addOutput(String name, Type type, INode parent);
 
     void mapInput(String input, NodeOutput source) throws InvalidNodeTypeException, NullPointerException;
 

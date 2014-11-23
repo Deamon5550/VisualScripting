@@ -12,7 +12,6 @@ import com.thevoxelbox.vsl.VariableScope;
 import com.thevoxelbox.vsl.api.IChainableNodeGraph;
 import com.thevoxelbox.vsl.api.IChainedRunnableGraph;
 import com.thevoxelbox.vsl.api.IGraphCompilerFactory;
-import com.thevoxelbox.vsl.api.IRunnableGraph;
 import com.thevoxelbox.vsl.api.IVariableHolder;
 import com.thevoxelbox.vsl.classloader.ASMClassLoader;
 import com.thevoxelbox.vsl.classloader.ChainableGraphCompiler;
@@ -24,6 +23,7 @@ import com.thevoxelbox.vsl.node.debug.PrintNode;
 import com.thevoxelbox.vsl.node.variables.ChainedInputNode;
 import com.thevoxelbox.vsl.node.variables.ChainedOutputNode;
 import com.thevoxelbox.vsl.node.variables.StringValueNode;
+import com.thevoxelbox.vsl.type.Type;
 
 public class ChainedNodeGraphTest
 {
@@ -50,8 +50,8 @@ public class ChainedNodeGraphTest
 
         StringValueNode string = new StringValueNode("Hello");
         StringValueNode string2 = new StringValueNode(" World");
-        ChainedOutputNode out1 = new ChainedOutputNode("first", String.class);
-        ChainedOutputNode out2 = new ChainedOutputNode("second", String.class);
+        ChainedOutputNode out1 = new ChainedOutputNode("first", Type.STRING);
+        ChainedOutputNode out2 = new ChainedOutputNode("second", Type.STRING);
         out1.mapInput("value", string.getOutput("value"));
         out2.mapInput("value", string2.getOutput("value"));
         out1.setNextNode(out2);
@@ -62,8 +62,8 @@ public class ChainedNodeGraphTest
         Class<? extends IChainedRunnableGraph> chain1 =
                 (Class<? extends IChainedRunnableGraph>) classloader.getCompiler(IChainableNodeGraph.class).compile(classloader, tree1);
 
-        ChainedInputNode in1 = new ChainedInputNode("first", String.class);
-        ChainedInputNode in2 = new ChainedInputNode("second", String.class);
+        ChainedInputNode in1 = new ChainedInputNode("first", Type.STRING);
+        ChainedInputNode in2 = new ChainedInputNode("second", Type.STRING);
         PrintNode print = new PrintNode();
         PrintNode print2 = new PrintNode();
         print.mapInput("msg", in1.getOutput("value"));

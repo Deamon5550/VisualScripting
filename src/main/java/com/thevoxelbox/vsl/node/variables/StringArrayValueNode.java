@@ -4,6 +4,8 @@ import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
 
 import com.thevoxelbox.vsl.node.Node;
+import com.thevoxelbox.vsl.type.Type;
+import com.thevoxelbox.vsl.type.TypeDepth;
 
 public class StringArrayValueNode extends Node implements Opcodes
 {
@@ -14,7 +16,7 @@ public class StringArrayValueNode extends Node implements Opcodes
     {
         super("String Array Value", "variables");
         this.value = value;
-        addOutput("value", String.class, this);
+        addOutput("value", Type.getType("STRING", "java/lang/String", TypeDepth.ARRAY), this);
     }
 
     @Override

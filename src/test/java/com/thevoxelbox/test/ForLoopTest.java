@@ -20,6 +20,8 @@ import com.thevoxelbox.vsl.node.NodeGraph;
 import com.thevoxelbox.vsl.node.control.ForEachLoopNode;
 import com.thevoxelbox.vsl.node.debug.PrintNode;
 import com.thevoxelbox.vsl.node.variables.StringArrayValueNode;
+import com.thevoxelbox.vsl.type.Type;
+import com.thevoxelbox.vsl.type.TypeDepth;
 
 public class ForLoopTest
 {
@@ -46,7 +48,7 @@ public class ForLoopTest
         StringArrayValueNode array = new StringArrayValueNode("Hel", "lo ", "Wor", "ld");
         PrintNode print = new PrintNode();
 
-        ForEachLoopNode forloop = new ForEachLoopNode(print, String.class);
+        ForEachLoopNode forloop = new ForEachLoopNode(print, Type.getType("STRING", "java/lang/String", TypeDepth.ARRAY));
         forloop.mapInput("array", array.getOutput("value"));
         print.mapInput("msg", forloop.getOutput("next"));
         forloop.setBody(print);

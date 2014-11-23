@@ -4,6 +4,7 @@ import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
 
 import com.thevoxelbox.vsl.node.Node;
+import com.thevoxelbox.vsl.type.Type;
 
 public class StringValueNode extends Node
 {
@@ -14,7 +15,7 @@ public class StringValueNode extends Node
     {
         super("String Value", "variables");
         this.value = value;
-        addOutput("value", String.class, this);
+        addOutput("value", Type.STRING, this);
     }
 
     @Override

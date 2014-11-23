@@ -4,6 +4,7 @@ import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
 
 import com.thevoxelbox.vsl.node.Node;
+import com.thevoxelbox.vsl.type.Type;
 
 public class FloatAdditionNode extends Node implements Opcodes
 {
@@ -11,9 +12,9 @@ public class FloatAdditionNode extends Node implements Opcodes
     public FloatAdditionNode()
     {
         super("Float Addition", "math");
-        addInput("a", double.class, true, null);
-        addInput("b", double.class, true, null);
-        addOutput("result", double.class, this);
+        addInput("a", Type.FLOAT, true, null);
+        addInput("b", Type.FLOAT, true, null);
+        addOutput("result", Type.FLOAT, this);
     }
 
     @Override
@@ -27,10 +28,10 @@ public class FloatAdditionNode extends Node implements Opcodes
          */
         int a_i = getInput("a").getSource().get();
         int b_i = getInput("b").getSource().get();
-        mv.visitVarInsn(FLOAD, a_i);
-        mv.visitVarInsn(FLOAD, b_i);
-        mv.visitInsn(FADD);
-        mv.visitVarInsn(FSTORE, localsIndex);
+        mv.visitVarInsn(DLOAD, a_i);
+        mv.visitVarInsn(DLOAD, b_i);
+        mv.visitInsn(DADD);
+        mv.visitVarInsn(DSTORE, localsIndex);
         setOutput("result", localsIndex);
         return localsIndex + 1;
     }

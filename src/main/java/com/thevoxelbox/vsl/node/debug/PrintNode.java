@@ -4,13 +4,14 @@ import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
 
 import com.thevoxelbox.vsl.node.ExecutableNode;
+import com.thevoxelbox.vsl.type.Type;
 
 public class PrintNode extends ExecutableNode
 {
     public PrintNode()
     {
         super("Print String", "debug");
-        addInput("msg", String.class, true, null);
+        addInput("msg", Type.STRING, true, null);
     }
 
     @Override

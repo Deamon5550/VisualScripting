@@ -8,6 +8,7 @@ import org.objectweb.asm.MethodVisitor;
 import com.thevoxelbox.vsl.api.INode;
 import com.thevoxelbox.vsl.error.GraphCompilationException;
 import com.thevoxelbox.vsl.error.InvalidNodeTypeException;
+import com.thevoxelbox.vsl.type.Type;
 
 public abstract class Node implements INode
 {
@@ -29,14 +30,14 @@ public abstract class Node implements INode
     }
 
     @Override
-    public void addInput(String name, Class<?> type, boolean required, Object defaultValue)
+    public void addInput(String name, Type type, boolean required, Object defaultValue)
     {
         if (inputs.containsKey(name)) return;
         inputs.put(name, new NodeInput(name, type, required, defaultValue));
     }
 
     @Override
-    public void addOutput(String name, Class<?> type, INode parent)
+    public void addOutput(String name, Type type, INode parent)
     {
         if (outputs.containsKey(name)) return;
         outputs.put(name, new NodeOutput(name, type, parent));
@@ -53,9 +54,9 @@ public abstract class Node implements INode
         {
             throw new NullPointerException("Attempted to map from null output");
         }
-        if (!inputs.get(input).getType().isAssignableFrom(source.getType()))
+        if (!inputs.get(input).getType().equals(source.getType()) && !inputs.get(input).getType().equals(Type.OBJECT))
         {
-            throw new InvalidNodeTypeException("Invalid type " + source.getType().getName() + " expected " + inputs.get(input).getType().getName());
+            throw new InvalidNodeTypeException("Invalid type " + source.getType().toString() + " expected " + inputs.get(input).getType().toString());
         }
         inputs.get(input).setSource(source);
     }

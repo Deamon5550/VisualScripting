@@ -4,6 +4,7 @@ import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
 
 import com.thevoxelbox.vsl.node.Node;
+import com.thevoxelbox.vsl.type.Type;
 
 public class ToStringNode extends Node implements Opcodes
 {
@@ -11,8 +12,8 @@ public class ToStringNode extends Node implements Opcodes
     public ToStringNode()
     {
         super("toString", "string");
-        addInput("value", Object.class, true, null);
-        addOutput("result", String.class, this);
+        addInput("value", Type.OBJECT, true, null);
+        addOutput("result", Type.STRING, this);
     }
 
     @Override

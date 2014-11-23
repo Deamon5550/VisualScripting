@@ -5,19 +5,25 @@ import org.objectweb.asm.Opcodes;
 
 import com.thevoxelbox.vsl.error.GraphCompilationException;
 import com.thevoxelbox.vsl.node.Node;
+import com.thevoxelbox.vsl.type.Type;
+import com.thevoxelbox.vsl.type.TypeDepth;
 
 public class ArrayIndexNode extends Node implements Opcodes
 {
 
-    public ArrayIndexNode(Class<?> type, long index)
+    public ArrayIndexNode(Type type, long index) throws GraphCompilationException
     {
         super("Array Index", "control");
+        if(type.getDepth() != TypeDepth.ARRAY)
+        {
+            throw new GraphCompilationException("Input type for ArrayIndexNode is not an array type");
+        }
         addInput("array", type, true, null);
-        addInput("index", int.class, index >= 0 ? false : true, index >= 0 ? index : null);
+        addInput("index", Type.INTEGER, index >= 0 ? false : true, index >= 0 ? index : null);
         addOutput("value", type, this);
     }
 
-    public ArrayIndexNode(Class<?> type)
+    public ArrayIndexNode(Type type) throws GraphCompilationException
     {
         this(type, -1);
     }
@@ -42,12 +48,4 @@ public class ArrayIndexNode extends Node implements Opcodes
         setOutput("value", localsIndex);
         return localsIndex + 1;
     }
-
-    public void t()
-    {
-        String[] s = null;
-
-        String v = s[0];
-    }
-
 }

@@ -6,6 +6,7 @@ import org.objectweb.asm.Opcodes;
 
 import com.thevoxelbox.vsl.error.GraphCompilationException;
 import com.thevoxelbox.vsl.node.Node;
+import com.thevoxelbox.vsl.type.Type;
 
 public class StringFindNode extends Node implements Opcodes
 {
@@ -13,9 +14,9 @@ public class StringFindNode extends Node implements Opcodes
     public StringFindNode()
     {
         super("String find", "string");
-        addInput("string", String.class, true, null);
-        addInput("token", String.class, false, 0);
-        addOutput("index", int.class, this);
+        addInput("string", Type.STRING, true, null);
+        addInput("token", Type.STRING, false, 0);
+        addOutput("index", Type.INTEGER, this);
     }
 
     @Override

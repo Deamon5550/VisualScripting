@@ -2,29 +2,29 @@ package com.thevoxelbox.vsl.node.variables;
 
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
-import org.objectweb.asm.Type;
 
 import com.thevoxelbox.vsl.error.GraphCompilationException;
 import com.thevoxelbox.vsl.node.Node;
+import com.thevoxelbox.vsl.type.Type;
 
 public class VariableGetNode extends Node
 {
 
-    private Class<?> type;
+    private Type type;
 
-    public VariableGetNode(Class<?> type)
+    public VariableGetNode(Type type)
     {
         super("Variable Get", "variables");
         addOutput("value", type, this);
-        addInput("name", String.class, true, null);
+        addInput("name", Type.STRING, true, null);
         this.type = type;
     }
 
-    public VariableGetNode(String name, Class<?> type)
+    public VariableGetNode(String name, Type type)
     {
         super("Variable Get", "variables");
         addOutput("value", type, this);
-        addInput("name", String.class, false, name);
+        addInput("name", Type.STRING, false, name);
         this.type = type;
     }
 
@@ -49,9 +49,33 @@ public class VariableGetNode extends Node
         mv.visitVarInsn(Opcodes.ALOAD, 1);
         mv.visitVarInsn(Opcodes.ALOAD, name_i);
         mv.visitMethodInsn(Opcodes.INVOKEINTERFACE, "com/thevoxelbox/vsl/api/IVariableHolder", "get", "(Ljava/lang/String;)Ljava/lang/Object;", true);
-        mv.visitTypeInsn(Opcodes.CHECKCAST, Type.getInternalName(type));
-        mv.visitVarInsn(Opcodes.ASTORE, localsIndex);
+        if (type == Type.INTEGER)
+        {
+            mv.visitTypeInsn(Opcodes.CHECKCAST, type.getInternalName());
+            mv.visitMethodInsn(Opcodes.INVOKEVIRTUAL, "java/lang/Integer", "intValue", "()I", false);
+            mv.visitVarInsn(Opcodes.ISTORE, localsIndex);
+        } else if (type == Type.FLOAT)
+        {
+            mv.visitTypeInsn(Opcodes.CHECKCAST, type.getInternalName());
+            mv.visitMethodInsn(Opcodes.INVOKEVIRTUAL, "java/lang/Double", "doubleValue", "()D", false);
+            mv.visitVarInsn(Opcodes.DSTORE, localsIndex);
+        } else if (type == Type.BOOLEAN)
+        {
+            mv.visitTypeInsn(Opcodes.CHECKCAST, type.getInternalName());
+            mv.visitMethodInsn(Opcodes.INVOKEVIRTUAL, "java/lang/Boolean", "booleanValue", "()Z", false);
+            mv.visitVarInsn(Opcodes.ISTORE, localsIndex);
+        } else
+        {
+            mv.visitTypeInsn(Opcodes.CHECKCAST, type.getInternalName());
+            mv.visitVarInsn(Opcodes.ASTORE, localsIndex);
+        }
         setOutput("value", localsIndex);
         return localsIndex + 1;
+    }
+
+    public void t()
+    {
+        Object o = null;
+        boolean i = ((Boolean) o).booleanValue();
     }
 }

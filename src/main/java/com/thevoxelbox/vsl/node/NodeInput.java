@@ -4,21 +4,22 @@ import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
 
 import com.thevoxelbox.vsl.error.GraphCompilationException;
+import com.thevoxelbox.vsl.type.Type;
 
 public class NodeInput
 {
     private final String name;
-    private final Class<?> type;
+    private final Type type;
     private NodeOutput out = null;
     private boolean required;
     private Object defaultValue;
 
-    public NodeInput(String n, Class<?> t)
+    public NodeInput(String n, Type t)
     {
         this(n, t, true, null);
     }
 
-    public NodeInput(String n, Class<?> t, boolean r, Object d)
+    public NodeInput(String n, Type t, boolean r, Object d)
     {
         this.name = n;
         this.type = t;
@@ -41,7 +42,7 @@ public class NodeInput
         return this.name;
     }
 
-    public Class<?> getType()
+    public Type getType()
     {
         return this.type;
     }
@@ -68,7 +69,7 @@ public class NodeInput
 
     public int insertDefaultValue(MethodVisitor mv, int init) throws GraphCompilationException
     {
-        if (this.type == int.class)
+        if (this.type == Type.INTEGER)
         {
             if (this.defaultValue == null)
             {
@@ -96,7 +97,7 @@ public class NodeInput
                 mv.visitVarInsn(Opcodes.LSTORE, init);
                 init += 2;
             }
-        } else if (this.type == String.class)
+        } else if (this.type == Type.STRING)
         {
             if (this.defaultValue == null)
             {

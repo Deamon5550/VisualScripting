@@ -23,6 +23,7 @@ import com.thevoxelbox.vsl.node.string.ToStringNode;
 import com.thevoxelbox.vsl.node.variables.StringValueNode;
 import com.thevoxelbox.vsl.node.variables.VariableGetNode;
 import com.thevoxelbox.vsl.node.variables.VariableSetNode;
+import com.thevoxelbox.vsl.type.Type;
 
 public class VariableScopeTest
 {
@@ -73,9 +74,9 @@ public class VariableScopeTest
         System.setOut(out);
 
         StringValueNode value = new StringValueNode("Hello World");
-        VariableSetNode set = new VariableSetNode("name", String.class);
+        VariableSetNode set = new VariableSetNode("name", Type.STRING);
         set.mapInput("value", value.getOutput("value"));
-        VariableGetNode get = new VariableGetNode("name", String.class);
+        VariableGetNode get = new VariableGetNode("name", Type.STRING);
         ToStringNode toString = new ToStringNode();
         toString.mapInput("value", get.getOutput("value"));
         PrintNode print = new PrintNode();

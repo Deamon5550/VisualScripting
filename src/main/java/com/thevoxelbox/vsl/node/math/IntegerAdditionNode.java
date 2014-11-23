@@ -4,6 +4,7 @@ import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
 
 import com.thevoxelbox.vsl.node.Node;
+import com.thevoxelbox.vsl.type.Type;
 
 public class IntegerAdditionNode extends Node implements Opcodes
 {
@@ -11,9 +12,9 @@ public class IntegerAdditionNode extends Node implements Opcodes
     public IntegerAdditionNode()
     {
         super("Integer Addition", "math");
-        addInput("a", int.class, true, null);
-        addInput("b", int.class, true, null);
-        addOutput("result", int.class, this);
+        addInput("a", Type.INTEGER, true, null);
+        addInput("b", Type.INTEGER, true, null);
+        addOutput("result", Type.INTEGER, this);
     }
 
     @Override

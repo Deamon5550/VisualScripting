@@ -6,18 +6,24 @@ import org.objectweb.asm.Opcodes;
 
 import com.thevoxelbox.vsl.error.GraphCompilationException;
 import com.thevoxelbox.vsl.node.ExecutableNode;
+import com.thevoxelbox.vsl.type.Type;
+import com.thevoxelbox.vsl.type.TypeDepth;
 
 public class ForEachLoopNode extends ExecutableNode implements Opcodes
 {
 
     private ExecutableNode body;
 
-    public ForEachLoopNode(ExecutableNode body, Class<?> type)
+    public ForEachLoopNode(ExecutableNode body, Type type) throws GraphCompilationException
     {
         super("for-each", "control");
+        if(type.getDepth() != TypeDepth.ARRAY)
+        {
+            throw new GraphCompilationException("Input type for ArrayIndexNode is not an array type");
+        }
         addInput("array", type, true, null);
-        addOutput("next", type, this);
-        addOutput("index", int.class, this);
+        addOutput("next", Type.getType(type.getName(), type.getInternalName(), TypeDepth.SINGLE), this);
+        addOutput("index", Type.INTEGER, this);
         this.body = body;
     }
 
@@ -117,14 +123,4 @@ public class ForEachLoopNode extends ExecutableNode implements Opcodes
         mv.visitJumpInsn(IF_ICMPLT, l1);*/
         return localsIndex;
     }
-
-    public void t()
-    {
-        String[] s = new String[] { "a", "b", "c" };
-        for (String i : s)
-        {
-            System.out.println(i);
-        }
-    }
-
 }

@@ -4,6 +4,7 @@ import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
 
 import com.thevoxelbox.vsl.node.Node;
+import com.thevoxelbox.vsl.type.Type;
 
 public class StringConcatenationNode extends Node implements Opcodes
 {
@@ -11,9 +12,9 @@ public class StringConcatenationNode extends Node implements Opcodes
     public StringConcatenationNode()
     {
         super("String Concatenation", "string");
-        addInput("first", String.class, true, null);
-        addInput("second", String.class, true, null);
-        addOutput("result", String.class, this);
+        addInput("first", Type.STRING, true, null);
+        addInput("second", Type.STRING, true, null);
+        addOutput("result", Type.STRING, this);
     }
 
     @Override
