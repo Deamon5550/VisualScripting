@@ -10,11 +10,12 @@ import com.thevoxelbox.vsl.type.TypeDepth;
 
 public class ArrayIndexNode extends Node implements Opcodes
 {
+    private static final long serialVersionUID = -5544598424756745612L;
 
     public ArrayIndexNode(Type type, long index) throws GraphCompilationException
     {
         super("Array Index", "control");
-        if(type.getDepth() != TypeDepth.ARRAY)
+        if (type.getDepth() != TypeDepth.ARRAY)
         {
             throw new GraphCompilationException("Input type for ArrayIndexNode is not an array type");
         }

@@ -9,6 +9,11 @@ import com.thevoxelbox.vsl.type.Type;
 public class BooleanOrNode extends Node implements Opcodes
 {
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1784526846245132087L;
+
     public BooleanOrNode()
     {
         super("Boolean Or", "math");

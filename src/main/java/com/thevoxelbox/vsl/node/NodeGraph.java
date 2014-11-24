@@ -1,12 +1,14 @@
 package com.thevoxelbox.vsl.node;
 
+import java.io.Serializable;
+
 import org.objectweb.asm.Opcodes;
 
 import com.thevoxelbox.vsl.api.INodeGraph;
 
-public class NodeGraph implements INodeGraph, Opcodes
+public class NodeGraph implements INodeGraph, Opcodes, Serializable
 {
-
+    private static final long serialVersionUID = 4398861156694365589L;
     private String name;
     private int c = 0;
     private ExecutableNode start;
@@ -25,7 +27,7 @@ public class NodeGraph implements INodeGraph, Opcodes
     @Override
     public String getName()
     {
-        return this.name + this.c;
+        return this.name;
     }
 
     @Override

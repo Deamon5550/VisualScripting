@@ -8,6 +8,8 @@ import com.thevoxelbox.vsl.type.Type;
 
 public class PrintNode extends ExecutableNode
 {
+    private static final long serialVersionUID = -6960304710052197838L;
+
     public PrintNode()
     {
         super("Print String", "debug");

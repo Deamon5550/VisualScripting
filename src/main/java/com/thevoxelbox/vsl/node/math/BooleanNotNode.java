@@ -10,6 +10,11 @@ import com.thevoxelbox.vsl.type.Type;
 public class BooleanNotNode extends Node implements Opcodes
 {
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 4549811889127134064L;
+
     public BooleanNotNode()
     {
         super("Boolean Not", "math");

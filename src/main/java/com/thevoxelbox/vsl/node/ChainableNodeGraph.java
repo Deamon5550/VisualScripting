@@ -8,6 +8,7 @@ import com.thevoxelbox.vsl.api.IChainableNodeGraph;
 
 public class ChainableNodeGraph extends NodeGraph implements IChainableNodeGraph
 {
+    private static final long serialVersionUID = -3351853188744638203L;
     private Map<String, Class<?>> inputs;
     private Map<String, Class<?>> outputs;
 

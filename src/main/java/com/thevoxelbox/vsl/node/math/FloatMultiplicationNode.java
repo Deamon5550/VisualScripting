@@ -9,6 +9,11 @@ import com.thevoxelbox.vsl.type.Type;
 public class FloatMultiplicationNode extends Node implements Opcodes
 {
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = -8363246258410493983L;
+
     public FloatMultiplicationNode()
     {
         super("Float Multiplication", "math");
@@ -33,7 +38,7 @@ public class FloatMultiplicationNode extends Node implements Opcodes
         mv.visitInsn(DMUL);
         mv.visitVarInsn(DSTORE, localsIndex);
         setOutput("result", localsIndex);
-        return localsIndex + 1;
+        return localsIndex + 2;
     }
 
 }

@@ -9,6 +9,10 @@ import com.thevoxelbox.vsl.type.Type;
 public class StringValueNode extends Node
 {
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = -5522179292881089093L;
     String value;
 
     public StringValueNode(String value)

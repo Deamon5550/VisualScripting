@@ -11,6 +11,11 @@ import com.thevoxelbox.vsl.type.Type;
 public class StringFindNode extends Node implements Opcodes
 {
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = -6054613299764204990L;
+
     public StringFindNode()
     {
         super("String find", "string");

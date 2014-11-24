@@ -10,6 +10,11 @@ import com.thevoxelbox.vsl.type.Type;
 public class SubStringNode extends Node
 {
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = -7801872777254732688L;
+
     public SubStringNode()
     {
         super("Substring", "string");

@@ -4,7 +4,6 @@ import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
 
-import com.thevoxelbox.vsl.api.IChainableNodeGraph;
 import com.thevoxelbox.vsl.api.IGraphCompiler;
 import com.thevoxelbox.vsl.api.INodeGraph;
 import com.thevoxelbox.vsl.api.IRunnableGraph;

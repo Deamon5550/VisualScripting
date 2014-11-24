@@ -10,6 +10,11 @@ import com.thevoxelbox.vsl.type.Type;
 public class VariableSetNode extends ExecutableNode
 {
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 5756751983729486668L;
+
     public VariableSetNode(Type type)
     {
         super("Variable Set", "variables");

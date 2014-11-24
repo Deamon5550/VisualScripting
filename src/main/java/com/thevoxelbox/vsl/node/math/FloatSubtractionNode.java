@@ -9,6 +9,11 @@ import com.thevoxelbox.vsl.type.Type;
 public class FloatSubtractionNode extends Node implements Opcodes
 {
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 5008316400875167971L;
+
     public FloatSubtractionNode()
     {
         super("Float Division", "math");
@@ -33,7 +38,7 @@ public class FloatSubtractionNode extends Node implements Opcodes
         mv.visitInsn(DDIV);
         mv.visitVarInsn(DSTORE, localsIndex);
         setOutput("result", localsIndex);
-        return localsIndex + 1;
+        return localsIndex + 2;
     }
 
 }

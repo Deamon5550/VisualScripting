@@ -9,6 +9,11 @@ import com.thevoxelbox.vsl.type.Type;
 public class BooleanAndNode extends Node implements Opcodes
 {
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = -8319895620036184541L;
+
     public BooleanAndNode()
     {
         super("Boolean And", "math");

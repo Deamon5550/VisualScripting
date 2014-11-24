@@ -10,7 +10,6 @@ import com.thevoxelbox.vsl.api.IChainableNodeGraph;
 import com.thevoxelbox.vsl.api.IGraphCompiler;
 import com.thevoxelbox.vsl.api.INodeGraph;
 import com.thevoxelbox.vsl.api.IRunnableGraph;
-import com.thevoxelbox.vsl.api.IVariableHolder;
 import com.thevoxelbox.vsl.error.GraphCompilationException;
 import com.thevoxelbox.vsl.node.ExecutableNode;
 

@@ -1,5 +1,6 @@
 package com.thevoxelbox.vsl.node;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -10,9 +11,9 @@ import com.thevoxelbox.vsl.error.GraphCompilationException;
 import com.thevoxelbox.vsl.error.InvalidNodeTypeException;
 import com.thevoxelbox.vsl.type.Type;
 
-public abstract class Node implements INode
+public abstract class Node implements INode, Serializable
 {
-
+    private static final long serialVersionUID = 4547770054027115676L;
     private final String name;
     private final String packageName;
     private final Map<String, NodeOutput> outputs = new HashMap<String, NodeOutput>();

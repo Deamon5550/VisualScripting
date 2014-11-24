@@ -10,6 +10,10 @@ import com.thevoxelbox.vsl.type.TypeDepth;
 public class StringArrayValueNode extends Node implements Opcodes
 {
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1242627948755821329L;
     String[] value;
 
     public StringArrayValueNode(String... value)

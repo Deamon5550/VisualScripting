@@ -1,10 +1,16 @@
 package com.thevoxelbox.vsl.node;
 
+import java.io.Serializable;
+
 import com.thevoxelbox.vsl.api.INode;
 import com.thevoxelbox.vsl.type.Type;
 
-public class NodeOutput
+public class NodeOutput implements Serializable
 {
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 3481166480208261206L;
     private int i = -1;
     private final String name;
     private final Type type;

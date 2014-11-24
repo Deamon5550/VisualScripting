@@ -9,6 +9,11 @@ import com.thevoxelbox.vsl.type.Type;
 public class StringConcatenationNode extends Node implements Opcodes
 {
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 6031735764752882274L;
+
     public StringConcatenationNode()
     {
         super("String Concatenation", "string");

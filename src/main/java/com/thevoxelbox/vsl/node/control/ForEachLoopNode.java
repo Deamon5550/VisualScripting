@@ -11,13 +11,13 @@ import com.thevoxelbox.vsl.type.TypeDepth;
 
 public class ForEachLoopNode extends ExecutableNode implements Opcodes
 {
-
+    private static final long serialVersionUID = 5228396915590984962L;
     private ExecutableNode body;
 
     public ForEachLoopNode(ExecutableNode body, Type type) throws GraphCompilationException
     {
         super("for-each", "control");
-        if(type.getDepth() != TypeDepth.ARRAY)
+        if (type.getDepth() != TypeDepth.ARRAY)
         {
             throw new GraphCompilationException("Input type for ArrayIndexNode is not an array type");
         }

@@ -10,6 +10,10 @@ import com.thevoxelbox.vsl.type.Type;
 public class VariableGetNode extends Node
 {
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = -5189214309378156617L;
     private Type type;
 
     public VariableGetNode(Type type)
@@ -49,33 +53,34 @@ public class VariableGetNode extends Node
         mv.visitVarInsn(Opcodes.ALOAD, 1);
         mv.visitVarInsn(Opcodes.ALOAD, name_i);
         mv.visitMethodInsn(Opcodes.INVOKEINTERFACE, "com/thevoxelbox/vsl/api/IVariableHolder", "get", "(Ljava/lang/String;)Ljava/lang/Object;", true);
-        if (type == Type.INTEGER)
+        if (type.equals(Type.INTEGER))
         {
             mv.visitTypeInsn(Opcodes.CHECKCAST, type.getInternalName());
             mv.visitMethodInsn(Opcodes.INVOKEVIRTUAL, "java/lang/Integer", "intValue", "()I", false);
             mv.visitVarInsn(Opcodes.ISTORE, localsIndex);
-        } else if (type == Type.FLOAT)
+            setOutput("value", localsIndex);
+            localsIndex++;
+        } else if (type.equals(Type.FLOAT))
         {
             mv.visitTypeInsn(Opcodes.CHECKCAST, type.getInternalName());
             mv.visitMethodInsn(Opcodes.INVOKEVIRTUAL, "java/lang/Double", "doubleValue", "()D", false);
             mv.visitVarInsn(Opcodes.DSTORE, localsIndex);
-        } else if (type == Type.BOOLEAN)
+            setOutput("value", localsIndex);
+            localsIndex += 2;
+        } else if (type.equals(Type.BOOLEAN))
         {
             mv.visitTypeInsn(Opcodes.CHECKCAST, type.getInternalName());
             mv.visitMethodInsn(Opcodes.INVOKEVIRTUAL, "java/lang/Boolean", "booleanValue", "()Z", false);
             mv.visitVarInsn(Opcodes.ISTORE, localsIndex);
+            setOutput("value", localsIndex);
+            localsIndex++;
         } else
         {
             mv.visitTypeInsn(Opcodes.CHECKCAST, type.getInternalName());
             mv.visitVarInsn(Opcodes.ASTORE, localsIndex);
+            setOutput("value", localsIndex);
+            localsIndex++;
         }
-        setOutput("value", localsIndex);
-        return localsIndex + 1;
-    }
-
-    public void t()
-    {
-        Object o = null;
-        boolean i = ((Boolean) o).booleanValue();
+        return localsIndex;
     }
 }

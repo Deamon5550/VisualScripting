@@ -2,7 +2,7 @@ package com.thevoxelbox.vsl.node;
 
 public abstract class ExecutableNode extends Node
 {
-
+    private static final long serialVersionUID = 6938126440494121404L;
     ExecutableNode next = null;
 
     public ExecutableNode(String name)

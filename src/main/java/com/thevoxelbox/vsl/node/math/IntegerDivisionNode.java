@@ -9,6 +9,11 @@ import com.thevoxelbox.vsl.type.Type;
 public class IntegerDivisionNode extends Node implements Opcodes
 {
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 2385059426226487134L;
+
     public IntegerDivisionNode()
     {
         super("Integer Multiplication", "math");

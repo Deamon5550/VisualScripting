@@ -9,6 +9,11 @@ import com.thevoxelbox.vsl.type.Type;
 public class IntegerSubtractionNode extends Node implements Opcodes
 {
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 938585496057453156L;
+
     public IntegerSubtractionNode()
     {
         super("Integer Division", "math");

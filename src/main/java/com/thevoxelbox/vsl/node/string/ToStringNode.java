@@ -9,6 +9,11 @@ import com.thevoxelbox.vsl.type.Type;
 public class ToStringNode extends Node implements Opcodes
 {
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = -8752322858200554863L;
+
     public ToStringNode()
     {
         super("toString", "string");

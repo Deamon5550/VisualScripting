@@ -1,13 +1,19 @@
 package com.thevoxelbox.vsl.node;
 
+import java.io.Serializable;
+
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
 
 import com.thevoxelbox.vsl.error.GraphCompilationException;
 import com.thevoxelbox.vsl.type.Type;
 
-public class NodeInput
+public class NodeInput implements Serializable
 {
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 4321453232297119565L;
     private final String name;
     private final Type type;
     private NodeOutput out = null;
@@ -69,7 +75,7 @@ public class NodeInput
 
     public int insertDefaultValue(MethodVisitor mv, int init) throws GraphCompilationException
     {
-        if (this.type == Type.INTEGER)
+        if (this.type.equals(Type.INTEGER))
         {
             if (this.defaultValue == null)
             {
@@ -97,7 +103,7 @@ public class NodeInput
                 mv.visitVarInsn(Opcodes.LSTORE, init);
                 init += 2;
             }
-        } else if (this.type == Type.STRING)
+        } else if (this.type.equals(Type.STRING))
         {
             if (this.defaultValue == null)
             {
