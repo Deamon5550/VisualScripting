@@ -7,22 +7,33 @@ import com.thevoxelbox.vsl.node.Node;
 import com.thevoxelbox.vsl.type.Type;
 import com.thevoxelbox.vsl.type.TypeDepth;
 
+/**
+* A node for creating a new {@link String} array.
+*/
 public class StringArrayValueNode extends Node implements Opcodes
 {
 
-    /**
-     * 
-     */
     private static final long serialVersionUID = 1242627948755821329L;
+    /**
+     * The value to be inserted.
+     */
     String[] value;
-
+    
+   /**
+    * Creates a new {@link StringArrayValueNode}.
+    * 
+    * @param value the array values
+    */
     public StringArrayValueNode(String... value)
     {
         super("String Array Value", "variables");
         this.value = value;
-        addOutput("value", Type.getType("STRING", "java/lang/String", TypeDepth.ARRAY), this);
+        addOutput("value", Type.getType("STRING", TypeDepth.ARRAY), this);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected int insertLocal(MethodVisitor mv, int localsIndex)
     {

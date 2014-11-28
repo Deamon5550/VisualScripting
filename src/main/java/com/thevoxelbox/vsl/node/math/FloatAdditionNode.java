@@ -6,14 +6,17 @@ import org.objectweb.asm.Opcodes;
 import com.thevoxelbox.vsl.node.Node;
 import com.thevoxelbox.vsl.type.Type;
 
+/**
+ * A node for perforing an addition operation between two floating point numbers.
+ */
 public class FloatAdditionNode extends Node implements Opcodes
 {
 
-    /**
-     * 
-     */
     private static final long serialVersionUID = -865050600878191915L;
 
+    /**
+     * Creates a new {@link FloatAdditionNode}.
+     */
     public FloatAdditionNode()
     {
         super("Float Addition", "math");
@@ -22,6 +25,9 @@ public class FloatAdditionNode extends Node implements Opcodes
         addOutput("result", Type.FLOAT, this);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected int insertLocal(MethodVisitor mv, int localsIndex)
     {

@@ -7,14 +7,17 @@ import org.objectweb.asm.Opcodes;
 import com.thevoxelbox.vsl.node.Node;
 import com.thevoxelbox.vsl.type.Type;
 
+/**
+ * A node for performing a boolean NOT operation.
+ */
 public class BooleanNotNode extends Node implements Opcodes
 {
 
-    /**
-     * 
-     */
     private static final long serialVersionUID = 4549811889127134064L;
 
+    /**
+     * Creates a new {@link BooleanNotNode}.
+     */
     public BooleanNotNode()
     {
         super("Boolean Not", "math");
@@ -22,6 +25,9 @@ public class BooleanNotNode extends Node implements Opcodes
         addOutput("result", Type.BOOLEAN, this);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected int insertLocal(MethodVisitor mv, int localsIndex)
     {

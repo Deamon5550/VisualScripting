@@ -1,5 +1,7 @@
 package com.thevoxelbox.vsl.classloader;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
@@ -9,18 +11,24 @@ import com.thevoxelbox.vsl.api.INodeGraph;
 import com.thevoxelbox.vsl.api.IRunnableGraph;
 import com.thevoxelbox.vsl.error.GraphCompilationException;
 import com.thevoxelbox.vsl.node.ExecutableNode;
+import com.thevoxelbox.vsl.node.NodeGraph;
 
+/**
+ * A basic graph compiler for {@link NodeGraph}s.
+ */
 public class NodeGraphCompiler implements IGraphCompiler, Opcodes
 {
 
+    /**
+     * {@inheritDoc}
+     */
     @SuppressWarnings("unchecked")
     @Override
     public Class<? extends IRunnableGraph> compile(ASMClassLoader cl, INodeGraph graph) throws NullPointerException, GraphCompilationException
     {
-        if (graph.getStart() == null)
-        {
-            throw new NullPointerException("Start node is null");
-        }
+        checkNotNull(cl, "Classloader cannot be null");
+        checkNotNull(graph, "Graph cannot be null");
+        checkNotNull(graph.getStart(), "Graph starting point cannot be null");
         while (cl.isClassLoaded("com.thevoxelbox.custom." + graph.getName() + graph.getIncrement()))
         {
             graph.incrementName();
@@ -29,8 +37,18 @@ public class NodeGraphCompiler implements IGraphCompiler, Opcodes
                 createClass(graph));
     }
 
+    /**
+     * Creates a new class from the given node graph and returns it as a byte array.
+     * 
+     * @param graph the graph to compile, cannot be null
+     * @return the new class
+     * @throws GraphCompilationException if an error occurs while compiling the graph
+     */
     public byte[] createClass(INodeGraph graph) throws GraphCompilationException
     {
+        checkNotNull(graph, "Graph cannot be null");
+        checkNotNull(graph.getStart(), "Graph starting point cannot be null");
+
         ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_FRAMES);
         MethodVisitor mv;
 

@@ -1,5 +1,7 @@
 package com.thevoxelbox.vsl.node.control;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import org.objectweb.asm.Label;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
@@ -9,29 +11,42 @@ import com.thevoxelbox.vsl.node.ExecutableNode;
 import com.thevoxelbox.vsl.type.Type;
 import com.thevoxelbox.vsl.type.TypeDepth;
 
+/**
+ * A node to loop over all objects in an array and operate on them.
+ */
 public class ForEachLoopNode extends ExecutableNode implements Opcodes
 {
     private static final long serialVersionUID = 5228396915590984962L;
+    /**
+     * The loop body.
+     */
     private ExecutableNode body;
 
+    /**
+     * Creates a new {@link ForEachLoopNode}.
+     * 
+     * @param body the loop body, cannot be null
+     * @param type the array type, cannot be null must be an array
+     * @throws GraphCompilationException if the type is not an array
+     */
     public ForEachLoopNode(ExecutableNode body, Type type) throws GraphCompilationException
     {
         super("for-each", "control");
+        checkNotNull(body, "Loop body cannot be null!");
+        checkNotNull(type, "Type cannot be null");
         if (type.getDepth() != TypeDepth.ARRAY)
         {
             throw new GraphCompilationException("Input type for ArrayIndexNode is not an array type");
         }
         addInput("array", type, true, null);
-        addOutput("next", Type.getType(type.getName(), type.getInternalName(), TypeDepth.SINGLE), this);
+        addOutput("next", Type.getType(type.getName(), TypeDepth.SINGLE), this);
         addOutput("index", Type.INTEGER, this);
         this.body = body;
     }
 
-    public void setBody(ExecutableNode body)
-    {
-        this.body = body;
-    }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected int insertLocal(MethodVisitor mv, int localsIndex) throws GraphCompilationException
     {

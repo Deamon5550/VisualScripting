@@ -6,14 +6,17 @@ import org.objectweb.asm.Opcodes;
 import com.thevoxelbox.vsl.node.Node;
 import com.thevoxelbox.vsl.type.Type;
 
+/**
+ * A node for performing a subtraction operation between two integers.
+ */
 public class IntegerSubtractionNode extends Node implements Opcodes
 {
 
-    /**
-     * 
-     */
     private static final long serialVersionUID = 938585496057453156L;
 
+    /**
+     * Creates a new {@link IntegerSubtractionNode}.
+     */
     public IntegerSubtractionNode()
     {
         super("Integer Division", "math");
@@ -22,6 +25,9 @@ public class IntegerSubtractionNode extends Node implements Opcodes
         addOutput("result", Type.INTEGER, this);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected int insertLocal(MethodVisitor mv, int localsIndex)
     {

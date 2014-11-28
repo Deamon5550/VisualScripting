@@ -6,16 +6,25 @@ import org.objectweb.asm.Opcodes;
 import com.thevoxelbox.vsl.node.ExecutableNode;
 import com.thevoxelbox.vsl.type.Type;
 
+/**
+ * A node for printing messages to standard output.
+ */
 public class PrintNode extends ExecutableNode
 {
     private static final long serialVersionUID = -6960304710052197838L;
 
+    /**
+     * Creates a new {@link PrintNode}.
+     */
     public PrintNode()
     {
         super("Print String", "debug");
         addInput("msg", Type.STRING, true, null);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected int insertLocal(MethodVisitor mv, int localsIndex)
     {

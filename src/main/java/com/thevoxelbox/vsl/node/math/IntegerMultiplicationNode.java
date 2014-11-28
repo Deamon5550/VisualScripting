@@ -6,14 +6,17 @@ import org.objectweb.asm.Opcodes;
 import com.thevoxelbox.vsl.node.Node;
 import com.thevoxelbox.vsl.type.Type;
 
+/**
+ * A node for performing a multiplication operation between two integers.
+ */
 public class IntegerMultiplicationNode extends Node implements Opcodes
 {
 
-    /**
-     * 
-     */
     private static final long serialVersionUID = -6656878446109197638L;
 
+    /**
+     * Creates a new {@link IntegerMultiplicationNode}.
+     */
     public IntegerMultiplicationNode()
     {
         super("Integer Multiplication", "math");
@@ -22,6 +25,9 @@ public class IntegerMultiplicationNode extends Node implements Opcodes
         addOutput("result", Type.INTEGER, this);
     }
 
+    /**
+     * A node for performing a modulo operation between two integers.
+     */
     @Override
     protected int insertLocal(MethodVisitor mv, int localsIndex)
     {

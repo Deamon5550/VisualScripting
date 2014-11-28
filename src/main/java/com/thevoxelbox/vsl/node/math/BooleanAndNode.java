@@ -6,14 +6,17 @@ import org.objectweb.asm.Opcodes;
 import com.thevoxelbox.vsl.node.Node;
 import com.thevoxelbox.vsl.type.Type;
 
+/**
+ * A node for performing a boolean AND operation.
+ */
 public class BooleanAndNode extends Node implements Opcodes
 {
 
-    /**
-     * 
-     */
     private static final long serialVersionUID = -8319895620036184541L;
 
+    /**
+     * Creates a new {@link BooleanAndNode}.
+     */
     public BooleanAndNode()
     {
         super("Boolean And", "math");
@@ -22,6 +25,9 @@ public class BooleanAndNode extends Node implements Opcodes
         addOutput("result", Type.BOOLEAN, this);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected int insertLocal(MethodVisitor mv, int localsIndex)
     {

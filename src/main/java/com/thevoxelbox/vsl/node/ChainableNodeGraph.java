@@ -6,12 +6,26 @@ import java.util.Map;
 
 import com.thevoxelbox.vsl.api.IChainableNodeGraph;
 
+/**
+ * A node graph which may be chained from and to another {@link ChainableNodeGraph}.
+ */
 public class ChainableNodeGraph extends NodeGraph implements IChainableNodeGraph
 {
     private static final long serialVersionUID = -3351853188744638203L;
+    /**
+     * Inputs to be received from a preceding {@link ChainableNodeGraph}.
+     */
     private Map<String, Class<?>> inputs;
+    /**
+     * Outputs to be sent to a following {@link ChainableNodeGraph}.
+     */
     private Map<String, Class<?>> outputs;
 
+    /**
+     * Creates a new {@link ChainableNodeGraph}.
+     * 
+     * @param name the name for this graph
+     */
     public ChainableNodeGraph(String name)
     {
         super(name);
@@ -19,6 +33,9 @@ public class ChainableNodeGraph extends NodeGraph implements IChainableNodeGraph
         this.outputs = new HashMap<String, Class<?>>();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean doInputsMatch(IChainableNodeGraph nextGraph)
     {
@@ -38,24 +55,36 @@ public class ChainableNodeGraph extends NodeGraph implements IChainableNodeGraph
         return true;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void addChainedInput(String name, Class<?> type)
     {
         this.inputs.put(name, type);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void addChainedOutput(String name, Class<?> type)
     {
         this.outputs.put(name, type);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Map<String, Class<?>> getInputs()
     {
         return Collections.unmodifiableMap(this.inputs);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Map<String, Class<?>> getOutputs()
     {

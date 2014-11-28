@@ -8,14 +8,17 @@ import com.thevoxelbox.vsl.error.GraphCompilationException;
 import com.thevoxelbox.vsl.node.Node;
 import com.thevoxelbox.vsl.type.Type;
 
+/**
+* A node for finding a regular expression pattern within a string.
+*/
 public class StringFindNode extends Node implements Opcodes
 {
 
-    /**
-     * 
-     */
     private static final long serialVersionUID = -6054613299764204990L;
-
+    
+   /**
+    * Creates a new {@link StringFindNode}.
+    */
     public StringFindNode()
     {
         super("String find", "string");
@@ -24,6 +27,9 @@ public class StringFindNode extends Node implements Opcodes
         addOutput("index", Type.INTEGER, this);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected int insertLocal(MethodVisitor mv, int localsIndex) throws GraphCompilationException
     {

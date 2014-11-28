@@ -6,14 +6,17 @@ import org.objectweb.asm.Opcodes;
 import com.thevoxelbox.vsl.node.Node;
 import com.thevoxelbox.vsl.type.Type;
 
+/**
+ * A node to perform a modulo operation between two floating point numbers.
+ */
 public class FloatModuloNode extends Node implements Opcodes
 {
 
-    /**
-     * 
-     */
     private static final long serialVersionUID = 2335759853457602886L;
 
+    /**
+     * Creates a new {@link FloatModuloNode}.
+     */
     public FloatModuloNode()
     {
         super("Float Modulo", "math");
@@ -22,6 +25,9 @@ public class FloatModuloNode extends Node implements Opcodes
         addOutput("result", Type.FLOAT, this);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected int insertLocal(MethodVisitor mv, int localsIndex)
     {

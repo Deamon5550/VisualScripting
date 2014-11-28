@@ -6,14 +6,17 @@ import org.objectweb.asm.Opcodes;
 import com.thevoxelbox.vsl.node.Node;
 import com.thevoxelbox.vsl.type.Type;
 
+/**
+ * A node for performing a subtraction operation between two floating point numbers.
+ */
 public class FloatSubtractionNode extends Node implements Opcodes
 {
 
-    /**
-     * 
-     */
     private static final long serialVersionUID = 5008316400875167971L;
 
+    /**
+     * Creates a new {@link FloatSubtractionNode}.
+     */
     public FloatSubtractionNode()
     {
         super("Float Division", "math");
@@ -22,6 +25,9 @@ public class FloatSubtractionNode extends Node implements Opcodes
         addOutput("result", Type.FLOAT, this);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected int insertLocal(MethodVisitor mv, int localsIndex)
     {

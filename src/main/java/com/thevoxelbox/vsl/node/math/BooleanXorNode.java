@@ -6,14 +6,17 @@ import org.objectweb.asm.Opcodes;
 import com.thevoxelbox.vsl.node.Node;
 import com.thevoxelbox.vsl.type.Type;
 
+/**
+ * A node for performing a boolean XOR operation.
+ */
 public class BooleanXorNode extends Node implements Opcodes
 {
 
-    /**
-     * 
-     */
     private static final long serialVersionUID = -3885333135910050440L;
 
+    /**
+     * Creates a new {@link BooleanXorNode}.
+     */
     public BooleanXorNode()
     {
         super("Boolean Xor", "math");
@@ -22,6 +25,9 @@ public class BooleanXorNode extends Node implements Opcodes
         addOutput("result", Type.BOOLEAN, this);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected int insertLocal(MethodVisitor mv, int localsIndex)
     {

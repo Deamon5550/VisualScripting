@@ -6,14 +6,17 @@ import org.objectweb.asm.Opcodes;
 import com.thevoxelbox.vsl.node.Node;
 import com.thevoxelbox.vsl.type.Type;
 
+/**
+ * A node to perform a multiplication operation between two floating point numbers.
+ */
 public class FloatMultiplicationNode extends Node implements Opcodes
 {
 
-    /**
-     * 
-     */
     private static final long serialVersionUID = -8363246258410493983L;
 
+    /**
+     * Creates a new {@link FloatMultiplicationNode}.
+     */
     public FloatMultiplicationNode()
     {
         super("Float Multiplication", "math");
@@ -22,6 +25,9 @@ public class FloatMultiplicationNode extends Node implements Opcodes
         addOutput("result", Type.FLOAT, this);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected int insertLocal(MethodVisitor mv, int localsIndex)
     {

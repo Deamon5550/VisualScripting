@@ -6,14 +6,17 @@ import org.objectweb.asm.Opcodes;
 import com.thevoxelbox.vsl.node.Node;
 import com.thevoxelbox.vsl.type.Type;
 
+/**
+ * A node for performing an addition operation between two integers.
+ */
 public class IntegerAdditionNode extends Node implements Opcodes
 {
 
-    /**
-     * 
-     */
     private static final long serialVersionUID = -748709622936011183L;
 
+    /**
+     * Creates a new {@link IntegerAdditionNode}.
+     */
     public IntegerAdditionNode()
     {
         super("Integer Addition", "math");
@@ -22,6 +25,9 @@ public class IntegerAdditionNode extends Node implements Opcodes
         addOutput("result", Type.INTEGER, this);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected int insertLocal(MethodVisitor mv, int localsIndex)
     {

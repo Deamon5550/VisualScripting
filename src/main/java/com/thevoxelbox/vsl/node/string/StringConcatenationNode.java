@@ -6,14 +6,17 @@ import org.objectweb.asm.Opcodes;
 import com.thevoxelbox.vsl.node.Node;
 import com.thevoxelbox.vsl.type.Type;
 
+/**
+* A node for concatenating two {@link String}s.
+*/
 public class StringConcatenationNode extends Node implements Opcodes
 {
 
-    /**
-     * 
-     */
     private static final long serialVersionUID = 6031735764752882274L;
-
+    
+   /**
+    * Creates a new {@link StringConcatenationNode}.
+    */
     public StringConcatenationNode()
     {
         super("String Concatenation", "string");
@@ -22,6 +25,9 @@ public class StringConcatenationNode extends Node implements Opcodes
         addOutput("result", Type.STRING, this);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected int insertLocal(MethodVisitor mv, int localsIndex)
     {

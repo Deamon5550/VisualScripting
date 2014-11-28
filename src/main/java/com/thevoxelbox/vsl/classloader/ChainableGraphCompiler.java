@@ -1,5 +1,7 @@
 package com.thevoxelbox.vsl.classloader;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.FieldVisitor;
 import org.objectweb.asm.Label;
@@ -13,17 +15,22 @@ import com.thevoxelbox.vsl.api.IRunnableGraph;
 import com.thevoxelbox.vsl.error.GraphCompilationException;
 import com.thevoxelbox.vsl.node.ExecutableNode;
 
+/**
+ * A graph compiler for {@link IChainableNodeGraph}s.
+ */
 public class ChainableGraphCompiler implements IGraphCompiler, Opcodes
 {
 
+    /**
+     * {@inheritDoc}
+     */
     @SuppressWarnings("unchecked")
     @Override
     public Class<? extends IRunnableGraph> compile(ASMClassLoader cl, INodeGraph graph) throws NullPointerException, GraphCompilationException
     {
-        if (graph.getStart() == null)
-        {
-            throw new NullPointerException("Start node is null");
-        }
+        checkNotNull(cl, "Classloader cannot be null");
+        checkNotNull(graph, "Graph cannot be null");
+        checkNotNull(graph.getStart(), "Graph starting point cannot be null");
         if (!(graph instanceof IChainableNodeGraph))
         {
             throw new GraphCompilationException("Graph type is incorrect type for compiler!");
@@ -37,8 +44,18 @@ public class ChainableGraphCompiler implements IGraphCompiler, Opcodes
                 createClass(cgraph));
     }
 
-    protected byte[] createClass(IChainableNodeGraph graph) throws GraphCompilationException
+    /**
+     * Creates a new class from the given node graph and returns it as a byte array.
+     * 
+     * @param graph the graph to compile, cannot be null
+     * @return the new class
+     * @throws GraphCompilationException if an error occurs while compiling the graph
+     */
+    public byte[] createClass(IChainableNodeGraph graph) throws GraphCompilationException
     {
+        checkNotNull(graph, "Graph cannot be null");
+        checkNotNull(graph.getStart(), "Graph starting point cannot be null");
+
         ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_FRAMES);
         MethodVisitor mv;
         FieldVisitor fv;

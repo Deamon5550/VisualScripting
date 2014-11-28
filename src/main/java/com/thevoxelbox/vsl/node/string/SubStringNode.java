@@ -7,14 +7,17 @@ import com.thevoxelbox.vsl.error.GraphCompilationException;
 import com.thevoxelbox.vsl.node.Node;
 import com.thevoxelbox.vsl.type.Type;
 
+/**
+* A node for performing a {@link String#substring(int, int)} operation.
+*/
 public class SubStringNode extends Node
 {
 
-    /**
-     * 
-     */
     private static final long serialVersionUID = -7801872777254732688L;
-
+    
+   /**
+    * Creates a new {@link SubStringNode}.
+    */
     public SubStringNode()
     {
         super("Substring", "string");
@@ -24,6 +27,9 @@ public class SubStringNode extends Node
         addOutput("result", Type.STRING, this);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected int insertLocal(MethodVisitor mv, int localsIndex) throws GraphCompilationException
     {

@@ -48,10 +48,9 @@ public class ForLoopTest
         StringArrayValueNode array = new StringArrayValueNode("Hel", "lo ", "Wor", "ld");
         PrintNode print = new PrintNode();
 
-        ForEachLoopNode forloop = new ForEachLoopNode(print, Type.getType("STRING", "java/lang/String", TypeDepth.ARRAY));
+        ForEachLoopNode forloop = new ForEachLoopNode(print, Type.getType("STRING", TypeDepth.ARRAY));
         forloop.mapInput("array", array.getOutput("value"));
         print.mapInput("msg", forloop.getOutput("next"));
-        forloop.setBody(print);
 
         INodeGraph tree = new NodeGraph("Test Graph");
         tree.setStartNode(forloop);

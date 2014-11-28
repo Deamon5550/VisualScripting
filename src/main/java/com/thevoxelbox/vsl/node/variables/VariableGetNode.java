@@ -1,5 +1,6 @@
 package com.thevoxelbox.vsl.node.variables;
 
+import static com.google.common.base.Preconditions.checkNotNull;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
 
@@ -7,31 +8,57 @@ import com.thevoxelbox.vsl.error.GraphCompilationException;
 import com.thevoxelbox.vsl.node.Node;
 import com.thevoxelbox.vsl.type.Type;
 
+/**
+* A node for fetching a value from the runtime variables.
+*/
 public class VariableGetNode extends Node
 {
 
-    /**
-     * 
-     */
     private static final long serialVersionUID = -5189214309378156617L;
+    /**
+     * The type of the variable being fetched.
+     */
     private Type type;
 
+    /**
+     * Creates a new {@link VariableGetNode}.
+     * 
+     * @param type the type of the variable being fetched, cannot be null
+     */
     public VariableGetNode(Type type)
     {
         super("Variable Get", "variables");
+        checkNotNull(type, "Type cannot be null");
         addOutput("value", type, this);
         addInput("name", Type.STRING, true, null);
         this.type = type;
     }
 
+    /**
+     * Creates a new {@link VariableGetNode}.
+     * 
+     * @param name the name of the variable, if empty or null will set the name input to required
+     * @param type the type of the variable being fetched, cannot be null
+     */
     public VariableGetNode(String name, Type type)
     {
         super("Variable Get", "variables");
+        checkNotNull(type, "Type cannot be null");
+        if(name == null || name.isEmpty())
+        {
+            addInput("name", Type.STRING, true, null);
+        }
+        else
+        {
+            addInput("name", Type.STRING, false, name);
+        }
         addOutput("value", type, this);
-        addInput("name", Type.STRING, false, name);
         this.type = type;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected int insertLocal(MethodVisitor mv, int localsIndex) throws GraphCompilationException
     {

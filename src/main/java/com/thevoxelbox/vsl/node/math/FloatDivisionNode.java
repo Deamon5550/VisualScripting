@@ -6,14 +6,17 @@ import org.objectweb.asm.Opcodes;
 import com.thevoxelbox.vsl.node.Node;
 import com.thevoxelbox.vsl.type.Type;
 
+/**
+ * A node for performing a division operation between two floating point numbers.
+ */
 public class FloatDivisionNode extends Node implements Opcodes
 {
 
-    /**
-     * 
-     */
     private static final long serialVersionUID = -6054833793501584677L;
 
+    /**
+     * Creates a new {@link FloatDivisionNode}.
+     */
     public FloatDivisionNode()
     {
         super("Float Multiplication", "math");
@@ -22,6 +25,9 @@ public class FloatDivisionNode extends Node implements Opcodes
         addOutput("result", Type.FLOAT, this);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected int insertLocal(MethodVisitor mv, int localsIndex)
     {
