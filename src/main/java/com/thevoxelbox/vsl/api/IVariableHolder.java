@@ -1,5 +1,7 @@
 package com.thevoxelbox.vsl.api;
 
+import com.google.common.base.Optional;
+
 /**
  * A storage container for named variables.
  */
@@ -12,7 +14,7 @@ public interface IVariableHolder
      * @param name the name of the object to fetch, cannot be null
      * @return the value or null if no value is found
      */
-    Object get(String name);
+    Optional<Object> get(String name);
 
     /**
      * Puts a named value into this storage container

@@ -9,8 +9,8 @@ import com.thevoxelbox.vsl.node.Node;
 import com.thevoxelbox.vsl.type.Type;
 
 /**
-* A node for fetching a value from the runtime variables.
-*/
+ * A node for fetching a value from the runtime variables.
+ */
 public class VariableGetNode extends Node
 {
 
@@ -44,11 +44,10 @@ public class VariableGetNode extends Node
     {
         super("Variable Get", "variables");
         checkNotNull(type, "Type cannot be null");
-        if(name == null || name.isEmpty())
+        if (name == null || name.isEmpty())
         {
             addInput("name", Type.STRING, true, null);
-        }
-        else
+        } else
         {
             addInput("name", Type.STRING, false, name);
         }

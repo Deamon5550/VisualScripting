@@ -2,10 +2,12 @@ package com.thevoxelbox.vsl.type;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkArgument;
+
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.google.common.base.Optional;
 import com.thevoxelbox.vsl.node.Node;
 
 /**
@@ -14,7 +16,7 @@ import com.thevoxelbox.vsl.node.Node;
 public class Type implements Serializable
 {
     private static final long serialVersionUID = 3262111026913495545L;
-    
+
     public static Type INTEGER = new Type("INTEGER", "java/lang/Integer", TypeDepth.SINGLE);
     public static Type FLOAT = new Type("FLOAT", "java/lang/Double", TypeDepth.SINGLE);
     public static Type STRING = new Type("STRING", "java/lang/String", TypeDepth.SINGLE);
@@ -57,7 +59,7 @@ public class Type implements Serializable
      * @param depth the {@link TypeDepth} of the type
      * @return the type
      */
-    public static Type getType(String name, TypeDepth depth)
+    public static Optional<Type> getType(String name, TypeDepth depth)
     {
         checkNotNull(name, "Name cannot be null!");
         checkArgument(!name.isEmpty(), "Name cannot be empty");
@@ -65,13 +67,13 @@ public class Type implements Serializable
         name = name.toUpperCase();
         if (types.containsKey(name + ":" + depth.name()))
         {
-            return types.get(name + ":" + depth.name());
-        }
-        else if(types.containsKey(name + ":" + TypeDepth.SINGLE))
+            return Optional.of(types.get(name + ":" + depth.name()));
+        } else if (types.containsKey(name + ":" + TypeDepth.SINGLE))
         {
             types.put(name + ":" + depth.name(), new Type(name, types.get(name + ":" + TypeDepth.SINGLE).getInternalName(), depth));
+            return Optional.of(types.get(name + ":" + depth.name()));
         }
-        return null;
+        return Optional.absent();
     }
 
     /**

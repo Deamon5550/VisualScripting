@@ -9,16 +9,16 @@ import com.thevoxelbox.vsl.node.Node;
 import com.thevoxelbox.vsl.type.Type;
 
 /**
-* A node for finding a regular expression pattern within a string.
-*/
+ * A node for finding a regular expression pattern within a string.
+ */
 public class StringFindNode extends Node implements Opcodes
 {
 
     private static final long serialVersionUID = -6054613299764204990L;
-    
-   /**
-    * Creates a new {@link StringFindNode}.
-    */
+
+    /**
+     * Creates a new {@link StringFindNode}.
+     */
     public StringFindNode()
     {
         super("String find", "string");

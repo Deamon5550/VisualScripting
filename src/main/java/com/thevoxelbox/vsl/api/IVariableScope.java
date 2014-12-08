@@ -1,5 +1,7 @@
 package com.thevoxelbox.vsl.api;
 
+import com.google.common.base.Optional;
+
 /**
  * A VariableScope is a recursive {@link IVariableHolder}.
  */
@@ -25,5 +27,5 @@ public interface IVariableScope extends IVariableHolder
      * 
      * @return the highest parent, may be null
      */
-    IVariableScope getHighestParent();
+    Optional<IVariableScope> getHighestParent();
 }

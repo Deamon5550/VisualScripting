@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.google.common.base.Optional;
 import com.thevoxelbox.vsl.api.IVariableScope;
 
 /**
@@ -43,20 +44,20 @@ public class VariableScope implements IVariableScope, Serializable
      * {@inheritDoc}
      */
     @Override
-    public Object get(String name)
+    public Optional<Object> get(String name)
     {
         if (name == null || name.isEmpty())
         {
-            return null;
+            return Optional.absent();
         }
         if (this.vars.containsKey(name))
         {
-            return this.vars.get(name);
+            return Optional.fromNullable(this.vars.get(name));
         } else if (this.parent != null)
         {
             return this.parent.get(name);
         }
-        return null;
+        return Optional.absent();
     }
 
     /**
@@ -90,18 +91,18 @@ public class VariableScope implements IVariableScope, Serializable
      * {@inheritDoc}
      */
     @Override
-    public IVariableScope getHighestParent()
+    public Optional<IVariableScope> getHighestParent()
     {
         if (this.parent == null)
         {
-            return null;
+            Optional.absent();
         }
         IVariableScope next = this.parent;
         while (next.getParent() != null)
         {
             next = next.getParent();
         }
-        return next;
+        return Optional.of(next);
     }
 
     /**

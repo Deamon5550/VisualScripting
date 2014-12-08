@@ -8,8 +8,8 @@ import com.thevoxelbox.vsl.node.Node;
 import com.thevoxelbox.vsl.type.Type;
 
 /**
-* A node for inserting a static String value.
-*/
+ * A node for inserting a static String value.
+ */
 public class StringValueNode extends Node
 {
 

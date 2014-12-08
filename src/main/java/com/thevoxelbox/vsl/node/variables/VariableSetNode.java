@@ -9,8 +9,8 @@ import com.thevoxelbox.vsl.node.ExecutableNode;
 import com.thevoxelbox.vsl.type.Type;
 
 /**
-* A node for setting a value within the runtime variables.
-*/
+ * A node for setting a value within the runtime variables.
+ */
 public class VariableSetNode extends ExecutableNode
 {
 
@@ -39,11 +39,10 @@ public class VariableSetNode extends ExecutableNode
     {
         super("Variable Set", "variables");
         checkNotNull(type, "Type cannot be null");
-        if(name == null || name.isEmpty())
+        if (name == null || name.isEmpty())
         {
             addInput("name", Type.STRING, true, null);
-        }
-        else
+        } else
         {
             addInput("name", Type.STRING, false, name);
         }
