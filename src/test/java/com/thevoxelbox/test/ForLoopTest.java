@@ -48,7 +48,7 @@ public class ForLoopTest
         StringArrayValueNode array = new StringArrayValueNode("Hel", "lo ", "Wor", "ld");
         PrintNode print = new PrintNode();
 
-        ForEachLoopNode forloop = new ForEachLoopNode(print, Type.getType("STRING", TypeDepth.ARRAY));
+        ForEachLoopNode forloop = new ForEachLoopNode(print, Type.getType("STRING", TypeDepth.ARRAY).get());
         forloop.mapInput("array", array.getOutput("value"));
         print.mapInput("msg", forloop.getOutput("next"));
 

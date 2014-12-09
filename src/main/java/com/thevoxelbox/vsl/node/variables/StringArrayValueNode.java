@@ -28,7 +28,7 @@ public class StringArrayValueNode extends Node implements Opcodes
     {
         super("String Array Value", "variables");
         this.value = value;
-        addOutput("value", Type.getType("STRING", TypeDepth.ARRAY), this);
+        addOutput("value", Type.getType("STRING", TypeDepth.ARRAY).get(), this);
     }
 
     /**

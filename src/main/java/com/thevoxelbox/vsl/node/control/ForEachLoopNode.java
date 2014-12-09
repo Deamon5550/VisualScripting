@@ -39,7 +39,7 @@ public class ForEachLoopNode extends ExecutableNode implements Opcodes
             throw new GraphCompilationException("Input type for ArrayIndexNode is not an array type");
         }
         addInput("array", type, true, null);
-        addOutput("next", Type.getType(type.getName(), TypeDepth.SINGLE), this);
+        addOutput("next", Type.getType(type.getName(), TypeDepth.SINGLE).get(), this);
         addOutput("index", Type.INTEGER, this);
         this.body = body;
     }
@@ -109,33 +109,6 @@ public class ForEachLoopNode extends ExecutableNode implements Opcodes
         mv.visitVarInsn(ILOAD, i); // [integer]
         mv.visitVarInsn(ILOAD, target); // [integer, integer]
         mv.visitJumpInsn(IF_ICMPLT, l3); // []
-
-        /*mv.visitInsn(ICONST_0);
-        mv.visitVarInsn(ISTORE, i);
-        mv.visitVarInsn(ALOAD, array);
-        mv.visitInsn(ARRAYLENGTH);
-        mv.visitVarInsn(ISTORE, target);
-        Label l2 = new Label();
-        mv.visitJumpInsn(GOTO, l2);
-        Label l1 = new Label();
-        mv.visitLabel(l1);
-        mv.visitVarInsn(ALOAD, array);
-        mv.visitVarInsn(ILOAD, i);
-        mv.visitInsn(AALOAD);
-        mv.visitVarInsn(ASTORE, next);
-        setOutput("next", next);
-        setOutput("index", i);
-        ExecutableNode current = this.body;
-        while(current != null)
-        {
-            localsIndex = current.insert(mv, localsIndex);
-            current = current.getNextNode();
-        }
-        mv.visitIincInsn(i, 1);
-        mv.visitLabel(l2);
-        mv.visitVarInsn(ILOAD, i);
-        mv.visitVarInsn(ILOAD, target);
-        mv.visitJumpInsn(IF_ICMPLT, l1);*/
         return localsIndex;
     }
 }
