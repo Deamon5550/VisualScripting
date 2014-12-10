@@ -1,9 +1,11 @@
 package com.thevoxelbox.vsl.node.variables;
 
 import static com.google.common.base.Preconditions.checkNotNull;
+
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
 
+import com.thevoxelbox.vsl.api.IVariableHolder;
 import com.thevoxelbox.vsl.error.GraphCompilationException;
 import com.thevoxelbox.vsl.node.Node;
 import com.thevoxelbox.vsl.type.Type;
@@ -78,7 +80,8 @@ public class VariableGetNode extends Node
         }
         mv.visitVarInsn(Opcodes.ALOAD, 1);
         mv.visitVarInsn(Opcodes.ALOAD, name_i);
-        mv.visitMethodInsn(Opcodes.INVOKEINTERFACE, "com/thevoxelbox/vsl/api/IVariableHolder", "get", "(Ljava/lang/String;)Ljava/lang/Object;", true);
+        mv.visitMethodInsn(Opcodes.INVOKEINTERFACE, "com/thevoxelbox/vsl/api/IVariableHolder", "get", "(Ljava/lang/String;)Lcom/google/common/base/Optional;", true);
+        mv.visitMethodInsn(Opcodes.INVOKEVIRTUAL, "com/google/common/base/Optional", "get", "()Ljava/lang/Object;", false);
         if (type.equals(Type.INTEGER))
         {
             mv.visitTypeInsn(Opcodes.CHECKCAST, type.getInternalName());
@@ -108,5 +111,10 @@ public class VariableGetNode extends Node
             localsIndex++;
         }
         return localsIndex;
+    }
+    
+    public void run(IVariableHolder vars)
+    {
+        vars.get("t").get();
     }
 }

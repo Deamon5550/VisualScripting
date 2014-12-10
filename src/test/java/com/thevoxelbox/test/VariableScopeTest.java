@@ -53,15 +53,15 @@ public class VariableScopeTest
     @Test
     public void testInheritence()
     {
-        assertEquals("a", child.get("a"));
-        assertEquals("c", child.get("b"));
+        assertEquals("a", child.get("a").get());
+        assertEquals("c", child.get("b").get());
     }
 
     @Test
     public void testParenthood()
     {
         assertEquals(child, child2.getParent());
-        assertEquals(parent, child2.getHighestParent());
+        assertEquals(parent, child2.getHighestParent().get());
     }
 
     @Test
