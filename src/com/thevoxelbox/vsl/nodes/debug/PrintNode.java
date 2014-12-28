@@ -23,29 +23,23 @@
  */
 package com.thevoxelbox.vsl.nodes.debug;
 
-import com.thevoxelbox.vsl.api.IVariableHolder;
 import com.thevoxelbox.vsl.node.Node;
 import com.thevoxelbox.vsl.util.Provider;
+import com.thevoxelbox.vsl.util.RuntimeState;
 
 public class PrintNode extends Node
 {
-
-    private Provider<String> msg;
+    private final Provider<String> msg;
     
     public PrintNode(Provider<String> msg)
     {
         this.msg = msg;
     }
-    
-    public PrintNode(String msg)
-    {
-        this.msg = new Provider<String>(msg);
-    }
 
     @Override
-    public void exec(IVariableHolder vars)
+    public void exec(RuntimeState state)
     {
-        System.out.print(msg.get(vars));
+        System.out.print(msg.get(state));
     }
     
 }

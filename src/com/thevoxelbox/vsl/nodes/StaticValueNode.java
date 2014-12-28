@@ -23,30 +23,29 @@
  */
 package com.thevoxelbox.vsl.nodes;
 
-import com.thevoxelbox.vsl.api.IVariableHolder;
 import com.thevoxelbox.vsl.node.Node;
 import com.thevoxelbox.vsl.util.Provider;
+import com.thevoxelbox.vsl.util.RuntimeState;
 
 public class StaticValueNode<T> extends Node
 {
 
-    private final T value;
-    
+    private final Provider<T> value;
     
     public StaticValueNode(T value)
     {
-        this.value = value;
+        this.value = new Provider<T>(value);
     }
     
     @Override
-    public void exec(IVariableHolder vars)
+    public void exec(RuntimeState state)
     {
         
     }
 
     public Provider<T> getValue()
     {
-        return new Provider<T>(value);
+        return this.value;
     }
     
     

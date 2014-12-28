@@ -25,15 +25,16 @@ package com.thevoxelbox.vsl.node;
 
 import com.thevoxelbox.vsl.api.INode;
 import com.thevoxelbox.vsl.api.IVariableHolder;
+import com.thevoxelbox.vsl.util.RuntimeState;
 
-public class NodeGraph
+public class NodeGraph extends Node
 {
     String name;
-    Node start;
+    NodeGraph next = null;
     
-    public NodeGraph(String name, Node start)
+    public NodeGraph(String name)
     {
-        this.start = start;
+        this.name = name;
     }
     
     public String getName()
@@ -41,18 +42,30 @@ public class NodeGraph
         return this.name;
     }
     
-    public void run()
-    {
-        run(null);
-    }
-    
     public void run(IVariableHolder vars)
     {
-        INode next = start;
+        RuntimeState state = new RuntimeState(vars);
+        exec(state);
+    }
+
+    @Override
+    public void exec(RuntimeState state)
+    {
+        INode next = this.getNext();
         while(next != null)
         {
-            next.exec(vars);
+            next.exec(state);
             next = next.getNext();
         }
+        if(this.next != null)
+        {
+            this.next.exec(state);
+        }
     }
+
+    public void chain(NodeGraph next)
+    {
+        this.next = next;
+    }
+
 }

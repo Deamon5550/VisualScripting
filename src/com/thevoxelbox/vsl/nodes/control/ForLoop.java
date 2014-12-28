@@ -24,9 +24,9 @@
 package com.thevoxelbox.vsl.nodes.control;
 
 import com.thevoxelbox.vsl.api.INode;
-import com.thevoxelbox.vsl.api.IVariableHolder;
 import com.thevoxelbox.vsl.node.Node;
 import com.thevoxelbox.vsl.util.Provider;
+import com.thevoxelbox.vsl.util.RuntimeState;
 
 public class ForLoop extends Node
 {
@@ -92,14 +92,19 @@ public class ForLoop extends Node
 
 
     @Override
-    public void exec(IVariableHolder vars)
+    public void exec(RuntimeState state)
     {
-        int i = init.get(vars);
-        int t = target.get(vars);
-        int n = increment.get(vars);
+        int i = init.get(state);
+        int t = target.get(state);
+        int n = increment.get(state);
         for(; i < t; i += n)
         {
-            body.exec(vars);
+            INode next = this.body;
+            while(next != null)
+            {
+                next.exec(state);
+                next = next.getNext();
+            }
         }
     }
     

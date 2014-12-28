@@ -39,7 +39,8 @@ public class ForLoopTest
         PrintNode print = new PrintNode(forloop.getNextValue());
         forloop.setBody(print);
 
-        NodeGraph graph = new NodeGraph("Test Graph", forloop);
+        NodeGraph graph = new NodeGraph("Test Graph");
+        graph.setNext(forloop);
         graph.run(vars);
 
         String s = new String(baos.toByteArray());

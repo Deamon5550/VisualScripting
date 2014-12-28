@@ -23,13 +23,13 @@
  */
 package com.thevoxelbox.vsl.nodes.math;
 
-import com.thevoxelbox.vsl.api.IVariableHolder;
 import com.thevoxelbox.vsl.node.Node;
 import com.thevoxelbox.vsl.util.Provider;
+import com.thevoxelbox.vsl.util.RuntimeState;
 
 public class MultiplicationNode extends Node
 {
-    
+
     private final Provider<Number> value;
     private final Provider<Number> a;
     private final Provider<Number> b;
@@ -44,18 +44,17 @@ public class MultiplicationNode extends Node
     }
 
     @Override
-    public void exec(IVariableHolder vars)
+    public void exec(RuntimeState state)
     {
-        if(floating)
+        if (floating)
         {
-            this.value.set(a.get(vars).doubleValue()*b.get(vars).doubleValue());
-        }
-        else
+            this.value.set(a.get(state).doubleValue() * b.get(state).doubleValue(), state.getUUID());
+        } else
         {
-            this.value.set(a.get(vars).longValue()*b.get(vars).longValue());
+            this.value.set(a.get(state).longValue() * b.get(state).longValue(), state.getUUID());
         }
     }
-    
+
     public Provider<Number> getResult()
     {
         return this.value;

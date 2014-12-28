@@ -23,9 +23,9 @@
  */
 package com.thevoxelbox.vsl.nodes.vars;
 
-import com.thevoxelbox.vsl.api.IVariableHolder;
 import com.thevoxelbox.vsl.node.Node;
 import com.thevoxelbox.vsl.util.Provider;
+import com.thevoxelbox.vsl.util.RuntimeState;
 
 public class VariableSetNode<T> extends Node
 {
@@ -58,9 +58,9 @@ public class VariableSetNode<T> extends Node
     }
 
     @Override
-    public void exec(IVariableHolder vars)
+    public void exec(RuntimeState state)
     {
-        vars.set(this.varName.get(vars), this.value.get(vars));
+        state.getVars().set(this.varName.get(state), this.value.get(state));
     }
 
 }

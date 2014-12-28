@@ -23,13 +23,13 @@
  */
 package com.thevoxelbox.vsl.nodes.math;
 
-import com.thevoxelbox.vsl.api.IVariableHolder;
 import com.thevoxelbox.vsl.node.Node;
 import com.thevoxelbox.vsl.util.Provider;
+import com.thevoxelbox.vsl.util.RuntimeState;
 
 public class SqrtNode extends Node
 {
-    
+
     private final Provider<Number> value;
     private final Provider<Number> a;
 
@@ -40,11 +40,11 @@ public class SqrtNode extends Node
     }
 
     @Override
-    public void exec(IVariableHolder vars)
+    public void exec(RuntimeState state)
     {
-        this.value.set(Math.sqrt(this.a.get(vars).doubleValue()));
+        this.value.set(Math.sqrt(this.a.get(state).doubleValue()), state.getUUID());
     }
-    
+
     public Provider<Number> getResult()
     {
         return this.value;

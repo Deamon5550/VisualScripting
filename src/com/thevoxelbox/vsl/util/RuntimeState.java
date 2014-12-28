@@ -23,51 +23,30 @@
  */
 package com.thevoxelbox.vsl.util;
 
-import java.util.Map;
 import java.util.UUID;
 
-import com.google.common.collect.Maps;
-import com.thevoxelbox.vsl.api.INode;
+import com.thevoxelbox.vsl.api.IVariableHolder;
 
-public class Provider<T>
+public class RuntimeState
 {
-    
-    private final Map<UUID, T> values;
-    private final T value;
-    private final boolean isStatic;
-    private INode callback;
-    
-    public Provider(INode n)
+
+    private final UUID uuid;
+    private final IVariableHolder vars;
+
+    public RuntimeState(IVariableHolder vars)
     {
-        this.callback = n;
-        this.values = Maps.newHashMap();
-        isStatic = false;
-        this.value = null;
+        this.vars = vars;
+        this.uuid = UUID.randomUUID();
     }
     
-    public Provider(T value)
+    public UUID getUUID()
     {
-        this.value = value;
-        isStatic = true;
-        this.values = null;
+        return this.uuid;
+    }
+    
+    public IVariableHolder getVars()
+    {
+        return this.vars;
     }
 
-    public T get(RuntimeState state)
-    {
-        if(isStatic)
-        {
-            return this.value;
-        }
-        if(!this.values.containsKey(state.getUUID()))
-        {
-            this.callback.exec(state);
-        }
-        return this.values.get(state.getUUID());
-    }
-    
-    public void set(T newValue, UUID uuid)
-    {
-        this.values.put(uuid, newValue);
-    }
-    
 }

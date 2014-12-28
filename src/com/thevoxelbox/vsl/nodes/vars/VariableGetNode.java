@@ -23,9 +23,9 @@
  */
 package com.thevoxelbox.vsl.nodes.vars;
 
-import com.thevoxelbox.vsl.api.IVariableHolder;
 import com.thevoxelbox.vsl.node.Node;
 import com.thevoxelbox.vsl.util.Provider;
+import com.thevoxelbox.vsl.util.RuntimeState;
 
 public class VariableGetNode<T> extends Node
 {
@@ -44,11 +44,11 @@ public class VariableGetNode<T> extends Node
         this.value = new Provider<T>(this);
     }
 
-    @Override
     @SuppressWarnings("unchecked")
-    public void exec(IVariableHolder vars)
+    @Override
+    public void exec(RuntimeState state)
     {
-        this.value.set((T) vars.get(this.varName.get(vars)).get());
+        this.value.set((T) state.getVars().get(this.varName.get(state)).get(), state.getUUID());
     }
     
     public Provider<T> getValue()

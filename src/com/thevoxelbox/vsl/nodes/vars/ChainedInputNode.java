@@ -21,53 +21,15 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.thevoxelbox.vsl.util;
+package com.thevoxelbox.vsl.nodes.vars;
 
-import java.util.Map;
-import java.util.UUID;
 
-import com.google.common.collect.Maps;
-import com.thevoxelbox.vsl.api.INode;
-
-public class Provider<T>
+public class ChainedInputNode<T> extends VariableGetNode<T>
 {
-    
-    private final Map<UUID, T> values;
-    private final T value;
-    private final boolean isStatic;
-    private INode callback;
-    
-    public Provider(INode n)
+
+    public ChainedInputNode(String name)
     {
-        this.callback = n;
-        this.values = Maps.newHashMap();
-        isStatic = false;
-        this.value = null;
-    }
-    
-    public Provider(T value)
-    {
-        this.value = value;
-        isStatic = true;
-        this.values = null;
+        super("__CHAINED__" + name);
     }
 
-    public T get(RuntimeState state)
-    {
-        if(isStatic)
-        {
-            return this.value;
-        }
-        if(!this.values.containsKey(state.getUUID()))
-        {
-            this.callback.exec(state);
-        }
-        return this.values.get(state.getUUID());
-    }
-    
-    public void set(T newValue, UUID uuid)
-    {
-        this.values.put(uuid, newValue);
-    }
-    
 }

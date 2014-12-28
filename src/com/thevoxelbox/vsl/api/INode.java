@@ -23,10 +23,12 @@
  */
 package com.thevoxelbox.vsl.api;
 
+import com.thevoxelbox.vsl.util.RuntimeState;
+
 public interface INode
 {
 
-    void exec(IVariableHolder vars);
+    void exec(RuntimeState state);
 
     void setNext(INode n);
     

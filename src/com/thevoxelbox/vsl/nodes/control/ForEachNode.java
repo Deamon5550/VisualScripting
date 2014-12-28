@@ -24,9 +24,9 @@
 package com.thevoxelbox.vsl.nodes.control;
 
 import com.thevoxelbox.vsl.api.INode;
-import com.thevoxelbox.vsl.api.IVariableHolder;
 import com.thevoxelbox.vsl.node.Node;
 import com.thevoxelbox.vsl.util.Provider;
+import com.thevoxelbox.vsl.util.RuntimeState;
 
 public class ForEachNode<T> extends Node
 {
@@ -44,17 +44,18 @@ public class ForEachNode<T> extends Node
     }
 
     @Override
-    public void exec(IVariableHolder vars)
+    public void exec(RuntimeState state)
     {
         int i = 0;
-        for(T obj: array.get(vars))
+        T[] arr = array.get(state);
+        for(T obj: arr)
         {
-            this.next.set(obj);
-            this.index.set(i);
+            this.next.set(obj, state.getUUID());
+            this.index.set(i, state.getUUID());
             INode next = this.body;
             while(next != null)
             {
-                next.exec(vars);
+                next.exec(state);
                 next = next.getNext();
             }
             i++;

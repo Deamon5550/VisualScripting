@@ -38,7 +38,8 @@ public class NodeGraphTest
         PrintNode print2 = new PrintNode(string2.getValue());
         print.setNext(print2);
 
-        NodeGraph graph = new NodeGraph("Test Graph", print);
+        NodeGraph graph = new NodeGraph("Test Graph");
+        graph.setNext(print);
         graph.run(vars);
 
         String s = new String(baos.toByteArray());

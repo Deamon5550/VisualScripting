@@ -62,7 +62,8 @@ public class VariableScopeTest
         PrintNode print = new PrintNode(get.getValue());
         set.setNext(print);
 
-        NodeGraph graph = new NodeGraph("Test Graph", set);
+        NodeGraph graph = new NodeGraph("Test Graph");
+        graph.setNext(set);
         graph.run(child);
 
         String s = new String(baos.toByteArray());

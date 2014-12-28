@@ -27,6 +27,7 @@ import com.thevoxelbox.vsl.api.INode;
 
 public abstract class Node implements INode
 {
+
     private INode next;
 
     @Override
@@ -34,7 +35,7 @@ public abstract class Node implements INode
     {
         this.next = n;
     }
-    
+
     @Override
     public INode getNext()
     {
