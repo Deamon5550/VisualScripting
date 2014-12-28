@@ -62,3 +62,7 @@ $RECYCLE.BIN/
 .settings
 .project
 .classpath
+
+#maven/gradle files
+target/
+build/
