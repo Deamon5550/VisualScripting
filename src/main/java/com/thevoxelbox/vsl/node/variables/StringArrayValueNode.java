@@ -5,7 +5,6 @@ import org.objectweb.asm.Opcodes;
 
 import com.thevoxelbox.vsl.node.Node;
 import com.thevoxelbox.vsl.type.Type;
-import com.thevoxelbox.vsl.type.TypeDepth;
 
 /**
  * A node for creating a new {@link String} array.
@@ -28,7 +27,7 @@ public class StringArrayValueNode extends Node implements Opcodes
     {
         super("String Array Value", "variables");
         this.value = value;
-        addOutput("value", Type.getType("STRING", TypeDepth.ARRAY).get(), this);
+        addOutput("value", Type.getType("STRING", Type.Depth.ARRAY).get(), this);
     }
 
     /**

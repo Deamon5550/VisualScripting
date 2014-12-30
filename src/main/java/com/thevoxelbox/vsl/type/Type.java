@@ -17,11 +17,11 @@ public class Type implements Serializable
 {
     private static final long serialVersionUID = 3262111026913495545L;
 
-    public static Type INTEGER = new Type("INTEGER", "java/lang/Integer", TypeDepth.SINGLE);
-    public static Type FLOAT = new Type("FLOAT", "java/lang/Double", TypeDepth.SINGLE);
-    public static Type STRING = new Type("STRING", "java/lang/String", TypeDepth.SINGLE);
-    public static Type BOOLEAN = new Type("BOOLEAN", "java/lang/Boolean", TypeDepth.SINGLE);
-    public static Type OBJECT = new Type("OBJECT", "java/lang/Object", TypeDepth.SINGLE);
+    public static Type INTEGER = new Type("INTEGER", "java/lang/Integer", Depth.SINGLE);
+    public static Type FLOAT = new Type("FLOAT", "java/lang/Double", Depth.SINGLE);
+    public static Type STRING = new Type("STRING", "java/lang/String", Depth.SINGLE);
+    public static Type BOOLEAN = new Type("BOOLEAN", "java/lang/Boolean", Depth.SINGLE);
+    public static Type OBJECT = new Type("OBJECT", "java/lang/Object", Depth.SINGLE);
 
     /**
      * A Map of registered types.
@@ -49,7 +49,7 @@ public class Type implements Serializable
         checkArgument(!name.isEmpty(), "Name cannot be empty");
         checkNotNull(internal, "Internal name cannot be null!");
         checkArgument(!internal.isEmpty(), "Internal name cannot be empty");
-        types.put(name.toUpperCase() + ":" + TypeDepth.SINGLE.name(), new Type(name, internal, TypeDepth.SINGLE));
+        types.put(name.toUpperCase() + ":" + Depth.SINGLE.name(), new Type(name, internal, Depth.SINGLE));
     }
 
     /**
@@ -59,7 +59,7 @@ public class Type implements Serializable
      * @param depth the {@link TypeDepth} of the type
      * @return the type
      */
-    public static Optional<Type> getType(String name, TypeDepth depth)
+    public static Optional<Type> getType(String name, Depth depth)
     {
         checkNotNull(name, "Name cannot be null!");
         checkArgument(!name.isEmpty(), "Name cannot be empty");
@@ -68,9 +68,9 @@ public class Type implements Serializable
         if (types.containsKey(name + ":" + depth.name()))
         {
             return Optional.of(types.get(name + ":" + depth.name()));
-        } else if (types.containsKey(name + ":" + TypeDepth.SINGLE))
+        } else if (types.containsKey(name + ":" + Depth.SINGLE))
         {
-            types.put(name + ":" + depth.name(), new Type(name, types.get(name + ":" + TypeDepth.SINGLE).getInternalName(), depth));
+            types.put(name + ":" + depth.name(), new Type(name, types.get(name + ":" + Depth.SINGLE).getInternalName(), depth));
             return Optional.of(types.get(name + ":" + depth.name()));
         }
         return Optional.absent();
@@ -87,7 +87,7 @@ public class Type implements Serializable
     /**
      * The {@link TypeDepth} of this type.
      */
-    private TypeDepth depth;
+    private Depth depth;
 
     /**
      * Creates a new type.
@@ -96,7 +96,7 @@ public class Type implements Serializable
      * @param internal the internal name of the type, cannot be null or empty
      * @param depth the {@link TypeDepth}, cannot be null
      */
-    private Type(String name, String internal, TypeDepth depth)
+    private Type(String name, String internal, Depth depth)
     {
         checkNotNull(name, "Name cannot be null!");
         checkArgument(!name.isEmpty(), "Name cannot be empty");
@@ -133,7 +133,7 @@ public class Type implements Serializable
      * 
      * @return the depth
      */
-    public TypeDepth getDepth()
+    public Depth getDepth()
     {
         return depth;
     }
@@ -166,6 +166,11 @@ public class Type implements Serializable
     public String toString()
     {
         return "Type(" + name + ", " + internalName + ", " + depth.name() + ")";
+    }
+    
+    public static enum Depth
+    {
+        SINGLE, ARRAY, LIST;
     }
 
 }

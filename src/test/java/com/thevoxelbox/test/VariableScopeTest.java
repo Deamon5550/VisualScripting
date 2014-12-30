@@ -1,4 +1,4 @@
-package com.thevoxelbox.test;
+/*package com.thevoxelbox.test;
 
 import static org.junit.Assert.assertEquals;
 
@@ -98,3 +98,4 @@ public class VariableScopeTest
         System.setOut(oldOut);
     }
 }
+*/

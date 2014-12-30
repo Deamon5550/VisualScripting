@@ -122,4 +122,22 @@ public class VariableScope implements IVariableScope, Serializable
         return false;
     }
 
+    @Override
+    @SuppressWarnings("unchecked")
+    public <T> Optional<T> get(String name, Class<T> type)
+    {
+        if (name == null || name.isEmpty())
+        {
+            return Optional.absent();
+        }
+        if (this.vars.containsKey(name))
+        {
+            return Optional.fromNullable((T) this.vars.get(name));
+        } else if (this.parent != null)
+        {
+            return this.parent.get(name, type);
+        }
+        return Optional.absent();
+    }
+
 }

@@ -9,7 +9,6 @@ import org.objectweb.asm.Opcodes;
 import com.thevoxelbox.vsl.error.GraphCompilationException;
 import com.thevoxelbox.vsl.node.ExecutableNode;
 import com.thevoxelbox.vsl.type.Type;
-import com.thevoxelbox.vsl.type.TypeDepth;
 
 /**
  * A node to loop over all objects in an array and operate on them.
@@ -34,12 +33,12 @@ public class ForEachLoopNode extends ExecutableNode implements Opcodes
         super("for-each", "control");
         checkNotNull(body, "Loop body cannot be null!");
         checkNotNull(type, "Type cannot be null");
-        if (type.getDepth() != TypeDepth.ARRAY)
+        if (type.getDepth() != Type.Depth.ARRAY)
         {
             throw new GraphCompilationException("Input type for ArrayIndexNode is not an array type");
         }
         addInput("array", type, true, null);
-        addOutput("next", Type.getType(type.getName(), TypeDepth.SINGLE).get(), this);
+        addOutput("next", Type.getType(type.getName(), Type.Depth.SINGLE).get(), this);
         addOutput("index", Type.INTEGER, this);
         this.body = body;
     }

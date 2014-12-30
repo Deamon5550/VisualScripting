@@ -1,14 +1,13 @@
 package com.thevoxelbox.vsl.node.control;
 
-import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
+
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
 
 import com.thevoxelbox.vsl.error.GraphCompilationException;
 import com.thevoxelbox.vsl.node.Node;
 import com.thevoxelbox.vsl.type.Type;
-import com.thevoxelbox.vsl.type.TypeDepth;
 
 /**
  * A node for returning an index of an array.
@@ -28,7 +27,7 @@ public class ArrayIndexNode extends Node implements Opcodes
     {
         super("Array Index", "control");
         checkNotNull(type, "Type cannot be null");
-        if (type.getDepth() != TypeDepth.ARRAY)
+        if (type.getDepth() != Type.Depth.ARRAY)
         {
             throw new GraphCompilationException("Input type for ArrayIndexNode is not an array type");
         }
