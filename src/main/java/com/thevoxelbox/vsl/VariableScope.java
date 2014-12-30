@@ -21,6 +21,7 @@ public class VariableScope implements IVariableScope, Serializable
      * The variable map.
      */
     private final Map<String, Object> vars = new HashMap<String, Object>();
+    private boolean caseSensitive = true;
 
     /**
      * Creates a new VariableScope.
@@ -39,6 +40,11 @@ public class VariableScope implements IVariableScope, Serializable
     {
         this.parent = parent;
     }
+    
+    public void setCaseSensitive(boolean cs)
+    {
+        this.caseSensitive = cs;
+    }
 
     /**
      * {@inheritDoc}
@@ -49,6 +55,10 @@ public class VariableScope implements IVariableScope, Serializable
         if (name == null || name.isEmpty())
         {
             return Optional.absent();
+        }
+        if(this.caseSensitive)
+        {
+            name = name.toLowerCase();
         }
         if (this.vars.containsKey(name))
         {
@@ -66,6 +76,10 @@ public class VariableScope implements IVariableScope, Serializable
     @Override
     public void set(String name, Object value)
     {
+        if(this.caseSensitive)
+        {
+            name = name.toLowerCase();
+        }
         this.vars.put(name, value);
     }
 
@@ -111,6 +125,10 @@ public class VariableScope implements IVariableScope, Serializable
     @Override
     public boolean hasValue(String name)
     {
+        if(this.caseSensitive)
+        {
+            name = name.toLowerCase();
+        }
         if (this.vars.containsKey(name))
         {
             return true;
@@ -129,6 +147,10 @@ public class VariableScope implements IVariableScope, Serializable
         if (name == null || name.isEmpty())
         {
             return Optional.absent();
+        }
+        if(this.caseSensitive)
+        {
+            name = name.toLowerCase();
         }
         if (this.vars.containsKey(name))
         {
