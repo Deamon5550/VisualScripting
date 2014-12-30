@@ -16,6 +16,8 @@ public interface IVariableHolder
      */
     Optional<Object> get(String name);
 
+    <T> Optional<T> get(String name, Class<T> type);
+
     /**
      * Puts a named value into this storage container
      * 
