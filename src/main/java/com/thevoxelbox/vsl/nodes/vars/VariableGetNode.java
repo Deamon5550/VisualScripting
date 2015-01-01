@@ -24,20 +24,24 @@
 package com.thevoxelbox.vsl.nodes.vars;
 
 import com.thevoxelbox.vsl.node.Node;
+import com.thevoxelbox.vsl.util.Input;
+import com.thevoxelbox.vsl.util.Output;
 import com.thevoxelbox.vsl.util.Provider;
 import com.thevoxelbox.vsl.util.RuntimeState;
 
 public class VariableGetNode<T> extends Node
 {
+    @Input
     private final Provider<String> varName;
+    @Output
     private final Provider<T> value;
-    
+
     public VariableGetNode(Provider<String> name)
     {
         this.varName = name;
         this.value = new Provider<T>(this);
     }
-    
+
     public VariableGetNode(String name)
     {
         this.varName = new Provider<String>(name);
@@ -50,7 +54,7 @@ public class VariableGetNode<T> extends Node
     {
         this.value.set((T) state.getVars().get(this.varName.get(state)).get(), state.getUUID());
     }
-    
+
     public Provider<T> getValue()
     {
         return this.value;

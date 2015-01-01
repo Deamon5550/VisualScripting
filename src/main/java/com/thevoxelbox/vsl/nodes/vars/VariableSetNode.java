@@ -24,33 +24,36 @@
 package com.thevoxelbox.vsl.nodes.vars;
 
 import com.thevoxelbox.vsl.node.Node;
+import com.thevoxelbox.vsl.util.Input;
 import com.thevoxelbox.vsl.util.Provider;
 import com.thevoxelbox.vsl.util.RuntimeState;
 
 public class VariableSetNode<T> extends Node
 {
-    
+
+    @Input
     private final Provider<String> varName;
+    @Input
     private final Provider<T> value;
-    
+
     public VariableSetNode(Provider<String> name, Provider<T> value)
     {
         this.varName = name;
         this.value = value;
     }
-    
+
     public VariableSetNode(String name, Provider<T> value)
     {
         this.varName = new Provider<String>(name);
         this.value = value;
     }
-    
+
     public VariableSetNode(Provider<String> name, T value)
     {
         this.varName = name;
         this.value = new Provider<T>(value);
     }
-    
+
     public VariableSetNode(String name, T value)
     {
         this.varName = new Provider<String>(name);

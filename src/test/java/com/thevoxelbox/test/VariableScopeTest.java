@@ -72,4 +72,12 @@ public class VariableScopeTest
         assertEquals("Hello World", s);
         System.setOut(oldOut);
     }
+    
+    @Test
+    public void testCaseSensitivity()
+    {
+        parent.setCaseSensitive(false);
+        parent.set("aString", "Hello");
+        assertEquals("Hello", parent.get("astring").get());
+    }
 }

@@ -9,7 +9,7 @@ public interface IVariableHolder
 {
 
     void setCaseSensitive(boolean cs);
-    
+
     /**
      * Returns the variable with the given name, or null if there is no variable with that name in this storage container.
      * 

@@ -40,7 +40,7 @@ public class VariableScope implements IVariableScope, Serializable
     {
         this.parent = parent;
     }
-    
+
     public void setCaseSensitive(boolean cs)
     {
         this.caseSensitive = cs;
@@ -56,7 +56,7 @@ public class VariableScope implements IVariableScope, Serializable
         {
             return Optional.absent();
         }
-        if(this.caseSensitive)
+        if (!this.caseSensitive)
         {
             name = name.toLowerCase();
         }
@@ -76,7 +76,7 @@ public class VariableScope implements IVariableScope, Serializable
     @Override
     public void set(String name, Object value)
     {
-        if(this.caseSensitive)
+        if (!this.caseSensitive)
         {
             name = name.toLowerCase();
         }
@@ -125,7 +125,7 @@ public class VariableScope implements IVariableScope, Serializable
     @Override
     public boolean hasValue(String name)
     {
-        if(this.caseSensitive)
+        if (!this.caseSensitive)
         {
             name = name.toLowerCase();
         }
@@ -139,7 +139,7 @@ public class VariableScope implements IVariableScope, Serializable
         }
         return false;
     }
-    
+
     @Override
     @SuppressWarnings("unchecked")
     public <T> Optional<T> get(String name, Class<T> type)
@@ -148,7 +148,7 @@ public class VariableScope implements IVariableScope, Serializable
         {
             return Optional.absent();
         }
-        if(this.caseSensitive)
+        if (!this.caseSensitive)
         {
             name = name.toLowerCase();
         }

@@ -25,17 +25,22 @@ package com.thevoxelbox.vsl.nodes.control;
 
 import com.thevoxelbox.vsl.api.INode;
 import com.thevoxelbox.vsl.node.Node;
+import com.thevoxelbox.vsl.util.Input;
+import com.thevoxelbox.vsl.util.Output;
 import com.thevoxelbox.vsl.util.Provider;
 import com.thevoxelbox.vsl.util.RuntimeState;
 
 public class ForEachNode<T> extends Node
 {
-    
+
     private INode body;
+    @Input
     private final Provider<T[]> array;
+    @Output
     private final Provider<T> next;
+    @Output
     private final Provider<Integer> index;
-    
+
     public ForEachNode(Provider<T[]> array)
     {
         this.array = array;
@@ -48,12 +53,12 @@ public class ForEachNode<T> extends Node
     {
         int i = 0;
         T[] arr = array.get(state);
-        for(T obj: arr)
+        for (T obj : arr)
         {
             this.next.set(obj, state.getUUID());
             this.index.set(i, state.getUUID());
             INode next = this.body;
-            while(next != null)
+            while (next != null)
             {
                 next.exec(state);
                 next = next.getNext();
@@ -61,12 +66,12 @@ public class ForEachNode<T> extends Node
             i++;
         }
     }
-    
+
     public Provider<T> getNextValue()
     {
         return this.next;
     }
-    
+
     public void setBody(Node n)
     {
         this.body = n;

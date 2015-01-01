@@ -24,13 +24,16 @@
 package com.thevoxelbox.vsl.nodes.math;
 
 import com.thevoxelbox.vsl.node.Node;
+import com.thevoxelbox.vsl.util.Input;
+import com.thevoxelbox.vsl.util.Output;
 import com.thevoxelbox.vsl.util.Provider;
 import com.thevoxelbox.vsl.util.RuntimeState;
 
 public class SqrtNode extends Node
 {
-
+    @Output
     private final Provider<Number> value;
+    @Input
     private final Provider<Number> a;
 
     public SqrtNode(Provider<Number> a)

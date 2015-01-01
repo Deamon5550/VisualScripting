@@ -21,44 +21,16 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.thevoxelbox.vsl.nodes.math;
+package com.thevoxelbox.vsl.util;
 
-import com.thevoxelbox.vsl.node.Node;
-import com.thevoxelbox.vsl.util.Input;
-import com.thevoxelbox.vsl.util.Output;
-import com.thevoxelbox.vsl.util.Provider;
-import com.thevoxelbox.vsl.util.RuntimeState;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
-public class AbsNode extends Node
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.FIELD)
+public @interface Input
 {
-    @Output
-    private final Provider<Number> value;
-    @Input
-    private final Provider<Number> a;
-    private final boolean floating;
-
-    public AbsNode(Provider<Number> a, boolean floating)
-    {
-        this.a = a;
-        this.value = new Provider<Number>(this);
-        this.floating = floating;
-    }
-
-    @Override
-    public void exec(RuntimeState state)
-    {
-        if (floating)
-        {
-            this.value.set(Math.abs(this.a.get(state).doubleValue()), state.getUUID());
-        } else
-        {
-            this.value.set(Math.abs(this.a.get(state).longValue()), state.getUUID());
-        }
-    }
-
-    public Provider<Number> getResult()
-    {
-        return this.value;
-    }
 
 }

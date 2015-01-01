@@ -31,12 +31,12 @@ import com.thevoxelbox.vsl.api.INode;
 
 public class Provider<T>
 {
-    
+
     private final Map<UUID, T> values;
     private final T value;
     private final boolean isStatic;
     private INode callback;
-    
+
     public Provider(INode n)
     {
         this.callback = n;
@@ -44,7 +44,7 @@ public class Provider<T>
         isStatic = false;
         this.value = null;
     }
-    
+
     public Provider(T value)
     {
         this.value = value;
@@ -54,20 +54,20 @@ public class Provider<T>
 
     public T get(RuntimeState state)
     {
-        if(isStatic)
+        if (isStatic)
         {
             return this.value;
         }
-        if(!this.values.containsKey(state.getUUID()))
+        if (!this.values.containsKey(state.getUUID()))
         {
             this.callback.exec(state);
         }
         return this.values.get(state.getUUID());
     }
-    
+
     public void set(T newValue, UUID uuid)
     {
         this.values.put(uuid, newValue);
     }
-    
+
 }

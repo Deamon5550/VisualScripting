@@ -31,7 +31,7 @@ public interface INode
     void exec(RuntimeState state);
 
     void setNext(INode n);
-    
+
     INode getNext();
-    
+
 }

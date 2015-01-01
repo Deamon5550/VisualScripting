@@ -24,13 +24,15 @@
 package com.thevoxelbox.vsl.nodes.debug;
 
 import com.thevoxelbox.vsl.node.Node;
+import com.thevoxelbox.vsl.util.Input;
 import com.thevoxelbox.vsl.util.Provider;
 import com.thevoxelbox.vsl.util.RuntimeState;
 
 public class PrintNode extends Node
 {
+    @Input
     private final Provider<String> msg;
-    
+
     public PrintNode(Provider<String> msg)
     {
         this.msg = msg;
@@ -41,5 +43,5 @@ public class PrintNode extends Node
     {
         System.out.print(msg.get(state));
     }
-    
+
 }

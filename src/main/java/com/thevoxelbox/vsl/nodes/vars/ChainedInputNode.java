@@ -23,7 +23,6 @@
  */
 package com.thevoxelbox.vsl.nodes.vars;
 
-
 public class ChainedInputNode<T> extends VariableGetNode<T>
 {
 

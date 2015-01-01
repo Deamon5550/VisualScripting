@@ -38,12 +38,12 @@ public class RuntimeState
         this.vars = vars;
         this.uuid = UUID.randomUUID();
     }
-    
+
     public UUID getUUID()
     {
         return this.uuid;
     }
-    
+
     public IVariableHolder getVars()
     {
         return this.vars;

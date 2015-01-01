@@ -25,6 +25,7 @@ package com.thevoxelbox.vsl.nodes.control;
 
 import com.thevoxelbox.vsl.api.INode;
 import com.thevoxelbox.vsl.node.Node;
+import com.thevoxelbox.vsl.util.Input;
 import com.thevoxelbox.vsl.util.Provider;
 import com.thevoxelbox.vsl.util.RuntimeState;
 
@@ -32,22 +33,27 @@ public class ForLoop extends Node
 {
 
     private INode body;
+    @Input
     private final Provider<Integer> init;
+    @Input
     private final Provider<Integer> target;
+    @Input
     private final Provider<Integer> increment;
-    
+
     public ForLoop(Provider<Integer> i, Provider<Integer> t, Provider<Integer> n)
     {
         this.init = i;
         this.target = t;
         this.increment = n;
     }
+
     public ForLoop(int i, Provider<Integer> t, Provider<Integer> n)
     {
         this.init = new Provider<Integer>(i);
         this.target = t;
         this.increment = n;
     }
+
     public ForLoop(Provider<Integer> i, int t, Provider<Integer> n)
     {
         this.init = i;
@@ -90,27 +96,26 @@ public class ForLoop extends Node
         this.increment = new Provider<Integer>(n);
     }
 
-
     @Override
     public void exec(RuntimeState state)
     {
         int i = init.get(state);
         int t = target.get(state);
         int n = increment.get(state);
-        for(; i < t; i += n)
+        for (; i < t; i += n)
         {
             INode next = this.body;
-            while(next != null)
+            while (next != null)
             {
                 next.exec(state);
                 next = next.getNext();
             }
         }
     }
-    
+
     public void setBody(Node n)
     {
         this.body = n;
     }
-    
+
 }

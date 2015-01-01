@@ -38,7 +38,7 @@ public class ChainedNodeGraphTest
         StaticValueNode<String> string2 = new StaticValueNode<String>(" World");
         ChainedOutputNode<String> out1 = new ChainedOutputNode<String>("first", string.getValue());
         ChainedOutputNode<String> out2 = new ChainedOutputNode<String>("second", string2.getValue());
-        
+
         NodeGraph graph1 = new NodeGraph("Chained Graph 1");
         graph1.setNext(out1);
         out1.setNext(out2);

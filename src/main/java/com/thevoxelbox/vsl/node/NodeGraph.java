@@ -30,18 +30,18 @@ import com.thevoxelbox.vsl.util.RuntimeState;
 public class NodeGraph extends Node
 {
     String name;
-    NodeGraph next = null;
-    
+    NodeGraph nextgraph = null;
+
     public NodeGraph(String name)
     {
         this.name = name;
     }
-    
+
     public String getName()
     {
         return this.name;
     }
-    
+
     public void run(IVariableHolder vars)
     {
         RuntimeState state = new RuntimeState(vars);
@@ -52,20 +52,25 @@ public class NodeGraph extends Node
     public void exec(RuntimeState state)
     {
         INode next = this.getNext();
-        while(next != null)
+        while (next != null)
         {
             next.exec(state);
             next = next.getNext();
         }
-        if(this.next != null)
+        if (this.nextgraph != null)
         {
-            this.next.exec(state);
+            this.nextgraph.exec(state);
         }
     }
 
     public void chain(NodeGraph next)
     {
-        this.next = next;
+        this.nextgraph = next;
+    }
+    
+    public NodeGraph getNextGraph()
+    {
+        return this.nextgraph;
     }
 
 }

@@ -24,15 +24,19 @@
 package com.thevoxelbox.vsl.nodes.math;
 
 import com.thevoxelbox.vsl.node.Node;
+import com.thevoxelbox.vsl.util.Input;
+import com.thevoxelbox.vsl.util.Output;
 import com.thevoxelbox.vsl.util.Provider;
 import com.thevoxelbox.vsl.util.RuntimeState;
 
 public class MultiplicationNode extends Node
 {
-
+    @Output
     private final Provider<Number> value;
+    @Input
     private final Provider<Number> a;
     private final Provider<Number> b;
+    @Input
     private final boolean floating;
 
     public MultiplicationNode(Provider<Number> a, Provider<Number> b, boolean floating)

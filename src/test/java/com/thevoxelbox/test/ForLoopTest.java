@@ -33,7 +33,7 @@ public class ForLoopTest
         PrintStream oldOut = System.out;
         System.setOut(out);
 
-        StaticValueNode<String[]> array = new StaticValueNode<String[]>(new String[]{"Hel", "lo ", "Wor", "ld"});
+        StaticValueNode<String[]> array = new StaticValueNode<String[]>(new String[] { "Hel", "lo ", "Wor", "ld" });
 
         ForEachNode<String> forloop = new ForEachNode<String>(array.getValue());
         PrintNode print = new PrintNode(forloop.getNextValue());
