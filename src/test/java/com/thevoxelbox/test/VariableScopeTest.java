@@ -8,6 +8,7 @@ import java.io.PrintStream;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.thevoxelbox.test.util.OutputHelper;
 import com.thevoxelbox.vsl.VariableScope;
 import com.thevoxelbox.vsl.node.NodeGraph;
 import com.thevoxelbox.vsl.nodes.StaticValueNode;
@@ -15,7 +16,7 @@ import com.thevoxelbox.vsl.nodes.debug.PrintNode;
 import com.thevoxelbox.vsl.nodes.vars.VariableGetNode;
 import com.thevoxelbox.vsl.nodes.vars.VariableSetNode;
 
-public class VariableScopeTest
+public class VariableScopeTest extends StandardTest
 {
     private VariableScope parent;
     private VariableScope child;
@@ -32,6 +33,7 @@ public class VariableScopeTest
         parent.set("b", "b");
 
         child.set("b", "c");
+        output = new OutputHelper();
     }
 
     @Test
@@ -51,10 +53,7 @@ public class VariableScopeTest
     @Test
     public void testVariableNodes()
     {
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        PrintStream out = new PrintStream(baos);
-        PrintStream oldOut = System.out;
-        System.setOut(out);
+        output.setup();
 
         StaticValueNode<String> value = new StaticValueNode<String>("Hello World");
         VariableSetNode<String> set = new VariableSetNode<String>("name", value.getValue());
@@ -65,12 +64,9 @@ public class VariableScopeTest
         NodeGraph graph = new NodeGraph("Test Graph");
         graph.setNext(set);
         graph.run(child);
-
-        String s = new String(baos.toByteArray());
-        s = s.replace("\n", "");
-        s = s.replace("\r", "");
-        assertEquals("Hello World", s);
-        System.setOut(oldOut);
+        
+        output.check("Hello World");
+        output.reset();
     }
     
     @Test
