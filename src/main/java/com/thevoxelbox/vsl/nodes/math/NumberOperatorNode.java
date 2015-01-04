@@ -32,7 +32,7 @@ public abstract class NumberOperatorNode extends TwoNumberNode
     @Output
     protected final Provider<Number> value;
 
-    public NumberOperatorNode(Provider<Number> a, Provider<Number> b, boolean floating)
+    public NumberOperatorNode(Provider<? extends Number> a, Provider<? extends Number> b, boolean floating)
     {
         super(a, b, floating);
         this.value = new Provider<Number>(this);

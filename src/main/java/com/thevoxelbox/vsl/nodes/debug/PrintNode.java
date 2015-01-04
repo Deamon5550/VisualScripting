@@ -31,9 +31,9 @@ import com.thevoxelbox.vsl.util.RuntimeState;
 public class PrintNode extends Node
 {
     @Input
-    private final Provider<String> msg;
+    private final Provider<?> msg;
 
-    public PrintNode(Provider<String> msg)
+    public PrintNode(Provider<?> msg)
     {
         this.msg = msg;
     }
@@ -41,7 +41,7 @@ public class PrintNode extends Node
     @Override
     public void exec(RuntimeState state)
     {
-        System.out.print(msg.get(state));
+        System.out.print(msg.get(state).toString());
     }
 
 }

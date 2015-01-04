@@ -30,12 +30,12 @@ import com.thevoxelbox.vsl.util.Provider;
 public abstract class TwoNumberNode extends Node
 {
     @Input
-    protected final Provider<Number> a;
+    protected final Provider<? extends Number> a;
     @Input
-    protected final Provider<Number> b;
+    protected final Provider<? extends Number> b;
     protected final boolean floating;
     
-    public TwoNumberNode(Provider<Number> a, Provider<Number> b, boolean floating)
+    public TwoNumberNode(Provider<? extends Number> a, Provider<? extends Number> b, boolean floating)
     {
         this.a = a;
         this.b = b;

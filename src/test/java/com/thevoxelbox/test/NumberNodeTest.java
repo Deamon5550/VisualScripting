@@ -21,27 +21,35 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.thevoxelbox.vsl.nodes.math.compare;
+package com.thevoxelbox.test;
 
-import com.thevoxelbox.vsl.nodes.math.TwoNumberNode;
-import com.thevoxelbox.vsl.util.Output;
-import com.thevoxelbox.vsl.util.Provider;
+import org.junit.Test;
 
-public abstract class NumberCompareNode extends TwoNumberNode
+import com.thevoxelbox.vsl.node.NodeGraph;
+import com.thevoxelbox.vsl.nodes.StaticValueNode;
+import com.thevoxelbox.vsl.nodes.debug.PrintNode;
+import com.thevoxelbox.vsl.nodes.math.AdditionNode;
+
+public class NumberNodeTest extends StandardTest
 {
-    
-    @Output
-    protected final Provider<Boolean> result;
 
-    public NumberCompareNode(Provider<? extends Number> a, Provider<? extends Number> b, boolean floating)
+
+    @Test
+    public void testAddition()
     {
-        super(a, b, floating);
-        this.result = new Provider<Boolean>(this);
+        output.setup();
+
+        StaticValueNode<Integer> a = new StaticValueNode<Integer>(5);
+        StaticValueNode<Integer> b = new StaticValueNode<Integer>(8);
+        AdditionNode add = new AdditionNode(a.getValue(), b.getValue(), false);
+        PrintNode print = new PrintNode(add.getResult());
+
+        NodeGraph graph = new NodeGraph("Test Graph");
+        graph.setNext(print);
+        graph.run(vars);
+
+        output.check("13");
+        output.reset();
     }
     
-    public Provider<Boolean> getComparisonResult()
-    {
-        return this.result;
-    }
-
 }
