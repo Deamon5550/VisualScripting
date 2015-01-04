@@ -23,28 +23,15 @@
  */
 package com.thevoxelbox.vsl.nodes.math;
 
-import com.thevoxelbox.vsl.node.Node;
-import com.thevoxelbox.vsl.util.Input;
-import com.thevoxelbox.vsl.util.Output;
 import com.thevoxelbox.vsl.util.Provider;
 import com.thevoxelbox.vsl.util.RuntimeState;
 
-public class AdditionNode extends Node
+public class AdditionNode extends NumberOperatorNode
 {
-    @Output
-    private final Provider<Number> value;
-    @Input
-    private final Provider<Number> a;
-    @Input
-    private final Provider<Number> b;
-    private final boolean floating;
 
     public AdditionNode(Provider<Number> a, Provider<Number> b, boolean floating)
     {
-        this.a = a;
-        this.b = b;
-        this.value = new Provider<Number>(this);
-        this.floating = floating;
+        super(a, b, floating);
     }
 
     @Override
@@ -59,9 +46,5 @@ public class AdditionNode extends Node
         }
     }
 
-    public Provider<Number> getResult()
-    {
-        return this.value;
-    }
 
 }

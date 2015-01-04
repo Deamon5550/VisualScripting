@@ -21,29 +21,27 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.thevoxelbox.vsl.nodes.math;
+package com.thevoxelbox.vsl.nodes.math.compare;
 
+import com.thevoxelbox.vsl.nodes.math.TwoNumberNode;
+import com.thevoxelbox.vsl.util.Output;
 import com.thevoxelbox.vsl.util.Provider;
-import com.thevoxelbox.vsl.util.RuntimeState;
 
-public class ModuloNode extends NumberOperatorNode
+public abstract class NumberCompareNode extends TwoNumberNode
 {
+    
+    @Output
+    protected final Provider<Boolean> result;
 
-    public ModuloNode(Provider<Number> a, Provider<Number> b, boolean floating)
+    public NumberCompareNode(Provider<Number> a, Provider<Number> b, boolean floating)
     {
         super(a, b, floating);
+        this.result = new Provider<Boolean>(this);
     }
-
-    @Override
-    public void exec(RuntimeState state)
+    
+    public Provider<Boolean> getComparisonResult()
     {
-        if (floating)
-        {
-            this.value.set(a.get(state).doubleValue() % b.get(state).doubleValue(), state.getUUID());
-        } else
-        {
-            this.value.set(a.get(state).longValue() % b.get(state).longValue(), state.getUUID());
-        }
+        return this.result;
     }
 
 }

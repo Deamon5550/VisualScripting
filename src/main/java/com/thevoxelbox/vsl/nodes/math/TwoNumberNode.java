@@ -23,27 +23,23 @@
  */
 package com.thevoxelbox.vsl.nodes.math;
 
+import com.thevoxelbox.vsl.node.Node;
+import com.thevoxelbox.vsl.util.Input;
 import com.thevoxelbox.vsl.util.Provider;
-import com.thevoxelbox.vsl.util.RuntimeState;
 
-public class ModuloNode extends NumberOperatorNode
+public abstract class TwoNumberNode extends Node
 {
-
-    public ModuloNode(Provider<Number> a, Provider<Number> b, boolean floating)
+    @Input
+    protected final Provider<Number> a;
+    @Input
+    protected final Provider<Number> b;
+    protected final boolean floating;
+    
+    public TwoNumberNode(Provider<Number> a, Provider<Number> b, boolean floating)
     {
-        super(a, b, floating);
-    }
-
-    @Override
-    public void exec(RuntimeState state)
-    {
-        if (floating)
-        {
-            this.value.set(a.get(state).doubleValue() % b.get(state).doubleValue(), state.getUUID());
-        } else
-        {
-            this.value.set(a.get(state).longValue() % b.get(state).longValue(), state.getUUID());
-        }
+        this.a = a;
+        this.b = b;
+        this.floating = floating;
     }
 
 }

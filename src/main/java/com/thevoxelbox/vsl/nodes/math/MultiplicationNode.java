@@ -23,28 +23,15 @@
  */
 package com.thevoxelbox.vsl.nodes.math;
 
-import com.thevoxelbox.vsl.node.Node;
-import com.thevoxelbox.vsl.util.Input;
-import com.thevoxelbox.vsl.util.Output;
 import com.thevoxelbox.vsl.util.Provider;
 import com.thevoxelbox.vsl.util.RuntimeState;
 
-public class MultiplicationNode extends Node
+public class MultiplicationNode extends NumberOperatorNode
 {
-    @Output
-    private final Provider<Number> value;
-    @Input
-    private final Provider<Number> a;
-    private final Provider<Number> b;
-    @Input
-    private final boolean floating;
 
     public MultiplicationNode(Provider<Number> a, Provider<Number> b, boolean floating)
     {
-        this.a = a;
-        this.b = b;
-        this.value = new Provider<Number>(this);
-        this.floating = floating;
+        super(a, b, floating);
     }
 
     @Override
@@ -57,11 +44,6 @@ public class MultiplicationNode extends Node
         {
             this.value.set(a.get(state).longValue() * b.get(state).longValue(), state.getUUID());
         }
-    }
-
-    public Provider<Number> getResult()
-    {
-        return this.value;
     }
 
 }

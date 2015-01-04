@@ -21,15 +21,15 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.thevoxelbox.vsl.nodes.math;
+package com.thevoxelbox.vsl.nodes.math.compare;
 
 import com.thevoxelbox.vsl.util.Provider;
 import com.thevoxelbox.vsl.util.RuntimeState;
 
-public class ModuloNode extends NumberOperatorNode
+public class NumberGreaterThanOrEqualsNode extends NumberCompareNode
 {
 
-    public ModuloNode(Provider<Number> a, Provider<Number> b, boolean floating)
+    public NumberGreaterThanOrEqualsNode(Provider<Number> a, Provider<Number> b, boolean floating)
     {
         super(a, b, floating);
     }
@@ -37,12 +37,13 @@ public class ModuloNode extends NumberOperatorNode
     @Override
     public void exec(RuntimeState state)
     {
-        if (floating)
+        if(this.floating)
         {
-            this.value.set(a.get(state).doubleValue() % b.get(state).doubleValue(), state.getUUID());
-        } else
+            this.result.set(this.a.get(state).doubleValue() >= this.b.get(state).doubleValue(), state.getUUID());
+        }
+        else
         {
-            this.value.set(a.get(state).longValue() % b.get(state).longValue(), state.getUUID());
+            this.result.set(this.a.get(state).longValue() >= this.b.get(state).longValue(), state.getUUID()); 
         }
     }
 
