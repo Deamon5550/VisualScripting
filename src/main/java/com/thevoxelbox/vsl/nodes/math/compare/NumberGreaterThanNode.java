@@ -29,7 +29,7 @@ import com.thevoxelbox.vsl.util.RuntimeState;
 public class NumberGreaterThanNode extends NumberCompareNode
 {
 
-    public NumberGreaterThanNode(Provider<Number> a, Provider<Number> b, boolean floating)
+    public NumberGreaterThanNode(Provider<? extends Number> a, Provider<? extends Number> b, boolean floating)
     {
         super(a, b, floating);
     }

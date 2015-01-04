@@ -29,6 +29,7 @@ import com.thevoxelbox.vsl.node.NodeGraph;
 import com.thevoxelbox.vsl.nodes.StaticValueNode;
 import com.thevoxelbox.vsl.nodes.debug.PrintNode;
 import com.thevoxelbox.vsl.nodes.math.AdditionNode;
+import com.thevoxelbox.vsl.nodes.math.compare.NumberEqualsNode;
 
 public class NumberNodeTest extends StandardTest
 {
@@ -49,6 +50,24 @@ public class NumberNodeTest extends StandardTest
         graph.run(vars);
 
         output.check("13");
+        output.reset();
+    }
+    
+    @Test
+    public void testEquals()
+    {
+        output.setup();
+
+        StaticValueNode<Integer> a = new StaticValueNode<Integer>(5);
+        StaticValueNode<Integer> b = new StaticValueNode<Integer>(5);
+        NumberEqualsNode add = new NumberEqualsNode(a.getValue(), b.getValue(), false);
+        PrintNode print = new PrintNode(add.getComparisonResult());
+
+        NodeGraph graph = new NodeGraph("Test Graph");
+        graph.setNext(print);
+        graph.run(vars);
+
+        output.check("true");
         output.reset();
     }
     
