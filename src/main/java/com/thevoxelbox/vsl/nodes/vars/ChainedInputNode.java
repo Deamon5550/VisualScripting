@@ -23,9 +23,21 @@
  */
 package com.thevoxelbox.vsl.nodes.vars;
 
+import com.thevoxelbox.vsl.node.NodeGraph;
+
+/**
+ * Returns an input received from a previously run {@link NodeGraph}.
+ * 
+ * @param <T> The input type
+ */
 public class ChainedInputNode<T> extends VariableGetNode<T>
 {
 
+	/**
+	 * Creates a new {@link ChainedInputNode}.
+	 * 
+	 * @param name The variable name to input
+	 */
     public ChainedInputNode(String name)
     {
         super("__CHAINED__" + name);

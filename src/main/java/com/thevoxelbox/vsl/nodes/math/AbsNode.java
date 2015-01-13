@@ -29,6 +29,9 @@ import com.thevoxelbox.vsl.util.Output;
 import com.thevoxelbox.vsl.util.Provider;
 import com.thevoxelbox.vsl.util.RuntimeState;
 
+/**
+ * Returns the absolute value of an integer or floating-point number.
+ */
 public class AbsNode extends Node
 {
     @Output
@@ -37,6 +40,12 @@ public class AbsNode extends Node
     private final Provider<Number> a;
     private final boolean floating;
 
+    /**
+     * Creates a new {@link AbsNode}.
+     * 
+     * @param a The input value
+     * @param floating Whether to use floating point percision
+     */
     public AbsNode(Provider<Number> a, boolean floating)
     {
         this.a = a;
@@ -44,6 +53,9 @@ public class AbsNode extends Node
         this.floating = floating;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void exec(RuntimeState state)
     {
@@ -56,6 +68,11 @@ public class AbsNode extends Node
         }
     }
 
+    /**
+     * Returns the result provider.
+     * 
+     * @return The absolute value of the input
+     */
     public Provider<Number> getResult()
     {
         return this.value;

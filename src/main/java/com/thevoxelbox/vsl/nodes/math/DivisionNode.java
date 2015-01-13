@@ -26,14 +26,27 @@ package com.thevoxelbox.vsl.nodes.math;
 import com.thevoxelbox.vsl.util.Provider;
 import com.thevoxelbox.vsl.util.RuntimeState;
 
+/**
+ * Returns the quotient of two integer or floating-point numbers.
+ */
 public class DivisionNode extends NumberOperatorNode
 {
 
+	/**
+	 * Creates a new {@link DivisionNode}.
+	 * 
+	 * @param a The first input
+	 * @param b The second input
+	 * @param floating Whether to use floating point precision
+	 */
     public DivisionNode(Provider<Number> a, Provider<Number> b, boolean floating)
     {
         super(a, b, floating);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void exec(RuntimeState state)
     {

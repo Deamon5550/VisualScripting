@@ -26,14 +26,27 @@ package com.thevoxelbox.vsl.nodes.math;
 import com.thevoxelbox.vsl.util.Provider;
 import com.thevoxelbox.vsl.util.RuntimeState;
 
+/**
+ * Returns the sub of two integer or floating-point numbers.
+ */
 public class AdditionNode extends NumberOperatorNode
 {
 
+	/**
+	 * Creates a new {@link AdditionNode}.
+	 * 
+	 * @param a The first input
+	 * @param b The second input
+	 * @param floating Whether to use floating point percision
+	 */
     public AdditionNode(Provider<? extends Number> a, Provider<? extends Number> b, boolean floating)
     {
         super(a, b, floating);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void exec(RuntimeState state)
     {
@@ -45,6 +58,5 @@ public class AdditionNode extends NumberOperatorNode
             this.value.set(a.get(state).longValue() + b.get(state).longValue(), state.getUUID());
         }
     }
-
 
 }

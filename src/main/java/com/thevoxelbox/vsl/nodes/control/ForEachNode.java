@@ -30,6 +30,11 @@ import com.thevoxelbox.vsl.util.Output;
 import com.thevoxelbox.vsl.util.Provider;
 import com.thevoxelbox.vsl.util.RuntimeState;
 
+/**
+ * Loops over every value in the given array and calls another {@link INode} as the body.
+ * 
+ * @param <T> The array type
+ */
 public class ForEachNode<T> extends Node
 {
 
@@ -41,6 +46,11 @@ public class ForEachNode<T> extends Node
     @Output
     private final Provider<Integer> index;
 
+    /**
+     * Creates a new {@link ForEachNode}.
+     * 
+     * @param array The array to loop over
+     */
     public ForEachNode(Provider<T[]> array)
     {
         this.array = array;
@@ -48,6 +58,9 @@ public class ForEachNode<T> extends Node
         this.next = new Provider<T>(this);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void exec(RuntimeState state)
     {
@@ -67,14 +80,24 @@ public class ForEachNode<T> extends Node
         }
     }
 
+    /**
+     * Gets the last array value fetched from the array.
+     * 
+     * @return The value
+     */
     public Provider<T> getNextValue()
     {
         return this.next;
     }
 
-    public void setBody(Node n)
+    /**
+     * Sets the {@link INode} to use as the body of this loop.
+     * 
+     * @param body The body
+     */
+    public void setBody(Node body)
     {
-        this.body = n;
+        this.body = body;
     }
 
 }

@@ -8,9 +8,17 @@ import com.thevoxelbox.vsl.nodes.debug.PrintNode;
 import com.thevoxelbox.vsl.nodes.vars.ChainedInputNode;
 import com.thevoxelbox.vsl.nodes.vars.ChainedOutputNode;
 
+/**
+ * A test for two node graphs chained together.
+ * 
+ * TODO cleanup
+ */
 public class ChainedNodeGraphTest extends StandardTest
 {
 
+	/**
+	 * 
+	 */
     @Test
     public void test()
     {
