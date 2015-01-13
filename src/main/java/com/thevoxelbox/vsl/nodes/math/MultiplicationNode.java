@@ -26,14 +26,27 @@ package com.thevoxelbox.vsl.nodes.math;
 import com.thevoxelbox.vsl.util.Provider;
 import com.thevoxelbox.vsl.util.RuntimeState;
 
+/**
+ * Performs the multiplication operation between two numbers.
+ */
 public class MultiplicationNode extends NumberOperatorNode
 {
 
+	/**
+	 * Creates a new {@link MultiplicationNode}.
+	 * 
+	 * @param a The first number
+	 * @param b The second number
+	 * @param floating Whether to use floating point precision
+	 */
     public MultiplicationNode(Provider<Number> a, Provider<Number> b, boolean floating)
     {
         super(a, b, floating);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void exec(RuntimeState state)
     {

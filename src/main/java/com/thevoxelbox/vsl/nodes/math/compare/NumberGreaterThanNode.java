@@ -26,14 +26,27 @@ package com.thevoxelbox.vsl.nodes.math.compare;
 import com.thevoxelbox.vsl.util.Provider;
 import com.thevoxelbox.vsl.util.RuntimeState;
 
+/**
+ * Tests if a number is greater than a second number.
+ */
 public class NumberGreaterThanNode extends NumberCompareNode
 {
 
+	/**
+	 * Creates a new {@link NumberGreaterThanNode}.
+	 * 
+	 * @param a The first number
+	 * @param b The second number
+	 * @param floating Whether to use floating point precision
+	 */
     public NumberGreaterThanNode(Provider<? extends Number> a, Provider<? extends Number> b, boolean floating)
     {
         super(a, b, floating);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void exec(RuntimeState state)
     {

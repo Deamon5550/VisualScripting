@@ -29,6 +29,11 @@ import com.thevoxelbox.vsl.util.Output;
 import com.thevoxelbox.vsl.util.Provider;
 import com.thevoxelbox.vsl.util.RuntimeState;
 
+/**
+ * Gets a variable from the runtime variables with the given name.
+ * 
+ * @param <T> The value type
+ */
 public class VariableGetNode<T> extends Node
 {
     @Input
@@ -36,18 +41,31 @@ public class VariableGetNode<T> extends Node
     @Output
     private final Provider<T> value;
 
+    /**
+     * Creates a new {@link VariableGetNode}.
+     * 
+     * @param name The variable name
+     */
     public VariableGetNode(Provider<String> name)
     {
         this.varName = name;
         this.value = new Provider<T>(this);
     }
 
+    /**
+     * Creates a new {@link VariableGetNode}.
+     * 
+     * @param name The variable name
+     */
     public VariableGetNode(String name)
     {
         this.varName = new Provider<String>(name);
         this.value = new Provider<T>(this);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @SuppressWarnings("unchecked")
     @Override
     public void exec(RuntimeState state)
@@ -55,6 +73,11 @@ public class VariableGetNode<T> extends Node
         this.value.set((T) state.getVars().get(this.varName.get(state)).get(), state.getUUID());
     }
 
+    /**
+     * Gets the value.
+     * 
+     * @return The value
+     */
     public Provider<T> getValue()
     {
         return this.value;

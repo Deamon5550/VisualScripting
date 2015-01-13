@@ -28,6 +28,11 @@ import com.thevoxelbox.vsl.util.Input;
 import com.thevoxelbox.vsl.util.Provider;
 import com.thevoxelbox.vsl.util.RuntimeState;
 
+/**
+ * Sets a variable within the runtime variables.
+ * 
+ * @param <T> The value type
+ */
 public class VariableSetNode<T> extends Node
 {
 
@@ -36,30 +41,57 @@ public class VariableSetNode<T> extends Node
     @Input
     private final Provider<T> value;
 
+    /**
+     * Creates a new {@link VariableSetNode}.
+     * 
+     * @param name The variable name
+     * @param value The new value
+     */
     public VariableSetNode(Provider<String> name, Provider<T> value)
     {
         this.varName = name;
         this.value = value;
     }
 
+    /**
+     * Creates a new {@link VariableSetNode}.
+     * 
+     * @param name The variable name
+     * @param value The new value
+     */
     public VariableSetNode(String name, Provider<T> value)
     {
         this.varName = new Provider<String>(name);
         this.value = value;
     }
 
+    /**
+     * Creates a new {@link VariableSetNode}.
+     * 
+     * @param name The variable name
+     * @param value The new value
+     */
     public VariableSetNode(Provider<String> name, T value)
     {
         this.varName = name;
         this.value = new Provider<T>(value);
     }
 
+    /**
+     * Creates a new {@link VariableSetNode}.
+     * 
+     * @param name The variable name
+     * @param value The new value
+     */
     public VariableSetNode(String name, T value)
     {
         this.varName = new Provider<String>(name);
         this.value = new Provider<T>(value);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void exec(RuntimeState state)
     {

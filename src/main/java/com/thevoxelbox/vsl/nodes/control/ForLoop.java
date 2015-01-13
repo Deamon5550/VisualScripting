@@ -29,6 +29,9 @@ import com.thevoxelbox.vsl.util.Input;
 import com.thevoxelbox.vsl.util.Provider;
 import com.thevoxelbox.vsl.util.RuntimeState;
 
+/**
+ * Loops over a set of integers and executes a {@link INode} for each integer.
+ */
 public class ForLoop extends Node
 {
 
@@ -40,6 +43,13 @@ public class ForLoop extends Node
     @Input
     private final Provider<Integer> increment;
 
+    /**
+     * Creates a new {@link ForLoop}.
+     * 
+     * @param i The initial value
+     * @param t The target value
+     * @param n The increment
+     */
     public ForLoop(Provider<Integer> i, Provider<Integer> t, Provider<Integer> n)
     {
         this.init = i;
@@ -47,6 +57,13 @@ public class ForLoop extends Node
         this.increment = n;
     }
 
+    /**
+     * Creates a new {@link ForLoop}.
+     * 
+     * @param i The initial value
+     * @param t The target value
+     * @param n The increment
+     */
     public ForLoop(int i, Provider<Integer> t, Provider<Integer> n)
     {
         this.init = new Provider<Integer>(i);
@@ -54,6 +71,13 @@ public class ForLoop extends Node
         this.increment = n;
     }
 
+    /**
+     * Creates a new {@link ForLoop}.
+     * 
+     * @param i The initial value
+     * @param t The target value
+     * @param n The increment
+     */
     public ForLoop(Provider<Integer> i, int t, Provider<Integer> n)
     {
         this.init = i;
@@ -61,6 +85,13 @@ public class ForLoop extends Node
         this.increment = n;
     }
 
+    /**
+     * Creates a new {@link ForLoop}.
+     * 
+     * @param i The initial value
+     * @param t The target value
+     * @param n The increment
+     */
     public ForLoop(int i, int t, Provider<Integer> n)
     {
         this.init = new Provider<Integer>(i);
@@ -68,6 +99,13 @@ public class ForLoop extends Node
         this.increment = n;
     }
 
+    /**
+     * Creates a new {@link ForLoop}.
+     * 
+     * @param i The initial value
+     * @param t The target value
+     * @param n The increment
+     */
     public ForLoop(Provider<Integer> i, Provider<Integer> t, int n)
     {
         this.init = i;
@@ -75,6 +113,13 @@ public class ForLoop extends Node
         this.increment = new Provider<Integer>(n);
     }
 
+    /**
+     * Creates a new {@link ForLoop}.
+     * 
+     * @param i The initial value
+     * @param t The target value
+     * @param n The increment
+     */
     public ForLoop(int i, int t, int n)
     {
         this.init = new Provider<Integer>(i);
@@ -82,6 +127,13 @@ public class ForLoop extends Node
         this.increment = new Provider<Integer>(n);
     }
 
+    /**
+     * Creates a new {@link ForLoop}.
+     * 
+     * @param i The initial value
+     * @param t The target value
+     * @param n The increment
+     */
     public ForLoop(Provider<Integer> i, int t, int n)
     {
         this.init = i;
@@ -89,6 +141,13 @@ public class ForLoop extends Node
         this.increment = new Provider<Integer>(n);
     }
 
+    /**
+     * Creates a new {@link ForLoop}.
+     * 
+     * @param i The initial value
+     * @param t The target value
+     * @param n The increment
+     */
     public ForLoop(int i, Provider<Integer> t, int n)
     {
         this.init = new Provider<Integer>(i);
@@ -96,6 +155,9 @@ public class ForLoop extends Node
         this.increment = new Provider<Integer>(n);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void exec(RuntimeState state)
     {
@@ -113,9 +175,16 @@ public class ForLoop extends Node
         }
     }
 
+    /**
+     * Sets the body of the loop.
+     * 
+     * @param n The body
+     */
     public void setBody(Node n)
     {
         this.body = n;
     }
+    
+    //TODO: providers for the value at each step, floating point values
 
 }

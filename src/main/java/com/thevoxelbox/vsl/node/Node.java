@@ -25,17 +25,26 @@ package com.thevoxelbox.vsl.node;
 
 import com.thevoxelbox.vsl.api.INode;
 
+/**
+ * An abstract node.
+ */
 public abstract class Node implements INode
 {
 
     private INode next;
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setNext(INode n)
     {
         this.next = n;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public INode getNext()
     {

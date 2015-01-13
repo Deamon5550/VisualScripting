@@ -25,13 +25,31 @@ package com.thevoxelbox.vsl.api;
 
 import com.thevoxelbox.vsl.util.RuntimeState;
 
+/**
+ * Represents a node with a set of inputs and outputs which executes a single discrete function.
+ */
 public interface INode
 {
 
+	/**
+	 * Executes this node's function based on the runtime state and its inputs.
+	 * 
+	 * @param state The runtime state
+	 */
     void exec(RuntimeState state);
 
-    void setNext(INode n);
+    /**
+     * Sets the node to be executed after this node in the execution pathway.
+     * 
+     * @param next The next node
+     */
+    void setNext(INode next);
 
+    /**
+     * Gets the next node in the execution pathway.
+     * 
+     * @return The next node
+     */
     INode getNext();
 
 }

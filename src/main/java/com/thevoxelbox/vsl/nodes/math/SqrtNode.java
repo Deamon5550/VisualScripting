@@ -29,6 +29,9 @@ import com.thevoxelbox.vsl.util.Output;
 import com.thevoxelbox.vsl.util.Provider;
 import com.thevoxelbox.vsl.util.RuntimeState;
 
+/**
+ * Performs the {@link Math#sqrt(double)} on the given number.
+ */
 public class SqrtNode extends Node
 {
     @Output
@@ -36,18 +39,31 @@ public class SqrtNode extends Node
     @Input
     private final Provider<Number> a;
 
+    /**
+     * Creates a new {@link SqrtNode}.
+     * 
+     * @param a The number to square root
+     */
     public SqrtNode(Provider<Number> a)
     {
         this.a = a;
         this.value = new Provider<Number>(this);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void exec(RuntimeState state)
     {
         this.value.set(Math.sqrt(this.a.get(state).doubleValue()), state.getUUID());
     }
 
+    /**
+     * Gets the resultant value.
+     * 
+     * @return The result
+     */
     public Provider<Number> getResult()
     {
         return this.value;

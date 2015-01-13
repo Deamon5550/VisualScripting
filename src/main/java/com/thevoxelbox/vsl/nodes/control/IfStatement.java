@@ -28,22 +28,40 @@ import com.thevoxelbox.vsl.node.Node;
 import com.thevoxelbox.vsl.util.Provider;
 import com.thevoxelbox.vsl.util.RuntimeState;
 
+/**
+ * Executed a node if the given boolean is true.
+ * 
+ * TODO: else support
+ */
 public class IfStatement extends Node
 {
     
     private final Provider<Boolean> statement;
     private INode body;
     
+    /**
+     * Creates a new {@link IfStatement}.
+     * 
+     * @param statement The boolean provider
+     */
     public IfStatement(Provider<Boolean> statement)
     {
         this.statement = statement;
     }
     
+    /**
+     * Sets the body of this if statement
+     * 
+     * @param n The body
+     */
     public void setBody(INode n)
     {
         this.body = n;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void exec(RuntimeState state)
     {
@@ -57,7 +75,5 @@ public class IfStatement extends Node
             }
         }
     }
-    
-    
 
 }

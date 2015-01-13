@@ -28,16 +28,27 @@ import com.thevoxelbox.vsl.util.Input;
 import com.thevoxelbox.vsl.util.Provider;
 import com.thevoxelbox.vsl.util.RuntimeState;
 
+/**
+ * A node which prints a string to standard out.
+ */
 public class PrintNode extends Node
 {
     @Input
     private final Provider<?> msg;
 
+    /**
+     * Creates a new {@link PrintNode}.
+     * 
+     * @param msg The message to print
+     */
     public PrintNode(Provider<?> msg)
     {
         this.msg = msg;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void exec(RuntimeState state)
     {

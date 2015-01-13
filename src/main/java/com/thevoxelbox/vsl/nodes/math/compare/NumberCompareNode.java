@@ -27,18 +27,33 @@ import com.thevoxelbox.vsl.nodes.math.TwoNumberNode;
 import com.thevoxelbox.vsl.util.Output;
 import com.thevoxelbox.vsl.util.Provider;
 
+/**
+ * An abstract node for comparing numbers.
+ */
 public abstract class NumberCompareNode extends TwoNumberNode
 {
     
     @Output
     protected final Provider<Boolean> result;
 
+    /**
+     * Sets up a number comparison node.
+     * 
+     * @param a The first number
+     * @param b The second number
+     * @param floating Whether to use floating point precision
+     */
     public NumberCompareNode(Provider<? extends Number> a, Provider<? extends Number> b, boolean floating)
     {
         super(a, b, floating);
         this.result = new Provider<Boolean>(this);
     }
     
+    /**
+     * Gets the comparision result.
+     * 
+     * @return The result
+     */
     public Provider<Boolean> getComparisonResult()
     {
         return this.result;

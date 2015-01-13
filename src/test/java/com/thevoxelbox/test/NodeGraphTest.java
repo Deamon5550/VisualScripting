@@ -6,9 +6,15 @@ import com.thevoxelbox.vsl.node.NodeGraph;
 import com.thevoxelbox.vsl.nodes.StaticValueNode;
 import com.thevoxelbox.vsl.nodes.debug.PrintNode;
 
+/**
+ * Basic {@link NodeGraph} tests.
+ */
 public class NodeGraphTest extends StandardTest
 {
 
+	/**
+	 * 
+	 */
     @Test
     public void testStringNodes()
     {

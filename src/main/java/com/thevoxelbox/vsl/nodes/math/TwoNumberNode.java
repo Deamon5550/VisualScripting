@@ -27,6 +27,9 @@ import com.thevoxelbox.vsl.node.Node;
 import com.thevoxelbox.vsl.util.Input;
 import com.thevoxelbox.vsl.util.Provider;
 
+/**
+ * An abstract node for a node receiving two numbers as input.
+ */
 public abstract class TwoNumberNode extends Node
 {
     @Input
@@ -35,6 +38,13 @@ public abstract class TwoNumberNode extends Node
     protected final Provider<? extends Number> b;
     protected final boolean floating;
     
+    /**
+     * Sets up a {@link TwoNumberNode}.
+     * 
+     * @param a The first number
+     * @param b The second number
+     * @param floating Whether to use floating point precision
+     */
     public TwoNumberNode(Provider<? extends Number> a, Provider<? extends Number> b, boolean floating)
     {
         this.a = a;

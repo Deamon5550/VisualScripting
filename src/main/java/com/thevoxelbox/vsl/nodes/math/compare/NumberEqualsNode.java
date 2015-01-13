@@ -26,25 +26,37 @@ package com.thevoxelbox.vsl.nodes.math.compare;
 import com.thevoxelbox.vsl.util.Provider;
 import com.thevoxelbox.vsl.util.RuntimeState;
 
+/**
+ * Tests if two numbers are equal.
+ */
 public class NumberEqualsNode extends NumberCompareNode
 {
 
-    public NumberEqualsNode(Provider<? extends Number> a, Provider<? extends Number> b, boolean floating)
-    {
-        super(a, b, floating);
-    }
+	/**
+	 * Creates a new {@link NumberEqualsNode}.
+	 * 
+	 * @param a The first number
+	 * @param b The second number
+	 * @param floating Whether to use floating point precision
+	 */
+	public NumberEqualsNode(Provider<? extends Number> a, Provider<? extends Number> b, boolean floating)
+	{
+		super(a, b, floating);
+	}
 
-    @Override
-    public void exec(RuntimeState state)
-    {
-        if(this.floating)
-        {
-            this.result.set(this.a.get(state).doubleValue() == this.b.get(state).doubleValue(), state.getUUID());
-        }
-        else
-        {
-            this.result.set(this.a.get(state).longValue() == this.b.get(state).longValue(), state.getUUID()); 
-        }
-    }
+    /**
+     * {@inheritDoc}
+     */
+	@Override
+	public void exec(RuntimeState state)
+	{
+		if (this.floating)
+		{
+			this.result.set(this.a.get(state).doubleValue() == this.b.get(state).doubleValue(), state.getUUID());
+		} else
+		{
+			this.result.set(this.a.get(state).longValue() == this.b.get(state).longValue(), state.getUUID());
+		}
+	}
 
 }

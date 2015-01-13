@@ -28,23 +28,41 @@ import com.thevoxelbox.vsl.util.Output;
 import com.thevoxelbox.vsl.util.Provider;
 import com.thevoxelbox.vsl.util.RuntimeState;
 
+/**
+ * A node for inserting a static value to a program.
+ * 
+ * @param <T> The value type
+ */
 public class StaticValueNode<T> extends Node
 {
 
     @Output
     private final Provider<T> value;
 
+    /**
+     * Creates a new {@link StaticValueNode}.
+     * 
+     * @param value
+     */
     public StaticValueNode(T value)
     {
         this.value = new Provider<T>(value);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void exec(RuntimeState state)
     {
 
     }
 
+    /**
+     * Gets the value.
+     * 
+     * @return The value
+     */
     public Provider<T> getValue()
     {
         return this.value;

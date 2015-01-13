@@ -27,50 +27,84 @@ import com.thevoxelbox.vsl.api.INode;
 import com.thevoxelbox.vsl.api.IVariableHolder;
 import com.thevoxelbox.vsl.util.RuntimeState;
 
+/**
+ * A node graph is a directed acyclic graph of connected nodes which when
+ * traversed will execute the program function. It is itself a node and may be
+ * used in another {@link NodeGraph} recursively.
+ */
 public class NodeGraph extends Node
 {
-    String name;
-    NodeGraph nextgraph = null;
 
-    public NodeGraph(String name)
-    {
-        this.name = name;
-    }
+	String name;
+	NodeGraph nextgraph = null;
 
-    public String getName()
-    {
-        return this.name;
-    }
+	/**
+	 * Creates a new {@link NodeGraph}
+	 * 
+	 * @param name The name
+	 */
+	public NodeGraph(String name)
+	{
+		this.name = name;
+	}
 
-    public void run(IVariableHolder vars)
-    {
-        RuntimeState state = new RuntimeState(vars);
-        exec(state);
-    }
+	/**
+	 * Gets the graph name.
+	 * 
+	 * @return The name
+	 */
+	public String getName()
+	{
+		return this.name;
+	}
 
-    @Override
-    public void exec(RuntimeState state)
-    {
-        INode next = this.getNext();
-        while (next != null)
-        {
-            next.exec(state);
-            next = next.getNext();
-        }
-        if (this.nextgraph != null)
-        {
-            this.nextgraph.exec(state);
-        }
-    }
+	/**
+	 * Runs this graph based on the given variables.
+	 * 
+	 * @param vars The runtime variables
+	 */
+	public void run(IVariableHolder vars)
+	{
+		RuntimeState state = new RuntimeState(vars);
+		exec(state);
+	}
 
-    public void chain(NodeGraph next)
-    {
-        this.nextgraph = next;
-    }
-    
-    public NodeGraph getNextGraph()
-    {
-        return this.nextgraph;
-    }
+    /**
+     * {@inheritDoc}
+     */
+	@Override
+	public void exec(RuntimeState state)
+	{
+		INode next = this.getNext();
+		while (next != null)
+		{
+			next.exec(state);
+			next = next.getNext();
+		}
+		if (this.nextgraph != null)
+		{
+			this.nextgraph.exec(state);
+		}
+	}
+
+	/**
+	 * Chains this graph into another graph
+	 * 
+	 * @param next The next graph
+	 */
+	public void chain(NodeGraph next)
+	{
+		this.nextgraph = next;
+	}
+
+	/**
+	 * Gets the next graph.
+	 * 
+	 * @return The graph
+	 */
+	public NodeGraph getNextGraph()
+	{
+		return this.nextgraph;
+	}
 
 }

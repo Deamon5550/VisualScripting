@@ -28,17 +28,24 @@ import org.junit.Before;
 import com.thevoxelbox.test.util.OutputHelper;
 import com.thevoxelbox.vsl.VariableScope;
 import com.thevoxelbox.vsl.api.IVariableHolder;
+import com.thevoxelbox.vsl.node.NodeGraph;
 
+/**
+ * A standard baseline for {@link NodeGraph} related tests.
+ */
 public class StandardTest
 {
-    protected IVariableHolder vars;
-    protected OutputHelper output;
 
+	protected IVariableHolder vars;
+	protected OutputHelper output;
 
-    @Before
-    public void setup()
-    {
-        vars = new VariableScope();
-        output = new OutputHelper();
-    }
+	/**
+	 * Sets up the test.
+	 */
+	@Before
+	public void setup()
+	{
+		vars = new VariableScope();
+		output = new OutputHelper();
+	}
 }
