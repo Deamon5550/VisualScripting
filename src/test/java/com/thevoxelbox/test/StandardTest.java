@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2014 The Voxel Plugineering Team
+ * Copyright (c) 2014 The VoxelBox
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -24,11 +24,13 @@
 package com.thevoxelbox.test;
 
 import org.junit.Before;
+import org.mockito.Mockito;
 
 import com.thevoxelbox.test.util.OutputHelper;
 import com.thevoxelbox.vsl.VariableScope;
 import com.thevoxelbox.vsl.api.IVariableHolder;
 import com.thevoxelbox.vsl.node.NodeGraph;
+import com.thevoxelbox.vsl.util.RuntimeState;
 
 /**
  * A standard baseline for {@link NodeGraph} related tests.
@@ -38,6 +40,7 @@ public class StandardTest
 
 	protected IVariableHolder vars;
 	protected OutputHelper output;
+	protected RuntimeState state;
 
 	/**
 	 * Sets up the test.
@@ -45,7 +48,9 @@ public class StandardTest
 	@Before
 	public void setup()
 	{
-		vars = new VariableScope();
-		output = new OutputHelper();
+		this.vars = new VariableScope();
+		this.output = new OutputHelper();
+		this.state = Mockito.mock(RuntimeState.class);
+		Mockito.when(this.state.getVars()).thenReturn(this.vars);
 	}
 }

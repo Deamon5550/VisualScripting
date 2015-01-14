@@ -21,43 +21,75 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.thevoxelbox.vsl.nodes.math.compare;
+package com.thevoxelbox.test;
 
+import static org.junit.Assert.assertEquals;
+
+import org.junit.Test;
+
+import com.thevoxelbox.vsl.nodes.StaticValueNode;
+import com.thevoxelbox.vsl.nodes.debug.PrintNode;
 import com.thevoxelbox.vsl.util.Provider;
-import com.thevoxelbox.vsl.util.RuntimeState;
 
 /**
- * Tests if a number is greater than or equal to a second number.
+ * A test for program debug nodes
  */
-public class NumberGreaterThanOrEqualsNode extends NumberCompareNode
+public class DebugNodeTest extends StandardTest
 {
 
 	/**
-	 * Creates a new {@link NumberEqualsNode}.
 	 * 
-	 * @param a The first number
-	 * @param b The second number
-	 * @param floating Whether to use floating point precision
 	 */
-    public NumberGreaterThanOrEqualsNode(Provider<? extends Number> a, Provider<? extends Number> b, boolean floating)
-    {
-        super(a, b, floating);
-    }
+	@Test
+	public void testStaticValueObject()
+	{
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void exec(RuntimeState state)
-    {
-        if(this.floating)
-        {
-            this.result.set(this.a.get(state).doubleValue() >= this.b.get(state).doubleValue(), state.getUUID());
-        }
-        else
-        {
-            this.result.set(this.a.get(state).longValue() >= this.b.get(state).longValue(), state.getUUID()); 
-        }
-    }
+		String s = "hello";
+
+		StaticValueNode<String> stat = new StaticValueNode<String>(s);
+
+		stat.exec(this.state);
+
+		assertEquals(s, stat.getValue().get(this.state));
+
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testStaticValueBoxedPrimative()
+	{
+
+		int i = 5;
+
+		StaticValueNode<Integer> stat = new StaticValueNode<Integer>(i);
+
+		stat.exec(this.state);
+
+		assertEquals((Integer) i, stat.getValue().get(this.state));
+
+	}
+
+	/**
+	 * 
+	 */
+	@Test
+	public void testPrint()
+	{
+
+		this.output.setup();
+
+		Provider<String> s = new Provider<String>("hello");
+
+		PrintNode print = new PrintNode(s);
+
+		print.exec(this.state);
+
+		this.output.check("hello");
+
+		this.output.reset();
+
+	}
 
 }

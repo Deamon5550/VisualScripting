@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2014 The Voxel Plugineering Team
+ * Copyright (c) 2014 The VoxelBox
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -37,7 +37,7 @@ public class AbsNode extends Node
     @Output
     private final Provider<Number> value;
     @Input
-    private final Provider<Number> a;
+    private final Provider<? extends Number> a;
     private final boolean floating;
 
     /**
@@ -46,7 +46,7 @@ public class AbsNode extends Node
      * @param a The input value
      * @param floating Whether to use floating point percision
      */
-    public AbsNode(Provider<Number> a, boolean floating)
+    public AbsNode(Provider<? extends Number> a, boolean floating)
     {
         this.a = a;
         this.value = new Provider<Number>(this);

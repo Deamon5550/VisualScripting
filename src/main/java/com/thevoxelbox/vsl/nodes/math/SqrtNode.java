@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2014 The Voxel Plugineering Team
+ * Copyright (c) 2014 The VoxelBox
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -37,14 +37,14 @@ public class SqrtNode extends Node
     @Output
     private final Provider<Number> value;
     @Input
-    private final Provider<Number> a;
+    private final Provider<? extends Number> a;
 
     /**
      * Creates a new {@link SqrtNode}.
      * 
      * @param a The number to square root
      */
-    public SqrtNode(Provider<Number> a)
+    public SqrtNode(Provider<? extends Number> a)
     {
         this.a = a;
         this.value = new Provider<Number>(this);

@@ -21,43 +21,51 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.thevoxelbox.vsl.nodes.math.compare;
+package com.thevoxelbox.test.util;
 
-import com.thevoxelbox.vsl.util.Provider;
+import com.thevoxelbox.vsl.node.Node;
 import com.thevoxelbox.vsl.util.RuntimeState;
 
 /**
- * Tests if a number is greater than or equal to a second number.
+ * A testing utility node to check that a node is run a specified number of times.
  */
-public class NumberGreaterThanOrEqualsNode extends NumberCompareNode
+public class CheckRunNode extends Node
 {
 
-	/**
-	 * Creates a new {@link NumberEqualsNode}.
-	 * 
-	 * @param a The first number
-	 * @param b The second number
-	 * @param floating Whether to use floating point precision
-	 */
-    public NumberGreaterThanOrEqualsNode(Provider<? extends Number> a, Provider<? extends Number> b, boolean floating)
-    {
-        super(a, b, floating);
-    }
+	int expected;
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void exec(RuntimeState state)
-    {
-        if(this.floating)
-        {
-            this.result.set(this.a.get(state).doubleValue() >= this.b.get(state).doubleValue(), state.getUUID());
-        }
-        else
-        {
-            this.result.set(this.a.get(state).longValue() >= this.b.get(state).longValue(), state.getUUID()); 
-        }
-    }
+	/**
+	 * Creates a new {@link CheckRunNode}.
+	 * 
+	 * @param e The expected number of runs
+	 */
+	public CheckRunNode(int e)
+	{
+		this.expected = e;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void exec(RuntimeState state)
+	{
+		expected--;
+		if (expected < 0)
+		{
+			throw new UnsupportedOperationException("Check node ran too many times");
+		}
+	}
+
+	/**
+	 * Validates that the node ran the expected number of times
+	 */
+	public void end()
+	{
+		if(expected > 0)
+		{
+			throw new UnsupportedOperationException("Check node ran too few times");
+		}
+	}
 
 }

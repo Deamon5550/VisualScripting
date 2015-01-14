@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2014 The Voxel Plugineering Team
+ * Copyright (c) 2014 The VoxelBox
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -39,7 +39,7 @@ public class MultiplicationNode extends NumberOperatorNode
 	 * @param b The second number
 	 * @param floating Whether to use floating point precision
 	 */
-    public MultiplicationNode(Provider<Number> a, Provider<Number> b, boolean floating)
+    public MultiplicationNode(Provider<? extends Number> a, Provider<? extends Number> b, boolean floating)
     {
         super(a, b, floating);
     }
