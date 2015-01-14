@@ -64,6 +64,10 @@ public class VariableScope implements IVariableScope, Serializable
         this.parent = parent;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void setCaseSensitive(boolean cs)
     {
         this.caseSensitive = cs;
@@ -163,6 +167,9 @@ public class VariableScope implements IVariableScope, Serializable
         return false;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     @SuppressWarnings("unchecked")
     public <T> Optional<T> get(String name, Class<T> type)
