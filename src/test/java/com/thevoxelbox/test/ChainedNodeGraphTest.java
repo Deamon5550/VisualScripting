@@ -31,6 +31,8 @@ import com.thevoxelbox.vsl.nodes.debug.PrintNode;
 import com.thevoxelbox.vsl.nodes.vars.ChainedInputNode;
 import com.thevoxelbox.vsl.nodes.vars.ChainedOutputNode;
 
+import static org.junit.Assert.assertEquals;
+
 /**
  * A test for two node graphs chained together. TODO cleanup
  */
@@ -65,6 +67,8 @@ public class ChainedNodeGraphTest extends StandardTest
         graph1.chain(graph2);
 
         graph1.run(this.vars);
+
+        assertEquals(graph2, graph1.getNextGraph());
 
         this.output.check("Hello World");
         this.output.reset();

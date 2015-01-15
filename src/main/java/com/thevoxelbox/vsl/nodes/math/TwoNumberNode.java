@@ -32,6 +32,7 @@ import com.thevoxelbox.vsl.util.Provider;
  */
 public abstract class TwoNumberNode extends Node
 {
+
     @Input
     protected final Provider<? extends Number> a;
     @Input

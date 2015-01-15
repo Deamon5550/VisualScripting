@@ -26,8 +26,11 @@ package com.thevoxelbox.vsl;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 import com.google.common.base.Optional;
+import com.google.common.collect.Sets;
+import com.thevoxelbox.vsl.api.IVariableHolder;
 import com.thevoxelbox.vsl.api.IVariableScope;
 
 /**
@@ -35,11 +38,12 @@ import com.thevoxelbox.vsl.api.IVariableScope;
  */
 public class VariableScope implements IVariableScope, Serializable
 {
+
     private static final long serialVersionUID = 9032180603411264823L;
     /**
      * The parent variable holder.
      */
-    private transient IVariableScope parent = null;
+    private transient IVariableHolder parent = null;
     /**
      * The variable map.
      */
@@ -59,7 +63,7 @@ public class VariableScope implements IVariableScope, Serializable
      * 
      * @param parent the parent
      */
-    public VariableScope(IVariableScope parent)
+    public VariableScope(IVariableHolder parent)
     {
         this.parent = parent;
     }
@@ -114,7 +118,7 @@ public class VariableScope implements IVariableScope, Serializable
      * {@inheritDoc}
      */
     @Override
-    public void setParent(IVariableScope scope)
+    public void setParent(IVariableHolder scope)
     {
         this.parent = scope;
     }
@@ -123,27 +127,38 @@ public class VariableScope implements IVariableScope, Serializable
      * {@inheritDoc}
      */
     @Override
-    public IVariableScope getParent()
+    public Optional<IVariableHolder> getParent()
     {
-        return this.parent;
+        return Optional.fromNullable(this.parent);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public Optional<IVariableScope> getHighestParent()
+    public Optional<IVariableHolder> getHighestParent()
     {
         if (this.parent == null)
         {
             Optional.absent();
         }
-        IVariableScope next = this.parent;
-        while (next.getParent() != null)
+        IVariableHolder next = this.parent;
+        if (next instanceof IVariableScope)
         {
-            next = next.getParent();
+            IVariableScope nextScope = (IVariableScope) next;
+            while (nextScope.getParent().isPresent())
+            {
+                next = nextScope.getParent().get();
+                if (next instanceof IVariableScope)
+                {
+                    nextScope = (IVariableScope) next;
+                } else
+                {
+                    break;
+                }
+            }
         }
-        return Optional.of(next);
+        return Optional.fromNullable(next);
     }
 
     /**
@@ -174,6 +189,10 @@ public class VariableScope implements IVariableScope, Serializable
     @SuppressWarnings("unchecked")
     public <T> Optional<T> get(String name, Class<T> type)
     {
+        if (type == null)
+        {
+            return (Optional<T>) get(name);
+        }
         if (name == null || name.isEmpty())
         {
             return Optional.absent();
@@ -190,6 +209,21 @@ public class VariableScope implements IVariableScope, Serializable
             return this.parent.get(name, type);
         }
         return Optional.absent();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Set<String> keyset()
+    {
+        Set<String> keyset = Sets.newHashSet();
+        keyset.addAll(this.vars.keySet());
+        if (this.parent != null)
+        {
+            keyset.addAll(this.parent.keyset());
+        }
+        return keyset;
     }
 
 }

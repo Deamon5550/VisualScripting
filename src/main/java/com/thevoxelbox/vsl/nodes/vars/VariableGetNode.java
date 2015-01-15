@@ -38,6 +38,7 @@ import com.thevoxelbox.vsl.util.RuntimeState;
 @NodeInfo("VariableGet")
 public class VariableGetNode<T> extends Node
 {
+
     @Input
     private final Provider<String> varName;
     @Output

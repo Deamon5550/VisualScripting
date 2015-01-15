@@ -29,6 +29,8 @@ import com.thevoxelbox.vsl.node.NodeGraph;
 import com.thevoxelbox.vsl.nodes.StaticValueNode;
 import com.thevoxelbox.vsl.nodes.debug.PrintNode;
 
+import static org.junit.Assert.assertEquals;
+
 /**
  * Basic {@link NodeGraph} tests.
  */
@@ -55,6 +57,13 @@ public class NodeGraphTest extends StandardTest
 
         this.output.check("Hello World");
         this.output.reset();
+    }
+
+    @Test
+    public void testName()
+    {
+        NodeGraph graph = new NodeGraph("Test Graph");
+        assertEquals("Test Graph", graph.getName());
     }
 
 }

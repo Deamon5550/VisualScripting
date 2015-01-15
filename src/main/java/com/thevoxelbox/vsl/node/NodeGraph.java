@@ -28,7 +28,8 @@ import com.thevoxelbox.vsl.api.IVariableHolder;
 import com.thevoxelbox.vsl.util.RuntimeState;
 
 /**
- * A node graph is a directed acyclic graph of connected nodes which when traversed will execute the program function. It is itself a node and may be
+ * A node graph is a directed acyclic graph of connected nodes which when
+ * traversed will execute the program function. It is itself a node and may be
  * used in another {@link NodeGraph} recursively.
  */
 public class NodeGraph extends Node

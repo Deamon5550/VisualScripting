@@ -60,6 +60,22 @@ public class NumberComparisonTest extends StandardTest
      * 
      */
     @Test
+    public void testEquals2()
+    {
+        Provider<Integer> a = new Provider<Integer>(5);
+        Provider<Integer> b = new Provider<Integer>(4);
+
+        NumberEqualsNode eq = new NumberEqualsNode(a, b, false);
+
+        eq.exec(this.state);
+
+        assertEquals(false, eq.getComparisonResult().get(this.state));
+    }
+
+    /**
+     * 
+     */
+    @Test
     public void testGreater()
     {
         Provider<Integer> a = new Provider<Integer>(6);
@@ -70,6 +86,22 @@ public class NumberComparisonTest extends StandardTest
         eq.exec(this.state);
 
         assertEquals(true, eq.getComparisonResult().get(this.state));
+    }
+
+    /**
+     * 
+     */
+    @Test
+    public void testGreater2()
+    {
+        Provider<Integer> a = new Provider<Integer>(6);
+        Provider<Integer> b = new Provider<Integer>(7);
+
+        NumberGreaterThanNode eq = new NumberGreaterThanNode(a, b, false);
+
+        eq.exec(this.state);
+
+        assertEquals(false, eq.getComparisonResult().get(this.state));
     }
 
     /**
@@ -108,6 +140,22 @@ public class NumberComparisonTest extends StandardTest
      * 
      */
     @Test
+    public void testGreaterEq3()
+    {
+        Provider<Integer> a = new Provider<Integer>(6);
+        Provider<Integer> b = new Provider<Integer>(7);
+
+        NumberGreaterThanOrEqualsNode eq = new NumberGreaterThanOrEqualsNode(a, b, false);
+
+        eq.exec(this.state);
+
+        assertEquals(false, eq.getComparisonResult().get(this.state));
+    }
+
+    /**
+     * 
+     */
+    @Test
     public void testLess()
     {
         Provider<Integer> a = new Provider<Integer>(4);
@@ -118,6 +166,22 @@ public class NumberComparisonTest extends StandardTest
         eq.exec(this.state);
 
         assertEquals(true, eq.getComparisonResult().get(this.state));
+    }
+
+    /**
+     * 
+     */
+    @Test
+    public void testLess2()
+    {
+        Provider<Integer> a = new Provider<Integer>(4);
+        Provider<Integer> b = new Provider<Integer>(3);
+
+        NumberLessThanNode eq = new NumberLessThanNode(a, b, false);
+
+        eq.exec(this.state);
+
+        assertEquals(false, eq.getComparisonResult().get(this.state));
     }
 
     /**
@@ -156,6 +220,22 @@ public class NumberComparisonTest extends StandardTest
      * 
      */
     @Test
+    public void testLessEq3()
+    {
+        Provider<Integer> a = new Provider<Integer>(4);
+        Provider<Integer> b = new Provider<Integer>(2);
+
+        NumberLessThanOrEqualsNode eq = new NumberLessThanOrEqualsNode(a, b, false);
+
+        eq.exec(this.state);
+
+        assertEquals(false, eq.getComparisonResult().get(this.state));
+    }
+
+    /**
+     * 
+     */
+    @Test
     public void testFloatEquals()
     {
         Provider<Double> a = new Provider<Double>(5.2);
@@ -172,6 +252,22 @@ public class NumberComparisonTest extends StandardTest
      * 
      */
     @Test
+    public void testFloatEquals2()
+    {
+        Provider<Double> a = new Provider<Double>(5.2);
+        Provider<Double> b = new Provider<Double>(5.3);
+
+        NumberEqualsNode eq = new NumberEqualsNode(a, b, true);
+
+        eq.exec(this.state);
+
+        assertEquals(false, eq.getComparisonResult().get(this.state));
+    }
+
+    /**
+     * 
+     */
+    @Test
     public void testFloatGreater()
     {
         Provider<Double> a = new Provider<Double>(6.4);
@@ -182,6 +278,22 @@ public class NumberComparisonTest extends StandardTest
         eq.exec(this.state);
 
         assertEquals(true, eq.getComparisonResult().get(this.state));
+    }
+
+    /**
+     * 
+     */
+    @Test
+    public void testFloatGreater2()
+    {
+        Provider<Double> a = new Provider<Double>(6.4);
+        Provider<Double> b = new Provider<Double>(7.5);
+
+        NumberGreaterThanNode eq = new NumberGreaterThanNode(a, b, true);
+
+        eq.exec(this.state);
+
+        assertEquals(false, eq.getComparisonResult().get(this.state));
     }
 
     /**
@@ -220,6 +332,22 @@ public class NumberComparisonTest extends StandardTest
      * 
      */
     @Test
+    public void testFloatGreaterEq3()
+    {
+        Provider<Double> a = new Provider<Double>(5.4);
+        Provider<Double> b = new Provider<Double>(5.5);
+
+        NumberGreaterThanOrEqualsNode eq = new NumberGreaterThanOrEqualsNode(a, b, true);
+
+        eq.exec(this.state);
+
+        assertEquals(false, eq.getComparisonResult().get(this.state));
+    }
+
+    /**
+     * 
+     */
+    @Test
     public void testFloatLess()
     {
         Provider<Double> a = new Provider<Double>(4.4);
@@ -230,6 +358,22 @@ public class NumberComparisonTest extends StandardTest
         eq.exec(this.state);
 
         assertEquals(true, eq.getComparisonResult().get(this.state));
+    }
+
+    /**
+     * 
+     */
+    @Test
+    public void testFloatLess2()
+    {
+        Provider<Double> a = new Provider<Double>(4.4);
+        Provider<Double> b = new Provider<Double>(4.2);
+
+        NumberLessThanNode eq = new NumberLessThanNode(a, b, true);
+
+        eq.exec(this.state);
+
+        assertEquals(false, eq.getComparisonResult().get(this.state));
     }
 
     /**
@@ -262,6 +406,22 @@ public class NumberComparisonTest extends StandardTest
         eq.exec(this.state);
 
         assertEquals(true, eq.getComparisonResult().get(this.state));
+    }
+
+    /**
+     * 
+     */
+    @Test
+    public void testFloatLessEq3()
+    {
+        Provider<Double> a = new Provider<Double>(4.4);
+        Provider<Double> b = new Provider<Double>(4.3);
+
+        NumberLessThanOrEqualsNode eq = new NumberLessThanOrEqualsNode(a, b, true);
+
+        eq.exec(this.state);
+
+        assertEquals(false, eq.getComparisonResult().get(this.state));
     }
 
 }

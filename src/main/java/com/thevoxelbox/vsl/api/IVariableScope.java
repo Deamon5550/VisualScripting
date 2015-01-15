@@ -30,25 +30,29 @@ import com.google.common.base.Optional;
  */
 public interface IVariableScope extends IVariableHolder
 {
+
     /**
      * Sets the parent {@link IVariableScope}.
      * 
      * @param scope the new parent, cannot be null
      */
-    void setParent(IVariableScope scope);
+    void setParent(IVariableHolder scope);
 
     /**
-     * Returns the parent of this VariableScope or null if this VariableScope has no parent.
+     * Returns the parent of this VariableScope or null if this VariableScope
+     * has no parent.
      * 
      * @return the parent, may be null
      */
-    IVariableScope getParent();
+    Optional<IVariableHolder> getParent();
 
     /**
-     * Returns the highest parent VariableScope. That is the farthest parent VariableScope by recursively calling {@link #getParent()} until a
-     * VariableScope with no parent is reached. Returns null if this VariableScope has no parent.
+     * Returns the highest parent VariableScope. That is the farthest parent
+     * VariableScope by recursively calling {@link #getParent()} until a
+     * VariableScope with no parent is reached. Returns null if this
+     * VariableScope has no parent.
      * 
      * @return the highest parent, may be null
      */
-    Optional<IVariableScope> getHighestParent();
+    Optional<IVariableHolder> getHighestParent();
 }

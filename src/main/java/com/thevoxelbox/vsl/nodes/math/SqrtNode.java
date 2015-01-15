@@ -36,6 +36,7 @@ import com.thevoxelbox.vsl.util.RuntimeState;
 @NodeInfo("Sqrt")
 public class SqrtNode extends Node
 {
+
     @Output
     private final Provider<Number> value;
     @Input

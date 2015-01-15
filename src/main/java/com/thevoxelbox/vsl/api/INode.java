@@ -26,7 +26,8 @@ package com.thevoxelbox.vsl.api;
 import com.thevoxelbox.vsl.util.RuntimeState;
 
 /**
- * Represents a node with a set of inputs and outputs which executes a single discrete function.
+ * Represents a node with a set of inputs and outputs which executes a single
+ * discrete function.
  */
 public interface INode
 {

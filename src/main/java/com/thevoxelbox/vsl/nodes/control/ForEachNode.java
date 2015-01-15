@@ -32,7 +32,8 @@ import com.thevoxelbox.vsl.util.Provider;
 import com.thevoxelbox.vsl.util.RuntimeState;
 
 /**
- * Loops over every value in the given array and calls another {@link INode} as the body.
+ * Loops over every value in the given array and calls another {@link INode} as
+ * the body.
  * 
  * @param <T> The array type
  */

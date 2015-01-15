@@ -30,7 +30,8 @@ import com.google.common.collect.Maps;
 import com.thevoxelbox.vsl.api.INode;
 
 /**
- * Tracks values for an input or output of a node and stores them with an associated UUID for a {@link RuntimeState}.
+ * Tracks values for an input or output of a node and stores them with an
+ * associated UUID for a {@link RuntimeState}.
  * 
  * @param <T> The value type
  */
@@ -43,7 +44,8 @@ public class Provider<T>
     private INode callback;
 
     /**
-     * Creates a new {@link Provider} which will perform a callback to the given node if the value is not set and a call to {@link #get(RuntimeState)}
+     * Creates a new {@link Provider} which will perform a callback to the given
+     * node if the value is not set and a call to {@link #get(RuntimeState)}
      * occurs.
      * 
      * @param n The node to call back to
@@ -69,8 +71,9 @@ public class Provider<T>
     }
 
     /**
-     * Gets the value for the given {@link RuntimeState} from this provider. I decided not to use optionals here in preference of the debugging
-     * utility of null pointers over checking an optional value.
+     * Gets the value for the given {@link RuntimeState} from this provider. I
+     * decided not to use optionals here in preference of the debugging utility
+     * of null pointers over checking an optional value.
      * 
      * @param state The runtime state
      * @return The value, or null

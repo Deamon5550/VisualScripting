@@ -29,6 +29,7 @@ import com.thevoxelbox.test.util.CheckRunNode;
 import com.thevoxelbox.test.util.StringArrayCheckNode;
 import com.thevoxelbox.vsl.nodes.StaticValueNode;
 import com.thevoxelbox.vsl.nodes.control.ForEachNode;
+import com.thevoxelbox.vsl.nodes.control.ForLoop;
 import com.thevoxelbox.vsl.nodes.control.IfStatement;
 import com.thevoxelbox.vsl.util.Provider;
 
@@ -86,6 +87,158 @@ public class ProgramFlowTest extends StandardTest
         ifs.setBody(check);
 
         ifs.exec(this.state);
+        check.end();
+    }
+
+    /**
+     * 
+     */
+    @Test
+    public void testFor1()
+    {
+        // Provider<Integer> init = new Provider<Integer>(0);
+        // Provider<Integer> target = new Provider<Integer>(2);
+        // Provider<Integer> increment = new Provider<Integer>(1);
+
+        ForLoop foor = new ForLoop(0, 2, 1);
+
+        CheckRunNode check = new CheckRunNode(2);
+        foor.setBody(check);
+
+        foor.exec(this.state);
+        check.end();
+    }
+
+    /**
+     * 
+     */
+    @Test
+    public void testFor2()
+    {
+        // Provider<Integer> init = new Provider<Integer>(0);
+        // Provider<Integer> target = new Provider<Integer>(2);
+        Provider<Integer> increment = new Provider<Integer>(1);
+
+        ForLoop foor = new ForLoop(0, 2, increment);
+
+        CheckRunNode check = new CheckRunNode(2);
+        foor.setBody(check);
+
+        foor.exec(this.state);
+        check.end();
+    }
+
+    /**
+     * 
+     */
+    @Test
+    public void testFor3()
+    {
+        // Provider<Integer> init = new Provider<Integer>(0);
+        Provider<Integer> target = new Provider<Integer>(2);
+        // Provider<Integer> increment = new Provider<Integer>(1);
+
+        ForLoop foor = new ForLoop(0, target, 1);
+
+        CheckRunNode check = new CheckRunNode(2);
+        foor.setBody(check);
+
+        foor.exec(this.state);
+        check.end();
+    }
+
+    /**
+     * 
+     */
+    @Test
+    public void testFor4()
+    {
+        // Provider<Integer> init = new Provider<Integer>(0);
+        Provider<Integer> target = new Provider<Integer>(2);
+        Provider<Integer> increment = new Provider<Integer>(1);
+
+        ForLoop foor = new ForLoop(0, target, increment);
+
+        CheckRunNode check = new CheckRunNode(2);
+        foor.setBody(check);
+
+        foor.exec(this.state);
+        check.end();
+    }
+
+    /**
+     * 
+     */
+    @Test
+    public void testFor5()
+    {
+        Provider<Integer> init = new Provider<Integer>(0);
+        // Provider<Integer> target = new Provider<Integer>(2);
+        // Provider<Integer> increment = new Provider<Integer>(1);
+
+        ForLoop foor = new ForLoop(init, 2, 1);
+
+        CheckRunNode check = new CheckRunNode(2);
+        foor.setBody(check);
+
+        foor.exec(this.state);
+        check.end();
+    }
+
+    /**
+     * 
+     */
+    @Test
+    public void testFor6()
+    {
+        Provider<Integer> init = new Provider<Integer>(0);
+        // Provider<Integer> target = new Provider<Integer>(2);
+        Provider<Integer> increment = new Provider<Integer>(1);
+
+        ForLoop foor = new ForLoop(init, 2, increment);
+
+        CheckRunNode check = new CheckRunNode(2);
+        foor.setBody(check);
+
+        foor.exec(this.state);
+        check.end();
+    }
+
+    /**
+     * 
+     */
+    @Test
+    public void testFor7()
+    {
+        Provider<Integer> init = new Provider<Integer>(0);
+        Provider<Integer> target = new Provider<Integer>(2);
+        // Provider<Integer> increment = new Provider<Integer>(1);
+
+        ForLoop foor = new ForLoop(init, target, 1);
+
+        CheckRunNode check = new CheckRunNode(2);
+        foor.setBody(check);
+
+        foor.exec(this.state);
+        check.end();
+    }
+
+    /**
+     * 
+     */
+    @Test
+    public void testFor8()
+    {
+        Provider<Integer> init = new Provider<Integer>(0);
+        Provider<Integer> target = new Provider<Integer>(2);
+        Provider<Integer> increment = new Provider<Integer>(1);
+
+        ForLoop foor = new ForLoop(init, target, increment);
+
+        CheckRunNode check = new CheckRunNode(2);
+        foor.setBody(check);
+
+        foor.exec(this.state);
         check.end();
     }
 

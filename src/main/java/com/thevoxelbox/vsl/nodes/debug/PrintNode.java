@@ -35,6 +35,7 @@ import com.thevoxelbox.vsl.util.RuntimeState;
 @NodeInfo("Print")
 public class PrintNode extends Node
 {
+
     @Input
     private final Provider<?> msg;
 

@@ -29,7 +29,8 @@ import com.thevoxelbox.vsl.api.IVariableHolder;
 import com.thevoxelbox.vsl.node.NodeGraph;
 
 /**
- * A container for the values associated with a single runtime instance of a {@link NodeGraph}.
+ * A container for the values associated with a single runtime instance of a
+ * {@link NodeGraph}.
  */
 public class RuntimeState
 {

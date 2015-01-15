@@ -36,6 +36,7 @@ import com.thevoxelbox.vsl.util.RuntimeState;
 @NodeInfo("Abs")
 public class AbsNode extends Node
 {
+
     @Output
     private final Provider<Number> value;
     @Input
