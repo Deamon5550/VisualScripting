@@ -32,40 +32,40 @@ import com.thevoxelbox.vsl.util.RuntimeState;
 public class CheckRunNode extends Node
 {
 
-	int expected;
+    int expected;
 
-	/**
-	 * Creates a new {@link CheckRunNode}.
-	 * 
-	 * @param e The expected number of runs
-	 */
-	public CheckRunNode(int e)
-	{
-		this.expected = e;
-	}
+    /**
+     * Creates a new {@link CheckRunNode}.
+     * 
+     * @param e The expected number of runs
+     */
+    public CheckRunNode(int e)
+    {
+        this.expected = e;
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void exec(RuntimeState state)
-	{
-		expected--;
-		if (expected < 0)
-		{
-			throw new UnsupportedOperationException("Check node ran too many times");
-		}
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void exec(RuntimeState state)
+    {
+        this.expected--;
+        if (this.expected < 0)
+        {
+            throw new UnsupportedOperationException("Check node ran too many times");
+        }
+    }
 
-	/**
-	 * Validates that the node ran the expected number of times
-	 */
-	public void end()
-	{
-		if(expected > 0)
-		{
-			throw new UnsupportedOperationException("Check node ran too few times");
-		}
-	}
+    /**
+     * Validates that the node ran the expected number of times
+     */
+    public void end()
+    {
+        if (this.expected > 0)
+        {
+            throw new UnsupportedOperationException("Check node ran too few times");
+        }
+    }
 
 }

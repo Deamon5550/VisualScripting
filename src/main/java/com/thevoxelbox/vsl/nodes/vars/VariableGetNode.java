@@ -24,6 +24,7 @@
 package com.thevoxelbox.vsl.nodes.vars;
 
 import com.thevoxelbox.vsl.node.Node;
+import com.thevoxelbox.vsl.node.NodeInfo;
 import com.thevoxelbox.vsl.util.Input;
 import com.thevoxelbox.vsl.util.Output;
 import com.thevoxelbox.vsl.util.Provider;
@@ -34,6 +35,7 @@ import com.thevoxelbox.vsl.util.RuntimeState;
  * 
  * @param <T> The value type
  */
+@NodeInfo("VariableGet")
 public class VariableGetNode<T> extends Node
 {
     @Input

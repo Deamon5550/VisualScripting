@@ -42,77 +42,77 @@ import com.thevoxelbox.vsl.nodes.vars.VariableSetNode;
 public class VariableScopeTest extends StandardTest
 {
 
-	private VariableScope parent;
-	private VariableScope child;
-	private VariableScope child2;
+    private VariableScope parent;
+    private VariableScope child;
+    private VariableScope child2;
 
-	/**
+    /**
      * 
      */
-	@Before
-	public void setup()
-	{
-		parent = new VariableScope();
-		child = new VariableScope(parent);
-		child2 = new VariableScope(child);
+    @Before
+    public void setup()
+    {
+        this.parent = new VariableScope();
+        this.child = new VariableScope(this.parent);
+        this.child2 = new VariableScope(this.child);
 
-		parent.set("a", "a");
-		parent.set("b", "b");
+        this.parent.set("a", "a");
+        this.parent.set("b", "b");
 
-		child.set("b", "c");
-		output = new OutputHelper();
-	}
+        this.child.set("b", "c");
+        this.output = new OutputHelper();
+    }
 
-	/**
+    /**
      * 
      */
-	@Test
-	public void testInheritence()
-	{
-		assertEquals("a", child.get("a").get());
-		assertEquals("c", child.get("b").get());
-	}
+    @Test
+    public void testInheritence()
+    {
+        assertEquals("a", this.child.get("a").get());
+        assertEquals("c", this.child.get("b").get());
+    }
 
-	/**
+    /**
      * 
      */
-	@Test
-	public void testParenthood()
-	{
-		assertEquals(child, child2.getParent());
-		assertEquals(parent, child2.getHighestParent().get());
-	}
+    @Test
+    public void testParenthood()
+    {
+        assertEquals(this.child, this.child2.getParent());
+        assertEquals(this.parent, this.child2.getHighestParent().get());
+    }
 
-	/**
+    /**
      * 
      */
-	@Test
-	public void testVariableNodes()
-	{
-		output.setup();
+    @Test
+    public void testVariableNodes()
+    {
+        this.output.setup();
 
-		StaticValueNode<String> value = new StaticValueNode<String>("Hello World");
-		VariableSetNode<String> set = new VariableSetNode<String>("name", value.getValue());
-		VariableGetNode<String> get = new VariableGetNode<String>("name");
-		PrintNode print = new PrintNode(get.getValue());
-		set.setNext(print);
+        StaticValueNode<String> value = new StaticValueNode<String>("Hello World");
+        VariableSetNode<String> set = new VariableSetNode<String>("name", value.getValue());
+        VariableGetNode<String> get = new VariableGetNode<String>("name");
+        PrintNode print = new PrintNode(get.getValue());
+        set.setNext(print);
 
-		NodeGraph graph = new NodeGraph("Test Graph");
-		graph.setNext(set);
-		graph.run(child);
+        NodeGraph graph = new NodeGraph("Test Graph");
+        graph.setNext(set);
+        graph.run(this.child);
 
-		output.check("Hello World");
-		output.reset();
-	}
+        this.output.check("Hello World");
+        this.output.reset();
+    }
 
-	/**
+    /**
      * 
      */
-	@Test
-	public void testCaseSensitivity()
-	{
-		parent.setCaseSensitive(false);
-		parent.set("aString", "Hello");
-		assertEquals("Hello", parent.get("astring").get());
-	}
+    @Test
+    public void testCaseSensitivity()
+    {
+        this.parent.setCaseSensitive(false);
+        this.parent.set("aString", "Hello");
+        assertEquals("Hello", this.parent.get("astring").get());
+    }
 }

@@ -30,76 +30,73 @@ import com.google.common.collect.Maps;
 import com.thevoxelbox.vsl.api.INode;
 
 /**
- * Tracks values for an input or output of a node and stores them with an
- * associated UUID for a {@link RuntimeState}.
+ * Tracks values for an input or output of a node and stores them with an associated UUID for a {@link RuntimeState}.
  * 
  * @param <T> The value type
  */
 public class Provider<T>
 {
 
-	private final Map<UUID, T> values;
-	private final T value;
-	private final boolean isStatic;
-	private INode callback;
+    private final Map<UUID, T> values;
+    private final T value;
+    private final boolean isStatic;
+    private INode callback;
 
-	/**
-	 * Creates a new {@link Provider} which will perform a callback to the given
-	 * node if the value is not set and a call to {@link #get(RuntimeState)}
-	 * occurs.
-	 * 
-	 * @param n The node to call back to
-	 */
-	public Provider(INode n)
-	{
-		this.callback = n;
-		this.values = Maps.newHashMap();
-		isStatic = false;
-		this.value = null;
-	}
+    /**
+     * Creates a new {@link Provider} which will perform a callback to the given node if the value is not set and a call to {@link #get(RuntimeState)}
+     * occurs.
+     * 
+     * @param n The node to call back to
+     */
+    public Provider(INode n)
+    {
+        this.callback = n;
+        this.values = Maps.newHashMap();
+        this.isStatic = false;
+        this.value = null;
+    }
 
-	/**
-	 * Creates a new {@link Provider} with the given static value.
-	 * 
-	 * @param value The static value
-	 */
-	public Provider(T value)
-	{
-		this.value = value;
-		isStatic = true;
-		this.values = null;
-	}
+    /**
+     * Creates a new {@link Provider} with the given static value.
+     * 
+     * @param value The static value
+     */
+    public Provider(T value)
+    {
+        this.value = value;
+        this.isStatic = true;
+        this.values = null;
+    }
 
-	/**
-	 * Gets the value for the given {@link RuntimeState} from this provider. I
-	 * decided not to use optionals here in preference of the debugging utility
-	 * of null pointers over checking an optional value.
-	 * 
-	 * @param state The runtime state
-	 * @return The value, or null
-	 */
-	public T get(RuntimeState state)
-	{
-		if (isStatic)
-		{
-			return this.value;
-		}
-		if (!this.values.containsKey(state.getUUID()))
-		{
-			this.callback.exec(state);
-		}
-		return this.values.get(state.getUUID());
-	}
+    /**
+     * Gets the value for the given {@link RuntimeState} from this provider. I decided not to use optionals here in preference of the debugging
+     * utility of null pointers over checking an optional value.
+     * 
+     * @param state The runtime state
+     * @return The value, or null
+     */
+    public T get(RuntimeState state)
+    {
+        if (this.isStatic)
+        {
+            return this.value;
+        }
+        if (!this.values.containsKey(state.getUUID()))
+        {
+            this.callback.exec(state);
+        }
+        return this.values.get(state.getUUID());
+    }
 
-	/**
-	 * Sets the value for the given {@link UUID}.
-	 * 
-	 * @param newValue The new value
-	 * @param uuid The UUID
-	 */
-	public void set(T newValue, UUID uuid)
-	{
-		this.values.put(uuid, newValue);
-	}
+    /**
+     * Sets the value for the given {@link UUID}.
+     * 
+     * @param newValue The new value
+     * @param uuid The UUID
+     */
+    public void set(T newValue, UUID uuid)
+    {
+        this.values.put(uuid, newValue);
+    }
 
 }

@@ -31,11 +31,11 @@ import com.thevoxelbox.vsl.util.RuntimeState;
 public interface INode
 {
 
-	/**
-	 * Executes this node's function based on the runtime state and its inputs.
-	 * 
-	 * @param state The runtime state
-	 */
+    /**
+     * Executes this node's function based on the runtime state and its inputs.
+     * 
+     * @param state The runtime state
+     */
     void exec(RuntimeState state);
 
     /**

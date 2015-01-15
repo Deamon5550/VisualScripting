@@ -24,6 +24,7 @@
 package com.thevoxelbox.vsl.nodes.vars;
 
 import com.thevoxelbox.vsl.node.Node;
+import com.thevoxelbox.vsl.node.NodeInfo;
 import com.thevoxelbox.vsl.util.Input;
 import com.thevoxelbox.vsl.util.Provider;
 import com.thevoxelbox.vsl.util.RuntimeState;
@@ -33,6 +34,7 @@ import com.thevoxelbox.vsl.util.RuntimeState;
  * 
  * @param <T> The value type
  */
+@NodeInfo("VariableSet")
 public class VariableSetNode<T> extends Node
 {
 

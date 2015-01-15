@@ -29,44 +29,43 @@ import com.thevoxelbox.vsl.api.IVariableHolder;
 import com.thevoxelbox.vsl.node.NodeGraph;
 
 /**
- * A container for the values associated with a single runtime instance of a
- * {@link NodeGraph}.
+ * A container for the values associated with a single runtime instance of a {@link NodeGraph}.
  */
 public class RuntimeState
 {
 
-	private final UUID uuid;
-	private final IVariableHolder vars;
+    private final UUID uuid;
+    private final IVariableHolder vars;
 
-	/**
-	 * Creates a new {@link RuntimeState}.
-	 * 
-	 * @param vars
-	 */
-	public RuntimeState(IVariableHolder vars)
-	{
-		this.vars = vars;
-		this.uuid = UUID.randomUUID();
-	}
+    /**
+     * Creates a new {@link RuntimeState}.
+     * 
+     * @param vars
+     */
+    public RuntimeState(IVariableHolder vars)
+    {
+        this.vars = vars;
+        this.uuid = UUID.randomUUID();
+    }
 
-	/**
-	 * Gets the {@link UUID} of this runtime instance.
-	 * 
-	 * @return The UUID
-	 */
-	public UUID getUUID()
-	{
-		return this.uuid;
-	}
+    /**
+     * Gets the {@link UUID} of this runtime instance.
+     * 
+     * @return The UUID
+     */
+    public UUID getUUID()
+    {
+        return this.uuid;
+    }
 
-	/**
-	 * Gets the runtime variable holder for this runtime instance.
-	 * 
-	 * @return The variables
-	 */
-	public IVariableHolder getVars()
-	{
-		return this.vars;
-	}
+    /**
+     * Gets the runtime variable holder for this runtime instance.
+     * 
+     * @return The variables
+     */
+    public IVariableHolder getVars()
+    {
+        return this.vars;
+    }
 
 }

@@ -35,100 +35,100 @@ import com.thevoxelbox.vsl.util.Provider;
 public class NodeTestUtilsTest extends StandardTest
 {
 
-	/**
-	 * 
-	 */
-	@Test
-	public void testStringCheckArrayNode()
-	{
+    /**
+     * 
+     */
+    @Test
+    public void testStringCheckArrayNode()
+    {
 
-		Provider<String> string = new Provider<String>("hello");
+        Provider<String> string = new Provider<String>("hello");
 
-		StringArrayCheckNode check = new StringArrayCheckNode(string, "hello");
+        StringArrayCheckNode check = new StringArrayCheckNode(string, "hello");
 
-		check.exec(this.state);
-		check.end();
-	}
+        check.exec(this.state);
+        check.end();
+    }
 
-	/**
-	 * 
-	 */
-	@Test(expected = UnsupportedOperationException.class)
-	public void testStringCheckArrayNodeTooFew()
-	{
+    /**
+     * 
+     */
+    @Test(expected = UnsupportedOperationException.class)
+    public void testStringCheckArrayNodeTooFew()
+    {
 
-		Provider<String> string = new Provider<String>("hello");
+        Provider<String> string = new Provider<String>("hello");
 
-		StringArrayCheckNode check = new StringArrayCheckNode(string, "hello", "world");
+        StringArrayCheckNode check = new StringArrayCheckNode(string, "hello", "world");
 
-		check.exec(this.state);
-		check.end();
-	}
+        check.exec(this.state);
+        check.end();
+    }
 
-	/**
-	 * 
-	 */
-	@Test(expected = ArrayIndexOutOfBoundsException.class)
-	public void testStringCheckArrayNodeTooMany()
-	{
+    /**
+     * 
+     */
+    @Test(expected = ArrayIndexOutOfBoundsException.class)
+    public void testStringCheckArrayNodeTooMany()
+    {
 
-		Provider<String> string = new Provider<String>("hello");
+        Provider<String> string = new Provider<String>("hello");
 
-		StringArrayCheckNode check = new StringArrayCheckNode(string, "hello");
+        StringArrayCheckNode check = new StringArrayCheckNode(string, "hello");
 
-		check.exec(this.state);
-		check.exec(this.state);
-		check.end();
-	}
+        check.exec(this.state);
+        check.exec(this.state);
+        check.end();
+    }
 
-	/**
-	 * 
-	 */
-	@Test(expected = IllegalArgumentException.class)
-	public void testStringCheckArrayNodeInvalid()
-	{
+    /**
+     * 
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void testStringCheckArrayNodeInvalid()
+    {
 
-		Provider<String> string = new Provider<String>("world");
+        Provider<String> string = new Provider<String>("world");
 
-		StringArrayCheckNode check = new StringArrayCheckNode(string, "hello");
+        StringArrayCheckNode check = new StringArrayCheckNode(string, "hello");
 
-		check.exec(this.state);
-		check.end();
-	}
+        check.exec(this.state);
+        check.end();
+    }
 
-	/**
-	 * Tests the expected behavior of a {@link CheckRunNode}.
-	 */
-	@Test
-	public void testCheckRunNode()
-	{
-		CheckRunNode check = new CheckRunNode(3);
-		check.exec(this.state);
-		check.exec(this.state);
-		check.exec(this.state);
-		check.end();
-	}
+    /**
+     * Tests the expected behavior of a {@link CheckRunNode}.
+     */
+    @Test
+    public void testCheckRunNode()
+    {
+        CheckRunNode check = new CheckRunNode(3);
+        check.exec(this.state);
+        check.exec(this.state);
+        check.exec(this.state);
+        check.end();
+    }
 
-	/**
-	 * Tests the expected behavior of a {@link CheckRunNode}.
-	 */
-	@Test(expected = UnsupportedOperationException.class)
-	public void testCheckRunNodeTooFew()
-	{
-		CheckRunNode check = new CheckRunNode(1);
-		check.end();
-	}
+    /**
+     * Tests the expected behavior of a {@link CheckRunNode}.
+     */
+    @Test(expected = UnsupportedOperationException.class)
+    public void testCheckRunNodeTooFew()
+    {
+        CheckRunNode check = new CheckRunNode(1);
+        check.end();
+    }
 
-	/**
-	 * Tests the expected behavior of a {@link CheckRunNode}.
-	 */
-	@Test(expected = UnsupportedOperationException.class)
-	public void testCheckRunNodeTooMany()
-	{
-		CheckRunNode check = new CheckRunNode(1);
-		check.exec(this.state);
-		check.exec(this.state);
-		check.exec(this.state);
-		check.end();
-	}
+    /**
+     * Tests the expected behavior of a {@link CheckRunNode}.
+     */
+    @Test(expected = UnsupportedOperationException.class)
+    public void testCheckRunNodeTooMany()
+    {
+        CheckRunNode check = new CheckRunNode(1);
+        check.exec(this.state);
+        check.exec(this.state);
+        check.exec(this.state);
+        check.end();
+    }
 }

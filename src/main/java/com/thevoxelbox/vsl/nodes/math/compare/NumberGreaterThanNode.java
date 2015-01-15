@@ -23,22 +23,24 @@
  */
 package com.thevoxelbox.vsl.nodes.math.compare;
 
+import com.thevoxelbox.vsl.node.NodeInfo;
 import com.thevoxelbox.vsl.util.Provider;
 import com.thevoxelbox.vsl.util.RuntimeState;
 
 /**
  * Tests if a number is greater than a second number.
  */
+@NodeInfo("GreaterThan")
 public class NumberGreaterThanNode extends NumberCompareNode
 {
 
-	/**
-	 * Creates a new {@link NumberGreaterThanNode}.
-	 * 
-	 * @param a The first number
-	 * @param b The second number
-	 * @param floating Whether to use floating point precision
-	 */
+    /**
+     * Creates a new {@link NumberGreaterThanNode}.
+     * 
+     * @param a The first number
+     * @param b The second number
+     * @param floating Whether to use floating point precision
+     */
     public NumberGreaterThanNode(Provider<? extends Number> a, Provider<? extends Number> b, boolean floating)
     {
         super(a, b, floating);
@@ -50,13 +52,12 @@ public class NumberGreaterThanNode extends NumberCompareNode
     @Override
     public void exec(RuntimeState state)
     {
-        if(this.floating)
+        if (this.floating)
         {
             this.result.set(this.a.get(state).doubleValue() > this.b.get(state).doubleValue(), state.getUUID());
-        }
-        else
+        } else
         {
-            this.result.set(this.a.get(state).longValue() > this.b.get(state).longValue(), state.getUUID()); 
+            this.result.set(this.a.get(state).longValue() > this.b.get(state).longValue(), state.getUUID());
         }
     }
 

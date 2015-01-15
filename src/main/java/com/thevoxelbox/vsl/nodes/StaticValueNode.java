@@ -24,6 +24,7 @@
 package com.thevoxelbox.vsl.nodes;
 
 import com.thevoxelbox.vsl.node.Node;
+import com.thevoxelbox.vsl.node.NodeInfo;
 import com.thevoxelbox.vsl.util.Output;
 import com.thevoxelbox.vsl.util.Provider;
 import com.thevoxelbox.vsl.util.RuntimeState;
@@ -33,6 +34,7 @@ import com.thevoxelbox.vsl.util.RuntimeState;
  * 
  * @param <T> The value type
  */
+@NodeInfo("StaticValue")
 public class StaticValueNode<T> extends Node
 {
 

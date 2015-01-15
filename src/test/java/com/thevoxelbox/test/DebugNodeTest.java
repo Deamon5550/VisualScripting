@@ -37,59 +37,59 @@ import com.thevoxelbox.vsl.util.Provider;
 public class DebugNodeTest extends StandardTest
 {
 
-	/**
-	 * 
-	 */
-	@Test
-	public void testStaticValueObject()
-	{
+    /**
+     * 
+     */
+    @Test
+    public void testStaticValueObject()
+    {
 
-		String s = "hello";
+        String s = "hello";
 
-		StaticValueNode<String> stat = new StaticValueNode<String>(s);
+        StaticValueNode<String> stat = new StaticValueNode<String>(s);
 
-		stat.exec(this.state);
+        stat.exec(this.state);
 
-		assertEquals(s, stat.getValue().get(this.state));
+        assertEquals(s, stat.getValue().get(this.state));
 
-	}
+    }
 
-	/**
-	 * 
-	 */
-	@Test
-	public void testStaticValueBoxedPrimative()
-	{
+    /**
+     * 
+     */
+    @Test
+    public void testStaticValueBoxedPrimative()
+    {
 
-		int i = 5;
+        int i = 5;
 
-		StaticValueNode<Integer> stat = new StaticValueNode<Integer>(i);
+        StaticValueNode<Integer> stat = new StaticValueNode<Integer>(i);
 
-		stat.exec(this.state);
+        stat.exec(this.state);
 
-		assertEquals((Integer) i, stat.getValue().get(this.state));
+        assertEquals((Integer) i, stat.getValue().get(this.state));
 
-	}
+    }
 
-	/**
-	 * 
-	 */
-	@Test
-	public void testPrint()
-	{
+    /**
+     * 
+     */
+    @Test
+    public void testPrint()
+    {
 
-		this.output.setup();
+        this.output.setup();
 
-		Provider<String> s = new Provider<String>("hello");
+        Provider<String> s = new Provider<String>("hello");
 
-		PrintNode print = new PrintNode(s);
+        PrintNode print = new PrintNode(s);
 
-		print.exec(this.state);
+        print.exec(this.state);
 
-		this.output.check("hello");
+        this.output.check("hello");
 
-		this.output.reset();
+        this.output.reset();
 
-	}
+    }
 
 }

@@ -40,229 +40,228 @@ import com.thevoxelbox.vsl.util.Provider;
 public class NumberComparisonTest extends StandardTest
 {
 
+    /**
+     * 
+     */
+    @Test
+    public void testEquals()
+    {
+        Provider<Integer> a = new Provider<Integer>(5);
+        Provider<Integer> b = new Provider<Integer>(5);
 
-	/**
-	 * 
-	 */
-	@Test
-	public void testEquals()
-	{
-		Provider<Integer> a = new Provider<Integer>(5);
-		Provider<Integer> b = new Provider<Integer>(5);
-		
-		NumberEqualsNode eq = new NumberEqualsNode(a, b, false);
-		
-		eq.exec(this.state);
-		
-		assertEquals(true, eq.getComparisonResult().get(this.state));
-	}
+        NumberEqualsNode eq = new NumberEqualsNode(a, b, false);
 
-	/**
-	 * 
-	 */
-	@Test
-	public void testGreater()
-	{
-		Provider<Integer> a = new Provider<Integer>(6);
-		Provider<Integer> b = new Provider<Integer>(5);
-		
-		NumberGreaterThanNode eq = new NumberGreaterThanNode(a, b, false);
-		
-		eq.exec(this.state);
-		
-		assertEquals(true, eq.getComparisonResult().get(this.state));
-	}
+        eq.exec(this.state);
 
-	/**
-	 * 
-	 */
-	@Test
-	public void testGreaterEq()
-	{
-		Provider<Integer> a = new Provider<Integer>(6);
-		Provider<Integer> b = new Provider<Integer>(5);
-		
-		NumberGreaterThanOrEqualsNode eq = new NumberGreaterThanOrEqualsNode(a, b, false);
-		
-		eq.exec(this.state);
-		
-		assertEquals(true, eq.getComparisonResult().get(this.state));
-	}
+        assertEquals(true, eq.getComparisonResult().get(this.state));
+    }
 
-	/**
-	 * 
-	 */
-	@Test
-	public void testGreaterEq2()
-	{
-		Provider<Integer> a = new Provider<Integer>(5);
-		Provider<Integer> b = new Provider<Integer>(5);
-		
-		NumberGreaterThanOrEqualsNode eq = new NumberGreaterThanOrEqualsNode(a, b, false);
-		
-		eq.exec(this.state);
-		
-		assertEquals(true, eq.getComparisonResult().get(this.state));
-	}
+    /**
+     * 
+     */
+    @Test
+    public void testGreater()
+    {
+        Provider<Integer> a = new Provider<Integer>(6);
+        Provider<Integer> b = new Provider<Integer>(5);
 
-	/**
-	 * 
-	 */
-	@Test
-	public void testLess()
-	{
-		Provider<Integer> a = new Provider<Integer>(4);
-		Provider<Integer> b = new Provider<Integer>(5);
-		
-		NumberLessThanNode eq = new NumberLessThanNode(a, b, false);
-		
-		eq.exec(this.state);
-		
-		assertEquals(true, eq.getComparisonResult().get(this.state));
-	}
+        NumberGreaterThanNode eq = new NumberGreaterThanNode(a, b, false);
 
-	/**
-	 * 
-	 */
-	@Test
-	public void testLessEq()
-	{
-		Provider<Integer> a = new Provider<Integer>(5);
-		Provider<Integer> b = new Provider<Integer>(5);
-		
-		NumberLessThanOrEqualsNode eq = new NumberLessThanOrEqualsNode(a, b, false);
-		
-		eq.exec(this.state);
-		
-		assertEquals(true, eq.getComparisonResult().get(this.state));
-	}
+        eq.exec(this.state);
 
-	/**
-	 * 
-	 */
-	@Test
-	public void testLessEq2()
-	{
-		Provider<Integer> a = new Provider<Integer>(4);
-		Provider<Integer> b = new Provider<Integer>(5);
-		
-		NumberLessThanOrEqualsNode eq = new NumberLessThanOrEqualsNode(a, b, false);
-		
-		eq.exec(this.state);
-		
-		assertEquals(true, eq.getComparisonResult().get(this.state));
-	}
+        assertEquals(true, eq.getComparisonResult().get(this.state));
+    }
 
-	/**
-	 * 
-	 */
-	@Test
-	public void testFloatEquals()
-	{
-		Provider<Double> a = new Provider<Double>(5.2);
-		Provider<Double> b = new Provider<Double>(5.2);
-		
-		NumberEqualsNode eq = new NumberEqualsNode(a, b, true);
-		
-		eq.exec(this.state);
-		
-		assertEquals(true, eq.getComparisonResult().get(this.state));
-	}
+    /**
+     * 
+     */
+    @Test
+    public void testGreaterEq()
+    {
+        Provider<Integer> a = new Provider<Integer>(6);
+        Provider<Integer> b = new Provider<Integer>(5);
 
-	/**
-	 * 
-	 */
-	@Test
-	public void testFloatGreater()
-	{
-		Provider<Double> a = new Provider<Double>(6.4);
-		Provider<Double> b = new Provider<Double>(5.4);
-		
-		NumberGreaterThanNode eq = new NumberGreaterThanNode(a, b, true);
-		
-		eq.exec(this.state);
-		
-		assertEquals(true, eq.getComparisonResult().get(this.state));
-	}
+        NumberGreaterThanOrEqualsNode eq = new NumberGreaterThanOrEqualsNode(a, b, false);
 
-	/**
-	 * 
-	 */
-	@Test
-	public void testFloatGreaterEq()
-	{
-		Provider<Double> a = new Provider<Double>(6.4);
-		Provider<Double> b = new Provider<Double>(5.4);
-		
-		NumberGreaterThanOrEqualsNode eq = new NumberGreaterThanOrEqualsNode(a, b, true);
-		
-		eq.exec(this.state);
-		
-		assertEquals(true, eq.getComparisonResult().get(this.state));
-	}
+        eq.exec(this.state);
 
-	/**
-	 * 
-	 */
-	@Test
-	public void testFloatGreaterEq2()
-	{
-		Provider<Double> a = new Provider<Double>(5.4);
-		Provider<Double> b = new Provider<Double>(5.4);
-		
-		NumberGreaterThanOrEqualsNode eq = new NumberGreaterThanOrEqualsNode(a, b, true);
-		
-		eq.exec(this.state);
-		
-		assertEquals(true, eq.getComparisonResult().get(this.state));
-	}
+        assertEquals(true, eq.getComparisonResult().get(this.state));
+    }
 
-	/**
-	 * 
-	 */
-	@Test
-	public void testFloatLess()
-	{
-		Provider<Double> a = new Provider<Double>(4.4);
-		Provider<Double> b = new Provider<Double>(5.4);
-		
-		NumberLessThanNode eq = new NumberLessThanNode(a, b, true);
-		
-		eq.exec(this.state);
-		
-		assertEquals(true, eq.getComparisonResult().get(this.state));
-	}
+    /**
+     * 
+     */
+    @Test
+    public void testGreaterEq2()
+    {
+        Provider<Integer> a = new Provider<Integer>(5);
+        Provider<Integer> b = new Provider<Integer>(5);
 
-	/**
-	 * 
-	 */
-	@Test
-	public void testFloatLessEq()
-	{
-		Provider<Double> a = new Provider<Double>(5.4);
-		Provider<Double> b = new Provider<Double>(5.4);
-		
-		NumberLessThanOrEqualsNode eq = new NumberLessThanOrEqualsNode(a, b, true);
-		
-		eq.exec(this.state);
-		
-		assertEquals(true, eq.getComparisonResult().get(this.state));
-	}
+        NumberGreaterThanOrEqualsNode eq = new NumberGreaterThanOrEqualsNode(a, b, false);
 
-	/**
-	 * 
-	 */
-	@Test
-	public void testFloatLessEq2()
-	{
-		Provider<Double> a = new Provider<Double>(4.4);
-		Provider<Double> b = new Provider<Double>(5.4);
-		
-		NumberLessThanOrEqualsNode eq = new NumberLessThanOrEqualsNode(a, b, true);
-		
-		eq.exec(this.state);
-		
-		assertEquals(true, eq.getComparisonResult().get(this.state));
-	}
-	
+        eq.exec(this.state);
+
+        assertEquals(true, eq.getComparisonResult().get(this.state));
+    }
+
+    /**
+     * 
+     */
+    @Test
+    public void testLess()
+    {
+        Provider<Integer> a = new Provider<Integer>(4);
+        Provider<Integer> b = new Provider<Integer>(5);
+
+        NumberLessThanNode eq = new NumberLessThanNode(a, b, false);
+
+        eq.exec(this.state);
+
+        assertEquals(true, eq.getComparisonResult().get(this.state));
+    }
+
+    /**
+     * 
+     */
+    @Test
+    public void testLessEq()
+    {
+        Provider<Integer> a = new Provider<Integer>(5);
+        Provider<Integer> b = new Provider<Integer>(5);
+
+        NumberLessThanOrEqualsNode eq = new NumberLessThanOrEqualsNode(a, b, false);
+
+        eq.exec(this.state);
+
+        assertEquals(true, eq.getComparisonResult().get(this.state));
+    }
+
+    /**
+     * 
+     */
+    @Test
+    public void testLessEq2()
+    {
+        Provider<Integer> a = new Provider<Integer>(4);
+        Provider<Integer> b = new Provider<Integer>(5);
+
+        NumberLessThanOrEqualsNode eq = new NumberLessThanOrEqualsNode(a, b, false);
+
+        eq.exec(this.state);
+
+        assertEquals(true, eq.getComparisonResult().get(this.state));
+    }
+
+    /**
+     * 
+     */
+    @Test
+    public void testFloatEquals()
+    {
+        Provider<Double> a = new Provider<Double>(5.2);
+        Provider<Double> b = new Provider<Double>(5.2);
+
+        NumberEqualsNode eq = new NumberEqualsNode(a, b, true);
+
+        eq.exec(this.state);
+
+        assertEquals(true, eq.getComparisonResult().get(this.state));
+    }
+
+    /**
+     * 
+     */
+    @Test
+    public void testFloatGreater()
+    {
+        Provider<Double> a = new Provider<Double>(6.4);
+        Provider<Double> b = new Provider<Double>(5.4);
+
+        NumberGreaterThanNode eq = new NumberGreaterThanNode(a, b, true);
+
+        eq.exec(this.state);
+
+        assertEquals(true, eq.getComparisonResult().get(this.state));
+    }
+
+    /**
+     * 
+     */
+    @Test
+    public void testFloatGreaterEq()
+    {
+        Provider<Double> a = new Provider<Double>(6.4);
+        Provider<Double> b = new Provider<Double>(5.4);
+
+        NumberGreaterThanOrEqualsNode eq = new NumberGreaterThanOrEqualsNode(a, b, true);
+
+        eq.exec(this.state);
+
+        assertEquals(true, eq.getComparisonResult().get(this.state));
+    }
+
+    /**
+     * 
+     */
+    @Test
+    public void testFloatGreaterEq2()
+    {
+        Provider<Double> a = new Provider<Double>(5.4);
+        Provider<Double> b = new Provider<Double>(5.4);
+
+        NumberGreaterThanOrEqualsNode eq = new NumberGreaterThanOrEqualsNode(a, b, true);
+
+        eq.exec(this.state);
+
+        assertEquals(true, eq.getComparisonResult().get(this.state));
+    }
+
+    /**
+     * 
+     */
+    @Test
+    public void testFloatLess()
+    {
+        Provider<Double> a = new Provider<Double>(4.4);
+        Provider<Double> b = new Provider<Double>(5.4);
+
+        NumberLessThanNode eq = new NumberLessThanNode(a, b, true);
+
+        eq.exec(this.state);
+
+        assertEquals(true, eq.getComparisonResult().get(this.state));
+    }
+
+    /**
+     * 
+     */
+    @Test
+    public void testFloatLessEq()
+    {
+        Provider<Double> a = new Provider<Double>(5.4);
+        Provider<Double> b = new Provider<Double>(5.4);
+
+        NumberLessThanOrEqualsNode eq = new NumberLessThanOrEqualsNode(a, b, true);
+
+        eq.exec(this.state);
+
+        assertEquals(true, eq.getComparisonResult().get(this.state));
+    }
+
+    /**
+     * 
+     */
+    @Test
+    public void testFloatLessEq2()
+    {
+        Provider<Double> a = new Provider<Double>(4.4);
+        Provider<Double> b = new Provider<Double>(5.4);
+
+        NumberLessThanOrEqualsNode eq = new NumberLessThanOrEqualsNode(a, b, true);
+
+        eq.exec(this.state);
+
+        assertEquals(true, eq.getComparisonResult().get(this.state));
+    }
+
 }

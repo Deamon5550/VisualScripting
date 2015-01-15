@@ -35,13 +35,13 @@ import com.thevoxelbox.vsl.nodes.debug.PrintNode;
 public class NodeGraphTest extends StandardTest
 {
 
-	/**
-	 * 
-	 */
+    /**
+     * 
+     */
     @Test
     public void testStringNodes()
     {
-        output.setup();
+        this.output.setup();
 
         StaticValueNode<String> string = new StaticValueNode<String>("Hello");
         StaticValueNode<String> string2 = new StaticValueNode<String>(" World");
@@ -51,10 +51,10 @@ public class NodeGraphTest extends StandardTest
 
         NodeGraph graph = new NodeGraph("Test Graph");
         graph.setNext(print);
-        graph.run(vars);
+        graph.run(this.vars);
 
-        output.check("Hello World");
-        output.reset();
+        this.output.check("Hello World");
+        this.output.reset();
     }
 
 }

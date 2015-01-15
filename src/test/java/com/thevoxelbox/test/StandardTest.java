@@ -38,19 +38,19 @@ import com.thevoxelbox.vsl.util.RuntimeState;
 public class StandardTest
 {
 
-	protected IVariableHolder vars;
-	protected OutputHelper output;
-	protected RuntimeState state;
+    protected IVariableHolder vars;
+    protected OutputHelper output;
+    protected RuntimeState state;
 
-	/**
-	 * Sets up the test.
-	 */
-	@Before
-	public void setup()
-	{
-		this.vars = new VariableScope();
-		this.output = new OutputHelper();
-		this.state = Mockito.mock(RuntimeState.class);
-		Mockito.when(this.state.getVars()).thenReturn(this.vars);
-	}
+    /**
+     * Sets up the test.
+     */
+    @Before
+    public void setup()
+    {
+        this.vars = new VariableScope();
+        this.output = new OutputHelper();
+        this.state = Mockito.mock(RuntimeState.class);
+        Mockito.when(this.state.getVars()).thenReturn(this.vars);
+    }
 }

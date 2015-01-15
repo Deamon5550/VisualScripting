@@ -32,20 +32,18 @@ import com.thevoxelbox.vsl.nodes.vars.ChainedInputNode;
 import com.thevoxelbox.vsl.nodes.vars.ChainedOutputNode;
 
 /**
- * A test for two node graphs chained together.
- * 
- * TODO cleanup
+ * A test for two node graphs chained together. TODO cleanup
  */
 public class ChainedNodeGraphTest extends StandardTest
 {
 
-	/**
-	 * 
-	 */
+    /**
+     * 
+     */
     @Test
     public void test()
     {
-        output.setup();
+        this.output.setup();
 
         StaticValueNode<String> string = new StaticValueNode<String>("Hello");
         StaticValueNode<String> string2 = new StaticValueNode<String>(" World");
@@ -56,8 +54,8 @@ public class ChainedNodeGraphTest extends StandardTest
         graph1.setNext(out1);
         out1.setNext(out2);
 
-        ChainedInputNode<String> in1 = new ChainedInputNode<>("first");
-        ChainedInputNode<String> in2 = new ChainedInputNode<>("second");
+        ChainedInputNode<String> in1 = new ChainedInputNode<String>("first");
+        ChainedInputNode<String> in2 = new ChainedInputNode<String>("second");
         PrintNode print = new PrintNode(in1.getValue());
         PrintNode print2 = new PrintNode(in2.getValue());
         print.setNext(print2);
@@ -66,10 +64,10 @@ public class ChainedNodeGraphTest extends StandardTest
         graph2.setNext(print);
         graph1.chain(graph2);
 
-        graph1.run(vars);
+        graph1.run(this.vars);
 
-        output.check("Hello World");
-        output.reset();
+        this.output.check("Hello World");
+        this.output.reset();
     }
 
 }

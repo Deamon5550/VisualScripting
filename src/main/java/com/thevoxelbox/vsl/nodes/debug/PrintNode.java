@@ -24,6 +24,7 @@
 package com.thevoxelbox.vsl.nodes.debug;
 
 import com.thevoxelbox.vsl.node.Node;
+import com.thevoxelbox.vsl.node.NodeInfo;
 import com.thevoxelbox.vsl.util.Input;
 import com.thevoxelbox.vsl.util.Provider;
 import com.thevoxelbox.vsl.util.RuntimeState;
@@ -31,6 +32,7 @@ import com.thevoxelbox.vsl.util.RuntimeState;
 /**
  * A node which prints a string to standard out.
  */
+@NodeInfo("Print")
 public class PrintNode extends Node
 {
     @Input
@@ -52,7 +54,7 @@ public class PrintNode extends Node
     @Override
     public void exec(RuntimeState state)
     {
-        System.out.print(msg.get(state).toString());
+        System.out.print(this.msg.get(state).toString());
     }
 
 }

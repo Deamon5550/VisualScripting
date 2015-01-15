@@ -23,22 +23,24 @@
  */
 package com.thevoxelbox.vsl.nodes.math;
 
+import com.thevoxelbox.vsl.node.NodeInfo;
 import com.thevoxelbox.vsl.util.Provider;
 import com.thevoxelbox.vsl.util.RuntimeState;
 
 /**
  * Returns the quotient of two integer or floating-point numbers.
  */
+@NodeInfo("Division")
 public class DivisionNode extends NumberOperatorNode
 {
 
-	/**
-	 * Creates a new {@link DivisionNode}.
-	 * 
-	 * @param a The first input
-	 * @param b The second input
-	 * @param floating Whether to use floating point precision
-	 */
+    /**
+     * Creates a new {@link DivisionNode}.
+     * 
+     * @param a The first input
+     * @param b The second input
+     * @param floating Whether to use floating point precision
+     */
     public DivisionNode(Provider<? extends Number> a, Provider<? extends Number> b, boolean floating)
     {
         super(a, b, floating);
@@ -50,12 +52,12 @@ public class DivisionNode extends NumberOperatorNode
     @Override
     public void exec(RuntimeState state)
     {
-        if (floating)
+        if (this.floating)
         {
-            this.value.set(a.get(state).doubleValue() / b.get(state).doubleValue(), state.getUUID());
+            this.value.set(this.a.get(state).doubleValue() / this.b.get(state).doubleValue(), state.getUUID());
         } else
         {
-            this.value.set(a.get(state).longValue() / b.get(state).longValue(), state.getUUID());
+            this.value.set(this.a.get(state).longValue() / this.b.get(state).longValue(), state.getUUID());
         }
     }
 

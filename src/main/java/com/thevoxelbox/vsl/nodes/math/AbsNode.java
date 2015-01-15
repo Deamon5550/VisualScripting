@@ -24,6 +24,7 @@
 package com.thevoxelbox.vsl.nodes.math;
 
 import com.thevoxelbox.vsl.node.Node;
+import com.thevoxelbox.vsl.node.NodeInfo;
 import com.thevoxelbox.vsl.util.Input;
 import com.thevoxelbox.vsl.util.Output;
 import com.thevoxelbox.vsl.util.Provider;
@@ -32,6 +33,7 @@ import com.thevoxelbox.vsl.util.RuntimeState;
 /**
  * Returns the absolute value of an integer or floating-point number.
  */
+@NodeInfo("Abs")
 public class AbsNode extends Node
 {
     @Output
@@ -59,7 +61,7 @@ public class AbsNode extends Node
     @Override
     public void exec(RuntimeState state)
     {
-        if (floating)
+        if (this.floating)
         {
             this.value.set(Math.abs(this.a.get(state).doubleValue()), state.getUUID());
         } else

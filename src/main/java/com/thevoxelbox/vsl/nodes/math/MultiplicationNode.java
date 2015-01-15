@@ -23,22 +23,24 @@
  */
 package com.thevoxelbox.vsl.nodes.math;
 
+import com.thevoxelbox.vsl.node.NodeInfo;
 import com.thevoxelbox.vsl.util.Provider;
 import com.thevoxelbox.vsl.util.RuntimeState;
 
 /**
  * Performs the multiplication operation between two numbers.
  */
+@NodeInfo("Multiplication")
 public class MultiplicationNode extends NumberOperatorNode
 {
 
-	/**
-	 * Creates a new {@link MultiplicationNode}.
-	 * 
-	 * @param a The first number
-	 * @param b The second number
-	 * @param floating Whether to use floating point precision
-	 */
+    /**
+     * Creates a new {@link MultiplicationNode}.
+     * 
+     * @param a The first number
+     * @param b The second number
+     * @param floating Whether to use floating point precision
+     */
     public MultiplicationNode(Provider<? extends Number> a, Provider<? extends Number> b, boolean floating)
     {
         super(a, b, floating);
@@ -50,12 +52,12 @@ public class MultiplicationNode extends NumberOperatorNode
     @Override
     public void exec(RuntimeState state)
     {
-        if (floating)
+        if (this.floating)
         {
-            this.value.set(a.get(state).doubleValue() * b.get(state).doubleValue(), state.getUUID());
+            this.value.set(this.a.get(state).doubleValue() * this.b.get(state).doubleValue(), state.getUUID());
         } else
         {
-            this.value.set(a.get(state).longValue() * b.get(state).longValue(), state.getUUID());
+            this.value.set(this.a.get(state).longValue() * this.b.get(state).longValue(), state.getUUID());
         }
     }
 

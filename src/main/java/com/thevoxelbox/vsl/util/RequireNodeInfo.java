@@ -21,51 +21,19 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.thevoxelbox.test.util;
+package com.thevoxelbox.vsl.util;
 
-import static org.junit.Assert.assertEquals;
-
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 /**
- * A testing utility for capturing output passed to standard out.
+ * Marks classes and packages as requiring NodeInfo annotations.
  */
-public class OutputHelper
+@Target(ElementType.PACKAGE)
+@Retention(RetentionPolicy.SOURCE)
+public @interface RequireNodeInfo
 {
 
-    private ByteArrayOutputStream newOut;
-    private PrintStream oldOut;
-
-    /**
-     * Sets up a new capture of standard out.
-     */
-    public void setup()
-    {
-        this.newOut = new ByteArrayOutputStream();
-        PrintStream out = new PrintStream(this.newOut);
-        this.oldOut = System.out;
-        System.setOut(out);
-    }
-
-    /**
-     * Checks of the output to standard out matches the given string. Newlines are omitted.
-     * 
-     * @param s The string to check
-     */
-    public void check(String s)
-    {
-        String output = new String(this.newOut.toByteArray());
-        output = output.replace("\n", "");
-        output = output.replace("\r", "");
-        assertEquals(output, s);
-    }
-
-    /**
-     * Resets standard out to the original {@link PrintStream}.
-     */
-    public void reset()
-    {
-        System.setOut(this.oldOut);
-    }
 }

@@ -42,209 +42,209 @@ import com.thevoxelbox.vsl.util.Provider;
 public class NumberNodeTest extends StandardTest
 {
 
-	/**
-	 * 
-	 */
-	@Test
-	public void testAddition()
-	{
-		Provider<Integer> a = new Provider<Integer>(5);
-		Provider<Integer> b = new Provider<Integer>(6);
-		
-		AdditionNode add = new AdditionNode(a, b, false);
-		
-		add.exec(this.state);
-		
-		assertEquals(11l, add.getResult().get(this.state));
-	}
+    /**
+     * 
+     */
+    @Test
+    public void testAddition()
+    {
+        Provider<Integer> a = new Provider<Integer>(5);
+        Provider<Integer> b = new Provider<Integer>(6);
 
-	/**
-	 * 
-	 */
-	@Test
-	public void testSubtraction()
-	{
-		Provider<Integer> a = new Provider<Integer>(5);
-		Provider<Integer> b = new Provider<Integer>(6);
-		
-		SubtractionNode add = new SubtractionNode(a, b, false);
-		
-		add.exec(this.state);
-		
-		assertEquals(-1l, add.getResult().get(this.state));
-	}
+        AdditionNode add = new AdditionNode(a, b, false);
 
-	/**
-	 * 
-	 */
-	@Test
-	public void testMultiplication()
-	{
-		Provider<Integer> a = new Provider<Integer>(5);
-		Provider<Integer> b = new Provider<Integer>(6);
-		
-		MultiplicationNode add = new MultiplicationNode(a, b, false);
-		
-		add.exec(this.state);
-		
-		assertEquals(30l, add.getResult().get(this.state));
-	}
+        add.exec(this.state);
 
-	/**
-	 * 
-	 */
-	@Test
-	public void testDivision()
-	{
-		Provider<Integer> a = new Provider<Integer>(14);
-		Provider<Integer> b = new Provider<Integer>(6);
-		
-		DivisionNode add = new DivisionNode(a, b, false);
-		
-		add.exec(this.state);
-		
-		assertEquals(2l, add.getResult().get(this.state));
-	}
+        assertEquals(11L, add.getResult().get(this.state));
+    }
 
-	/**
-	 * 
-	 */
-	@Test
-	public void testModulo()
-	{
-		Provider<Integer> a = new Provider<Integer>(8);
-		Provider<Integer> b = new Provider<Integer>(6);
-		
-		ModuloNode add = new ModuloNode(a, b, false);
-		
-		add.exec(this.state);
-		
-		assertEquals(2l, add.getResult().get(this.state));
-	}
+    /**
+     * 
+     */
+    @Test
+    public void testSubtraction()
+    {
+        Provider<Integer> a = new Provider<Integer>(5);
+        Provider<Integer> b = new Provider<Integer>(6);
 
-	/**
-	 * 
-	 */
-	@Test
-	public void testSqrt()
-	{
-		Provider<Integer> a = new Provider<Integer>(16);
-		
-		SqrtNode add = new SqrtNode(a);
-		
-		add.exec(this.state);
-		
-		assertEquals(4.0, add.getResult().get(this.state));
-	}
+        SubtractionNode add = new SubtractionNode(a, b, false);
 
-	/**
-	 * 
-	 */
-	@Test
-	public void testAbs()
-	{
-		Provider<Integer> a = new Provider<Integer>(-5);
-		
-		AbsNode add = new AbsNode(a, false);
-		
-		add.exec(this.state);
-		
-		assertEquals(5l, add.getResult().get(this.state));
-	}
+        add.exec(this.state);
 
-	/**
-	 * 
-	 */
-	@Test
-	public void testFloatAbs()
-	{
-		Provider<Double> a = new Provider<Double>(-5.2);
-		
-		AbsNode add = new AbsNode(a, true);
-		
-		add.exec(this.state);
-		
-		assertEquals(5.2, add.getResult().get(this.state));
-	}
+        assertEquals(-1L, add.getResult().get(this.state));
+    }
 
-	/**
-	 * 
-	 */
-	@Test
-	public void testFloatAddition()
-	{
-		Provider<Double> a = new Provider<Double>(5.2);
-		Provider<Double> b = new Provider<Double>(6.3);
-		
-		AdditionNode add = new AdditionNode(a, b, true);
-		
-		add.exec(this.state);
-		
-		assertEquals(11.5, add.getResult().get(this.state));
-	}
+    /**
+     * 
+     */
+    @Test
+    public void testMultiplication()
+    {
+        Provider<Integer> a = new Provider<Integer>(5);
+        Provider<Integer> b = new Provider<Integer>(6);
 
-	/**
-	 * 
-	 */
-	@Test
-	public void testFloatSubtraction()
-	{
-		Provider<Double> a = new Provider<Double>(5.2);
-		Provider<Double> b = new Provider<Double>(6.2);
-		
-		SubtractionNode add = new SubtractionNode(a, b, true);
-		
-		add.exec(this.state);
-		
-		assertEquals(-1.0, add.getResult().get(this.state));
-	}
+        MultiplicationNode add = new MultiplicationNode(a, b, false);
 
-	/**
-	 * 
-	 */
-	@Test
-	public void testFloatMultiplication()
-	{
-		Provider<Double> a = new Provider<Double>(2.5);
-		Provider<Double> b = new Provider<Double>(5.0);
-		
-		MultiplicationNode add = new MultiplicationNode(a, b, true);
-		
-		add.exec(this.state);
-		
-		assertEquals(12.5, add.getResult().get(this.state));
-	}
+        add.exec(this.state);
 
-	/**
-	 * 
-	 */
-	@Test
-	public void testFloatDivision()
-	{
-		Provider<Double> a = new Provider<Double>(7.5);
-		Provider<Double> b = new Provider<Double>(3.0);
-		
-		DivisionNode add = new DivisionNode(a, b, true);
-		
-		add.exec(this.state);
-		
-		assertEquals(2.5, add.getResult().get(this.state));
-	}
+        assertEquals(30L, add.getResult().get(this.state));
+    }
 
-	/**
-	 * 
-	 */
-	@Test
-	public void testFloatModulo()
-	{
-		Provider<Double> a = new Provider<Double>(5.4);
-		Provider<Double> b = new Provider<Double>(2.2);
-		
-		ModuloNode add = new ModuloNode(a, b, true);
-		
-		add.exec(this.state);
-		
-		assertEquals(1.0, add.getResult().get(this.state));
-	}
+    /**
+     * 
+     */
+    @Test
+    public void testDivision()
+    {
+        Provider<Integer> a = new Provider<Integer>(14);
+        Provider<Integer> b = new Provider<Integer>(6);
+
+        DivisionNode add = new DivisionNode(a, b, false);
+
+        add.exec(this.state);
+
+        assertEquals(2L, add.getResult().get(this.state));
+    }
+
+    /**
+     * 
+     */
+    @Test
+    public void testModulo()
+    {
+        Provider<Integer> a = new Provider<Integer>(8);
+        Provider<Integer> b = new Provider<Integer>(6);
+
+        ModuloNode add = new ModuloNode(a, b, false);
+
+        add.exec(this.state);
+
+        assertEquals(2L, add.getResult().get(this.state));
+    }
+
+    /**
+     * 
+     */
+    @Test
+    public void testSqrt()
+    {
+        Provider<Integer> a = new Provider<Integer>(16);
+
+        SqrtNode add = new SqrtNode(a);
+
+        add.exec(this.state);
+
+        assertEquals(4.0, add.getResult().get(this.state));
+    }
+
+    /**
+     * 
+     */
+    @Test
+    public void testAbs()
+    {
+        Provider<Integer> a = new Provider<Integer>(-5);
+
+        AbsNode add = new AbsNode(a, false);
+
+        add.exec(this.state);
+
+        assertEquals(5L, add.getResult().get(this.state));
+    }
+
+    /**
+     * 
+     */
+    @Test
+    public void testFloatAbs()
+    {
+        Provider<Double> a = new Provider<Double>(-5.2);
+
+        AbsNode add = new AbsNode(a, true);
+
+        add.exec(this.state);
+
+        assertEquals(5.2, add.getResult().get(this.state));
+    }
+
+    /**
+     * 
+     */
+    @Test
+    public void testFloatAddition()
+    {
+        Provider<Double> a = new Provider<Double>(5.2);
+        Provider<Double> b = new Provider<Double>(6.3);
+
+        AdditionNode add = new AdditionNode(a, b, true);
+
+        add.exec(this.state);
+
+        assertEquals(11.5, add.getResult().get(this.state));
+    }
+
+    /**
+     * 
+     */
+    @Test
+    public void testFloatSubtraction()
+    {
+        Provider<Double> a = new Provider<Double>(5.2);
+        Provider<Double> b = new Provider<Double>(6.2);
+
+        SubtractionNode add = new SubtractionNode(a, b, true);
+
+        add.exec(this.state);
+
+        assertEquals(-1.0, add.getResult().get(this.state));
+    }
+
+    /**
+     * 
+     */
+    @Test
+    public void testFloatMultiplication()
+    {
+        Provider<Double> a = new Provider<Double>(2.5);
+        Provider<Double> b = new Provider<Double>(5.0);
+
+        MultiplicationNode add = new MultiplicationNode(a, b, true);
+
+        add.exec(this.state);
+
+        assertEquals(12.5, add.getResult().get(this.state));
+    }
+
+    /**
+     * 
+     */
+    @Test
+    public void testFloatDivision()
+    {
+        Provider<Double> a = new Provider<Double>(7.5);
+        Provider<Double> b = new Provider<Double>(3.0);
+
+        DivisionNode add = new DivisionNode(a, b, true);
+
+        add.exec(this.state);
+
+        assertEquals(2.5, add.getResult().get(this.state));
+    }
+
+    /**
+     * 
+     */
+    @Test
+    public void testFloatModulo()
+    {
+        Provider<Double> a = new Provider<Double>(5.4);
+        Provider<Double> b = new Provider<Double>(2.2);
+
+        ModuloNode add = new ModuloNode(a, b, true);
+
+        add.exec(this.state);
+
+        assertEquals(1.0, add.getResult().get(this.state));
+    }
 
 }

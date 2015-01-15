@@ -37,7 +37,7 @@ public abstract class TwoNumberNode extends Node
     @Input
     protected final Provider<? extends Number> b;
     protected final boolean floating;
-    
+
     /**
      * Sets up a {@link TwoNumberNode}.
      * 

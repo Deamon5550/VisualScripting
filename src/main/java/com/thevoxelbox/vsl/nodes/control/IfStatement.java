@@ -25,20 +25,20 @@ package com.thevoxelbox.vsl.nodes.control;
 
 import com.thevoxelbox.vsl.api.INode;
 import com.thevoxelbox.vsl.node.Node;
+import com.thevoxelbox.vsl.node.NodeInfo;
 import com.thevoxelbox.vsl.util.Provider;
 import com.thevoxelbox.vsl.util.RuntimeState;
 
 /**
- * Executed a node if the given boolean is true.
- * 
- * TODO: else support
+ * Executed a node if the given boolean is true. TODO: else support
  */
+@NodeInfo("If")
 public class IfStatement extends Node
 {
-    
+
     private final Provider<Boolean> statement;
     private INode body;
-    
+
     /**
      * Creates a new {@link IfStatement}.
      * 
@@ -48,7 +48,7 @@ public class IfStatement extends Node
     {
         this.statement = statement;
     }
-    
+
     /**
      * Sets the body of this if statement
      * 
@@ -65,10 +65,10 @@ public class IfStatement extends Node
     @Override
     public void exec(RuntimeState state)
     {
-        if(this.statement.get(state))
+        if (this.statement.get(state))
         {
             INode next = this.body;
-            while(next != null)
+            while (next != null)
             {
                 next.exec(state);
                 next = next.getNext();

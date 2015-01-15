@@ -32,7 +32,7 @@ import com.thevoxelbox.vsl.util.Provider;
  */
 public abstract class NumberCompareNode extends TwoNumberNode
 {
-    
+
     @Output
     protected final Provider<Boolean> result;
 
@@ -48,7 +48,7 @@ public abstract class NumberCompareNode extends TwoNumberNode
         super(a, b, floating);
         this.result = new Provider<Boolean>(this);
     }
-    
+
     /**
      * Gets the comparision result.
      * 

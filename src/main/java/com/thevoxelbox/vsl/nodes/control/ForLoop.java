@@ -25,6 +25,7 @@ package com.thevoxelbox.vsl.nodes.control;
 
 import com.thevoxelbox.vsl.api.INode;
 import com.thevoxelbox.vsl.node.Node;
+import com.thevoxelbox.vsl.node.NodeInfo;
 import com.thevoxelbox.vsl.util.Input;
 import com.thevoxelbox.vsl.util.Provider;
 import com.thevoxelbox.vsl.util.RuntimeState;
@@ -32,6 +33,7 @@ import com.thevoxelbox.vsl.util.RuntimeState;
 /**
  * Loops over a set of integers and executes a {@link INode} for each integer.
  */
+@NodeInfo("For")
 public class ForLoop extends Node
 {
 
@@ -161,9 +163,9 @@ public class ForLoop extends Node
     @Override
     public void exec(RuntimeState state)
     {
-        int i = init.get(state);
-        int t = target.get(state);
-        int n = increment.get(state);
+        int i = this.init.get(state);
+        int t = this.target.get(state);
+        int n = this.increment.get(state);
         for (; i < t; i += n)
         {
             INode next = this.body;
@@ -184,7 +186,7 @@ public class ForLoop extends Node
     {
         this.body = n;
     }
-    
+
     //TODO: providers for the value at each step, floating point values
 
 }

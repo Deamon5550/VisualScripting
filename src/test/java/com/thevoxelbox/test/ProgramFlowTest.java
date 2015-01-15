@@ -38,55 +38,55 @@ import com.thevoxelbox.vsl.util.Provider;
 public class ProgramFlowTest extends StandardTest
 {
 
-	/**
-	 * 
-	 */
-	@Test
-	public void testForEachLoop()
-	{
+    /**
+     * 
+     */
+    @Test
+    public void testForEachLoop()
+    {
 
-		StaticValueNode<String[]> array = new StaticValueNode<String[]>(new String[] { "Hel", "lo ", "Wor", "ld" });
+        StaticValueNode<String[]> array = new StaticValueNode<String[]>(new String[] { "Hel", "lo ", "Wor", "ld" });
 
-		ForEachNode<String> forloop = new ForEachNode<String>(array.getValue());
-		StringArrayCheckNode check = new StringArrayCheckNode(forloop.getNextValue(), "Hel", "lo ", "Wor", "ld");
-		forloop.setBody(check);
+        ForEachNode<String> forloop = new ForEachNode<String>(array.getValue());
+        StringArrayCheckNode check = new StringArrayCheckNode(forloop.getNextValue(), "Hel", "lo ", "Wor", "ld");
+        forloop.setBody(check);
 
-		forloop.exec(this.state);
-		check.end();
-	}
+        forloop.exec(this.state);
+        check.end();
+    }
 
-	/**
-	 * 
-	 */
-	@Test
-	public void isIf()
-	{
-		Provider<Boolean> condition = new Provider<Boolean>(true);
-		
-		IfStatement ifs = new IfStatement(condition);
-		
-		CheckRunNode check = new CheckRunNode(1);
-		ifs.setBody(check);
-		
-		ifs.exec(this.state);
-		check.end();
-	}
+    /**
+     * 
+     */
+    @Test
+    public void isIf()
+    {
+        Provider<Boolean> condition = new Provider<Boolean>(true);
 
-	/**
-	 * 
-	 */
-	@Test
-	public void isIfFalse()
-	{
-		Provider<Boolean> condition = new Provider<Boolean>(false);
-		
-		IfStatement ifs = new IfStatement(condition);
-		
-		CheckRunNode check = new CheckRunNode(0);
-		ifs.setBody(check);
-		
-		ifs.exec(this.state);
-		check.end();
-	}
+        IfStatement ifs = new IfStatement(condition);
+
+        CheckRunNode check = new CheckRunNode(1);
+        ifs.setBody(check);
+
+        ifs.exec(this.state);
+        check.end();
+    }
+
+    /**
+     * 
+     */
+    @Test
+    public void isIfFalse()
+    {
+        Provider<Boolean> condition = new Provider<Boolean>(false);
+
+        IfStatement ifs = new IfStatement(condition);
+
+        CheckRunNode check = new CheckRunNode(0);
+        ifs.setBody(check);
+
+        ifs.exec(this.state);
+        check.end();
+    }
 
 }

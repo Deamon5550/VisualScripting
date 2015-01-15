@@ -25,6 +25,7 @@ package com.thevoxelbox.vsl.nodes.control;
 
 import com.thevoxelbox.vsl.api.INode;
 import com.thevoxelbox.vsl.node.Node;
+import com.thevoxelbox.vsl.node.NodeInfo;
 import com.thevoxelbox.vsl.util.Input;
 import com.thevoxelbox.vsl.util.Output;
 import com.thevoxelbox.vsl.util.Provider;
@@ -35,6 +36,7 @@ import com.thevoxelbox.vsl.util.RuntimeState;
  * 
  * @param <T> The array type
  */
+@NodeInfo("ForEach")
 public class ForEachNode<T> extends Node
 {
 
@@ -65,7 +67,7 @@ public class ForEachNode<T> extends Node
     public void exec(RuntimeState state)
     {
         int i = 0;
-        T[] arr = array.get(state);
+        T[] arr = this.array.get(state);
         for (T obj : arr)
         {
             this.next.set(obj, state.getUUID());

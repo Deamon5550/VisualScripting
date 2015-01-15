@@ -31,11 +31,11 @@ import com.google.common.base.Optional;
 public interface IVariableHolder
 {
 
-	/**
-	 * Sets whether the variable holder should use case sensitive keys for its variable storage.
-	 * 
-	 * @param cs Case sensitive keys
-	 */
+    /**
+     * Sets whether the variable holder should use case sensitive keys for its variable storage.
+     * 
+     * @param cs Case sensitive keys
+     */
     void setCaseSensitive(boolean cs);
 
     /**
