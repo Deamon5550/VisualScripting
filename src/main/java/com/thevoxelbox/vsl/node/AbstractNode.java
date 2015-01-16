@@ -21,36 +21,33 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.thevoxelbox.vsl.api;
+package com.thevoxelbox.vsl.node;
 
-import com.thevoxelbox.vsl.util.RuntimeState;
+import com.thevoxelbox.vsl.api.node.Node;
 
 /**
- * Represents a node with a set of inputs and outputs which executes a single
- * discrete function.
+ * An abstract node.
  */
-public interface INode
+public abstract class AbstractNode implements Node
 {
 
-    /**
-     * Executes this node's function based on the runtime state and its inputs.
-     * 
-     * @param state The runtime state
-     */
-    void exec(RuntimeState state);
+    private Node next;
 
     /**
-     * Sets the node to be executed after this node in the execution pathway.
-     * 
-     * @param next The next node
+     * {@inheritDoc}
      */
-    void setNext(INode next);
+    @Override
+    public void setNext(Node n)
+    {
+        this.next = n;
+    }
 
     /**
-     * Gets the next node in the execution pathway.
-     * 
-     * @return The next node
+     * {@inheritDoc}
      */
-    INode getNext();
-
+    @Override
+    public Node getNext()
+    {
+        return this.next;
+    }
 }

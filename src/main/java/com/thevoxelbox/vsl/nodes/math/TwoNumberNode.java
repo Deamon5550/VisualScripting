@@ -23,14 +23,14 @@
  */
 package com.thevoxelbox.vsl.nodes.math;
 
-import com.thevoxelbox.vsl.node.Node;
-import com.thevoxelbox.vsl.util.Input;
+import com.thevoxelbox.vsl.annotation.Input;
+import com.thevoxelbox.vsl.node.AbstractNode;
 import com.thevoxelbox.vsl.util.Provider;
 
 /**
  * An abstract node for a node receiving two numbers as input.
  */
-public abstract class TwoNumberNode extends Node
+public abstract class TwoNumberNode extends AbstractNode
 {
 
     @Input

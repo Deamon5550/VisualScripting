@@ -27,7 +27,7 @@ import java.util.Map;
 import java.util.UUID;
 
 import com.google.common.collect.Maps;
-import com.thevoxelbox.vsl.api.INode;
+import com.thevoxelbox.vsl.api.node.Node;
 
 /**
  * Tracks values for an input or output of a node and stores them with an
@@ -41,7 +41,7 @@ public class Provider<T>
     private final Map<UUID, T> values;
     private final T value;
     private final boolean isStatic;
-    private INode callback;
+    private Node callback;
 
     /**
      * Creates a new {@link Provider} which will perform a callback to the given
@@ -50,7 +50,7 @@ public class Provider<T>
      * 
      * @param n The node to call back to
      */
-    public Provider(INode n)
+    public Provider(Node n)
     {
         this.callback = n;
         this.values = Maps.newHashMap();
@@ -63,8 +63,9 @@ public class Provider<T>
      * 
      * @param value The static value
      */
-    public Provider(T value)
+    public Provider(Node n, T value)
     {
+        this.callback = n;
         this.value = value;
         this.isStatic = true;
         this.values = null;
@@ -100,6 +101,16 @@ public class Provider<T>
     public void set(T newValue, UUID uuid)
     {
         this.values.put(uuid, newValue);
+    }
+
+    public Node getOwner()
+    {
+        return this.callback;
+    }
+
+    public boolean isStatic()
+    {
+        return this.isStatic;
     }
 
 }

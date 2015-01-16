@@ -23,14 +23,14 @@
  */
 package com.thevoxelbox.vsl.nodes.math.compare;
 
-import com.thevoxelbox.vsl.node.NodeInfo;
+import com.thevoxelbox.vsl.annotation.NodeInfo;
 import com.thevoxelbox.vsl.util.Provider;
 import com.thevoxelbox.vsl.util.RuntimeState;
 
 /**
  * Tests if two numbers are equal.
  */
-@NodeInfo("Equals")
+@NodeInfo(name = "Equals")
 public class NumberEqualsNode extends NumberCompareNode
 {
 

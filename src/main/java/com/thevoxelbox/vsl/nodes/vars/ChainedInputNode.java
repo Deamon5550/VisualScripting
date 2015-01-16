@@ -23,15 +23,15 @@
  */
 package com.thevoxelbox.vsl.nodes.vars;
 
-import com.thevoxelbox.vsl.node.NodeGraph;
-import com.thevoxelbox.vsl.node.NodeInfo;
+import com.thevoxelbox.vsl.annotation.NodeInfo;
+import com.thevoxelbox.vsl.node.RunnableNodeGraph;
 
 /**
- * Returns an input received from a previously run {@link NodeGraph}.
+ * Returns an input received from a previously run {@link RunnableNodeGraph}.
  * 
  * @param <T> The input type
  */
-@NodeInfo("ChainedInput")
+@NodeInfo(name = "ChainedInput")
 public class ChainedInputNode<T> extends VariableGetNode<T>
 {
 

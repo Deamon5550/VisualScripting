@@ -26,7 +26,9 @@ package com.thevoxelbox.test;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
+import org.mockito.Mockito;
 
+import com.thevoxelbox.vsl.api.node.Node;
 import com.thevoxelbox.vsl.nodes.StaticValueNode;
 import com.thevoxelbox.vsl.nodes.debug.PrintNode;
 import com.thevoxelbox.vsl.util.Provider;
@@ -79,8 +81,8 @@ public class DebugNodeTest extends StandardTest
     {
 
         this.output.setup();
-
-        Provider<String> s = new Provider<String>("hello");
+        Node node = Mockito.mock(Node.class);
+        Provider<String> s = new Provider<String>(node, "hello");
 
         PrintNode print = new PrintNode(s);
 

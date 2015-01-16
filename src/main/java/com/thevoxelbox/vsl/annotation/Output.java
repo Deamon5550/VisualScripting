@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.thevoxelbox.vsl.node;
+package com.thevoxelbox.vsl.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -29,18 +29,21 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * An information marker annotation, used for serialization.
+ * A marker annotation for the output providers of a node.
  */
 @Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.TYPE)
-public @interface NodeInfo
+@Target(ElementType.FIELD)
+public @interface Output
 {
 
     /**
-     * Gets the name of the node.
+     * Gets the name of this Output (for the purpose of serialization). If no
+     * name was specified then a single underscore will be returned, this is an
+     * indication that the name of the annotated field should be used instead of
+     * this value.
      * 
      * @return The name
      */
-    String value();
+    String name() default "_";
 
 }

@@ -23,26 +23,26 @@
  */
 package com.thevoxelbox.vsl.nodes.control;
 
-import com.thevoxelbox.vsl.api.INode;
-import com.thevoxelbox.vsl.node.Node;
-import com.thevoxelbox.vsl.node.NodeInfo;
-import com.thevoxelbox.vsl.util.Input;
-import com.thevoxelbox.vsl.util.Output;
+import com.thevoxelbox.vsl.annotation.Input;
+import com.thevoxelbox.vsl.annotation.NodeInfo;
+import com.thevoxelbox.vsl.annotation.Output;
+import com.thevoxelbox.vsl.api.node.Node;
+import com.thevoxelbox.vsl.node.AbstractNode;
 import com.thevoxelbox.vsl.util.Provider;
 import com.thevoxelbox.vsl.util.RuntimeState;
 
 /**
- * Loops over every value in the given array and calls another {@link INode} as
+ * Loops over every value in the given array and calls another {@link Node} as
  * the body.
  * 
  * @param <T> The array type
  */
-@NodeInfo("ForEach")
-public class ForEachNode<T> extends Node
+@NodeInfo(name = "ForEach")
+public class ForEachNode<T> extends AbstractNode
 {
 
-    private INode body;
-    @Input
+    private Node body;
+    @Input(name = "array")
     private final Provider<T[]> array;
     @Output
     private final Provider<T> next;
@@ -73,7 +73,7 @@ public class ForEachNode<T> extends Node
         {
             this.next.set(obj, state.getUUID());
             this.index.set(i, state.getUUID());
-            INode next = this.body;
+            Node next = this.body;
             while (next != null)
             {
                 next.exec(state);
@@ -94,11 +94,11 @@ public class ForEachNode<T> extends Node
     }
 
     /**
-     * Sets the {@link INode} to use as the body of this loop.
+     * Sets the {@link Node} to use as the body of this loop.
      * 
      * @param body The body
      */
-    public void setBody(Node body)
+    public void setBody(AbstractNode body)
     {
         this.body = body;
     }

@@ -23,18 +23,18 @@
  */
 package com.thevoxelbox.vsl.nodes.math;
 
-import com.thevoxelbox.vsl.node.Node;
-import com.thevoxelbox.vsl.node.NodeInfo;
-import com.thevoxelbox.vsl.util.Input;
-import com.thevoxelbox.vsl.util.Output;
+import com.thevoxelbox.vsl.annotation.Input;
+import com.thevoxelbox.vsl.annotation.NodeInfo;
+import com.thevoxelbox.vsl.annotation.Output;
+import com.thevoxelbox.vsl.node.AbstractNode;
 import com.thevoxelbox.vsl.util.Provider;
 import com.thevoxelbox.vsl.util.RuntimeState;
 
 /**
  * Returns the absolute value of an integer or floating-point number.
  */
-@NodeInfo("Abs")
-public class AbsNode extends Node
+@NodeInfo(name = "Abs")
+public class AbsNode extends AbstractNode
 {
 
     @Output

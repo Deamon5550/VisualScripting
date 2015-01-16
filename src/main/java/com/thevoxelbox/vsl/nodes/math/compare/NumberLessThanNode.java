@@ -23,14 +23,14 @@
  */
 package com.thevoxelbox.vsl.nodes.math.compare;
 
-import com.thevoxelbox.vsl.node.NodeInfo;
+import com.thevoxelbox.vsl.annotation.NodeInfo;
 import com.thevoxelbox.vsl.util.Provider;
 import com.thevoxelbox.vsl.util.RuntimeState;
 
 /**
  * Tests if a number is less than a second number.
  */
-@NodeInfo("LessThan")
+@NodeInfo(name = "LessThan")
 public class NumberLessThanNode extends NumberCompareNode
 {
 

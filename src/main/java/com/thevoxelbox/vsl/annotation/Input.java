@@ -21,38 +21,29 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.thevoxelbox.vsl.api;
+package com.thevoxelbox.vsl.annotation;
 
-import com.google.common.base.Optional;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 /**
- * A VariableScope is a recursive {@link IVariableHolder}.
+ * A marker for the input provider fields of a node.
  */
-public interface IVariableScope extends IVariableHolder
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.FIELD)
+public @interface Input
 {
 
     /**
-     * Sets the parent {@link IVariableScope}.
+     * Gets the name for the input (for the purposes of serialization). If no
+     * name was specified then a single underscore will be returned, this is an
+     * indication that the name of the annotated field should be used instead of
+     * this value.
      * 
-     * @param scope the new parent, cannot be null
+     * @return The name
      */
-    void setParent(IVariableHolder scope);
+    String name() default "_";
 
-    /**
-     * Returns the parent of this VariableScope or null if this VariableScope
-     * has no parent.
-     * 
-     * @return the parent, may be null
-     */
-    Optional<IVariableHolder> getParent();
-
-    /**
-     * Returns the highest parent VariableScope. That is the farthest parent
-     * VariableScope by recursively calling {@link #getParent()} until a
-     * VariableScope with no parent is reached. Returns null if this
-     * VariableScope has no parent.
-     * 
-     * @return the highest parent, may be null
-     */
-    Optional<IVariableHolder> getHighestParent();
 }

@@ -23,14 +23,14 @@
  */
 package com.thevoxelbox.vsl.nodes.math.compare;
 
-import com.thevoxelbox.vsl.node.NodeInfo;
+import com.thevoxelbox.vsl.annotation.NodeInfo;
 import com.thevoxelbox.vsl.util.Provider;
 import com.thevoxelbox.vsl.util.RuntimeState;
 
 /**
  * Tests if a number is greater than or equal to a second number.
  */
-@NodeInfo("GreaterThanOrEquals")
+@NodeInfo(name = "GreaterThanOrEquals")
 public class NumberGreaterThanOrEqualsNode extends NumberCompareNode
 {
 

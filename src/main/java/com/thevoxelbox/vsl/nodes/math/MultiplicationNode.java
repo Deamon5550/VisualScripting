@@ -23,14 +23,14 @@
  */
 package com.thevoxelbox.vsl.nodes.math;
 
-import com.thevoxelbox.vsl.node.NodeInfo;
+import com.thevoxelbox.vsl.annotation.NodeInfo;
 import com.thevoxelbox.vsl.util.Provider;
 import com.thevoxelbox.vsl.util.RuntimeState;
 
 /**
  * Performs the multiplication operation between two numbers.
  */
-@NodeInfo("Multiplication")
+@NodeInfo(name = "Multiplication")
 public class MultiplicationNode extends NumberOperatorNode
 {
 

@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.thevoxelbox.vsl;
+package com.thevoxelbox.vsl.variables;
 
 import java.io.Serializable;
 import java.util.HashMap;
@@ -30,20 +30,20 @@ import java.util.Set;
 
 import com.google.common.base.Optional;
 import com.google.common.collect.Sets;
-import com.thevoxelbox.vsl.api.IVariableHolder;
-import com.thevoxelbox.vsl.api.IVariableScope;
+import com.thevoxelbox.vsl.api.variables.VariableHolder;
+import com.thevoxelbox.vsl.api.variables.VariableScope;
 
 /**
  * A recursive variable holder.
  */
-public class VariableScope implements IVariableScope, Serializable
+public class ParentedVariableScope implements VariableScope, Serializable
 {
 
     private static final long serialVersionUID = 9032180603411264823L;
     /**
      * The parent variable holder.
      */
-    private transient IVariableHolder parent = null;
+    private transient VariableHolder parent = null;
     /**
      * The variable map.
      */
@@ -53,7 +53,7 @@ public class VariableScope implements IVariableScope, Serializable
     /**
      * Creates a new VariableScope.
      */
-    public VariableScope()
+    public ParentedVariableScope()
     {
 
     }
@@ -63,7 +63,7 @@ public class VariableScope implements IVariableScope, Serializable
      * 
      * @param parent the parent
      */
-    public VariableScope(IVariableHolder parent)
+    public ParentedVariableScope(VariableHolder parent)
     {
         this.parent = parent;
     }
@@ -118,7 +118,7 @@ public class VariableScope implements IVariableScope, Serializable
      * {@inheritDoc}
      */
     @Override
-    public void setParent(IVariableHolder scope)
+    public void setParent(VariableHolder scope)
     {
         this.parent = scope;
     }
@@ -127,7 +127,7 @@ public class VariableScope implements IVariableScope, Serializable
      * {@inheritDoc}
      */
     @Override
-    public Optional<IVariableHolder> getParent()
+    public Optional<VariableHolder> getParent()
     {
         return Optional.fromNullable(this.parent);
     }
@@ -136,22 +136,22 @@ public class VariableScope implements IVariableScope, Serializable
      * {@inheritDoc}
      */
     @Override
-    public Optional<IVariableHolder> getHighestParent()
+    public Optional<VariableHolder> getHighestParent()
     {
         if (this.parent == null)
         {
             Optional.absent();
         }
-        IVariableHolder next = this.parent;
-        if (next instanceof IVariableScope)
+        VariableHolder next = this.parent;
+        if (next instanceof VariableScope)
         {
-            IVariableScope nextScope = (IVariableScope) next;
+            VariableScope nextScope = (VariableScope) next;
             while (nextScope.getParent().isPresent())
             {
                 next = nextScope.getParent().get();
-                if (next instanceof IVariableScope)
+                if (next instanceof VariableScope)
                 {
-                    nextScope = (IVariableScope) next;
+                    nextScope = (VariableScope) next;
                 } else
                 {
                     break;

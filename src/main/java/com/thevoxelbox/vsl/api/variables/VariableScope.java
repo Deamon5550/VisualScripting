@@ -21,19 +21,38 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.thevoxelbox.vsl.util;
+package com.thevoxelbox.vsl.api.variables;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import com.google.common.base.Optional;
 
 /**
- * A marker for the input provider fields of a node.
+ * A VariableScope is a recursive {@link VariableHolder}.
  */
-@Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.FIELD)
-public @interface Input
+public interface VariableScope extends VariableHolder
 {
 
+    /**
+     * Sets the parent {@link VariableScope}.
+     * 
+     * @param scope the new parent, cannot be null
+     */
+    void setParent(VariableHolder scope);
+
+    /**
+     * Returns the parent of this VariableScope or null if this VariableScope
+     * has no parent.
+     * 
+     * @return the parent, may be null
+     */
+    Optional<VariableHolder> getParent();
+
+    /**
+     * Returns the highest parent VariableScope. That is the farthest parent
+     * VariableScope by recursively calling {@link #getParent()} until a
+     * VariableScope with no parent is reached. Returns null if this
+     * VariableScope has no parent.
+     * 
+     * @return the highest parent, may be null
+     */
+    Optional<VariableHolder> getHighestParent();
 }

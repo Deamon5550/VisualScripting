@@ -23,16 +23,17 @@
  */
 package com.thevoxelbox.test;
 
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Test;
 
-import com.thevoxelbox.vsl.node.NodeGraph;
+import com.thevoxelbox.vsl.api.node.NodeGraph;
+import com.thevoxelbox.vsl.node.RunnableNodeGraph;
 import com.thevoxelbox.vsl.nodes.StaticValueNode;
 import com.thevoxelbox.vsl.nodes.debug.PrintNode;
 
-import static org.junit.Assert.assertEquals;
-
 /**
- * Basic {@link NodeGraph} tests.
+ * Basic {@link RunnableNodeGraph} tests.
  */
 public class NodeGraphTest extends StandardTest
 {
@@ -51,18 +52,21 @@ public class NodeGraphTest extends StandardTest
         PrintNode print2 = new PrintNode(string2.getValue());
         print.setNext(print2);
 
-        NodeGraph graph = new NodeGraph("Test Graph");
-        graph.setNext(print);
+        NodeGraph graph = new RunnableNodeGraph("Test Graph");
+        graph.setStart(print);
         graph.run(this.vars);
 
         this.output.check("Hello World");
         this.output.reset();
     }
 
+    /**
+     * 
+     */
     @Test
     public void testName()
     {
-        NodeGraph graph = new NodeGraph("Test Graph");
+        RunnableNodeGraph graph = new RunnableNodeGraph("Test Graph");
         assertEquals("Test Graph", graph.getName());
     }
 

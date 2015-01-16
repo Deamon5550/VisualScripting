@@ -23,17 +23,17 @@
  */
 package com.thevoxelbox.vsl.nodes.debug;
 
-import com.thevoxelbox.vsl.node.Node;
-import com.thevoxelbox.vsl.node.NodeInfo;
-import com.thevoxelbox.vsl.util.Input;
+import com.thevoxelbox.vsl.annotation.Input;
+import com.thevoxelbox.vsl.annotation.NodeInfo;
+import com.thevoxelbox.vsl.node.AbstractNode;
 import com.thevoxelbox.vsl.util.Provider;
 import com.thevoxelbox.vsl.util.RuntimeState;
 
 /**
  * A node which prints a string to standard out.
  */
-@NodeInfo("Print")
-public class PrintNode extends Node
+@NodeInfo(name = "Print")
+public class PrintNode extends AbstractNode
 {
 
     @Input

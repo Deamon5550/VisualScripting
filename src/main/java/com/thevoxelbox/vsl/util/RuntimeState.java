@@ -25,25 +25,25 @@ package com.thevoxelbox.vsl.util;
 
 import java.util.UUID;
 
-import com.thevoxelbox.vsl.api.IVariableHolder;
-import com.thevoxelbox.vsl.node.NodeGraph;
+import com.thevoxelbox.vsl.api.variables.VariableHolder;
+import com.thevoxelbox.vsl.node.RunnableNodeGraph;
 
 /**
  * A container for the values associated with a single runtime instance of a
- * {@link NodeGraph}.
+ * {@link RunnableNodeGraph}.
  */
 public class RuntimeState
 {
 
     private final UUID uuid;
-    private final IVariableHolder vars;
+    private final VariableHolder vars;
 
     /**
      * Creates a new {@link RuntimeState}.
      * 
      * @param vars
      */
-    public RuntimeState(IVariableHolder vars)
+    public RuntimeState(VariableHolder vars)
     {
         this.vars = vars;
         this.uuid = UUID.randomUUID();
@@ -64,7 +64,7 @@ public class RuntimeState
      * 
      * @return The variables
      */
-    public IVariableHolder getVars()
+    public VariableHolder getVars()
     {
         return this.vars;
     }

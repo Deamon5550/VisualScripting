@@ -23,9 +23,9 @@
  */
 package com.thevoxelbox.vsl.nodes;
 
-import com.thevoxelbox.vsl.node.Node;
-import com.thevoxelbox.vsl.node.NodeInfo;
-import com.thevoxelbox.vsl.util.Output;
+import com.thevoxelbox.vsl.annotation.NodeInfo;
+import com.thevoxelbox.vsl.annotation.Output;
+import com.thevoxelbox.vsl.node.AbstractNode;
 import com.thevoxelbox.vsl.util.Provider;
 import com.thevoxelbox.vsl.util.RuntimeState;
 
@@ -34,8 +34,8 @@ import com.thevoxelbox.vsl.util.RuntimeState;
  * 
  * @param <T> The value type
  */
-@NodeInfo("StaticValue")
-public class StaticValueNode<T> extends Node
+@NodeInfo(name = "StaticValue")
+public class StaticValueNode<T> extends AbstractNode
 {
 
     @Output
@@ -48,7 +48,7 @@ public class StaticValueNode<T> extends Node
      */
     public StaticValueNode(T value)
     {
-        this.value = new Provider<T>(value);
+        this.value = new Provider<T>(this, value);
     }
 
     /**

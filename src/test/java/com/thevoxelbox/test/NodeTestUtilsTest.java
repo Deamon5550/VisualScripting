@@ -24,9 +24,11 @@
 package com.thevoxelbox.test;
 
 import org.junit.Test;
+import org.mockito.Mockito;
 
 import com.thevoxelbox.test.util.CheckRunNode;
 import com.thevoxelbox.test.util.StringArrayCheckNode;
+import com.thevoxelbox.vsl.api.node.Node;
 import com.thevoxelbox.vsl.util.Provider;
 
 /**
@@ -42,7 +44,8 @@ public class NodeTestUtilsTest extends StandardTest
     public void testStringCheckArrayNode()
     {
 
-        Provider<String> string = new Provider<String>("hello");
+        Node node = Mockito.mock(Node.class);
+        Provider<String> string = new Provider<String>(node, "hello");
 
         StringArrayCheckNode check = new StringArrayCheckNode(string, "hello");
 
@@ -57,7 +60,8 @@ public class NodeTestUtilsTest extends StandardTest
     public void testStringCheckArrayNodeTooFew()
     {
 
-        Provider<String> string = new Provider<String>("hello");
+        Node node = Mockito.mock(Node.class);
+        Provider<String> string = new Provider<String>(node, "hello");
 
         StringArrayCheckNode check = new StringArrayCheckNode(string, "hello", "world");
 
@@ -72,7 +76,8 @@ public class NodeTestUtilsTest extends StandardTest
     public void testStringCheckArrayNodeTooMany()
     {
 
-        Provider<String> string = new Provider<String>("hello");
+        Node node = Mockito.mock(Node.class);
+        Provider<String> string = new Provider<String>(node, "hello");
 
         StringArrayCheckNode check = new StringArrayCheckNode(string, "hello");
 
@@ -88,7 +93,8 @@ public class NodeTestUtilsTest extends StandardTest
     public void testStringCheckArrayNodeInvalid()
     {
 
-        Provider<String> string = new Provider<String>("world");
+        Node node = Mockito.mock(Node.class);
+        Provider<String> string = new Provider<String>(node, "world");
 
         StringArrayCheckNode check = new StringArrayCheckNode(string, "hello");
 

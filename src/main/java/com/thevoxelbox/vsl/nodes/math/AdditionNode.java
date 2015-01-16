@@ -23,14 +23,14 @@
  */
 package com.thevoxelbox.vsl.nodes.math;
 
-import com.thevoxelbox.vsl.node.NodeInfo;
+import com.thevoxelbox.vsl.annotation.NodeInfo;
 import com.thevoxelbox.vsl.util.Provider;
 import com.thevoxelbox.vsl.util.RuntimeState;
 
 /**
  * Returns the sub of two integer or floating-point numbers.
  */
-@NodeInfo("Addition")
+@NodeInfo(name = "Addition")
 public class AdditionNode extends NumberOperatorNode
 {
 

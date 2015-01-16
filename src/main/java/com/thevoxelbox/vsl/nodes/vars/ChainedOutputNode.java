@@ -23,16 +23,16 @@
  */
 package com.thevoxelbox.vsl.nodes.vars;
 
-import com.thevoxelbox.vsl.node.NodeGraph;
-import com.thevoxelbox.vsl.node.NodeInfo;
+import com.thevoxelbox.vsl.annotation.NodeInfo;
+import com.thevoxelbox.vsl.node.RunnableNodeGraph;
 import com.thevoxelbox.vsl.util.Provider;
 
 /**
- * Outputs a value for a future chained {@link NodeGraph} to input.
+ * Outputs a value for a future chained {@link RunnableNodeGraph} to input.
  * 
  * @param <T> The output type
  */
-@NodeInfo("ChainedOutput")
+@NodeInfo(name = "ChainedOutput")
 public class ChainedOutputNode<T> extends VariableSetNode<T>
 {
 

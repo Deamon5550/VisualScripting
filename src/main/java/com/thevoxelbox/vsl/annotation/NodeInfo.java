@@ -21,34 +21,26 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.thevoxelbox.vsl.node;
+package com.thevoxelbox.vsl.annotation;
 
-import com.thevoxelbox.vsl.api.INode;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 /**
- * An abstract node.
+ * An information marker annotation, used for serialization.
  */
-public abstract class Node implements INode
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.TYPE)
+public @interface NodeInfo
 {
 
-    private INode next;
-
     /**
-     * {@inheritDoc}
+     * Gets the name of the node.
+     * 
+     * @return The name
      */
-    @Override
-    public void setNext(INode n)
-    {
-        this.next = n;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public INode getNext()
-    {
-        return this.next;
-    }
+    String name();
 
 }

@@ -23,21 +23,21 @@
  */
 package com.thevoxelbox.vsl.nodes.control;
 
-import com.thevoxelbox.vsl.api.INode;
-import com.thevoxelbox.vsl.node.Node;
-import com.thevoxelbox.vsl.node.NodeInfo;
-import com.thevoxelbox.vsl.util.Input;
+import com.thevoxelbox.vsl.annotation.Input;
+import com.thevoxelbox.vsl.annotation.NodeInfo;
+import com.thevoxelbox.vsl.api.node.Node;
+import com.thevoxelbox.vsl.node.AbstractNode;
 import com.thevoxelbox.vsl.util.Provider;
 import com.thevoxelbox.vsl.util.RuntimeState;
 
 /**
- * Loops over a set of integers and executes a {@link INode} for each integer.
+ * Loops over a set of integers and executes a {@link Node} for each integer.
  */
-@NodeInfo("For")
-public class ForLoop extends Node
+@NodeInfo(name = "For")
+public class ForLoop extends AbstractNode
 {
 
-    private INode body;
+    private Node body;
     @Input
     private final Provider<Integer> init;
     @Input
@@ -68,7 +68,7 @@ public class ForLoop extends Node
      */
     public ForLoop(int i, Provider<Integer> t, Provider<Integer> n)
     {
-        this.init = new Provider<Integer>(i);
+        this.init = new Provider<Integer>(this, i);
         this.target = t;
         this.increment = n;
     }
@@ -83,7 +83,7 @@ public class ForLoop extends Node
     public ForLoop(Provider<Integer> i, int t, Provider<Integer> n)
     {
         this.init = i;
-        this.target = new Provider<Integer>(t);
+        this.target = new Provider<Integer>(this, t);
         this.increment = n;
     }
 
@@ -96,8 +96,8 @@ public class ForLoop extends Node
      */
     public ForLoop(int i, int t, Provider<Integer> n)
     {
-        this.init = new Provider<Integer>(i);
-        this.target = new Provider<Integer>(t);
+        this.init = new Provider<Integer>(this, i);
+        this.target = new Provider<Integer>(this, t);
         this.increment = n;
     }
 
@@ -112,7 +112,7 @@ public class ForLoop extends Node
     {
         this.init = i;
         this.target = t;
-        this.increment = new Provider<Integer>(n);
+        this.increment = new Provider<Integer>(this, n);
     }
 
     /**
@@ -124,9 +124,9 @@ public class ForLoop extends Node
      */
     public ForLoop(int i, int t, int n)
     {
-        this.init = new Provider<Integer>(i);
-        this.target = new Provider<Integer>(t);
-        this.increment = new Provider<Integer>(n);
+        this.init = new Provider<Integer>(this, i);
+        this.target = new Provider<Integer>(this, t);
+        this.increment = new Provider<Integer>(this, n);
     }
 
     /**
@@ -139,8 +139,8 @@ public class ForLoop extends Node
     public ForLoop(Provider<Integer> i, int t, int n)
     {
         this.init = i;
-        this.target = new Provider<Integer>(t);
-        this.increment = new Provider<Integer>(n);
+        this.target = new Provider<Integer>(this, t);
+        this.increment = new Provider<Integer>(this, n);
     }
 
     /**
@@ -152,9 +152,9 @@ public class ForLoop extends Node
      */
     public ForLoop(int i, Provider<Integer> t, int n)
     {
-        this.init = new Provider<Integer>(i);
+        this.init = new Provider<Integer>(this, i);
         this.target = t;
-        this.increment = new Provider<Integer>(n);
+        this.increment = new Provider<Integer>(this, n);
     }
 
     /**
@@ -168,7 +168,7 @@ public class ForLoop extends Node
         int n = this.increment.get(state);
         for (; i < t; i += n)
         {
-            INode next = this.body;
+            Node next = this.body;
             while (next != null)
             {
                 next.exec(state);
@@ -182,7 +182,7 @@ public class ForLoop extends Node
      * 
      * @param n The body
      */
-    public void setBody(Node n)
+    public void setBody(AbstractNode n)
     {
         this.body = n;
     }

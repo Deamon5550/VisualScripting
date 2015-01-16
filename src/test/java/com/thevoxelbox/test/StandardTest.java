@@ -27,18 +27,18 @@ import org.junit.Before;
 import org.mockito.Mockito;
 
 import com.thevoxelbox.test.util.OutputHelper;
-import com.thevoxelbox.vsl.VariableScope;
-import com.thevoxelbox.vsl.api.IVariableHolder;
-import com.thevoxelbox.vsl.node.NodeGraph;
+import com.thevoxelbox.vsl.api.variables.VariableHolder;
+import com.thevoxelbox.vsl.node.RunnableNodeGraph;
 import com.thevoxelbox.vsl.util.RuntimeState;
+import com.thevoxelbox.vsl.variables.ParentedVariableScope;
 
 /**
- * A standard baseline for {@link NodeGraph} related tests.
+ * A standard baseline for {@link RunnableNodeGraph} related tests.
  */
 public class StandardTest
 {
 
-    protected IVariableHolder vars;
+    protected VariableHolder vars;
     protected OutputHelper output;
     protected RuntimeState state;
 
@@ -48,7 +48,7 @@ public class StandardTest
     @Before
     public void setup()
     {
-        this.vars = new VariableScope();
+        this.vars = new ParentedVariableScope();
         this.output = new OutputHelper();
         this.state = Mockito.mock(RuntimeState.class);
         Mockito.when(this.state.getVars()).thenReturn(this.vars);

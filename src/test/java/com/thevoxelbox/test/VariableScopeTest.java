@@ -29,15 +29,11 @@ import org.junit.Test;
 import org.mockito.Mockito;
 
 import com.google.common.base.Optional;
-import com.thevoxelbox.vsl.VariableScope;
-import com.thevoxelbox.vsl.api.IVariableHolder;
-import com.thevoxelbox.vsl.nodes.vars.VariableGetNode;
-import com.thevoxelbox.vsl.nodes.vars.VariableSetNode;
-import com.thevoxelbox.vsl.util.Provider;
-import com.thevoxelbox.vsl.util.RuntimeState;
+import com.thevoxelbox.vsl.api.variables.VariableHolder;
+import com.thevoxelbox.vsl.variables.ParentedVariableScope;
 
 /**
- * Sets for a {@link VariableScope}.
+ * Sets for a {@link ParentedVariableScope}.
  */
 public class VariableScopeTest extends StandardTest
 {
@@ -48,8 +44,8 @@ public class VariableScopeTest extends StandardTest
     @Test
     public void testInheritence()
     {
-        VariableScope parent = new VariableScope();
-        VariableScope child = new VariableScope(parent);
+        ParentedVariableScope parent = new ParentedVariableScope();
+        ParentedVariableScope child = new ParentedVariableScope(parent);
         parent.set("a", "a");
         child.set("b", "c");
 
@@ -63,8 +59,8 @@ public class VariableScopeTest extends StandardTest
     @Test
     public void testInheritence2()
     {
-        VariableScope parent = new VariableScope();
-        VariableScope child = new VariableScope();
+        ParentedVariableScope parent = new ParentedVariableScope();
+        ParentedVariableScope child = new ParentedVariableScope();
         parent.set("a", "a");
         child.set("b", "c");
         child.setParent(parent);
@@ -79,9 +75,9 @@ public class VariableScopeTest extends StandardTest
     @Test
     public void testParenthood()
     {
-        VariableScope parent = new VariableScope();
-        VariableScope child = new VariableScope(parent);
-        VariableScope child2 = new VariableScope(child);
+        ParentedVariableScope parent = new ParentedVariableScope();
+        ParentedVariableScope child = new ParentedVariableScope(parent);
+        ParentedVariableScope child2 = new ParentedVariableScope(child);
 
         assertEquals(child, child2.getParent().get());
         assertEquals(parent, child.getParent().get());
@@ -94,9 +90,9 @@ public class VariableScopeTest extends StandardTest
     @Test
     public void testParenthood2()
     {
-        IVariableHolder parent = Mockito.mock(IVariableHolder.class);
-        VariableScope child = new VariableScope(parent);
-        VariableScope child2 = new VariableScope(child);
+        VariableHolder parent = Mockito.mock(VariableHolder.class);
+        ParentedVariableScope child = new ParentedVariableScope(parent);
+        ParentedVariableScope child2 = new ParentedVariableScope(child);
 
         assertEquals(child, child2.getParent().get());
         assertEquals(parent, child.getParent().get());
@@ -109,7 +105,7 @@ public class VariableScopeTest extends StandardTest
     @Test
     public void testParenthood3()
     {
-        VariableScope parent = new VariableScope();
+        ParentedVariableScope parent = new ParentedVariableScope();
 
         assertEquals(false, parent.getParent().isPresent());
         assertEquals(false, parent.getHighestParent().isPresent());
@@ -121,7 +117,7 @@ public class VariableScopeTest extends StandardTest
     @Test
     public void testParenthoodAbsent()
     {
-        VariableScope parent = new VariableScope();
+        ParentedVariableScope parent = new ParentedVariableScope();
 
         assertEquals(Optional.absent(), parent.getParent());
     }
@@ -132,7 +128,7 @@ public class VariableScopeTest extends StandardTest
     @Test
     public void testCaseSensitivity()
     {
-        VariableScope parent = new VariableScope();
+        ParentedVariableScope parent = new ParentedVariableScope();
         parent.setCaseSensitive(false);
         parent.set("aString", "Hello");
         assertEquals("Hello", parent.get("astring").get());
@@ -141,28 +137,28 @@ public class VariableScopeTest extends StandardTest
     @Test
     public void testAbsentGet1()
     {
-        VariableScope parent = new VariableScope();
+        ParentedVariableScope parent = new ParentedVariableScope();
         assertEquals(false, parent.get(null).isPresent());
     }
 
     @Test
     public void testAbsentGet2()
     {
-        VariableScope parent = new VariableScope();
+        ParentedVariableScope parent = new ParentedVariableScope();
         assertEquals(false, parent.get("").isPresent());
     }
 
     @Test
     public void testAbsentGet3()
     {
-        VariableScope parent = new VariableScope();
+        ParentedVariableScope parent = new ParentedVariableScope();
         assertEquals(false, parent.get("ANonExistantKey").isPresent());
     }
 
     @Test
     public void testHasValue()
     {
-        VariableScope parent = new VariableScope();
+        ParentedVariableScope parent = new ParentedVariableScope();
         parent.set("a", "b");
 
         assertEquals(true, parent.hasValue("a"));
@@ -171,7 +167,7 @@ public class VariableScopeTest extends StandardTest
     @Test
     public void testHasValue2()
     {
-        VariableScope parent = new VariableScope();
+        ParentedVariableScope parent = new ParentedVariableScope();
 
         assertEquals(false, parent.hasValue("a"));
     }
@@ -179,8 +175,8 @@ public class VariableScopeTest extends StandardTest
     @Test
     public void testParentHasValue()
     {
-        VariableScope parent = new VariableScope();
-        VariableScope child = new VariableScope(parent);
+        ParentedVariableScope parent = new ParentedVariableScope();
+        ParentedVariableScope child = new ParentedVariableScope(parent);
         parent.set("a", "a");
 
         assertEquals(true, child.hasValue("a"));
@@ -189,7 +185,7 @@ public class VariableScopeTest extends StandardTest
     @Test
     public void testHasValueCaseInsensitive()
     {
-        VariableScope parent = new VariableScope();
+        ParentedVariableScope parent = new ParentedVariableScope();
         parent.setCaseSensitive(false);
         parent.set("a", "b");
 
@@ -199,7 +195,7 @@ public class VariableScopeTest extends StandardTest
     @Test
     public void testTypedGet()
     {
-        VariableScope parent = new VariableScope();
+        ParentedVariableScope parent = new ParentedVariableScope();
         parent.set("a", "b");
 
         assertEquals("b", parent.get("a", String.class).get());
@@ -208,7 +204,7 @@ public class VariableScopeTest extends StandardTest
     @Test
     public void testTypedGet2()
     {
-        VariableScope parent = new VariableScope();
+        ParentedVariableScope parent = new ParentedVariableScope();
 
         assertEquals(false, parent.get("a", String.class).isPresent());
     }
@@ -216,7 +212,7 @@ public class VariableScopeTest extends StandardTest
     @Test
     public void testTypedGetCased()
     {
-        VariableScope parent = new VariableScope();
+        ParentedVariableScope parent = new ParentedVariableScope();
         parent.setCaseSensitive(false);
         parent.set("a", "b");
 
@@ -226,8 +222,8 @@ public class VariableScopeTest extends StandardTest
     @Test
     public void testParentedTypedGet()
     {
-        VariableScope parent = new VariableScope();
-        VariableScope child = new VariableScope(parent);
+        ParentedVariableScope parent = new ParentedVariableScope();
+        ParentedVariableScope child = new ParentedVariableScope(parent);
         parent.set("a", "b");
 
         assertEquals("b", child.get("a", String.class).get());
@@ -236,7 +232,7 @@ public class VariableScopeTest extends StandardTest
     @Test
     public void testTypedGetNull()
     {
-        VariableScope parent = new VariableScope();
+        ParentedVariableScope parent = new ParentedVariableScope();
 
         assertEquals(false, parent.get(null, String.class).isPresent());
     }
@@ -244,7 +240,7 @@ public class VariableScopeTest extends StandardTest
     @Test
     public void testTypedGetNull2()
     {
-        VariableScope parent = new VariableScope();
+        ParentedVariableScope parent = new ParentedVariableScope();
         parent.set("a", "b");
 
         assertEquals("b", parent.get("a", null).get());
@@ -253,7 +249,7 @@ public class VariableScopeTest extends StandardTest
     @Test
     public void testTypedGetEmpty()
     {
-        VariableScope parent = new VariableScope();
+        ParentedVariableScope parent = new ParentedVariableScope();
 
         assertEquals(false, parent.get("", String.class).isPresent());
     }
@@ -261,7 +257,7 @@ public class VariableScopeTest extends StandardTest
     @Test
     public void testKeyset()
     {
-        VariableScope parent = new VariableScope();
+        ParentedVariableScope parent = new ParentedVariableScope();
         parent.set("a", "b");
 
         assertEquals(1, parent.keyset().size());
@@ -271,8 +267,8 @@ public class VariableScopeTest extends StandardTest
     @Test
     public void testParentedKeyset()
     {
-        VariableScope parent = new VariableScope();
-        VariableScope child = new VariableScope(parent);
+        ParentedVariableScope parent = new ParentedVariableScope();
+        ParentedVariableScope child = new ParentedVariableScope(parent);
         parent.set("a", "b");
         child.set("b", "d");
 
@@ -282,8 +278,8 @@ public class VariableScopeTest extends StandardTest
     @Test
     public void testParentedKeyset2()
     {
-        VariableScope parent = new VariableScope();
-        VariableScope child = new VariableScope(parent);
+        ParentedVariableScope parent = new ParentedVariableScope();
+        ParentedVariableScope child = new ParentedVariableScope(parent);
         parent.set("a", "b");
         child.set("a", "d");
         child.set("b", "d");

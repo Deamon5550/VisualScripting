@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.thevoxelbox.vsl.api;
+package com.thevoxelbox.vsl.api.variables;
 
 import java.util.Set;
 
@@ -30,7 +30,7 @@ import com.google.common.base.Optional;
 /**
  * A storage container for named variables.
  */
-public interface IVariableHolder
+public interface VariableHolder
 {
 
     /**

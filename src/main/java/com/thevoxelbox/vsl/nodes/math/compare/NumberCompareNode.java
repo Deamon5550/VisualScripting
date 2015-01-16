@@ -23,8 +23,8 @@
  */
 package com.thevoxelbox.vsl.nodes.math.compare;
 
+import com.thevoxelbox.vsl.annotation.Output;
 import com.thevoxelbox.vsl.nodes.math.TwoNumberNode;
-import com.thevoxelbox.vsl.util.Output;
 import com.thevoxelbox.vsl.util.Provider;
 
 /**

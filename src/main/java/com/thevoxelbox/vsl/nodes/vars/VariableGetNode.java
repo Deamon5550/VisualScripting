@@ -23,10 +23,10 @@
  */
 package com.thevoxelbox.vsl.nodes.vars;
 
-import com.thevoxelbox.vsl.node.Node;
-import com.thevoxelbox.vsl.node.NodeInfo;
-import com.thevoxelbox.vsl.util.Input;
-import com.thevoxelbox.vsl.util.Output;
+import com.thevoxelbox.vsl.annotation.Input;
+import com.thevoxelbox.vsl.annotation.NodeInfo;
+import com.thevoxelbox.vsl.annotation.Output;
+import com.thevoxelbox.vsl.node.AbstractNode;
 import com.thevoxelbox.vsl.util.Provider;
 import com.thevoxelbox.vsl.util.RuntimeState;
 
@@ -35,8 +35,8 @@ import com.thevoxelbox.vsl.util.RuntimeState;
  * 
  * @param <T> The value type
  */
-@NodeInfo("VariableGet")
-public class VariableGetNode<T> extends Node
+@NodeInfo(name = "VariableGet")
+public class VariableGetNode<T> extends AbstractNode
 {
 
     @Input
@@ -62,7 +62,7 @@ public class VariableGetNode<T> extends Node
      */
     public VariableGetNode(String name)
     {
-        this.varName = new Provider<String>(name);
+        this.varName = new Provider<String>(this, name);
         this.value = new Provider<T>(this);
     }
 

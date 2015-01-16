@@ -23,47 +23,46 @@
  */
 package com.thevoxelbox.vsl.node;
 
-import com.thevoxelbox.vsl.api.INode;
-import com.thevoxelbox.vsl.api.IVariableHolder;
+import com.thevoxelbox.vsl.api.node.Node;
+import com.thevoxelbox.vsl.api.node.NodeGraph;
+import com.thevoxelbox.vsl.api.variables.VariableHolder;
 import com.thevoxelbox.vsl.util.RuntimeState;
 
 /**
  * A node graph is a directed acyclic graph of connected nodes which when
  * traversed will execute the program function. It is itself a node and may be
- * used in another {@link NodeGraph} recursively.
+ * used in another {@link RunnableNodeGraph} recursively.
  */
-public class NodeGraph extends Node
+public class RunnableNodeGraph extends AbstractNode implements NodeGraph
 {
 
     String name;
-    NodeGraph nextgraph = null;
+    RunnableNodeGraph nextgraph = null;
 
     /**
-     * Creates a new {@link NodeGraph}
+     * Creates a new {@link RunnableNodeGraph}
      * 
      * @param name The name
      */
-    public NodeGraph(String name)
+    public RunnableNodeGraph(String name)
     {
         this.name = name;
     }
 
     /**
-     * Gets the graph name.
-     * 
-     * @return The name
+     * {@inheritDoc}
      */
+    @Override
     public String getName()
     {
         return this.name;
     }
 
     /**
-     * Runs this graph based on the given variables.
-     * 
-     * @param vars The runtime variables
+     * {@inheritDoc}
      */
-    public void run(IVariableHolder vars)
+    @Override
+    public void run(VariableHolder vars)
     {
         RuntimeState state = new RuntimeState(vars);
         exec(state);
@@ -75,7 +74,7 @@ public class NodeGraph extends Node
     @Override
     public void exec(RuntimeState state)
     {
-        INode next = this.getNext();
+        Node next = this.getNext();
         while (next != null)
         {
             next.exec(state);
@@ -88,23 +87,39 @@ public class NodeGraph extends Node
     }
 
     /**
-     * Chains this graph into another graph
-     * 
-     * @param next The next graph
+     * {@inheritDoc}
      */
-    public void chain(NodeGraph next)
+    @Override
+    public void chain(RunnableNodeGraph next)
     {
         this.nextgraph = next;
     }
 
     /**
-     * Gets the next graph.
-     * 
-     * @return The graph
+     * {@inheritDoc}
      */
-    public NodeGraph getNextGraph()
+    @Override
+    public RunnableNodeGraph getNextGraph()
     {
         return this.nextgraph;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Node getStart()
+    {
+        return this.getNext();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setStart(Node node)
+    {
+        this.setNext(node);
     }
 
 }

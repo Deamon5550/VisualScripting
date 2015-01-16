@@ -23,9 +23,9 @@
  */
 package com.thevoxelbox.vsl.nodes.vars;
 
-import com.thevoxelbox.vsl.node.Node;
-import com.thevoxelbox.vsl.node.NodeInfo;
-import com.thevoxelbox.vsl.util.Input;
+import com.thevoxelbox.vsl.annotation.Input;
+import com.thevoxelbox.vsl.annotation.NodeInfo;
+import com.thevoxelbox.vsl.node.AbstractNode;
 import com.thevoxelbox.vsl.util.Provider;
 import com.thevoxelbox.vsl.util.RuntimeState;
 
@@ -34,8 +34,8 @@ import com.thevoxelbox.vsl.util.RuntimeState;
  * 
  * @param <T> The value type
  */
-@NodeInfo("VariableSet")
-public class VariableSetNode<T> extends Node
+@NodeInfo(name = "VariableSet")
+public class VariableSetNode<T> extends AbstractNode
 {
 
     @Input
@@ -63,7 +63,7 @@ public class VariableSetNode<T> extends Node
      */
     public VariableSetNode(String name, Provider<T> value)
     {
-        this.varName = new Provider<String>(name);
+        this.varName = new Provider<String>(this, name);
         this.value = value;
     }
 
@@ -76,7 +76,7 @@ public class VariableSetNode<T> extends Node
     public VariableSetNode(Provider<String> name, T value)
     {
         this.varName = name;
-        this.value = new Provider<T>(value);
+        this.value = new Provider<T>(this, value);
     }
 
     /**
@@ -87,8 +87,8 @@ public class VariableSetNode<T> extends Node
      */
     public VariableSetNode(String name, T value)
     {
-        this.varName = new Provider<String>(name);
-        this.value = new Provider<T>(value);
+        this.varName = new Provider<String>(this, name);
+        this.value = new Provider<T>(this, value);
     }
 
     /**

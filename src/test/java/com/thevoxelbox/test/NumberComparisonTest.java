@@ -25,8 +25,11 @@ package com.thevoxelbox.test;
 
 import static org.junit.Assert.assertEquals;
 
+import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mockito;
 
+import com.thevoxelbox.vsl.api.node.Node;
 import com.thevoxelbox.vsl.nodes.math.compare.NumberEqualsNode;
 import com.thevoxelbox.vsl.nodes.math.compare.NumberGreaterThanNode;
 import com.thevoxelbox.vsl.nodes.math.compare.NumberGreaterThanOrEqualsNode;
@@ -39,6 +42,14 @@ import com.thevoxelbox.vsl.util.Provider;
  */
 public class NumberComparisonTest extends StandardTest
 {
+    
+    Node mockNode;
+    
+    @Before
+    public void setup()
+    {
+        this.mockNode = Mockito.mock(Node.class);
+    }
 
     /**
      * 
@@ -46,8 +57,8 @@ public class NumberComparisonTest extends StandardTest
     @Test
     public void testEquals()
     {
-        Provider<Integer> a = new Provider<Integer>(5);
-        Provider<Integer> b = new Provider<Integer>(5);
+        Provider<Integer> a = new Provider<Integer>(this.mockNode, 5);
+        Provider<Integer> b = new Provider<Integer>(this.mockNode, 5);
 
         NumberEqualsNode eq = new NumberEqualsNode(a, b, false);
 
@@ -62,8 +73,8 @@ public class NumberComparisonTest extends StandardTest
     @Test
     public void testEquals2()
     {
-        Provider<Integer> a = new Provider<Integer>(5);
-        Provider<Integer> b = new Provider<Integer>(4);
+        Provider<Integer> a = new Provider<Integer>(this.mockNode, 5);
+        Provider<Integer> b = new Provider<Integer>(this.mockNode, 4);
 
         NumberEqualsNode eq = new NumberEqualsNode(a, b, false);
 
@@ -78,8 +89,8 @@ public class NumberComparisonTest extends StandardTest
     @Test
     public void testGreater()
     {
-        Provider<Integer> a = new Provider<Integer>(6);
-        Provider<Integer> b = new Provider<Integer>(5);
+        Provider<Integer> a = new Provider<Integer>(this.mockNode, 6);
+        Provider<Integer> b = new Provider<Integer>(this.mockNode, 5);
 
         NumberGreaterThanNode eq = new NumberGreaterThanNode(a, b, false);
 
@@ -94,8 +105,8 @@ public class NumberComparisonTest extends StandardTest
     @Test
     public void testGreater2()
     {
-        Provider<Integer> a = new Provider<Integer>(6);
-        Provider<Integer> b = new Provider<Integer>(7);
+        Provider<Integer> a = new Provider<Integer>(this.mockNode, 6);
+        Provider<Integer> b = new Provider<Integer>(this.mockNode, 7);
 
         NumberGreaterThanNode eq = new NumberGreaterThanNode(a, b, false);
 
@@ -110,8 +121,8 @@ public class NumberComparisonTest extends StandardTest
     @Test
     public void testGreaterEq()
     {
-        Provider<Integer> a = new Provider<Integer>(6);
-        Provider<Integer> b = new Provider<Integer>(5);
+        Provider<Integer> a = new Provider<Integer>(this.mockNode, 6);
+        Provider<Integer> b = new Provider<Integer>(this.mockNode, 5);
 
         NumberGreaterThanOrEqualsNode eq = new NumberGreaterThanOrEqualsNode(a, b, false);
 
@@ -126,8 +137,8 @@ public class NumberComparisonTest extends StandardTest
     @Test
     public void testGreaterEq2()
     {
-        Provider<Integer> a = new Provider<Integer>(5);
-        Provider<Integer> b = new Provider<Integer>(5);
+        Provider<Integer> a = new Provider<Integer>(this.mockNode, 5);
+        Provider<Integer> b = new Provider<Integer>(this.mockNode, 5);
 
         NumberGreaterThanOrEqualsNode eq = new NumberGreaterThanOrEqualsNode(a, b, false);
 
@@ -142,8 +153,8 @@ public class NumberComparisonTest extends StandardTest
     @Test
     public void testGreaterEq3()
     {
-        Provider<Integer> a = new Provider<Integer>(6);
-        Provider<Integer> b = new Provider<Integer>(7);
+        Provider<Integer> a = new Provider<Integer>(this.mockNode, 6);
+        Provider<Integer> b = new Provider<Integer>(this.mockNode, 7);
 
         NumberGreaterThanOrEqualsNode eq = new NumberGreaterThanOrEqualsNode(a, b, false);
 
@@ -158,8 +169,8 @@ public class NumberComparisonTest extends StandardTest
     @Test
     public void testLess()
     {
-        Provider<Integer> a = new Provider<Integer>(4);
-        Provider<Integer> b = new Provider<Integer>(5);
+        Provider<Integer> a = new Provider<Integer>(this.mockNode, 4);
+        Provider<Integer> b = new Provider<Integer>(this.mockNode, 5);
 
         NumberLessThanNode eq = new NumberLessThanNode(a, b, false);
 
@@ -174,8 +185,8 @@ public class NumberComparisonTest extends StandardTest
     @Test
     public void testLess2()
     {
-        Provider<Integer> a = new Provider<Integer>(4);
-        Provider<Integer> b = new Provider<Integer>(3);
+        Provider<Integer> a = new Provider<Integer>(this.mockNode, 4);
+        Provider<Integer> b = new Provider<Integer>(this.mockNode, 3);
 
         NumberLessThanNode eq = new NumberLessThanNode(a, b, false);
 
@@ -190,8 +201,8 @@ public class NumberComparisonTest extends StandardTest
     @Test
     public void testLessEq()
     {
-        Provider<Integer> a = new Provider<Integer>(5);
-        Provider<Integer> b = new Provider<Integer>(5);
+        Provider<Integer> a = new Provider<Integer>(this.mockNode, 5);
+        Provider<Integer> b = new Provider<Integer>(this.mockNode, 5);
 
         NumberLessThanOrEqualsNode eq = new NumberLessThanOrEqualsNode(a, b, false);
 
@@ -206,8 +217,8 @@ public class NumberComparisonTest extends StandardTest
     @Test
     public void testLessEq2()
     {
-        Provider<Integer> a = new Provider<Integer>(4);
-        Provider<Integer> b = new Provider<Integer>(5);
+        Provider<Integer> a = new Provider<Integer>(this.mockNode, 4);
+        Provider<Integer> b = new Provider<Integer>(this.mockNode, 5);
 
         NumberLessThanOrEqualsNode eq = new NumberLessThanOrEqualsNode(a, b, false);
 
@@ -222,8 +233,8 @@ public class NumberComparisonTest extends StandardTest
     @Test
     public void testLessEq3()
     {
-        Provider<Integer> a = new Provider<Integer>(4);
-        Provider<Integer> b = new Provider<Integer>(2);
+        Provider<Integer> a = new Provider<Integer>(this.mockNode, 4);
+        Provider<Integer> b = new Provider<Integer>(this.mockNode, 2);
 
         NumberLessThanOrEqualsNode eq = new NumberLessThanOrEqualsNode(a, b, false);
 
@@ -238,8 +249,8 @@ public class NumberComparisonTest extends StandardTest
     @Test
     public void testFloatEquals()
     {
-        Provider<Double> a = new Provider<Double>(5.2);
-        Provider<Double> b = new Provider<Double>(5.2);
+        Provider<Double> a = new Provider<Double>(this.mockNode, 5.2);
+        Provider<Double> b = new Provider<Double>(this.mockNode, 5.2);
 
         NumberEqualsNode eq = new NumberEqualsNode(a, b, true);
 
@@ -254,8 +265,8 @@ public class NumberComparisonTest extends StandardTest
     @Test
     public void testFloatEquals2()
     {
-        Provider<Double> a = new Provider<Double>(5.2);
-        Provider<Double> b = new Provider<Double>(5.3);
+        Provider<Double> a = new Provider<Double>(this.mockNode, 5.2);
+        Provider<Double> b = new Provider<Double>(this.mockNode, 5.3);
 
         NumberEqualsNode eq = new NumberEqualsNode(a, b, true);
 
@@ -270,8 +281,8 @@ public class NumberComparisonTest extends StandardTest
     @Test
     public void testFloatGreater()
     {
-        Provider<Double> a = new Provider<Double>(6.4);
-        Provider<Double> b = new Provider<Double>(5.4);
+        Provider<Double> a = new Provider<Double>(this.mockNode, 6.4);
+        Provider<Double> b = new Provider<Double>(this.mockNode, 5.4);
 
         NumberGreaterThanNode eq = new NumberGreaterThanNode(a, b, true);
 
@@ -286,8 +297,8 @@ public class NumberComparisonTest extends StandardTest
     @Test
     public void testFloatGreater2()
     {
-        Provider<Double> a = new Provider<Double>(6.4);
-        Provider<Double> b = new Provider<Double>(7.5);
+        Provider<Double> a = new Provider<Double>(this.mockNode, 6.4);
+        Provider<Double> b = new Provider<Double>(this.mockNode, 7.5);
 
         NumberGreaterThanNode eq = new NumberGreaterThanNode(a, b, true);
 
@@ -302,8 +313,8 @@ public class NumberComparisonTest extends StandardTest
     @Test
     public void testFloatGreaterEq()
     {
-        Provider<Double> a = new Provider<Double>(6.4);
-        Provider<Double> b = new Provider<Double>(5.4);
+        Provider<Double> a = new Provider<Double>(this.mockNode, 6.4);
+        Provider<Double> b = new Provider<Double>(this.mockNode, 5.4);
 
         NumberGreaterThanOrEqualsNode eq = new NumberGreaterThanOrEqualsNode(a, b, true);
 
@@ -318,8 +329,8 @@ public class NumberComparisonTest extends StandardTest
     @Test
     public void testFloatGreaterEq2()
     {
-        Provider<Double> a = new Provider<Double>(5.4);
-        Provider<Double> b = new Provider<Double>(5.4);
+        Provider<Double> a = new Provider<Double>(this.mockNode, 5.4);
+        Provider<Double> b = new Provider<Double>(this.mockNode, 5.4);
 
         NumberGreaterThanOrEqualsNode eq = new NumberGreaterThanOrEqualsNode(a, b, true);
 
@@ -334,8 +345,8 @@ public class NumberComparisonTest extends StandardTest
     @Test
     public void testFloatGreaterEq3()
     {
-        Provider<Double> a = new Provider<Double>(5.4);
-        Provider<Double> b = new Provider<Double>(5.5);
+        Provider<Double> a = new Provider<Double>(this.mockNode, 5.4);
+        Provider<Double> b = new Provider<Double>(this.mockNode, 5.5);
 
         NumberGreaterThanOrEqualsNode eq = new NumberGreaterThanOrEqualsNode(a, b, true);
 
@@ -350,8 +361,8 @@ public class NumberComparisonTest extends StandardTest
     @Test
     public void testFloatLess()
     {
-        Provider<Double> a = new Provider<Double>(4.4);
-        Provider<Double> b = new Provider<Double>(5.4);
+        Provider<Double> a = new Provider<Double>(this.mockNode, 4.4);
+        Provider<Double> b = new Provider<Double>(this.mockNode, 5.4);
 
         NumberLessThanNode eq = new NumberLessThanNode(a, b, true);
 
@@ -366,8 +377,8 @@ public class NumberComparisonTest extends StandardTest
     @Test
     public void testFloatLess2()
     {
-        Provider<Double> a = new Provider<Double>(4.4);
-        Provider<Double> b = new Provider<Double>(4.2);
+        Provider<Double> a = new Provider<Double>(this.mockNode, 4.4);
+        Provider<Double> b = new Provider<Double>(this.mockNode, 4.2);
 
         NumberLessThanNode eq = new NumberLessThanNode(a, b, true);
 
@@ -382,8 +393,8 @@ public class NumberComparisonTest extends StandardTest
     @Test
     public void testFloatLessEq()
     {
-        Provider<Double> a = new Provider<Double>(5.4);
-        Provider<Double> b = new Provider<Double>(5.4);
+        Provider<Double> a = new Provider<Double>(this.mockNode, 5.4);
+        Provider<Double> b = new Provider<Double>(this.mockNode, 5.4);
 
         NumberLessThanOrEqualsNode eq = new NumberLessThanOrEqualsNode(a, b, true);
 
@@ -398,8 +409,8 @@ public class NumberComparisonTest extends StandardTest
     @Test
     public void testFloatLessEq2()
     {
-        Provider<Double> a = new Provider<Double>(4.4);
-        Provider<Double> b = new Provider<Double>(5.4);
+        Provider<Double> a = new Provider<Double>(this.mockNode, 4.4);
+        Provider<Double> b = new Provider<Double>(this.mockNode, 5.4);
 
         NumberLessThanOrEqualsNode eq = new NumberLessThanOrEqualsNode(a, b, true);
 
@@ -414,8 +425,8 @@ public class NumberComparisonTest extends StandardTest
     @Test
     public void testFloatLessEq3()
     {
-        Provider<Double> a = new Provider<Double>(4.4);
-        Provider<Double> b = new Provider<Double>(4.3);
+        Provider<Double> a = new Provider<Double>(this.mockNode, 4.4);
+        Provider<Double> b = new Provider<Double>(this.mockNode, 4.3);
 
         NumberLessThanOrEqualsNode eq = new NumberLessThanOrEqualsNode(a, b, true);
 

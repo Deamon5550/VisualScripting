@@ -21,19 +21,36 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.thevoxelbox.vsl.util;
+package com.thevoxelbox.vsl.api.node;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import com.thevoxelbox.vsl.util.RuntimeState;
 
 /**
- * A marker annotation for the output providers of a node.
+ * Represents a node with a set of inputs and outputs which executes a single
+ * discrete function.
  */
-@Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.FIELD)
-public @interface Output
+public interface Node
 {
+
+    /**
+     * Executes this node's function based on the runtime state and its inputs.
+     * 
+     * @param state The runtime state
+     */
+    void exec(RuntimeState state);
+
+    /**
+     * Sets the node to be executed after this node in the execution pathway.
+     * 
+     * @param next The next node
+     */
+    void setNext(Node next);
+
+    /**
+     * Gets the next node in the execution pathway.
+     * 
+     * @return The next node
+     */
+    Node getNext();
 
 }
