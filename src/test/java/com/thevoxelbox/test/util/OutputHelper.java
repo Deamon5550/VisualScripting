@@ -49,8 +49,7 @@ public class OutputHelper
     }
 
     /**
-     * Checks of the output to standard out matches the given string. Newlines
-     * are omitted.
+     * Checks of the output to standard out matches the given string. Newlines are omitted.
      * 
      * @param s The string to check
      */

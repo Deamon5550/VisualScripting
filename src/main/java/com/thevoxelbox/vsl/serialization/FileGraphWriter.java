@@ -1,7 +1,32 @@
+/*
+ * The MIT License (MIT)
+ *
+ * Copyright (c) 2014 The VoxelBox
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ */
 package com.thevoxelbox.vsl.serialization;
 
+import java.io.Closeable;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.Flushable;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.io.PrintWriter;
@@ -129,7 +154,11 @@ public class FileGraphWriter implements GraphWriter
     }
 
     /**
+     * Closes this stream and releases any system resources associated with it. If the stream is already closed then invoking this method has no
+     * effect.
      * 
+     * @throws IOException If an I/O error occurs
+     * @see Closeable#close()
      */
     @Override
     public void close() throws IOException
@@ -138,7 +167,10 @@ public class FileGraphWriter implements GraphWriter
     }
 
     /**
+     * Flushes this stream by writing any buffered output to the underlying stream.
      * 
+     * @throws IOException If an I/O error occurs
+     * @see Flushable#flush()
      */
     @Override
     public void flush() throws IOException

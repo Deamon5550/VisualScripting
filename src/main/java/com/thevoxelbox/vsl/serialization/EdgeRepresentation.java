@@ -1,3 +1,26 @@
+/*
+ * The MIT License (MIT)
+ *
+ * Copyright (c) 2014 The VoxelBox
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ */
 package com.thevoxelbox.vsl.serialization;
 
 /**
@@ -5,26 +28,26 @@ package com.thevoxelbox.vsl.serialization;
  */
 public class EdgeRepresentation
 {
-    
-    private final int a_node;
-    private final int a_output;
-    private final int b_node;
-    private final int b_input;
+
+    private final int nodeA;
+    private final int output;
+    private final int nodeB;
+    private final int input;
 
     /**
      * Creates a new {@link EdgeRepresentation}.
      * 
-     * @param a_node The output node index
-     * @param a_output The output node output index
-     * @param b_node The input node index
-     * @param b_input The input node input index
+     * @param nodeA The output node index
+     * @param output The output node output index
+     * @param nodeB The input node index
+     * @param input The input node input index
      */
-    public EdgeRepresentation(int a_node, int a_output, int b_node, int b_input)
+    public EdgeRepresentation(int nodeA, int output, int nodeB, int input)
     {
-        this.a_node = a_node;
-        this.a_output = a_output;
-        this.b_node = b_node;
-        this.b_input = b_input;
+        this.nodeA = nodeA;
+        this.output = output;
+        this.nodeB = nodeB;
+        this.input = input;
     }
 
     /**
@@ -34,7 +57,7 @@ public class EdgeRepresentation
      */
     public int getOutputNode()
     {
-        return this.a_node;
+        return this.nodeA;
     }
 
     /**
@@ -44,7 +67,7 @@ public class EdgeRepresentation
      */
     public int getOutputIndex()
     {
-        return this.a_output;
+        return this.output;
     }
 
     /**
@@ -54,7 +77,7 @@ public class EdgeRepresentation
      */
     public int getInputNode()
     {
-        return this.b_node;
+        return this.nodeB;
     }
 
     /**
@@ -64,9 +87,7 @@ public class EdgeRepresentation
      */
     public int getInputIndex()
     {
-        return this.b_input;
+        return this.input;
     }
-    
-    
-    
+
 }

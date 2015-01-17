@@ -27,8 +27,7 @@ import com.thevoxelbox.vsl.node.AbstractNode;
 import com.thevoxelbox.vsl.util.RuntimeState;
 
 /**
- * A testing utility node to check that a node is run a specified number of
- * times.
+ * A testing utility node to check that a node is run a specified number of times.
  */
 public class CheckRunNode extends AbstractNode
 {

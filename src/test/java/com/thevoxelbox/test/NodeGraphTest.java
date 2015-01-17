@@ -25,6 +25,7 @@ package com.thevoxelbox.test;
 
 import static org.junit.Assert.assertEquals;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import com.thevoxelbox.vsl.api.node.NodeGraph;
@@ -37,6 +38,15 @@ import com.thevoxelbox.vsl.nodes.debug.PrintNode;
  */
 public class NodeGraphTest extends StandardTest
 {
+
+    /**
+     * 
+     */
+    @Before
+    public void setup()
+    {
+        super.setup();
+    }
 
     /**
      * 

@@ -24,7 +24,6 @@
 package com.thevoxelbox.test;
 
 import org.junit.Before;
-import org.mockito.Mockito;
 
 import com.thevoxelbox.test.util.OutputHelper;
 import com.thevoxelbox.vsl.api.variables.VariableHolder;
@@ -45,12 +44,10 @@ public class StandardTest
     /**
      * Sets up the test.
      */
-    @Before
     public void setup()
     {
         this.vars = new ParentedVariableScope();
         this.output = new OutputHelper();
-        this.state = Mockito.mock(RuntimeState.class);
-        Mockito.when(this.state.getVars()).thenReturn(this.vars);
+        this.state = new RuntimeState(this.vars);
     }
 }

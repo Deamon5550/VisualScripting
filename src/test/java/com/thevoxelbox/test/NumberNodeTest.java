@@ -44,12 +44,16 @@ import com.thevoxelbox.vsl.util.Provider;
  */
 public class NumberNodeTest extends StandardTest
 {
-    
+
     Node mockNode;
     
+    /**
+     * 
+     */
     @Before
     public void setup()
     {
+        super.setup();
         this.mockNode = Mockito.mock(Node.class);
     }
 
@@ -172,7 +176,6 @@ public class NumberNodeTest extends StandardTest
         Provider<Double> a = new Provider<Double>(this.mockNode, -5.2);
 
         AbsNode add = new AbsNode(a, true);
-
         add.exec(this.state);
 
         assertEquals(5.2, add.getResult().get(this.state));

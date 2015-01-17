@@ -28,8 +28,7 @@ import com.thevoxelbox.vsl.util.Provider;
 import com.thevoxelbox.vsl.util.RuntimeState;
 
 /**
- * A testing utility node for checking if an array of strings is correctly
- * passed from a loop.
+ * A testing utility node for checking if an array of strings is correctly passed from a loop.
  */
 public class StringArrayCheckNode extends AbstractNode
 {

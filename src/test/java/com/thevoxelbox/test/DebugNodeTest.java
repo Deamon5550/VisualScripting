@@ -25,6 +25,7 @@ package com.thevoxelbox.test;
 
 import static org.junit.Assert.assertEquals;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 
@@ -38,6 +39,15 @@ import com.thevoxelbox.vsl.util.Provider;
  */
 public class DebugNodeTest extends StandardTest
 {
+
+    /**
+     * 
+     */
+    @Before
+    public void setup()
+    {
+        super.setup();
+    }
 
     /**
      * 

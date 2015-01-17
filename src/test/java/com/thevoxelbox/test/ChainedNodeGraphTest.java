@@ -23,6 +23,9 @@
  */
 package com.thevoxelbox.test;
 
+import static org.junit.Assert.assertEquals;
+
+import org.junit.Before;
 import org.junit.Test;
 
 import com.thevoxelbox.vsl.node.RunnableNodeGraph;
@@ -31,13 +34,20 @@ import com.thevoxelbox.vsl.nodes.debug.PrintNode;
 import com.thevoxelbox.vsl.nodes.vars.ChainedInputNode;
 import com.thevoxelbox.vsl.nodes.vars.ChainedOutputNode;
 
-import static org.junit.Assert.assertEquals;
-
 /**
  * A test for two node graphs chained together. TODO cleanup
  */
 public class ChainedNodeGraphTest extends StandardTest
 {
+
+    /**
+     * 
+     */
+    @Before
+    public void setup()
+    {
+        super.setup();
+    }
 
     /**
      * 

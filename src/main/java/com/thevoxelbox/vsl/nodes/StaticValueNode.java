@@ -44,7 +44,7 @@ public class StaticValueNode<T> extends AbstractNode
     /**
      * Creates a new {@link StaticValueNode}.
      * 
-     * @param value
+     * @param value The value
      */
     public StaticValueNode(T value)
     {

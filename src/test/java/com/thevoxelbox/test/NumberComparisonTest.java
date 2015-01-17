@@ -42,12 +42,16 @@ import com.thevoxelbox.vsl.util.Provider;
  */
 public class NumberComparisonTest extends StandardTest
 {
-    
+
     Node mockNode;
-    
+
+    /**
+     * 
+     */
     @Before
     public void setup()
     {
+        super.setup();
         this.mockNode = Mockito.mock(Node.class);
     }
 

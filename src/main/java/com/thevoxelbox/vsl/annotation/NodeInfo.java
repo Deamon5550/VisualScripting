@@ -38,8 +38,6 @@ public @interface NodeInfo
 
     /**
      * Gets the name of the node.
-     * 
-     * @return The name
      */
     String name();
 

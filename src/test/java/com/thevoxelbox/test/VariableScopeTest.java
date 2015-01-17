@@ -134,6 +134,9 @@ public class VariableScopeTest extends StandardTest
         assertEquals("Hello", parent.get("astring").get());
     }
 
+    /**
+     * 
+     */
     @Test
     public void testAbsentGet1()
     {
@@ -141,6 +144,9 @@ public class VariableScopeTest extends StandardTest
         assertEquals(false, parent.get(null).isPresent());
     }
 
+    /**
+     * 
+     */
     @Test
     public void testAbsentGet2()
     {
@@ -148,6 +154,9 @@ public class VariableScopeTest extends StandardTest
         assertEquals(false, parent.get("").isPresent());
     }
 
+    /**
+     * 
+     */
     @Test
     public void testAbsentGet3()
     {
@@ -155,6 +164,9 @@ public class VariableScopeTest extends StandardTest
         assertEquals(false, parent.get("ANonExistantKey").isPresent());
     }
 
+    /**
+     * 
+     */
     @Test
     public void testHasValue()
     {
@@ -164,6 +176,9 @@ public class VariableScopeTest extends StandardTest
         assertEquals(true, parent.hasValue("a"));
     }
 
+    /**
+     * 
+     */
     @Test
     public void testHasValue2()
     {
@@ -172,6 +187,9 @@ public class VariableScopeTest extends StandardTest
         assertEquals(false, parent.hasValue("a"));
     }
 
+    /**
+     * 
+     */
     @Test
     public void testParentHasValue()
     {
@@ -182,6 +200,9 @@ public class VariableScopeTest extends StandardTest
         assertEquals(true, child.hasValue("a"));
     }
 
+    /**
+     * 
+     */
     @Test
     public void testHasValueCaseInsensitive()
     {
@@ -192,6 +213,9 @@ public class VariableScopeTest extends StandardTest
         assertEquals(true, parent.hasValue("A"));
     }
 
+    /**
+     * 
+     */
     @Test
     public void testTypedGet()
     {
@@ -201,6 +225,9 @@ public class VariableScopeTest extends StandardTest
         assertEquals("b", parent.get("a", String.class).get());
     }
 
+    /**
+     * 
+     */
     @Test
     public void testTypedGet2()
     {
@@ -209,6 +236,9 @@ public class VariableScopeTest extends StandardTest
         assertEquals(false, parent.get("a", String.class).isPresent());
     }
 
+    /**
+     * 
+     */
     @Test
     public void testTypedGetCased()
     {
@@ -219,6 +249,9 @@ public class VariableScopeTest extends StandardTest
         assertEquals("b", parent.get("A", String.class).get());
     }
 
+    /**
+     * 
+     */
     @Test
     public void testParentedTypedGet()
     {
@@ -229,6 +262,9 @@ public class VariableScopeTest extends StandardTest
         assertEquals("b", child.get("a", String.class).get());
     }
 
+    /**
+     * 
+     */
     @Test
     public void testTypedGetNull()
     {
@@ -237,6 +273,9 @@ public class VariableScopeTest extends StandardTest
         assertEquals(false, parent.get(null, String.class).isPresent());
     }
 
+    /**
+     * 
+     */
     @Test
     public void testTypedGetNull2()
     {
@@ -246,6 +285,9 @@ public class VariableScopeTest extends StandardTest
         assertEquals("b", parent.get("a", null).get());
     }
 
+    /**
+     * 
+     */
     @Test
     public void testTypedGetEmpty()
     {
@@ -254,6 +296,9 @@ public class VariableScopeTest extends StandardTest
         assertEquals(false, parent.get("", String.class).isPresent());
     }
 
+    /**
+     * 
+     */
     @Test
     public void testKeyset()
     {
@@ -264,6 +309,9 @@ public class VariableScopeTest extends StandardTest
         assertEquals(true, parent.keyset().contains("a"));
     }
 
+    /**
+     * 
+     */
     @Test
     public void testParentedKeyset()
     {
@@ -275,6 +323,9 @@ public class VariableScopeTest extends StandardTest
         assertEquals(2, child.keyset().size());
     }
 
+    /**
+     * 
+     */
     @Test
     public void testParentedKeyset2()
     {

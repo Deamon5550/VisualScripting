@@ -41,12 +41,16 @@ import com.thevoxelbox.vsl.util.Provider;
  */
 public class ProgramFlowTest extends StandardTest
 {
-    
+
     Node mockNode;
-    
+
+    /**
+     * 
+     */
     @Before
     public void setup()
     {
+        super.setup();
         this.mockNode = Mockito.mock(Node.class);
     }
 
@@ -62,7 +66,7 @@ public class ProgramFlowTest extends StandardTest
         ForEachNode<String> forloop = new ForEachNode<String>(array.getValue());
         StringArrayCheckNode check = new StringArrayCheckNode(forloop.getNextValue(), "Hel", "lo ", "Wor", "ld");
         forloop.setBody(check);
-
+        
         forloop.exec(this.state);
         check.end();
     }

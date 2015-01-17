@@ -1,3 +1,26 @@
+/*
+ * The MIT License (MIT)
+ *
+ * Copyright (c) 2014 The VoxelBox
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ */
 package com.thevoxelbox.vsl.serialization;
 
 import java.util.Collections;
@@ -18,9 +41,9 @@ public class DirectedGraphRepresentation
 {
 
     private final Map<String, NodeRepresentation> nodeDictionary;
-    private int dict_index = 0;
+    private int dictIndex = 0;
     private final List<NodeInstanceRepresentation> instances;
-    private int instance_index = 0;
+    private int instanceIndex = 0;
     private final List<EdgeRepresentation> edges;
 
     /**
@@ -50,30 +73,29 @@ public class DirectedGraphRepresentation
         while (true)
         {
             Node next = node.getNext();
-            if(next == null)
+            if (next == null)
             {
                 break;
-            }
-            else
+            } else
             {
                 addExecEdge(node, next);
                 node = next;
             }
         }
     }
-    
+
     private void addExecEdge(Node a, Node b)
     {
-        NodeInstanceRepresentation aIns = getNodeInstance(a);
-        NodeInstanceRepresentation bIns = getNodeInstance(b);
-        this.edges.add(new EdgeRepresentation(aIns.getIndex(), -1, bIns.getIndex(), -1));
-        
+        NodeInstanceRepresentation instanceA = getNodeInstance(a);
+        NodeInstanceRepresentation instanceB = getNodeInstance(b);
+        this.edges.add(new EdgeRepresentation(instanceA.getIndex(), -1, instanceB.getIndex(), -1));
+
     }
-    
+
     private NodeInstanceRepresentation addInstance(Node next) throws InvalidNodeException
     {
         NodeRepresentation node = addNodeToDict(next);
-        NodeInstanceRepresentation ins = new NodeInstanceRepresentation(this.instance_index++, next, node);
+        NodeInstanceRepresentation ins = new NodeInstanceRepresentation(this.instanceIndex++, next, node);
         System.out.printf("Adding instance %s %d\n", node.getName(), node.getIndex());
         this.instances.add(ins);
         for (InputRepresentation input : ins.getInputs())
@@ -82,7 +104,7 @@ public class DirectedGraphRepresentation
             if (owner != null && owner != next)
             {
                 NodeInstanceRepresentation other = getNodeInstance(owner);
-                if(other == null)
+                if (other == null)
                 {
                     other = addInstance(owner);
                 }
@@ -121,11 +143,11 @@ public class DirectedGraphRepresentation
         {
             throw new InvalidNodeException("Node was null");
         }
-        NodeRepresentation rep = new NodeRepresentation(n, this.dict_index);
+        NodeRepresentation rep = new NodeRepresentation(n, this.dictIndex);
         if (!this.nodeDictionary.containsKey(rep.getName()))
         {
             this.nodeDictionary.put(rep.getName(), rep);
-            this.dict_index++;
+            this.dictIndex++;
             return rep;
         } else
         {
@@ -171,18 +193,19 @@ public class DirectedGraphRepresentation
     public List<NodeRepresentation> getOrderedDict()
     {
         List<NodeRepresentation> nodes = Lists.newArrayList();
-        for(Map.Entry<String, NodeRepresentation> entry: this.nodeDictionary.entrySet())
+        for (Map.Entry<String, NodeRepresentation> entry : this.nodeDictionary.entrySet())
         {
             nodes.add(entry.getValue());
         }
-        Collections.sort(nodes, new Comparator<NodeRepresentation>(){
+        Collections.sort(nodes, new Comparator<NodeRepresentation>()
+        {
 
             @Override
             public int compare(NodeRepresentation a, NodeRepresentation b)
             {
-                return a.getIndex()-b.getIndex();
+                return a.getIndex() - b.getIndex();
             }
-            
+
         });
         return nodes;
     }

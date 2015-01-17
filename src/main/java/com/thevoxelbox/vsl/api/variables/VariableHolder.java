@@ -34,16 +34,14 @@ public interface VariableHolder
 {
 
     /**
-     * Sets whether the variable holder should use case sensitive keys for its
-     * variable storage.
+     * Sets whether the variable holder should use case sensitive keys for its variable storage.
      * 
      * @param cs Case sensitive keys
      */
     void setCaseSensitive(boolean cs);
 
     /**
-     * Returns the variable with the given name, or null if there is no variable
-     * with that name in this storage container.
+     * Returns the variable with the given name, or null if there is no variable with that name in this storage container.
      * 
      * @param name the name of the object to fetch, cannot be null
      * @return the value or null if no value is found
@@ -51,11 +49,11 @@ public interface VariableHolder
     Optional<Object> get(String name);
 
     /**
-     * Returns the variable with the given name, or null if there is no variable
-     * with that name in this storage container.
+     * Returns the variable with the given name, or null if there is no variable with that name in this storage container.
      * 
      * @param name the name of the object to fetch, cannot be null
      * @param type The expected value type
+     * @param <T> The type
      * @return the value or null if no value is found
      */
     <T> Optional<T> get(String name, Class<T> type);
