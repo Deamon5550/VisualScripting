@@ -73,7 +73,7 @@ public class RunnableNodeGraph extends AbstractNode implements NodeGraph
     @Override
     public void exec(RuntimeState state)
     {
-        Node next = this.getNext();
+        Node next = this.getStart();
         while (next != null)
         {
             next.exec(state);

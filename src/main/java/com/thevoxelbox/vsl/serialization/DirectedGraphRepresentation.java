@@ -96,7 +96,6 @@ public class DirectedGraphRepresentation
     {
         NodeRepresentation node = addNodeToDict(next);
         NodeInstanceRepresentation ins = new NodeInstanceRepresentation(this.instanceIndex++, next, node);
-        System.out.printf("Adding instance %s %d\n", node.getName(), node.getIndex());
         this.instances.add(ins);
         for (InputRepresentation input : ins.getInputs())
         {
@@ -117,7 +116,6 @@ public class DirectedGraphRepresentation
 
     private void addEdge(NodeInstanceRepresentation outNode, OutputRepresentation out, NodeInstanceRepresentation inNode, InputRepresentation in)
     {
-        System.out.printf("Adding edge %d %s %d %s\n", outNode.getIndex(), out, inNode.getIndex(), in);
         this.edges.add(new EdgeRepresentation(outNode.getIndex(), out.getIndex(), inNode.getIndex(), in.getIndex()));
     }
 
