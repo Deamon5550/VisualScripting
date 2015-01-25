@@ -29,7 +29,6 @@ import org.junit.Test;
 import org.mockito.Mockito;
 
 import com.thevoxelbox.vsl.api.node.Node;
-import com.thevoxelbox.vsl.error.InvalidNodeException;
 import com.thevoxelbox.vsl.util.Provider;
 
 /**
@@ -45,7 +44,7 @@ public class ProviderTest extends StandardTest
     public void testOwner()
     {
         Node node = Mockito.mock(Node.class);
-        Provider<?> p = new Provider(node);
+        Provider<Object> p = new Provider<Object>(node);
         assertEquals(node, p.getOwner());
     }
 

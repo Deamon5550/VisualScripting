@@ -29,7 +29,7 @@ defaultTasks 'clean', 'licenseFormat', 'check', 'build'
 
 group 'com.thevoxelbox'
 archivesBaseName = 'VisualScripting'
-version '0.2.6-SNAPSHOT'
+version '0.2.7-SNAPSHOT'
 
 // Minimum version of Java required
 sourceCompatibility = 1.6
@@ -91,7 +91,6 @@ idea {
 def sonatypeUser = hasProperty('sonatypeUser') ? sonatypeUser : System.getenv('sonatypeUser')
 def sonatypePassword = hasProperty('sonatypePassword') ? sonatypePassword : System.getenv('sonatypePassword')
 
-//TODO update for tvb repo
 uploadArchives {
     repositories.mavenDeployer {
         beforeDeployment { MavenDeployment deployment ->

@@ -23,8 +23,6 @@
  */
 package com.thevoxelbox.test;
 
-import org.junit.Before;
-
 import com.thevoxelbox.test.util.OutputHelper;
 import com.thevoxelbox.vsl.api.variables.VariableHolder;
 import com.thevoxelbox.vsl.node.RunnableNodeGraph;
