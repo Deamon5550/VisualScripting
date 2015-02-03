@@ -23,9 +23,12 @@
  */
 package com.thevoxelbox.test;
 
+import static org.junit.Assert.assertEquals;
+
 import com.thevoxelbox.test.util.OutputHelper;
 import com.thevoxelbox.vsl.api.variables.VariableHolder;
 import com.thevoxelbox.vsl.node.RunnableNodeGraph;
+import com.thevoxelbox.vsl.util.Provider;
 import com.thevoxelbox.vsl.util.RuntimeState;
 import com.thevoxelbox.vsl.variables.ParentedVariableScope;
 
@@ -47,5 +50,10 @@ public class StandardTest
         this.vars = new ParentedVariableScope();
         this.output = new OutputHelper();
         this.state = new RuntimeState(this.vars);
+    }
+
+    protected <T> void assertResult(T expected, Provider<T> provider)
+    {
+        assertEquals(expected, provider.get(this.state));
     }
 }

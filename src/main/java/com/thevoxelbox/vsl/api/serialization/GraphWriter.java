@@ -40,8 +40,10 @@ public interface GraphWriter extends Closeable, Flushable
      * Writes the given NodeGraph to the output.
      * 
      * @param graph The graph to write
-     * @throws IOException If an error occurs while trying to write to the output.
-     * @throws InvalidNodeException If the graph contains an invalid node for serialization
+     * @throws IOException If an error occurs while trying to write to the
+     *             output.
+     * @throws InvalidNodeException If the graph contains an invalid node for
+     *             serialization
      */
     void write(NodeGraph graph) throws IOException, InvalidNodeException;
 

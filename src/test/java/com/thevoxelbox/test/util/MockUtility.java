@@ -21,36 +21,36 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.thevoxelbox.vsl.api.node;
 
-import com.thevoxelbox.vsl.util.RuntimeState;
+package com.thevoxelbox.test.util;
+
+import org.mockito.Mockito;
+
+import com.thevoxelbox.vsl.api.node.Node;
+import com.thevoxelbox.vsl.util.Provider;
 
 /**
- * Represents a node with a set of inputs and outputs which executes a single
- * discrete function.
+ * A utility for easily mocking basic types.
  */
-public interface Node
+public class MockUtility
 {
 
-    /**
-     * Executes this node's function based on the runtime state and its inputs.
-     * 
-     * @param state The runtime state
-     */
-    void exec(RuntimeState state);
+    private static Node mockNode;
+
+    static
+    {
+        mockNode = Mockito.mock(Node.class);
+    }
 
     /**
-     * Sets the node to be executed after this node in the execution pathway.
+     * Mocks a provider for the given type and initial value.
      * 
-     * @param next The next node
+     * @param value The value
+     * @return The provider
      */
-    void setNext(Node next);
-
-    /**
-     * Gets the next node in the execution pathway.
-     * 
-     * @return The next node
-     */
-    Node getNext();
+    public static <T> Provider<T> mock(T value)
+    {
+        return new Provider<T>(mockNode, value);
+    }
 
 }

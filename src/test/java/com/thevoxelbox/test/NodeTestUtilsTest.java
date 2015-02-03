@@ -23,13 +23,12 @@
  */
 package com.thevoxelbox.test;
 
+import static com.thevoxelbox.test.util.MockUtility.mock;
+
 import org.junit.Test;
-import org.mockito.Mockito;
 
 import com.thevoxelbox.test.util.CheckRunNode;
 import com.thevoxelbox.test.util.StringArrayCheckNode;
-import com.thevoxelbox.vsl.api.node.Node;
-import com.thevoxelbox.vsl.util.Provider;
 
 /**
  * Tests the testing utility nodes.
@@ -43,11 +42,7 @@ public class NodeTestUtilsTest extends StandardTest
     @Test
     public void testStringCheckArrayNode()
     {
-
-        Node node = Mockito.mock(Node.class);
-        Provider<String> string = new Provider<String>(node, "hello");
-
-        StringArrayCheckNode check = new StringArrayCheckNode(string, "hello");
+        StringArrayCheckNode check = new StringArrayCheckNode(mock("hello"), "hello");
 
         check.exec(this.state);
         check.end();
@@ -59,11 +54,7 @@ public class NodeTestUtilsTest extends StandardTest
     @Test(expected = UnsupportedOperationException.class)
     public void testStringCheckArrayNodeTooFew()
     {
-
-        Node node = Mockito.mock(Node.class);
-        Provider<String> string = new Provider<String>(node, "hello");
-
-        StringArrayCheckNode check = new StringArrayCheckNode(string, "hello", "world");
+        StringArrayCheckNode check = new StringArrayCheckNode(mock("hello"), "hello", "world");
 
         check.exec(this.state);
         check.end();
@@ -75,11 +66,7 @@ public class NodeTestUtilsTest extends StandardTest
     @Test(expected = ArrayIndexOutOfBoundsException.class)
     public void testStringCheckArrayNodeTooMany()
     {
-
-        Node node = Mockito.mock(Node.class);
-        Provider<String> string = new Provider<String>(node, "hello");
-
-        StringArrayCheckNode check = new StringArrayCheckNode(string, "hello");
+        StringArrayCheckNode check = new StringArrayCheckNode(mock("hello"), "hello");
 
         check.exec(this.state);
         check.exec(this.state);
@@ -92,11 +79,7 @@ public class NodeTestUtilsTest extends StandardTest
     @Test(expected = IllegalArgumentException.class)
     public void testStringCheckArrayNodeInvalid()
     {
-
-        Node node = Mockito.mock(Node.class);
-        Provider<String> string = new Provider<String>(node, "world");
-
-        StringArrayCheckNode check = new StringArrayCheckNode(string, "hello");
+        StringArrayCheckNode check = new StringArrayCheckNode(mock("world"), "hello");
 
         check.exec(this.state);
         check.end();

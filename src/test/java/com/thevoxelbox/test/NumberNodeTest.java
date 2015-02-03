@@ -23,13 +23,11 @@
  */
 package com.thevoxelbox.test;
 
-import static org.junit.Assert.assertEquals;
+import static com.thevoxelbox.test.util.MockUtility.mock;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mockito;
 
-import com.thevoxelbox.vsl.api.node.Node;
 import com.thevoxelbox.vsl.nodes.math.AbsNode;
 import com.thevoxelbox.vsl.nodes.math.AdditionNode;
 import com.thevoxelbox.vsl.nodes.math.DivisionNode;
@@ -37,7 +35,6 @@ import com.thevoxelbox.vsl.nodes.math.ModuloNode;
 import com.thevoxelbox.vsl.nodes.math.MultiplicationNode;
 import com.thevoxelbox.vsl.nodes.math.SqrtNode;
 import com.thevoxelbox.vsl.nodes.math.SubtractionNode;
-import com.thevoxelbox.vsl.util.Provider;
 
 /**
  * Tests for number based nodes.
@@ -45,16 +42,10 @@ import com.thevoxelbox.vsl.util.Provider;
 public class NumberNodeTest extends StandardTest
 {
 
-    Node mockNode;
-    
-    /**
-     * 
-     */
     @Before
     public void setup()
     {
         super.setup();
-        this.mockNode = Mockito.mock(Node.class);
     }
 
     /**
@@ -63,14 +54,12 @@ public class NumberNodeTest extends StandardTest
     @Test
     public void testAddition()
     {
-        Provider<Integer> a = new Provider<Integer>(this.mockNode, 5);
-        Provider<Integer> b = new Provider<Integer>(this.mockNode, 6);
 
-        AdditionNode add = new AdditionNode(a, b, false);
+        AdditionNode add = new AdditionNode(mock(6), mock(5), false);
 
         add.exec(this.state);
 
-        assertEquals(11L, add.getResult().get(this.state));
+        assertResult(11L, add.getResult());
     }
 
     /**
@@ -79,14 +68,11 @@ public class NumberNodeTest extends StandardTest
     @Test
     public void testSubtraction()
     {
-        Provider<Integer> a = new Provider<Integer>(this.mockNode, 5);
-        Provider<Integer> b = new Provider<Integer>(this.mockNode, 6);
-
-        SubtractionNode add = new SubtractionNode(a, b, false);
+        SubtractionNode add = new SubtractionNode(mock(5), mock(6), false);
 
         add.exec(this.state);
 
-        assertEquals(-1L, add.getResult().get(this.state));
+        assertResult(-1L, add.getResult());
     }
 
     /**
@@ -95,14 +81,11 @@ public class NumberNodeTest extends StandardTest
     @Test
     public void testMultiplication()
     {
-        Provider<Integer> a = new Provider<Integer>(this.mockNode, 5);
-        Provider<Integer> b = new Provider<Integer>(this.mockNode, 6);
-
-        MultiplicationNode add = new MultiplicationNode(a, b, false);
+        MultiplicationNode add = new MultiplicationNode(mock(6), mock(5), false);
 
         add.exec(this.state);
 
-        assertEquals(30L, add.getResult().get(this.state));
+        assertResult(30L, add.getResult());
     }
 
     /**
@@ -111,14 +94,11 @@ public class NumberNodeTest extends StandardTest
     @Test
     public void testDivision()
     {
-        Provider<Integer> a = new Provider<Integer>(this.mockNode, 14);
-        Provider<Integer> b = new Provider<Integer>(this.mockNode, 6);
-
-        DivisionNode add = new DivisionNode(a, b, false);
+        DivisionNode add = new DivisionNode(mock(14), mock(6), false);
 
         add.exec(this.state);
 
-        assertEquals(2L, add.getResult().get(this.state));
+        assertResult(2L, add.getResult());
     }
 
     /**
@@ -127,14 +107,11 @@ public class NumberNodeTest extends StandardTest
     @Test
     public void testModulo()
     {
-        Provider<Integer> a = new Provider<Integer>(this.mockNode, 8);
-        Provider<Integer> b = new Provider<Integer>(this.mockNode, 6);
-
-        ModuloNode add = new ModuloNode(a, b, false);
+        ModuloNode add = new ModuloNode(mock(8), mock(6), false);
 
         add.exec(this.state);
 
-        assertEquals(2L, add.getResult().get(this.state));
+        assertResult(2L, add.getResult());
     }
 
     /**
@@ -143,13 +120,11 @@ public class NumberNodeTest extends StandardTest
     @Test
     public void testSqrt()
     {
-        Provider<Integer> a = new Provider<Integer>(this.mockNode, 16);
-
-        SqrtNode add = new SqrtNode(a);
+        SqrtNode add = new SqrtNode(mock(16));
 
         add.exec(this.state);
 
-        assertEquals(4.0, add.getResult().get(this.state));
+        assertResult(4.0, add.getResult());
     }
 
     /**
@@ -158,13 +133,11 @@ public class NumberNodeTest extends StandardTest
     @Test
     public void testAbs()
     {
-        Provider<Integer> a = new Provider<Integer>(this.mockNode, -5);
-
-        AbsNode add = new AbsNode(a, false);
+        AbsNode add = new AbsNode(mock(-5), false);
 
         add.exec(this.state);
 
-        assertEquals(5L, add.getResult().get(this.state));
+        assertResult(5L, add.getResult());
     }
 
     /**
@@ -173,12 +146,11 @@ public class NumberNodeTest extends StandardTest
     @Test
     public void testFloatAbs()
     {
-        Provider<Double> a = new Provider<Double>(this.mockNode, -5.2);
+        AbsNode add = new AbsNode(mock(-5.2), true);
 
-        AbsNode add = new AbsNode(a, true);
         add.exec(this.state);
 
-        assertEquals(5.2, add.getResult().get(this.state));
+        assertResult(5.2, add.getResult());
     }
 
     /**
@@ -187,14 +159,11 @@ public class NumberNodeTest extends StandardTest
     @Test
     public void testFloatAddition()
     {
-        Provider<Double> a = new Provider<Double>(this.mockNode, 5.2);
-        Provider<Double> b = new Provider<Double>(this.mockNode, 6.3);
-
-        AdditionNode add = new AdditionNode(a, b, true);
+        AdditionNode add = new AdditionNode(mock(5.2), mock(6.3), true);
 
         add.exec(this.state);
 
-        assertEquals(11.5, add.getResult().get(this.state));
+        assertResult(11.5, add.getResult());
     }
 
     /**
@@ -203,14 +172,11 @@ public class NumberNodeTest extends StandardTest
     @Test
     public void testFloatSubtraction()
     {
-        Provider<Double> a = new Provider<Double>(this.mockNode, 5.2);
-        Provider<Double> b = new Provider<Double>(this.mockNode, 6.2);
-
-        SubtractionNode add = new SubtractionNode(a, b, true);
+        SubtractionNode add = new SubtractionNode(mock(5.2), mock(6.2), true);
 
         add.exec(this.state);
 
-        assertEquals(-1.0, add.getResult().get(this.state));
+        assertResult(-1.0, add.getResult());
     }
 
     /**
@@ -219,14 +185,11 @@ public class NumberNodeTest extends StandardTest
     @Test
     public void testFloatMultiplication()
     {
-        Provider<Double> a = new Provider<Double>(this.mockNode, 2.5);
-        Provider<Double> b = new Provider<Double>(this.mockNode, 5.0);
-
-        MultiplicationNode add = new MultiplicationNode(a, b, true);
+        MultiplicationNode add = new MultiplicationNode(mock(2.5), mock(5.0), true);
 
         add.exec(this.state);
 
-        assertEquals(12.5, add.getResult().get(this.state));
+        assertResult(12.5, add.getResult());
     }
 
     /**
@@ -235,14 +198,11 @@ public class NumberNodeTest extends StandardTest
     @Test
     public void testFloatDivision()
     {
-        Provider<Double> a = new Provider<Double>(this.mockNode, 7.5);
-        Provider<Double> b = new Provider<Double>(this.mockNode, 3.0);
-
-        DivisionNode add = new DivisionNode(a, b, true);
+        DivisionNode add = new DivisionNode(mock(7.5), mock(3.0), true);
 
         add.exec(this.state);
 
-        assertEquals(2.5, add.getResult().get(this.state));
+        assertResult(2.5, add.getResult());
     }
 
     /**
@@ -251,14 +211,11 @@ public class NumberNodeTest extends StandardTest
     @Test
     public void testFloatModulo()
     {
-        Provider<Double> a = new Provider<Double>(this.mockNode, 5.4);
-        Provider<Double> b = new Provider<Double>(this.mockNode, 2.2);
-
-        ModuloNode add = new ModuloNode(a, b, true);
+        ModuloNode add = new ModuloNode(mock(5.4), mock(2.2), true);
 
         add.exec(this.state);
 
-        assertEquals(1.0, add.getResult().get(this.state));
+        assertResult(1.0, add.getResult());
     }
 
 }

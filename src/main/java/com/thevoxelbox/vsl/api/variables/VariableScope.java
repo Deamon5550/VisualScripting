@@ -39,15 +39,18 @@ public interface VariableScope extends VariableHolder
     void setParent(VariableHolder scope);
 
     /**
-     * Returns the parent of this VariableScope or null if this VariableScope has no parent.
+     * Returns the parent of this VariableScope or null if this VariableScope
+     * has no parent.
      * 
      * @return the parent, may be null
      */
     Optional<VariableHolder> getParent();
 
     /**
-     * Returns the highest parent VariableScope. That is the farthest parent VariableScope by recursively calling {@link #getParent()} until a
-     * VariableScope with no parent is reached. Returns null if this VariableScope has no parent.
+     * Returns the highest parent VariableScope. That is the farthest parent
+     * VariableScope by recursively calling {@link #getParent()} until a
+     * VariableScope with no parent is reached. Returns null if this
+     * VariableScope has no parent.
      * 
      * @return the highest parent, may be null
      */

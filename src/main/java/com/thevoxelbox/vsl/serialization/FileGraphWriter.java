@@ -154,8 +154,8 @@ public class FileGraphWriter implements GraphWriter
     }
 
     /**
-     * Closes this stream and releases any system resources associated with it. If the stream is already closed then invoking this method has no
-     * effect.
+     * Closes this stream and releases any system resources associated with it.
+     * If the stream is already closed then invoking this method has no effect.
      * 
      * @throws IOException If an I/O error occurs
      * @see Closeable#close()
@@ -167,7 +167,8 @@ public class FileGraphWriter implements GraphWriter
     }
 
     /**
-     * Flushes this stream by writing any buffered output to the underlying stream.
+     * Flushes this stream by writing any buffered output to the underlying
+     * stream.
      * 
      * @throws IOException If an I/O error occurs
      * @see Flushable#flush()

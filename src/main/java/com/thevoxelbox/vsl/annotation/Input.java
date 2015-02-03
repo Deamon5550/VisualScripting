@@ -37,8 +37,10 @@ public @interface Input
 {
 
     /**
-     * Gets the name for the input (for the purposes of serialization). If no name was specified then a single underscore will be returned, this is an
-     * indication that the name of the annotated field should be used instead of this value.
+     * Gets the name for the input (for the purposes of serialization). If no
+     * name was specified then a single underscore will be returned, this is an
+     * indication that the name of the annotated field should be used instead of
+     * this value.
      */
     String name() default "_";
 

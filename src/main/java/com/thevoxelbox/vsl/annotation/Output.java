@@ -37,8 +37,10 @@ public @interface Output
 {
 
     /**
-     * Gets the name of this Output (for the purpose of serialization). If no name was specified then a single underscore will be returned, this is an
-     * indication that the name of the annotated field should be used instead of this value.
+     * Gets the name of this Output (for the purpose of serialization). If no
+     * name was specified then a single underscore will be returned, this is an
+     * indication that the name of the annotated field should be used instead of
+     * this value.
      */
     String name() default "_";
 

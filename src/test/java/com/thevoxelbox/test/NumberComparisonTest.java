@@ -23,7 +23,7 @@
  */
 package com.thevoxelbox.test;
 
-import static org.junit.Assert.assertEquals;
+import static com.thevoxelbox.test.util.MockUtility.mock;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -35,7 +35,6 @@ import com.thevoxelbox.vsl.nodes.math.compare.NumberGreaterThanNode;
 import com.thevoxelbox.vsl.nodes.math.compare.NumberGreaterThanOrEqualsNode;
 import com.thevoxelbox.vsl.nodes.math.compare.NumberLessThanNode;
 import com.thevoxelbox.vsl.nodes.math.compare.NumberLessThanOrEqualsNode;
-import com.thevoxelbox.vsl.util.Provider;
 
 /**
  * A set of tests for number comparison nodes
@@ -61,14 +60,11 @@ public class NumberComparisonTest extends StandardTest
     @Test
     public void testEquals()
     {
-        Provider<Integer> a = new Provider<Integer>(this.mockNode, 5);
-        Provider<Integer> b = new Provider<Integer>(this.mockNode, 5);
-
-        NumberEqualsNode eq = new NumberEqualsNode(a, b, false);
+        NumberEqualsNode eq = new NumberEqualsNode(mock(5), mock(5), false);
 
         eq.exec(this.state);
 
-        assertEquals(true, eq.getComparisonResult().get(this.state));
+        assertResult(true, eq.getComparisonResult());
     }
 
     /**
@@ -77,14 +73,11 @@ public class NumberComparisonTest extends StandardTest
     @Test
     public void testEquals2()
     {
-        Provider<Integer> a = new Provider<Integer>(this.mockNode, 5);
-        Provider<Integer> b = new Provider<Integer>(this.mockNode, 4);
-
-        NumberEqualsNode eq = new NumberEqualsNode(a, b, false);
+        NumberEqualsNode eq = new NumberEqualsNode(mock(5), mock(4), false);
 
         eq.exec(this.state);
 
-        assertEquals(false, eq.getComparisonResult().get(this.state));
+        assertResult(false, eq.getComparisonResult());
     }
 
     /**
@@ -93,14 +86,11 @@ public class NumberComparisonTest extends StandardTest
     @Test
     public void testGreater()
     {
-        Provider<Integer> a = new Provider<Integer>(this.mockNode, 6);
-        Provider<Integer> b = new Provider<Integer>(this.mockNode, 5);
-
-        NumberGreaterThanNode eq = new NumberGreaterThanNode(a, b, false);
+        NumberGreaterThanNode eq = new NumberGreaterThanNode(mock(6), mock(5), false);
 
         eq.exec(this.state);
 
-        assertEquals(true, eq.getComparisonResult().get(this.state));
+        assertResult(true, eq.getComparisonResult());
     }
 
     /**
@@ -109,14 +99,11 @@ public class NumberComparisonTest extends StandardTest
     @Test
     public void testGreater2()
     {
-        Provider<Integer> a = new Provider<Integer>(this.mockNode, 6);
-        Provider<Integer> b = new Provider<Integer>(this.mockNode, 7);
-
-        NumberGreaterThanNode eq = new NumberGreaterThanNode(a, b, false);
+        NumberGreaterThanNode eq = new NumberGreaterThanNode(mock(6), mock(7), false);
 
         eq.exec(this.state);
 
-        assertEquals(false, eq.getComparisonResult().get(this.state));
+        assertResult(false, eq.getComparisonResult());
     }
 
     /**
@@ -125,14 +112,11 @@ public class NumberComparisonTest extends StandardTest
     @Test
     public void testGreaterEq()
     {
-        Provider<Integer> a = new Provider<Integer>(this.mockNode, 6);
-        Provider<Integer> b = new Provider<Integer>(this.mockNode, 5);
-
-        NumberGreaterThanOrEqualsNode eq = new NumberGreaterThanOrEqualsNode(a, b, false);
+        NumberGreaterThanOrEqualsNode eq = new NumberGreaterThanOrEqualsNode(mock(6), mock(5), false);
 
         eq.exec(this.state);
 
-        assertEquals(true, eq.getComparisonResult().get(this.state));
+        assertResult(true, eq.getComparisonResult());
     }
 
     /**
@@ -141,14 +125,11 @@ public class NumberComparisonTest extends StandardTest
     @Test
     public void testGreaterEq2()
     {
-        Provider<Integer> a = new Provider<Integer>(this.mockNode, 5);
-        Provider<Integer> b = new Provider<Integer>(this.mockNode, 5);
-
-        NumberGreaterThanOrEqualsNode eq = new NumberGreaterThanOrEqualsNode(a, b, false);
+        NumberGreaterThanOrEqualsNode eq = new NumberGreaterThanOrEqualsNode(mock(5), mock(5), false);
 
         eq.exec(this.state);
 
-        assertEquals(true, eq.getComparisonResult().get(this.state));
+        assertResult(true, eq.getComparisonResult());
     }
 
     /**
@@ -157,14 +138,11 @@ public class NumberComparisonTest extends StandardTest
     @Test
     public void testGreaterEq3()
     {
-        Provider<Integer> a = new Provider<Integer>(this.mockNode, 6);
-        Provider<Integer> b = new Provider<Integer>(this.mockNode, 7);
-
-        NumberGreaterThanOrEqualsNode eq = new NumberGreaterThanOrEqualsNode(a, b, false);
+        NumberGreaterThanOrEqualsNode eq = new NumberGreaterThanOrEqualsNode(mock(6), mock(7), false);
 
         eq.exec(this.state);
 
-        assertEquals(false, eq.getComparisonResult().get(this.state));
+        assertResult(false, eq.getComparisonResult());
     }
 
     /**
@@ -173,14 +151,11 @@ public class NumberComparisonTest extends StandardTest
     @Test
     public void testLess()
     {
-        Provider<Integer> a = new Provider<Integer>(this.mockNode, 4);
-        Provider<Integer> b = new Provider<Integer>(this.mockNode, 5);
-
-        NumberLessThanNode eq = new NumberLessThanNode(a, b, false);
+        NumberLessThanNode eq = new NumberLessThanNode(mock(4), mock(5), false);
 
         eq.exec(this.state);
 
-        assertEquals(true, eq.getComparisonResult().get(this.state));
+        assertResult(true, eq.getComparisonResult());
     }
 
     /**
@@ -189,14 +164,11 @@ public class NumberComparisonTest extends StandardTest
     @Test
     public void testLess2()
     {
-        Provider<Integer> a = new Provider<Integer>(this.mockNode, 4);
-        Provider<Integer> b = new Provider<Integer>(this.mockNode, 3);
-
-        NumberLessThanNode eq = new NumberLessThanNode(a, b, false);
+        NumberLessThanNode eq = new NumberLessThanNode(mock(4), mock(3), false);
 
         eq.exec(this.state);
 
-        assertEquals(false, eq.getComparisonResult().get(this.state));
+        assertResult(false, eq.getComparisonResult());
     }
 
     /**
@@ -205,14 +177,11 @@ public class NumberComparisonTest extends StandardTest
     @Test
     public void testLessEq()
     {
-        Provider<Integer> a = new Provider<Integer>(this.mockNode, 5);
-        Provider<Integer> b = new Provider<Integer>(this.mockNode, 5);
-
-        NumberLessThanOrEqualsNode eq = new NumberLessThanOrEqualsNode(a, b, false);
+        NumberLessThanOrEqualsNode eq = new NumberLessThanOrEqualsNode(mock(5), mock(5), false);
 
         eq.exec(this.state);
 
-        assertEquals(true, eq.getComparisonResult().get(this.state));
+        assertResult(true, eq.getComparisonResult());
     }
 
     /**
@@ -221,14 +190,11 @@ public class NumberComparisonTest extends StandardTest
     @Test
     public void testLessEq2()
     {
-        Provider<Integer> a = new Provider<Integer>(this.mockNode, 4);
-        Provider<Integer> b = new Provider<Integer>(this.mockNode, 5);
-
-        NumberLessThanOrEqualsNode eq = new NumberLessThanOrEqualsNode(a, b, false);
+        NumberLessThanOrEqualsNode eq = new NumberLessThanOrEqualsNode(mock(4), mock(5), false);
 
         eq.exec(this.state);
 
-        assertEquals(true, eq.getComparisonResult().get(this.state));
+        assertResult(true, eq.getComparisonResult());
     }
 
     /**
@@ -237,14 +203,11 @@ public class NumberComparisonTest extends StandardTest
     @Test
     public void testLessEq3()
     {
-        Provider<Integer> a = new Provider<Integer>(this.mockNode, 4);
-        Provider<Integer> b = new Provider<Integer>(this.mockNode, 2);
-
-        NumberLessThanOrEqualsNode eq = new NumberLessThanOrEqualsNode(a, b, false);
+        NumberLessThanOrEqualsNode eq = new NumberLessThanOrEqualsNode(mock(4), mock(2), false);
 
         eq.exec(this.state);
 
-        assertEquals(false, eq.getComparisonResult().get(this.state));
+        assertResult(false, eq.getComparisonResult());
     }
 
     /**
@@ -253,14 +216,11 @@ public class NumberComparisonTest extends StandardTest
     @Test
     public void testFloatEquals()
     {
-        Provider<Double> a = new Provider<Double>(this.mockNode, 5.2);
-        Provider<Double> b = new Provider<Double>(this.mockNode, 5.2);
-
-        NumberEqualsNode eq = new NumberEqualsNode(a, b, true);
+        NumberEqualsNode eq = new NumberEqualsNode(mock(5.2), mock(5.2), true);
 
         eq.exec(this.state);
 
-        assertEquals(true, eq.getComparisonResult().get(this.state));
+        assertResult(true, eq.getComparisonResult());
     }
 
     /**
@@ -269,14 +229,11 @@ public class NumberComparisonTest extends StandardTest
     @Test
     public void testFloatEquals2()
     {
-        Provider<Double> a = new Provider<Double>(this.mockNode, 5.2);
-        Provider<Double> b = new Provider<Double>(this.mockNode, 5.3);
-
-        NumberEqualsNode eq = new NumberEqualsNode(a, b, true);
+        NumberEqualsNode eq = new NumberEqualsNode(mock(5.2), mock(5.3), true);
 
         eq.exec(this.state);
 
-        assertEquals(false, eq.getComparisonResult().get(this.state));
+        assertResult(false, eq.getComparisonResult());
     }
 
     /**
@@ -285,14 +242,11 @@ public class NumberComparisonTest extends StandardTest
     @Test
     public void testFloatGreater()
     {
-        Provider<Double> a = new Provider<Double>(this.mockNode, 6.4);
-        Provider<Double> b = new Provider<Double>(this.mockNode, 5.4);
-
-        NumberGreaterThanNode eq = new NumberGreaterThanNode(a, b, true);
+        NumberGreaterThanNode eq = new NumberGreaterThanNode(mock(6.4), mock(5.4), true);
 
         eq.exec(this.state);
 
-        assertEquals(true, eq.getComparisonResult().get(this.state));
+        assertResult(true, eq.getComparisonResult());
     }
 
     /**
@@ -301,14 +255,11 @@ public class NumberComparisonTest extends StandardTest
     @Test
     public void testFloatGreater2()
     {
-        Provider<Double> a = new Provider<Double>(this.mockNode, 6.4);
-        Provider<Double> b = new Provider<Double>(this.mockNode, 7.5);
-
-        NumberGreaterThanNode eq = new NumberGreaterThanNode(a, b, true);
+        NumberGreaterThanNode eq = new NumberGreaterThanNode(mock(6.4), mock(7.5), true);
 
         eq.exec(this.state);
 
-        assertEquals(false, eq.getComparisonResult().get(this.state));
+        assertResult(false, eq.getComparisonResult());
     }
 
     /**
@@ -317,14 +268,11 @@ public class NumberComparisonTest extends StandardTest
     @Test
     public void testFloatGreaterEq()
     {
-        Provider<Double> a = new Provider<Double>(this.mockNode, 6.4);
-        Provider<Double> b = new Provider<Double>(this.mockNode, 5.4);
-
-        NumberGreaterThanOrEqualsNode eq = new NumberGreaterThanOrEqualsNode(a, b, true);
+        NumberGreaterThanOrEqualsNode eq = new NumberGreaterThanOrEqualsNode(mock(6.4), mock(5.4), true);
 
         eq.exec(this.state);
 
-        assertEquals(true, eq.getComparisonResult().get(this.state));
+        assertResult(true, eq.getComparisonResult());
     }
 
     /**
@@ -333,14 +281,11 @@ public class NumberComparisonTest extends StandardTest
     @Test
     public void testFloatGreaterEq2()
     {
-        Provider<Double> a = new Provider<Double>(this.mockNode, 5.4);
-        Provider<Double> b = new Provider<Double>(this.mockNode, 5.4);
-
-        NumberGreaterThanOrEqualsNode eq = new NumberGreaterThanOrEqualsNode(a, b, true);
+        NumberGreaterThanOrEqualsNode eq = new NumberGreaterThanOrEqualsNode(mock(5.4), mock(5.4), true);
 
         eq.exec(this.state);
 
-        assertEquals(true, eq.getComparisonResult().get(this.state));
+        assertResult(true, eq.getComparisonResult());
     }
 
     /**
@@ -349,14 +294,11 @@ public class NumberComparisonTest extends StandardTest
     @Test
     public void testFloatGreaterEq3()
     {
-        Provider<Double> a = new Provider<Double>(this.mockNode, 5.4);
-        Provider<Double> b = new Provider<Double>(this.mockNode, 5.5);
-
-        NumberGreaterThanOrEqualsNode eq = new NumberGreaterThanOrEqualsNode(a, b, true);
+        NumberGreaterThanOrEqualsNode eq = new NumberGreaterThanOrEqualsNode(mock(5.4), mock(5.5), true);
 
         eq.exec(this.state);
 
-        assertEquals(false, eq.getComparisonResult().get(this.state));
+        assertResult(false, eq.getComparisonResult());
     }
 
     /**
@@ -365,14 +307,11 @@ public class NumberComparisonTest extends StandardTest
     @Test
     public void testFloatLess()
     {
-        Provider<Double> a = new Provider<Double>(this.mockNode, 4.4);
-        Provider<Double> b = new Provider<Double>(this.mockNode, 5.4);
-
-        NumberLessThanNode eq = new NumberLessThanNode(a, b, true);
+        NumberLessThanNode eq = new NumberLessThanNode(mock(4.4), mock(5.4), true);
 
         eq.exec(this.state);
 
-        assertEquals(true, eq.getComparisonResult().get(this.state));
+        assertResult(true, eq.getComparisonResult());
     }
 
     /**
@@ -381,14 +320,11 @@ public class NumberComparisonTest extends StandardTest
     @Test
     public void testFloatLess2()
     {
-        Provider<Double> a = new Provider<Double>(this.mockNode, 4.4);
-        Provider<Double> b = new Provider<Double>(this.mockNode, 4.2);
-
-        NumberLessThanNode eq = new NumberLessThanNode(a, b, true);
+        NumberLessThanNode eq = new NumberLessThanNode(mock(4.4), mock(4.2), true);
 
         eq.exec(this.state);
 
-        assertEquals(false, eq.getComparisonResult().get(this.state));
+        assertResult(false, eq.getComparisonResult());
     }
 
     /**
@@ -397,14 +333,11 @@ public class NumberComparisonTest extends StandardTest
     @Test
     public void testFloatLessEq()
     {
-        Provider<Double> a = new Provider<Double>(this.mockNode, 5.4);
-        Provider<Double> b = new Provider<Double>(this.mockNode, 5.4);
-
-        NumberLessThanOrEqualsNode eq = new NumberLessThanOrEqualsNode(a, b, true);
+        NumberLessThanOrEqualsNode eq = new NumberLessThanOrEqualsNode(mock(5.4), mock(5.4), true);
 
         eq.exec(this.state);
 
-        assertEquals(true, eq.getComparisonResult().get(this.state));
+        assertResult(true, eq.getComparisonResult());
     }
 
     /**
@@ -413,14 +346,11 @@ public class NumberComparisonTest extends StandardTest
     @Test
     public void testFloatLessEq2()
     {
-        Provider<Double> a = new Provider<Double>(this.mockNode, 4.4);
-        Provider<Double> b = new Provider<Double>(this.mockNode, 5.4);
-
-        NumberLessThanOrEqualsNode eq = new NumberLessThanOrEqualsNode(a, b, true);
+        NumberLessThanOrEqualsNode eq = new NumberLessThanOrEqualsNode(mock(4.4), mock(5.4), true);
 
         eq.exec(this.state);
 
-        assertEquals(true, eq.getComparisonResult().get(this.state));
+        assertResult(true, eq.getComparisonResult());
     }
 
     /**
@@ -429,14 +359,11 @@ public class NumberComparisonTest extends StandardTest
     @Test
     public void testFloatLessEq3()
     {
-        Provider<Double> a = new Provider<Double>(this.mockNode, 4.4);
-        Provider<Double> b = new Provider<Double>(this.mockNode, 4.3);
-
-        NumberLessThanOrEqualsNode eq = new NumberLessThanOrEqualsNode(a, b, true);
+        NumberLessThanOrEqualsNode eq = new NumberLessThanOrEqualsNode(mock(4.4), mock(4.3), true);
 
         eq.exec(this.state);
 
-        assertEquals(false, eq.getComparisonResult().get(this.state));
+        assertResult(false, eq.getComparisonResult());
     }
 
 }

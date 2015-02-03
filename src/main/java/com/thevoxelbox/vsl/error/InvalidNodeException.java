@@ -28,6 +28,7 @@ package com.thevoxelbox.vsl.error;
  */
 public class InvalidNodeException extends Exception
 {
+
     private static final long serialVersionUID = -5414120143027252485L;
 
     /**

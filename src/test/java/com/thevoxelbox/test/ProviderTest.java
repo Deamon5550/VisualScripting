@@ -69,5 +69,5 @@ public class ProviderTest extends StandardTest
         Provider<Object> p = new Provider<Object>(node, new Object());
         assertEquals(true, p.isStatic());
     }
-    
+
 }
