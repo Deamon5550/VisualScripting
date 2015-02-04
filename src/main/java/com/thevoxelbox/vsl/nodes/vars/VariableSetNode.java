@@ -23,7 +23,6 @@
  */
 package com.thevoxelbox.vsl.nodes.vars;
 
-import com.thevoxelbox.vsl.annotation.Input;
 import com.thevoxelbox.vsl.annotation.NodeInfo;
 import com.thevoxelbox.vsl.node.AbstractNode;
 import com.thevoxelbox.vsl.util.Provider;
@@ -34,13 +33,11 @@ import com.thevoxelbox.vsl.util.RuntimeState;
  * 
  * @param <T> The value type
  */
-@NodeInfo(name = "VariableSet")
+@NodeInfo(name = "VariableSet", inputs = { "key", "value" })
 public class VariableSetNode<T> extends AbstractNode
 {
 
-    @Input
-    private final Provider<String> varName;
-    @Input
+    private final Provider<String> key;
     private final Provider<T> value;
 
     /**
@@ -51,7 +48,7 @@ public class VariableSetNode<T> extends AbstractNode
      */
     public VariableSetNode(Provider<String> name, Provider<T> value)
     {
-        this.varName = name;
+        this.key = name;
         this.value = value;
     }
 
@@ -63,7 +60,7 @@ public class VariableSetNode<T> extends AbstractNode
      */
     public VariableSetNode(String name, Provider<T> value)
     {
-        this.varName = new Provider<String>(this, name);
+        this.key = new Provider<String>(this, name);
         this.value = value;
     }
 
@@ -75,7 +72,7 @@ public class VariableSetNode<T> extends AbstractNode
      */
     public VariableSetNode(Provider<String> name, T value)
     {
-        this.varName = name;
+        this.key = name;
         this.value = new Provider<T>(this, value);
     }
 
@@ -87,7 +84,7 @@ public class VariableSetNode<T> extends AbstractNode
      */
     public VariableSetNode(String name, T value)
     {
-        this.varName = new Provider<String>(this, name);
+        this.key = new Provider<String>(this, name);
         this.value = new Provider<T>(this, value);
     }
 
@@ -97,7 +94,7 @@ public class VariableSetNode<T> extends AbstractNode
     @Override
     public void exec(RuntimeState state)
     {
-        state.getVars().set(this.varName.get(state), this.value.get(state));
+        state.getVars().set(this.key.get(state), this.value.get(state));
     }
 
 }

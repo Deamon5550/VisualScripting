@@ -30,7 +30,7 @@ import com.thevoxelbox.vsl.util.RuntimeState;
 /**
  * Tests if a number is less than or equal to a second number.
  */
-@NodeInfo(name = "LessThanOrEquals")
+@NodeInfo(name = "LessThanOrEquals", inputs = { "a", "b", "floating" }, outputs = "result")
 public class NumberLessThanOrEqualsNode extends NumberCompareNode
 {
 
@@ -47,12 +47,24 @@ public class NumberLessThanOrEqualsNode extends NumberCompareNode
     }
 
     /**
+     * Creates a new {@link NumberEqualsNode}.
+     * 
+     * @param a The first number
+     * @param b The second number
+     * @param floating Whether to use floating point precision
+     */
+    public NumberLessThanOrEqualsNode(Provider<? extends Number> a, Provider<? extends Number> b, Provider<Boolean> floating)
+    {
+        super(a, b, floating);
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override
     public void exec(RuntimeState state)
     {
-        if (this.floating)
+        if (this.floating.get(state))
         {
             this.result.set(this.a.get(state).doubleValue() <= this.b.get(state).doubleValue(), state.getUUID());
         } else

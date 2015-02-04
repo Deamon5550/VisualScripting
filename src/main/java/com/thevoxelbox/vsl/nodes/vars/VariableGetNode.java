@@ -23,9 +23,7 @@
  */
 package com.thevoxelbox.vsl.nodes.vars;
 
-import com.thevoxelbox.vsl.annotation.Input;
 import com.thevoxelbox.vsl.annotation.NodeInfo;
-import com.thevoxelbox.vsl.annotation.Output;
 import com.thevoxelbox.vsl.node.AbstractNode;
 import com.thevoxelbox.vsl.util.Provider;
 import com.thevoxelbox.vsl.util.RuntimeState;
@@ -35,13 +33,11 @@ import com.thevoxelbox.vsl.util.RuntimeState;
  * 
  * @param <T> The value type
  */
-@NodeInfo(name = "VariableGet")
+@NodeInfo(name = "VariableGet", inputs = "key", outputs = "value")
 public class VariableGetNode<T> extends AbstractNode
 {
 
-    @Input
-    private final Provider<String> varName;
-    @Output
+    private final Provider<String> key;
     private final Provider<T> value;
 
     /**
@@ -51,7 +47,7 @@ public class VariableGetNode<T> extends AbstractNode
      */
     public VariableGetNode(Provider<String> name)
     {
-        this.varName = name;
+        this.key = name;
         this.value = new Provider<T>(this);
     }
 
@@ -62,7 +58,7 @@ public class VariableGetNode<T> extends AbstractNode
      */
     public VariableGetNode(String name)
     {
-        this.varName = new Provider<String>(this, name);
+        this.key = new Provider<String>(this, name);
         this.value = new Provider<T>(this);
     }
 
@@ -73,7 +69,7 @@ public class VariableGetNode<T> extends AbstractNode
     @Override
     public void exec(RuntimeState state)
     {
-        this.value.set((T) state.getVars().get(this.varName.get(state)).get(), state.getUUID());
+        this.value.set((T) state.getVars().get(this.key.get(state)).get(), state.getUUID());
     }
 
     /**

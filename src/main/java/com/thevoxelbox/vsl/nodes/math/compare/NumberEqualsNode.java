@@ -30,7 +30,7 @@ import com.thevoxelbox.vsl.util.RuntimeState;
 /**
  * Tests if two numbers are equal.
  */
-@NodeInfo(name = "Equals")
+@NodeInfo(name = "Equals", inputs = { "a", "b", "floating" }, outputs = "result")
 public class NumberEqualsNode extends NumberCompareNode
 {
 
@@ -47,12 +47,24 @@ public class NumberEqualsNode extends NumberCompareNode
     }
 
     /**
+     * Creates a new {@link NumberEqualsNode}.
+     * 
+     * @param a The first number
+     * @param b The second number
+     * @param floating Whether to use floating point precision
+     */
+    public NumberEqualsNode(Provider<? extends Number> a, Provider<? extends Number> b, Provider<Boolean> floating)
+    {
+        super(a, b, floating);
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override
     public void exec(RuntimeState state)
     {
-        if (this.floating)
+        if (this.floating.get(state))
         {
             this.result.set(this.a.get(state).doubleValue() == this.b.get(state).doubleValue(), state.getUUID());
         } else

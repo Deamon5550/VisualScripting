@@ -30,7 +30,7 @@ import com.thevoxelbox.vsl.util.RuntimeState;
 /**
  * Returns the sub of two integer or floating-point numbers.
  */
-@NodeInfo(name = "Addition")
+@NodeInfo(name = "Addition", inputs = { "a", "b", "floating" }, outputs = "value")
 public class AdditionNode extends NumberOperatorNode
 {
 
@@ -39,9 +39,21 @@ public class AdditionNode extends NumberOperatorNode
      * 
      * @param a The first input
      * @param b The second input
-     * @param floating Whether to use floating point percision
+     * @param floating Whether to use floating point precision
      */
     public AdditionNode(Provider<? extends Number> a, Provider<? extends Number> b, boolean floating)
+    {
+        super(a, b, floating);
+    }
+
+    /**
+     * Creates a new {@link AdditionNode}.
+     * 
+     * @param a The first input
+     * @param b The second input
+     * @param floating Whether to use floating point precision
+     */
+    public AdditionNode(Provider<? extends Number> a, Provider<? extends Number> b, Provider<Boolean> floating)
     {
         super(a, b, floating);
     }
@@ -52,7 +64,7 @@ public class AdditionNode extends NumberOperatorNode
     @Override
     public void exec(RuntimeState state)
     {
-        if (this.floating)
+        if (this.floating.get(state))
         {
             this.value.set(this.a.get(state).doubleValue() + this.b.get(state).doubleValue(), state.getUUID());
         } else

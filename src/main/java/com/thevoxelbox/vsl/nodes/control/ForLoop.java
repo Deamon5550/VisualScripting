@@ -23,7 +23,6 @@
  */
 package com.thevoxelbox.vsl.nodes.control;
 
-import com.thevoxelbox.vsl.annotation.Input;
 import com.thevoxelbox.vsl.annotation.NodeInfo;
 import com.thevoxelbox.vsl.api.node.Node;
 import com.thevoxelbox.vsl.node.AbstractNode;
@@ -33,16 +32,14 @@ import com.thevoxelbox.vsl.util.RuntimeState;
 /**
  * Loops over a set of integers and executes a {@link Node} for each integer.
  */
-@NodeInfo(name = "For")
+@NodeInfo(name = "For", inputs = { "init", "target", "increment" })
 public class ForLoop extends AbstractNode
 {
 
     private Node body;
-    @Input
+
     private final Provider<Integer> init;
-    @Input
     private final Provider<Integer> target;
-    @Input
     private final Provider<Integer> increment;
 
     /**

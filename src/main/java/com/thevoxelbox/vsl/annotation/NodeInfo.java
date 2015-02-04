@@ -40,5 +40,9 @@ public @interface NodeInfo
      * Gets the name of the node.
      */
     String name();
+    
+    String[] inputs() default {};
+    
+    String[] outputs() default {};
 
 }

@@ -23,7 +23,6 @@
  */
 package com.thevoxelbox.vsl.nodes.math;
 
-import com.thevoxelbox.vsl.annotation.Input;
 import com.thevoxelbox.vsl.node.AbstractNode;
 import com.thevoxelbox.vsl.util.Provider;
 
@@ -33,11 +32,9 @@ import com.thevoxelbox.vsl.util.Provider;
 public abstract class TwoNumberNode extends AbstractNode
 {
 
-    @Input
     protected final Provider<? extends Number> a;
-    @Input
     protected final Provider<? extends Number> b;
-    protected final boolean floating;
+    protected final Provider<Boolean> floating;
 
     /**
      * Sets up a {@link TwoNumberNode}.
@@ -47,6 +44,20 @@ public abstract class TwoNumberNode extends AbstractNode
      * @param floating Whether to use floating point precision
      */
     public TwoNumberNode(Provider<? extends Number> a, Provider<? extends Number> b, boolean floating)
+    {
+        this.a = a;
+        this.b = b;
+        this.floating = new Provider<Boolean>(this, floating);
+    }
+
+    /**
+     * Sets up a {@link TwoNumberNode}.
+     * 
+     * @param a The first number
+     * @param b The second number
+     * @param floating Whether to use floating point precision
+     */
+    public TwoNumberNode(Provider<? extends Number> a, Provider<? extends Number> b, Provider<Boolean> floating)
     {
         this.a = a;
         this.b = b;

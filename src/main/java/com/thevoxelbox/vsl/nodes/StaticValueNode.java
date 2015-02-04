@@ -24,7 +24,6 @@
 package com.thevoxelbox.vsl.nodes;
 
 import com.thevoxelbox.vsl.annotation.NodeInfo;
-import com.thevoxelbox.vsl.annotation.Output;
 import com.thevoxelbox.vsl.node.AbstractNode;
 import com.thevoxelbox.vsl.util.Provider;
 import com.thevoxelbox.vsl.util.RuntimeState;
@@ -34,12 +33,12 @@ import com.thevoxelbox.vsl.util.RuntimeState;
  * 
  * @param <T> The value type
  */
-@NodeInfo(name = "StaticValue")
+@NodeInfo(name = "StaticValue", outputs = {"value"}, inputs = {"input"})
 public class StaticValueNode<T> extends AbstractNode
 {
 
-    @Output
     private final Provider<T> value;
+    private final Provider<T> input;
 
     /**
      * Creates a new {@link StaticValueNode}.
@@ -48,7 +47,19 @@ public class StaticValueNode<T> extends AbstractNode
      */
     public StaticValueNode(T value)
     {
-        this.value = new Provider<T>(this, value);
+        this.input = new Provider<T>(this, value);
+        this.value = new Provider<T>(this);
+    }
+
+    /**
+     * Creates a new {@link StaticValueNode}.
+     * 
+     * @param value The value
+     */
+    public StaticValueNode(Provider<T> value)
+    {
+        this.input = value;
+        this.value = new Provider<T>(this);
     }
 
     /**
@@ -57,7 +68,7 @@ public class StaticValueNode<T> extends AbstractNode
     @Override
     public void exec(RuntimeState state)
     {
-
+        this.value.set(this.input.get(state), state.getUUID());
     }
 
     /**

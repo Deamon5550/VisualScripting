@@ -23,9 +23,7 @@
  */
 package com.thevoxelbox.vsl.nodes.math;
 
-import com.thevoxelbox.vsl.annotation.Input;
 import com.thevoxelbox.vsl.annotation.NodeInfo;
-import com.thevoxelbox.vsl.annotation.Output;
 import com.thevoxelbox.vsl.node.AbstractNode;
 import com.thevoxelbox.vsl.util.Provider;
 import com.thevoxelbox.vsl.util.RuntimeState;
@@ -33,13 +31,11 @@ import com.thevoxelbox.vsl.util.RuntimeState;
 /**
  * Performs the {@link Math#sqrt(double)} on the given number.
  */
-@NodeInfo(name = "Sqrt")
+@NodeInfo(name = "Sqrt", inputs = "a", outputs = "value")
 public class SqrtNode extends AbstractNode
 {
 
-    @Output
     private final Provider<Number> value;
-    @Input
     private final Provider<? extends Number> a;
 
     /**

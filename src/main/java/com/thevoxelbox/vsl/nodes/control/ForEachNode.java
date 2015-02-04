@@ -23,9 +23,7 @@
  */
 package com.thevoxelbox.vsl.nodes.control;
 
-import com.thevoxelbox.vsl.annotation.Input;
 import com.thevoxelbox.vsl.annotation.NodeInfo;
-import com.thevoxelbox.vsl.annotation.Output;
 import com.thevoxelbox.vsl.api.node.Node;
 import com.thevoxelbox.vsl.node.AbstractNode;
 import com.thevoxelbox.vsl.util.Provider;
@@ -37,16 +35,14 @@ import com.thevoxelbox.vsl.util.RuntimeState;
  * 
  * @param <T> The array type
  */
-@NodeInfo(name = "ForEach")
+@NodeInfo(name = "ForEach", inputs = {"array"}, outputs = {"next", "index"})
 public class ForEachNode<T> extends AbstractNode
 {
 
     private Node body;
-    @Input(name = "array")
+    
     private final Provider<T[]> array;
-    @Output
     private final Provider<T> next;
-    @Output
     private final Provider<Integer> index;
 
     /**

@@ -30,7 +30,7 @@ import com.thevoxelbox.vsl.util.RuntimeState;
 /**
  * Performs the modulo operator between two given numbers.
  */
-@NodeInfo(name = "Modulo")
+@NodeInfo(name = "Modulo", inputs = { "a", "b", "floating" }, outputs = "value")
 public class ModuloNode extends NumberOperatorNode
 {
 
@@ -47,12 +47,24 @@ public class ModuloNode extends NumberOperatorNode
     }
 
     /**
+     * Creates a new {@link ModuloNode}.
+     * 
+     * @param a The first number
+     * @param b The second number
+     * @param floating Whether to use floating point precision
+     */
+    public ModuloNode(Provider<? extends Number> a, Provider<? extends Number> b, Provider<Boolean> floating)
+    {
+        super(a, b, floating);
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override
     public void exec(RuntimeState state)
     {
-        if (this.floating)
+        if (this.floating.get(state))
         {
             this.value.set(this.a.get(state).doubleValue() % this.b.get(state).doubleValue(), state.getUUID());
         } else

@@ -52,5 +52,7 @@ public interface Node
      * @return The next node
      */
     Node getNext();
-
+    
+    Node[] getInputs();
+    
 }

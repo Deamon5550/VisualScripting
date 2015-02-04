@@ -30,7 +30,7 @@ import com.thevoxelbox.vsl.util.RuntimeState;
 /**
  * Performs a numerical subtraction between two numbers.
  */
-@NodeInfo(name = "Subtraction")
+@NodeInfo(name = "Subtraction", inputs = { "a", "b", "floating" }, outputs = "value")
 public class SubtractionNode extends NumberOperatorNode
 {
 
@@ -47,12 +47,24 @@ public class SubtractionNode extends NumberOperatorNode
     }
 
     /**
+     * Creates a new {@link SubtractionNode}.
+     * 
+     * @param a The first number
+     * @param b The second number
+     * @param floating Whether to use floating point precision
+     */
+    public SubtractionNode(Provider<? extends Number> a, Provider<? extends Number> b, Provider<Boolean> floating)
+    {
+        super(a, b, floating);
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override
     public void exec(RuntimeState state)
     {
-        if (this.floating)
+        if (this.floating.get(state))
         {
             this.value.set(this.a.get(state).doubleValue() - this.b.get(state).doubleValue(), state.getUUID());
         } else

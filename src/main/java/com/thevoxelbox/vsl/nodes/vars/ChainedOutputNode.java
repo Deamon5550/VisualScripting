@@ -32,7 +32,7 @@ import com.thevoxelbox.vsl.util.Provider;
  * 
  * @param <T> The output type
  */
-@NodeInfo(name = "ChainedOutput")
+@NodeInfo(name = "ChainedOutput", inputs = { "key", "value" })
 public class ChainedOutputNode<T> extends VariableSetNode<T>
 {
 

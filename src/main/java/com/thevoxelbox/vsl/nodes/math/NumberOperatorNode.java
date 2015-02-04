@@ -23,7 +23,6 @@
  */
 package com.thevoxelbox.vsl.nodes.math;
 
-import com.thevoxelbox.vsl.annotation.Output;
 import com.thevoxelbox.vsl.util.Provider;
 
 /**
@@ -32,7 +31,6 @@ import com.thevoxelbox.vsl.util.Provider;
 public abstract class NumberOperatorNode extends TwoNumberNode
 {
 
-    @Output
     protected final Provider<Number> value;
 
     /**
@@ -43,6 +41,19 @@ public abstract class NumberOperatorNode extends TwoNumberNode
      * @param floating Whether to use floating point precision
      */
     public NumberOperatorNode(Provider<? extends Number> a, Provider<? extends Number> b, boolean floating)
+    {
+        super(a, b, floating);
+        this.value = new Provider<Number>(this);
+    }
+
+    /**
+     * Sets up an operator node.
+     * 
+     * @param a The first number
+     * @param b The second number
+     * @param floating Whether to use floating point precision
+     */
+    public NumberOperatorNode(Provider<? extends Number> a, Provider<? extends Number> b, Provider<Boolean> floating)
     {
         super(a, b, floating);
         this.value = new Provider<Number>(this);

@@ -23,9 +23,7 @@
  */
 package com.thevoxelbox.vsl.nodes.math;
 
-import com.thevoxelbox.vsl.annotation.Input;
 import com.thevoxelbox.vsl.annotation.NodeInfo;
-import com.thevoxelbox.vsl.annotation.Output;
 import com.thevoxelbox.vsl.node.AbstractNode;
 import com.thevoxelbox.vsl.util.Provider;
 import com.thevoxelbox.vsl.util.RuntimeState;
@@ -33,27 +31,38 @@ import com.thevoxelbox.vsl.util.RuntimeState;
 /**
  * Returns the absolute value of an integer or floating-point number.
  */
-@NodeInfo(name = "Abs")
+@NodeInfo(name = "Abs", inputs = { "a", "floating" }, outputs = "value")
 public class AbsNode extends AbstractNode
 {
 
-    @Output
     private final Provider<Number> value;
-    @Input
     private final Provider<? extends Number> a;
-    private final boolean floating;
+    private final Provider<Boolean> floating;
 
     /**
      * Creates a new {@link AbsNode}.
      * 
      * @param a The input value
-     * @param floating Whether to use floating point percision
+     * @param floating Whether to use floating point precision
+     */
+    public AbsNode(Provider<? extends Number> a, Provider<Boolean> floating)
+    {
+        this.a = a;
+        this.value = new Provider<Number>(this);
+        this.floating = floating;
+    }
+
+    /**
+     * Creates a new {@link AbsNode}.
+     * 
+     * @param a The input value
+     * @param floating Whether to use floating point precision
      */
     public AbsNode(Provider<? extends Number> a, boolean floating)
     {
         this.a = a;
         this.value = new Provider<Number>(this);
-        this.floating = floating;
+        this.floating = new Provider<Boolean>(this, floating);
     }
 
     /**
@@ -62,7 +71,7 @@ public class AbsNode extends AbstractNode
     @Override
     public void exec(RuntimeState state)
     {
-        if (this.floating)
+        if (this.floating.get(state))
         {
             this.value.set(Math.abs(this.a.get(state).doubleValue()), state.getUUID());
         } else

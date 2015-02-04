@@ -30,14 +30,21 @@ import java.io.Flushable;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.io.PrintWriter;
-import java.util.Collections;
-import java.util.Comparator;
+import java.lang.reflect.Field;
 import java.util.List;
+import java.util.Map;
 
+import com.google.common.collect.BiMap;
+import com.google.common.collect.HashBiMap;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+import com.thevoxelbox.vsl.annotation.NodeInfo;
+import com.thevoxelbox.vsl.api.node.Node;
 import com.thevoxelbox.vsl.api.node.NodeGraph;
 import com.thevoxelbox.vsl.api.serialization.GraphWriter;
 import com.thevoxelbox.vsl.error.InvalidNodeException;
+import com.thevoxelbox.vsl.util.Provider;
+import com.thevoxelbox.vsl.util.ReflectionHelper;
 
 /**
  * A {@link GraphWriter} which outputs to a {@link File}.
@@ -86,71 +93,115 @@ public class FileGraphWriter implements GraphWriter
     @Override
     public void write(NodeGraph graph) throws IOException, InvalidNodeException
     {
-        DirectedGraphRepresentation rep = new DirectedGraphRepresentation(graph);
         this.outputStream.println("#version " + FORMAT_VERSION);
         this.outputStream.println("name " + graph.getName());
-        writeDigraphToStream(rep);
-    }
-
-    private void writeDigraphToStream(DirectedGraphRepresentation rep)
-    {
-        writeNodeDict(rep);
-        writeNodeInstances(rep);
-        writeEdges(rep);
-    }
-
-    private void writeEdges(DirectedGraphRepresentation rep)
-    {
-        for (EdgeRepresentation e : rep.getEdges())
+        List<Node> nodes = walk(graph);
+        BiMap<Class<? extends Node>, Integer> proto = getPrototypes(nodes);
+        for (int i = 0; i < proto.size(); i++)
         {
-            this.outputStream.println("e " + e.getOutputNode() + ":" + e.getOutputIndex() + " " + e.getInputNode() + ":" + e.getInputIndex());
+            printPrototype(proto.inverse().get(i));
+        }
+        String ins = "i";
+        for (Node n : nodes)
+        {
+            ins += " " + proto.get(n.getClass());
+        }
+        this.outputStream.println(ins);
+        printEdges(graph);
+    }
+
+    private void printEdges(NodeGraph graph)
+    {
+        Node start = graph.getStart();
+        while (start != null)
+        {
+            printEdge(start);
+            start = start.getNext();
         }
     }
-
-    private void writeNodeInstances(DirectedGraphRepresentation rep)
+    
+    private void printEdge(Node a)
     {
-        String s = "";
-        for (NodeInstanceRepresentation r : rep.getInstances())
+        NodeInfo inf = a.getClass().getAnnotation(NodeInfo.class);
+        for(String s: inf.inputs())
         {
-            if (!s.isEmpty())
+            try
             {
-                s += " ";
-            }
-            s += r.getRepresentation().getIndex();
-        }
-        this.outputStream.println("i " + s);
-    }
-
-    private void writeNodeDict(DirectedGraphRepresentation rep)
-    {
-        for (NodeRepresentation node : rep.getOrderedDict())
-        {
-            String s = "p " + node.getName();
-            List<IORepresentation> io = Lists.newArrayList();
-            for (InputRepresentation i : node.getRawInputs())
-            {
-                io.add(i);
-            }
-            for (OutputRepresentation o : node.getRawOutputs())
-            {
-                io.add(o);
-            }
-            Collections.sort(io, new Comparator<IORepresentation>()
-            {
-
-                @Override
-                public int compare(IORepresentation o1, IORepresentation o2)
+                Field f = ReflectionHelper.getField(this.getClass(), s);
+                if (f == null)
                 {
-                    return o1.getIndex() - o2.getIndex();
+                    continue;
                 }
-
-            });
-            for (IORepresentation i : io)
+                Provider<?> p = (Provider<?>) f.get(this);
+                
+                if(p.getOwner() != a)
+                {
+                    
+                }
+                
+            } catch (Exception ignored)
             {
-                s += " " + i.getName();
+                ignored.printStackTrace();
+                continue;
             }
-            this.outputStream.println(s);
         }
+    }
+
+    private BiMap<Class<? extends Node>, Integer> getPrototypes(List<Node> nodes)
+    {
+        BiMap<Class<? extends Node>, Integer> p = HashBiMap.create();
+        int i = 0;
+        for (Node n : nodes)
+        {
+            if (!p.containsKey(n.getClass()))
+            {
+                p.put(n.getClass(), i++);
+            }
+        }
+
+        return p;
+    }
+
+    private List<Node> walk(NodeGraph graph)
+    {
+        List<Node> nodes = Lists.newArrayList();
+
+        Node start = graph.getStart();
+        while (start != null)
+        {
+            addNode(nodes, start);
+            start = start.getNext();
+        }
+
+        return nodes;
+    }
+
+    private void addNode(List<Node> nodes, Node n)
+    {
+        if (!nodes.contains(n))
+        {
+            nodes.add(n);
+        }
+
+        for (Node i : n.getInputs())
+        {
+            addNode(nodes, i);
+        }
+    }
+
+    private void printPrototype(Class<? extends Node> n)
+    {
+        NodeInfo inf = n.getAnnotation(NodeInfo.class);
+        String s = "p " + inf.name();
+        for (String i : inf.inputs())
+        {
+            s += " " + i;
+        }
+        for (String o : inf.outputs())
+        {
+            s += " " + o;
+        }
+        this.outputStream.println(s);
     }
 
     /**

@@ -32,7 +32,7 @@ import com.thevoxelbox.vsl.util.RuntimeState;
 /**
  * Executed a node if the given boolean is true. TODO: else support
  */
-@NodeInfo(name = "If")
+@NodeInfo(name = "If", inputs = { "statement" })
 public class IfStatement extends AbstractNode
 {
 

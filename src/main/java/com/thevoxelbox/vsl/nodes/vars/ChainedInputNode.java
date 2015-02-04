@@ -31,7 +31,7 @@ import com.thevoxelbox.vsl.node.RunnableNodeGraph;
  * 
  * @param <T> The input type
  */
-@NodeInfo(name = "ChainedInput")
+@NodeInfo(name = "ChainedInput", inputs = "key", outputs = "value")
 public class ChainedInputNode<T> extends VariableGetNode<T>
 {
 
