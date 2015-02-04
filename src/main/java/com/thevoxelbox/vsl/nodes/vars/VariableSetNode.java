@@ -60,7 +60,7 @@ public class VariableSetNode<T> extends AbstractNode
      */
     public VariableSetNode(String name, Provider<T> value)
     {
-        this.key = new Provider<String>(this, name);
+        this.key = new Provider<String>(this, name, String.class);
         this.value = value;
     }
 
@@ -70,10 +70,10 @@ public class VariableSetNode<T> extends AbstractNode
      * @param name The variable name
      * @param value The new value
      */
-    public VariableSetNode(Provider<String> name, T value)
+    public VariableSetNode(Provider<String> name, T value, Class<T> type)
     {
         this.key = name;
-        this.value = new Provider<T>(this, value);
+        this.value = new Provider<T>(this, value, type);
     }
 
     /**
@@ -82,10 +82,10 @@ public class VariableSetNode<T> extends AbstractNode
      * @param name The variable name
      * @param value The new value
      */
-    public VariableSetNode(String name, T value)
+    public VariableSetNode(String name, T value, Class<T> type)
     {
-        this.key = new Provider<String>(this, name);
-        this.value = new Provider<T>(this, value);
+        this.key = new Provider<String>(this, name, String.class);
+        this.value = new Provider<T>(this, value, type);
     }
 
     /**

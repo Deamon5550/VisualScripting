@@ -55,7 +55,7 @@ public class NumberNodeTest extends StandardTest
     public void testAddition()
     {
 
-        AdditionNode add = new AdditionNode(mock(6), mock(5), false);
+        AdditionNode add = new AdditionNode(mock(6, Integer.class), mock(5, Integer.class), false);
 
         add.exec(this.state);
 
@@ -68,7 +68,7 @@ public class NumberNodeTest extends StandardTest
     @Test
     public void testSubtraction()
     {
-        SubtractionNode add = new SubtractionNode(mock(5), mock(6), false);
+        SubtractionNode add = new SubtractionNode(mock(5, Integer.class), mock(6, Integer.class), false);
 
         add.exec(this.state);
 
@@ -81,7 +81,7 @@ public class NumberNodeTest extends StandardTest
     @Test
     public void testMultiplication()
     {
-        MultiplicationNode add = new MultiplicationNode(mock(6), mock(5), false);
+        MultiplicationNode add = new MultiplicationNode(mock(6, Integer.class), mock(5, Integer.class), false);
 
         add.exec(this.state);
 
@@ -94,7 +94,7 @@ public class NumberNodeTest extends StandardTest
     @Test
     public void testDivision()
     {
-        DivisionNode add = new DivisionNode(mock(14), mock(6), false);
+        DivisionNode add = new DivisionNode(mock(14, Integer.class), mock(6, Integer.class), false);
 
         add.exec(this.state);
 
@@ -107,7 +107,7 @@ public class NumberNodeTest extends StandardTest
     @Test
     public void testModulo()
     {
-        ModuloNode add = new ModuloNode(mock(8), mock(6), false);
+        ModuloNode add = new ModuloNode(mock(8, Integer.class), mock(6, Integer.class), false);
 
         add.exec(this.state);
 
@@ -120,7 +120,7 @@ public class NumberNodeTest extends StandardTest
     @Test
     public void testSqrt()
     {
-        SqrtNode add = new SqrtNode(mock(16));
+        SqrtNode add = new SqrtNode(mock(16, Integer.class));
 
         add.exec(this.state);
 
@@ -133,7 +133,7 @@ public class NumberNodeTest extends StandardTest
     @Test
     public void testAbs()
     {
-        AbsNode add = new AbsNode(mock(-5), false);
+        AbsNode add = new AbsNode(mock(-5, Integer.class), false);
 
         add.exec(this.state);
 
@@ -146,7 +146,7 @@ public class NumberNodeTest extends StandardTest
     @Test
     public void testFloatAbs()
     {
-        AbsNode add = new AbsNode(mock(-5.2), true);
+        AbsNode add = new AbsNode(mock(-5.2, Double.class), true);
 
         add.exec(this.state);
 
@@ -159,7 +159,7 @@ public class NumberNodeTest extends StandardTest
     @Test
     public void testFloatAddition()
     {
-        AdditionNode add = new AdditionNode(mock(5.2), mock(6.3), true);
+        AdditionNode add = new AdditionNode(mock(5.2, Double.class), mock(6.3, Double.class), true);
 
         add.exec(this.state);
 
@@ -172,7 +172,7 @@ public class NumberNodeTest extends StandardTest
     @Test
     public void testFloatSubtraction()
     {
-        SubtractionNode add = new SubtractionNode(mock(5.2), mock(6.2), true);
+        SubtractionNode add = new SubtractionNode(mock(5.2, Double.class), mock(6.2, Double.class), true);
 
         add.exec(this.state);
 
@@ -185,7 +185,7 @@ public class NumberNodeTest extends StandardTest
     @Test
     public void testFloatMultiplication()
     {
-        MultiplicationNode add = new MultiplicationNode(mock(2.5), mock(5.0), true);
+        MultiplicationNode add = new MultiplicationNode(mock(2.5, Double.class), mock(5.0, Double.class), true);
 
         add.exec(this.state);
 
@@ -198,7 +198,7 @@ public class NumberNodeTest extends StandardTest
     @Test
     public void testFloatDivision()
     {
-        DivisionNode add = new DivisionNode(mock(7.5), mock(3.0), true);
+        DivisionNode add = new DivisionNode(mock(7.5, Double.class), mock(3.0, Double.class), true);
 
         add.exec(this.state);
 
@@ -211,7 +211,7 @@ public class NumberNodeTest extends StandardTest
     @Test
     public void testFloatModulo()
     {
-        ModuloNode add = new ModuloNode(mock(5.4), mock(2.2), true);
+        ModuloNode add = new ModuloNode(mock(5.4, Double.class), mock(2.2, Double.class), true);
 
         add.exec(this.state);
 

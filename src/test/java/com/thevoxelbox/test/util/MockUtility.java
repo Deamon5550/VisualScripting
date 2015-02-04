@@ -48,9 +48,9 @@ public class MockUtility
      * @param value The value
      * @return The provider
      */
-    public static <T> Provider<T> mock(T value)
+    public static <T> Provider<T> mock(T value, Class<T> type)
     {
-        return new Provider<T>(mockNode, value);
+        return new Provider<T>(mockNode, value, type);
     }
 
 }

@@ -40,9 +40,9 @@ public class ChainedInputNode<T> extends VariableGetNode<T>
      * 
      * @param name The variable name to input
      */
-    public ChainedInputNode(String name)
+    public ChainedInputNode(String name, Class<T> type)
     {
-        super("__CHAINED__" + name);
+        super("__CHAINED__" + name, type);
     }
 
 }

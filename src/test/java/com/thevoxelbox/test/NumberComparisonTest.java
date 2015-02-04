@@ -60,7 +60,7 @@ public class NumberComparisonTest extends StandardTest
     @Test
     public void testEquals()
     {
-        NumberEqualsNode eq = new NumberEqualsNode(mock(5), mock(5), false);
+        NumberEqualsNode eq = new NumberEqualsNode(mock(5, Integer.class), mock(5, Integer.class), false);
 
         eq.exec(this.state);
 
@@ -73,7 +73,7 @@ public class NumberComparisonTest extends StandardTest
     @Test
     public void testEquals2()
     {
-        NumberEqualsNode eq = new NumberEqualsNode(mock(5), mock(4), false);
+        NumberEqualsNode eq = new NumberEqualsNode(mock(5, Integer.class), mock(4, Integer.class), false);
 
         eq.exec(this.state);
 
@@ -86,7 +86,7 @@ public class NumberComparisonTest extends StandardTest
     @Test
     public void testGreater()
     {
-        NumberGreaterThanNode eq = new NumberGreaterThanNode(mock(6), mock(5), false);
+        NumberGreaterThanNode eq = new NumberGreaterThanNode(mock(6, Integer.class), mock(5, Integer.class), false);
 
         eq.exec(this.state);
 
@@ -99,7 +99,7 @@ public class NumberComparisonTest extends StandardTest
     @Test
     public void testGreater2()
     {
-        NumberGreaterThanNode eq = new NumberGreaterThanNode(mock(6), mock(7), false);
+        NumberGreaterThanNode eq = new NumberGreaterThanNode(mock(6, Integer.class), mock(7, Integer.class), false);
 
         eq.exec(this.state);
 
@@ -112,7 +112,7 @@ public class NumberComparisonTest extends StandardTest
     @Test
     public void testGreaterEq()
     {
-        NumberGreaterThanOrEqualsNode eq = new NumberGreaterThanOrEqualsNode(mock(6), mock(5), false);
+        NumberGreaterThanOrEqualsNode eq = new NumberGreaterThanOrEqualsNode(mock(6, Integer.class), mock(5, Integer.class), false);
 
         eq.exec(this.state);
 
@@ -125,7 +125,7 @@ public class NumberComparisonTest extends StandardTest
     @Test
     public void testGreaterEq2()
     {
-        NumberGreaterThanOrEqualsNode eq = new NumberGreaterThanOrEqualsNode(mock(5), mock(5), false);
+        NumberGreaterThanOrEqualsNode eq = new NumberGreaterThanOrEqualsNode(mock(5, Integer.class), mock(5, Integer.class), false);
 
         eq.exec(this.state);
 
@@ -138,7 +138,7 @@ public class NumberComparisonTest extends StandardTest
     @Test
     public void testGreaterEq3()
     {
-        NumberGreaterThanOrEqualsNode eq = new NumberGreaterThanOrEqualsNode(mock(6), mock(7), false);
+        NumberGreaterThanOrEqualsNode eq = new NumberGreaterThanOrEqualsNode(mock(6, Integer.class), mock(7, Integer.class), false);
 
         eq.exec(this.state);
 
@@ -151,7 +151,7 @@ public class NumberComparisonTest extends StandardTest
     @Test
     public void testLess()
     {
-        NumberLessThanNode eq = new NumberLessThanNode(mock(4), mock(5), false);
+        NumberLessThanNode eq = new NumberLessThanNode(mock(4, Integer.class), mock(5, Integer.class), false);
 
         eq.exec(this.state);
 
@@ -164,7 +164,7 @@ public class NumberComparisonTest extends StandardTest
     @Test
     public void testLess2()
     {
-        NumberLessThanNode eq = new NumberLessThanNode(mock(4), mock(3), false);
+        NumberLessThanNode eq = new NumberLessThanNode(mock(4, Integer.class), mock(3, Integer.class), false);
 
         eq.exec(this.state);
 
@@ -177,7 +177,7 @@ public class NumberComparisonTest extends StandardTest
     @Test
     public void testLessEq()
     {
-        NumberLessThanOrEqualsNode eq = new NumberLessThanOrEqualsNode(mock(5), mock(5), false);
+        NumberLessThanOrEqualsNode eq = new NumberLessThanOrEqualsNode(mock(5, Integer.class), mock(5, Integer.class), false);
 
         eq.exec(this.state);
 
@@ -190,7 +190,7 @@ public class NumberComparisonTest extends StandardTest
     @Test
     public void testLessEq2()
     {
-        NumberLessThanOrEqualsNode eq = new NumberLessThanOrEqualsNode(mock(4), mock(5), false);
+        NumberLessThanOrEqualsNode eq = new NumberLessThanOrEqualsNode(mock(4, Integer.class), mock(5, Integer.class), false);
 
         eq.exec(this.state);
 
@@ -203,7 +203,7 @@ public class NumberComparisonTest extends StandardTest
     @Test
     public void testLessEq3()
     {
-        NumberLessThanOrEqualsNode eq = new NumberLessThanOrEqualsNode(mock(4), mock(2), false);
+        NumberLessThanOrEqualsNode eq = new NumberLessThanOrEqualsNode(mock(4, Integer.class), mock(2, Integer.class), false);
 
         eq.exec(this.state);
 
@@ -216,7 +216,7 @@ public class NumberComparisonTest extends StandardTest
     @Test
     public void testFloatEquals()
     {
-        NumberEqualsNode eq = new NumberEqualsNode(mock(5.2), mock(5.2), true);
+        NumberEqualsNode eq = new NumberEqualsNode(mock(5.2, Double.class), mock(5.2, Double.class), true);
 
         eq.exec(this.state);
 
@@ -229,7 +229,7 @@ public class NumberComparisonTest extends StandardTest
     @Test
     public void testFloatEquals2()
     {
-        NumberEqualsNode eq = new NumberEqualsNode(mock(5.2), mock(5.3), true);
+        NumberEqualsNode eq = new NumberEqualsNode(mock(5.2, Double.class), mock(5.3, Double.class), true);
 
         eq.exec(this.state);
 
@@ -242,7 +242,7 @@ public class NumberComparisonTest extends StandardTest
     @Test
     public void testFloatGreater()
     {
-        NumberGreaterThanNode eq = new NumberGreaterThanNode(mock(6.4), mock(5.4), true);
+        NumberGreaterThanNode eq = new NumberGreaterThanNode(mock(6.4, Double.class), mock(5.4, Double.class), true);
 
         eq.exec(this.state);
 
@@ -255,7 +255,7 @@ public class NumberComparisonTest extends StandardTest
     @Test
     public void testFloatGreater2()
     {
-        NumberGreaterThanNode eq = new NumberGreaterThanNode(mock(6.4), mock(7.5), true);
+        NumberGreaterThanNode eq = new NumberGreaterThanNode(mock(6.4, Double.class), mock(7.5, Double.class), true);
 
         eq.exec(this.state);
 
@@ -268,7 +268,7 @@ public class NumberComparisonTest extends StandardTest
     @Test
     public void testFloatGreaterEq()
     {
-        NumberGreaterThanOrEqualsNode eq = new NumberGreaterThanOrEqualsNode(mock(6.4), mock(5.4), true);
+        NumberGreaterThanOrEqualsNode eq = new NumberGreaterThanOrEqualsNode(mock(6.4, Double.class), mock(5.4, Double.class), true);
 
         eq.exec(this.state);
 
@@ -281,7 +281,7 @@ public class NumberComparisonTest extends StandardTest
     @Test
     public void testFloatGreaterEq2()
     {
-        NumberGreaterThanOrEqualsNode eq = new NumberGreaterThanOrEqualsNode(mock(5.4), mock(5.4), true);
+        NumberGreaterThanOrEqualsNode eq = new NumberGreaterThanOrEqualsNode(mock(5.4, Double.class), mock(5.4, Double.class), true);
 
         eq.exec(this.state);
 
@@ -294,7 +294,7 @@ public class NumberComparisonTest extends StandardTest
     @Test
     public void testFloatGreaterEq3()
     {
-        NumberGreaterThanOrEqualsNode eq = new NumberGreaterThanOrEqualsNode(mock(5.4), mock(5.5), true);
+        NumberGreaterThanOrEqualsNode eq = new NumberGreaterThanOrEqualsNode(mock(5.4, Double.class), mock(5.5, Double.class), true);
 
         eq.exec(this.state);
 
@@ -307,7 +307,7 @@ public class NumberComparisonTest extends StandardTest
     @Test
     public void testFloatLess()
     {
-        NumberLessThanNode eq = new NumberLessThanNode(mock(4.4), mock(5.4), true);
+        NumberLessThanNode eq = new NumberLessThanNode(mock(4.4, Double.class), mock(5.4, Double.class), true);
 
         eq.exec(this.state);
 
@@ -320,7 +320,7 @@ public class NumberComparisonTest extends StandardTest
     @Test
     public void testFloatLess2()
     {
-        NumberLessThanNode eq = new NumberLessThanNode(mock(4.4), mock(4.2), true);
+        NumberLessThanNode eq = new NumberLessThanNode(mock(4.4, Double.class), mock(4.2, Double.class), true);
 
         eq.exec(this.state);
 
@@ -333,7 +333,7 @@ public class NumberComparisonTest extends StandardTest
     @Test
     public void testFloatLessEq()
     {
-        NumberLessThanOrEqualsNode eq = new NumberLessThanOrEqualsNode(mock(5.4), mock(5.4), true);
+        NumberLessThanOrEqualsNode eq = new NumberLessThanOrEqualsNode(mock(5.4, Double.class), mock(5.4, Double.class), true);
 
         eq.exec(this.state);
 
@@ -346,7 +346,7 @@ public class NumberComparisonTest extends StandardTest
     @Test
     public void testFloatLessEq2()
     {
-        NumberLessThanOrEqualsNode eq = new NumberLessThanOrEqualsNode(mock(4.4), mock(5.4), true);
+        NumberLessThanOrEqualsNode eq = new NumberLessThanOrEqualsNode(mock(4.4, Double.class), mock(5.4, Double.class), true);
 
         eq.exec(this.state);
 
@@ -359,7 +359,7 @@ public class NumberComparisonTest extends StandardTest
     @Test
     public void testFloatLessEq3()
     {
-        NumberLessThanOrEqualsNode eq = new NumberLessThanOrEqualsNode(mock(4.4), mock(4.3), true);
+        NumberLessThanOrEqualsNode eq = new NumberLessThanOrEqualsNode(mock(4.4, Double.class), mock(4.3, Double.class), true);
 
         eq.exec(this.state);
 

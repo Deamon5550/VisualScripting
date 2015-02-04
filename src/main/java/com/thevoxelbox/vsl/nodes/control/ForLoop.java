@@ -65,7 +65,7 @@ public class ForLoop extends AbstractNode
      */
     public ForLoop(int i, Provider<Integer> t, Provider<Integer> n)
     {
-        this.init = new Provider<Integer>(this, i);
+        this.init = new Provider<Integer>(this, i, Integer.class);
         this.target = t;
         this.increment = n;
     }
@@ -80,7 +80,7 @@ public class ForLoop extends AbstractNode
     public ForLoop(Provider<Integer> i, int t, Provider<Integer> n)
     {
         this.init = i;
-        this.target = new Provider<Integer>(this, t);
+        this.target = new Provider<Integer>(this, t, Integer.class);
         this.increment = n;
     }
 
@@ -93,8 +93,8 @@ public class ForLoop extends AbstractNode
      */
     public ForLoop(int i, int t, Provider<Integer> n)
     {
-        this.init = new Provider<Integer>(this, i);
-        this.target = new Provider<Integer>(this, t);
+        this.init = new Provider<Integer>(this, i, Integer.class);
+        this.target = new Provider<Integer>(this, t, Integer.class);
         this.increment = n;
     }
 
@@ -109,7 +109,7 @@ public class ForLoop extends AbstractNode
     {
         this.init = i;
         this.target = t;
-        this.increment = new Provider<Integer>(this, n);
+        this.increment = new Provider<Integer>(this, n, Integer.class);
     }
 
     /**
@@ -121,9 +121,9 @@ public class ForLoop extends AbstractNode
      */
     public ForLoop(int i, int t, int n)
     {
-        this.init = new Provider<Integer>(this, i);
-        this.target = new Provider<Integer>(this, t);
-        this.increment = new Provider<Integer>(this, n);
+        this.init = new Provider<Integer>(this, i, Integer.class);
+        this.target = new Provider<Integer>(this, t, Integer.class);
+        this.increment = new Provider<Integer>(this, n, Integer.class);
     }
 
     /**
@@ -136,8 +136,8 @@ public class ForLoop extends AbstractNode
     public ForLoop(Provider<Integer> i, int t, int n)
     {
         this.init = i;
-        this.target = new Provider<Integer>(this, t);
-        this.increment = new Provider<Integer>(this, n);
+        this.target = new Provider<Integer>(this, t, Integer.class);
+        this.increment = new Provider<Integer>(this, n, Integer.class);
     }
 
     /**
@@ -149,9 +149,9 @@ public class ForLoop extends AbstractNode
      */
     public ForLoop(int i, Provider<Integer> t, int n)
     {
-        this.init = new Provider<Integer>(this, i);
+        this.init = new Provider<Integer>(this, i, Integer.class);
         this.target = t;
-        this.increment = new Provider<Integer>(this, n);
+        this.increment = new Provider<Integer>(this, n, Integer.class);
     }
 
     /**

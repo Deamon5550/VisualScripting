@@ -26,11 +26,11 @@ public class ReflectionHelper
         return fields.toArray(new Field[fields.size()]);
     }
 
-    public static Field getField(Class<?> cls, String s) throws NoSuchFieldException, SecurityException
+    public static Field getField(Class<?> cls, String s)
     {
+        Class<?> next = cls;
         Field f = null;
 
-        Class<?> next = cls;
         while (next != null)
         {
             try
@@ -48,7 +48,7 @@ public class ReflectionHelper
 
             next = next.getSuperclass();
         }
-        throw new NoSuchFieldException(s);
+        return null;
     }
 
 }

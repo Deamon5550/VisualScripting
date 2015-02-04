@@ -56,8 +56,8 @@ public class NodeGraphTest extends StandardTest
     {
         this.output.setup();
 
-        StaticValueNode<String> string = new StaticValueNode<String>("Hello");
-        StaticValueNode<String> string2 = new StaticValueNode<String>(" World");
+        StaticValueNode<String> string = new StaticValueNode<String>("Hello", String.class);
+        StaticValueNode<String> string2 = new StaticValueNode<String>(" World", String.class);
         PrintNode print = new PrintNode(string.getValue());
         PrintNode print2 = new PrintNode(string2.getValue());
         print.setNext(print2);

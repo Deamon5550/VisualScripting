@@ -74,8 +74,8 @@ public class SerializationTest extends StandardTest
 
         FileGraphWriter writer = new FileGraphWriter(System.out);
         NodeGraph graph = new RunnableNodeGraph("TestGraph");
-        StaticValueNode<Integer> a = new StaticValueNode<Integer>(5);
-        StaticValueNode<Integer> b = new StaticValueNode<Integer>(6);
+        StaticValueNode<Integer> a = new StaticValueNode<Integer>(5, Integer.class);
+        StaticValueNode<Integer> b = new StaticValueNode<Integer>(6, Integer.class);
         AdditionNode add = new AdditionNode(a.getValue(), b.getValue(), false);
         PrintNode print = new PrintNode(add.getResult());
         graph.setStart(add);

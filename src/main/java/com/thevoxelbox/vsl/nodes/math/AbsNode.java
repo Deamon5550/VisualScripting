@@ -48,7 +48,7 @@ public class AbsNode extends AbstractNode
     public AbsNode(Provider<? extends Number> a, Provider<Boolean> floating)
     {
         this.a = a;
-        this.value = new Provider<Number>(this);
+        this.value = new Provider<Number>(this, Number.class);
         this.floating = floating;
     }
 
@@ -61,8 +61,8 @@ public class AbsNode extends AbstractNode
     public AbsNode(Provider<? extends Number> a, boolean floating)
     {
         this.a = a;
-        this.value = new Provider<Number>(this);
-        this.floating = new Provider<Boolean>(this, floating);
+        this.value = new Provider<Number>(this, Number.class);
+        this.floating = new Provider<Boolean>(this, floating, Boolean.class);
     }
 
     /**

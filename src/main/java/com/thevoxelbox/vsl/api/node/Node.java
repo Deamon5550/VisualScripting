@@ -23,6 +23,7 @@
  */
 package com.thevoxelbox.vsl.api.node;
 
+import com.thevoxelbox.vsl.util.Provider;
 import com.thevoxelbox.vsl.util.RuntimeState;
 
 /**
@@ -52,7 +53,5 @@ public interface Node
      * @return The next node
      */
     Node getNext();
-    
-    Node[] getInputs();
     
 }

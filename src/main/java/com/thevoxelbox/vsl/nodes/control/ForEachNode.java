@@ -50,11 +50,11 @@ public class ForEachNode<T> extends AbstractNode
      * 
      * @param array The array to loop over
      */
-    public ForEachNode(Provider<T[]> array)
+    public ForEachNode(Provider<T[]> array, Class<T> type)
     {
         this.array = array;
-        this.index = new Provider<Integer>(this);
-        this.next = new Provider<T>(this);
+        this.index = new Provider<Integer>(this, Integer.class);
+        this.next = new Provider<T>(this, type);
     }
 
     /**

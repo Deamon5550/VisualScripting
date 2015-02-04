@@ -23,6 +23,7 @@
  */
 package com.thevoxelbox.vsl.util;
 
+import java.lang.reflect.Type;
 import java.util.Map;
 import java.util.UUID;
 
@@ -41,6 +42,7 @@ public class Provider<T>
     private final Map<UUID, T> values;
     private final T value;
     private final boolean isStatic;
+    private final Type type;
     private Node callback;
 
     /**
@@ -50,12 +52,13 @@ public class Provider<T>
      * 
      * @param n The node to call back to
      */
-    public Provider(Node n)
+    public Provider(Node n, Class<T> type)
     {
         this.callback = n;
         this.values = Maps.newHashMap();
         this.isStatic = false;
         this.value = null;
+        this.type = type;
     }
 
     /**
@@ -64,12 +67,13 @@ public class Provider<T>
      * @param n The node as reference
      * @param value The static value
      */
-    public Provider(Node n, T value)
+    public Provider(Node n, T value, Class<T> type)
     {
         this.callback = n;
         this.value = value;
         this.isStatic = true;
         this.values = null;
+        this.type = type;
     }
 
     /**
@@ -123,6 +127,11 @@ public class Provider<T>
     public boolean isStatic()
     {
         return this.isStatic;
+    }
+
+    public Type getType()
+    {
+        return this.type;
     }
 
 }

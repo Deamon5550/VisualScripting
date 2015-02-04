@@ -58,7 +58,7 @@ public class DebugNodeTest extends StandardTest
 
         String s = "hello";
 
-        StaticValueNode<String> stat = new StaticValueNode<String>(s);
+        StaticValueNode<String> stat = new StaticValueNode<String>(s, String.class);
 
         stat.exec(this.state);
 
@@ -75,7 +75,7 @@ public class DebugNodeTest extends StandardTest
 
         int i = 5;
 
-        StaticValueNode<Integer> stat = new StaticValueNode<Integer>(i);
+        StaticValueNode<Integer> stat = new StaticValueNode<Integer>(i, Integer.class);
 
         stat.exec(this.state);
 
@@ -92,7 +92,7 @@ public class DebugNodeTest extends StandardTest
 
         this.output.setup();
         Node node = Mockito.mock(Node.class);
-        Provider<String> s = new Provider<String>(node, "hello");
+        Provider<String> s = new Provider<String>(node, "hello", String.class);
 
         PrintNode print = new PrintNode(s);
 

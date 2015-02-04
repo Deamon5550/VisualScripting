@@ -45,10 +45,10 @@ public class VariableGetNode<T> extends AbstractNode
      * 
      * @param name The variable name
      */
-    public VariableGetNode(Provider<String> name)
+    public VariableGetNode(Provider<String> name, Class<T> type)
     {
         this.key = name;
-        this.value = new Provider<T>(this);
+        this.value = new Provider<T>(this, type);
     }
 
     /**
@@ -56,10 +56,10 @@ public class VariableGetNode<T> extends AbstractNode
      * 
      * @param name The variable name
      */
-    public VariableGetNode(String name)
+    public VariableGetNode(String name, Class<T> type)
     {
-        this.key = new Provider<String>(this, name);
-        this.value = new Provider<T>(this);
+        this.key = new Provider<String>(this, name, String.class);
+        this.value = new Provider<T>(this, type);
     }
 
     /**

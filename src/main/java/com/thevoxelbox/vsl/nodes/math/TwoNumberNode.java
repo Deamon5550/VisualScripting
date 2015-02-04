@@ -47,7 +47,7 @@ public abstract class TwoNumberNode extends AbstractNode
     {
         this.a = a;
         this.b = b;
-        this.floating = new Provider<Boolean>(this, floating);
+        this.floating = new Provider<Boolean>(this, floating, boolean.class);
     }
 
     /**

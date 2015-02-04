@@ -57,8 +57,8 @@ public class ChainedNodeGraphTest extends StandardTest
     {
         this.output.setup();
 
-        StaticValueNode<String> string = new StaticValueNode<String>("Hello");
-        StaticValueNode<String> string2 = new StaticValueNode<String>(" World");
+        StaticValueNode<String> string = new StaticValueNode<String>("Hello", String.class);
+        StaticValueNode<String> string2 = new StaticValueNode<String>(" World", String.class);
         ChainedOutputNode<String> out1 = new ChainedOutputNode<String>("first", string.getValue());
         ChainedOutputNode<String> out2 = new ChainedOutputNode<String>("second", string2.getValue());
 
@@ -66,8 +66,8 @@ public class ChainedNodeGraphTest extends StandardTest
         graph1.setNext(out1);
         out1.setNext(out2);
 
-        ChainedInputNode<String> in1 = new ChainedInputNode<String>("first");
-        ChainedInputNode<String> in2 = new ChainedInputNode<String>("second");
+        ChainedInputNode<String> in1 = new ChainedInputNode<String>("first", String.class);
+        ChainedInputNode<String> in2 = new ChainedInputNode<String>("second", String.class);
         PrintNode print = new PrintNode(in1.getValue());
         PrintNode print2 = new PrintNode(in2.getValue());
         print.setNext(print2);

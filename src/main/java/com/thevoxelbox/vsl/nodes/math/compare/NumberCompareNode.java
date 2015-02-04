@@ -44,7 +44,7 @@ public abstract class NumberCompareNode extends TwoNumberNode
     public NumberCompareNode(Provider<? extends Number> a, Provider<? extends Number> b, boolean floating)
     {
         super(a, b, floating);
-        this.result = new Provider<Boolean>(this);
+        this.result = new Provider<Boolean>(this, Boolean.class);
     }
 
     /**
@@ -57,7 +57,7 @@ public abstract class NumberCompareNode extends TwoNumberNode
     public NumberCompareNode(Provider<? extends Number> a, Provider<? extends Number> b, Provider<Boolean> floating)
     {
         super(a, b, floating);
-        this.result = new Provider<Boolean>(this);
+        this.result = new Provider<Boolean>(this, Boolean.class);
     }
 
     /**

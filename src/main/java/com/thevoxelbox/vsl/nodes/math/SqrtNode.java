@@ -46,7 +46,7 @@ public class SqrtNode extends AbstractNode
     public SqrtNode(Provider<? extends Number> a)
     {
         this.a = a;
-        this.value = new Provider<Number>(this);
+        this.value = new Provider<Number>(this, Number.class);
     }
 
     /**

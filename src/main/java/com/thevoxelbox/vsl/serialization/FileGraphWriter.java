@@ -38,6 +38,9 @@ import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.thevoxelbox.test.util.MockUtility;
 import com.thevoxelbox.vsl.annotation.NodeInfo;
 import com.thevoxelbox.vsl.api.node.Node;
 import com.thevoxelbox.vsl.api.node.NodeGraph;
@@ -55,12 +58,15 @@ public class FileGraphWriter implements GraphWriter
     private static final int FORMAT_VERSION = 1;
 
     private PrintWriter outputStream;
+    private Provider<Boolean> test_field = MockUtility.mock(false, Boolean.class);
 
     /**
      * Creates a new {@link FileGraphWriter}.
      * 
-     * @param output The file to output to
-     * @throws FileNotFoundException If the file cannot be found
+     * @param output
+     *            The file to output to
+     * @throws FileNotFoundException
+     *             If the file cannot be found
      */
     public FileGraphWriter(File output) throws FileNotFoundException
     {
@@ -70,7 +76,8 @@ public class FileGraphWriter implements GraphWriter
     /**
      * Creates a new {@link FileGraphWriter}.
      * 
-     * @param writer The writer to output to
+     * @param writer
+     *            The writer to output to
      */
     public FileGraphWriter(PrintWriter writer)
     {
@@ -80,7 +87,8 @@ public class FileGraphWriter implements GraphWriter
     /**
      * Creates a new {@link FileGraphWriter}.
      * 
-     * @param stream The {@link PrintStream} to output to
+     * @param stream
+     *            The {@link PrintStream} to output to
      */
     public FileGraphWriter(PrintStream stream)
     {
@@ -95,35 +103,93 @@ public class FileGraphWriter implements GraphWriter
     {
         this.outputStream.println("#version " + FORMAT_VERSION);
         this.outputStream.println("name " + graph.getName());
-        List<Node> nodes = walk(graph);
+        List<NodeData> nodes = walk(graph);
         BiMap<Class<? extends Node>, Integer> proto = getPrototypes(nodes);
         for (int i = 0; i < proto.size(); i++)
         {
             printPrototype(proto.inverse().get(i));
         }
         String ins = "i";
-        for (Node n : nodes)
+        for (NodeData n : nodes)
         {
             ins += " " + proto.get(n.getClass());
         }
         this.outputStream.println(ins);
-        printEdges(graph);
+        //extractStaticValues(graph);
+        printEdges(nodes);
     }
 
-    private void printEdges(NodeGraph graph)
+    private void extractStaticValues(NodeGraph graph)
     {
+        List<String> values = Lists.newArrayList();
+        List<String> edges = Lists.newArrayList();
+        List<Node> previous = Lists.newArrayList();
+        
         Node start = graph.getStart();
         while (start != null)
         {
-            printEdge(start);
+            findStatics(start, values, edges, previous);
+            start = start.getNext();
+        }
+        
+        for(String s: values)
+        {
+            this.outputStream.println(s);
+        }
+        for(String s: edges)
+        {
+            this.outputStream.println(s);
+        }
+
+    }
+
+    private void findStatics(Node start, List<String> values, List<String> edges, List<Node> previous)
+    {
+        previous.add(start);
+        NodeInfo inf = start.getClass().getAnnotation(NodeInfo.class);
+        for (String s : inf.inputs())
+        {
+            try
+            {
+                Field f = ReflectionHelper.getField(start.getClass(), s);
+                if (f == null)
+                {
+                    continue;
+                }
+                Provider<?> p = (Provider<?>) f.get(start);
+                
+                if (p.isStatic())
+                {
+                    Gson g = new GsonBuilder().create();
+                    String json = g.toJson(p.get(null), p.getType());
+                    values.add("v " + json);
+                    
+                } else if (p.getOwner() != start && !previous.contains(p.getOwner()))
+                {
+                    findStatics(p.getOwner(), values, edges, previous);
+                }
+
+            } catch (Exception ignored)
+            {
+                ignored.printStackTrace();
+                continue;
+            }
+        }
+    }
+
+    private void printEdges(List<NodeData> nodes)
+    {
+        NodeData start = nodes.get(0);
+        while (start != null)
+        {
+            printEdge(nodes, start);
             start = start.getNext();
         }
     }
-    
-    private void printEdge(Node a)
+
+    private void printEdge(List<NodeData> nodes, NodeData a)
     {
-        NodeInfo inf = a.getClass().getAnnotation(NodeInfo.class);
-        for(String s: inf.inputs())
+        for (String s : a.getInfo().inputs())
         {
             try
             {
@@ -133,12 +199,12 @@ public class FileGraphWriter implements GraphWriter
                     continue;
                 }
                 Provider<?> p = (Provider<?>) f.get(this);
-                
-                if(p.getOwner() != a)
+                Node other = p.getOwner();
+                if (other != a)
                 {
-                    
+                    String name = other.getNameOfOutput(p);
                 }
-                
+
             } catch (Exception ignored)
             {
                 ignored.printStackTrace();
@@ -147,24 +213,24 @@ public class FileGraphWriter implements GraphWriter
         }
     }
 
-    private BiMap<Class<? extends Node>, Integer> getPrototypes(List<Node> nodes)
+    private BiMap<Class<? extends Node>, Integer> getPrototypes(List<NodeData> nodes)
     {
         BiMap<Class<? extends Node>, Integer> p = HashBiMap.create();
         int i = 0;
-        for (Node n : nodes)
+        for (NodeData n : nodes)
         {
             if (!p.containsKey(n.getClass()))
             {
-                p.put(n.getClass(), i++);
+                p.put(n.getNodeClass(), i++);
             }
         }
 
         return p;
     }
 
-    private List<Node> walk(NodeGraph graph)
+    private List<NodeData> walk(NodeGraph graph)
     {
-        List<Node> nodes = Lists.newArrayList();
+        List<NodeData> nodes = Lists.newArrayList();
 
         Node start = graph.getStart();
         while (start != null)
@@ -176,14 +242,25 @@ public class FileGraphWriter implements GraphWriter
         return nodes;
     }
 
-    private void addNode(List<Node> nodes, Node n)
+    private void addNode(List<NodeData> nodes, Node n)
     {
-        if (!nodes.contains(n))
+        NodeData data = null;
+        boolean found = false;
+        for(NodeData d: nodes)
         {
-            nodes.add(n);
+            if(d.getNode() == n)
+            {
+                data = d;
+                found = true;
+                break;
+            }
+        }
+        if(!found)
+        {
+            nodes.add(data = new NodeData(n));
         }
 
-        for (Node i : n.getInputs())
+        for (Node i : data.getInputs())
         {
             addNode(nodes, i);
         }
@@ -208,7 +285,8 @@ public class FileGraphWriter implements GraphWriter
      * Closes this stream and releases any system resources associated with it.
      * If the stream is already closed then invoking this method has no effect.
      * 
-     * @throws IOException If an I/O error occurs
+     * @throws IOException
+     *             If an I/O error occurs
      * @see Closeable#close()
      */
     @Override
@@ -221,7 +299,8 @@ public class FileGraphWriter implements GraphWriter
      * Flushes this stream by writing any buffered output to the underlying
      * stream.
      * 
-     * @throws IOException If an I/O error occurs
+     * @throws IOException
+     *             If an I/O error occurs
      * @see Flushable#flush()
      */
     @Override

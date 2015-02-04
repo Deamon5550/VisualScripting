@@ -63,7 +63,7 @@ public class VariableNodeTest
         vars.set("a", "b");
         RuntimeState state = new RuntimeState(vars);
 
-        VariableGetNode<String> get = new VariableGetNode<String>("a");
+        VariableGetNode<String> get = new VariableGetNode<String>("a", String.class);
         get.exec(state);
 
         assertEquals("b", get.getValue().get(state));
@@ -78,9 +78,9 @@ public class VariableNodeTest
         ParentedVariableScope vars = new ParentedVariableScope();
         vars.set("a", "b");
         RuntimeState state = new RuntimeState(vars);
-        Provider<String> target = new Provider<String>(this.mockNode, "a");
+        Provider<String> target = new Provider<String>(this.mockNode, "a", String.class);
 
-        VariableGetNode<String> get = new VariableGetNode<String>(target);
+        VariableGetNode<String> get = new VariableGetNode<String>(target, String.class);
         get.exec(state);
 
         assertEquals("b", get.getValue().get(state));
@@ -95,7 +95,7 @@ public class VariableNodeTest
         ParentedVariableScope vars = new ParentedVariableScope();
         RuntimeState state = new RuntimeState(vars);
 
-        VariableSetNode<String> get = new VariableSetNode<String>("a", "b");
+        VariableSetNode<String> get = new VariableSetNode<String>("a", "b", String.class);
         get.exec(state);
 
         assertEquals("b", vars.get("a").get());
@@ -110,7 +110,7 @@ public class VariableNodeTest
         ParentedVariableScope vars = new ParentedVariableScope();
         RuntimeState state = new RuntimeState(vars);
 
-        Provider<String> value = new Provider<String>(this.mockNode, "b");
+        Provider<String> value = new Provider<String>(this.mockNode, "b", String.class);
 
         VariableSetNode<String> get = new VariableSetNode<String>("a", value);
         get.exec(state);
@@ -127,9 +127,9 @@ public class VariableNodeTest
         ParentedVariableScope vars = new ParentedVariableScope();
         RuntimeState state = new RuntimeState(vars);
 
-        Provider<String> target = new Provider<String>(this.mockNode, "a");
+        Provider<String> target = new Provider<String>(this.mockNode, "a", String.class);
 
-        VariableSetNode<String> get = new VariableSetNode<String>(target, "b");
+        VariableSetNode<String> get = new VariableSetNode<String>(target, "b", String.class);
         get.exec(state);
 
         assertEquals("b", vars.get("a").get());
@@ -144,8 +144,8 @@ public class VariableNodeTest
         ParentedVariableScope vars = new ParentedVariableScope();
         RuntimeState state = new RuntimeState(vars);
 
-        Provider<String> target = new Provider<String>(this.mockNode, "a");
-        Provider<String> value = new Provider<String>(this.mockNode, "b");
+        Provider<String> target = new Provider<String>(this.mockNode, "a", String.class);
+        Provider<String> value = new Provider<String>(this.mockNode, "b", String.class);
 
         VariableSetNode<String> get = new VariableSetNode<String>(target, value);
         get.exec(state);

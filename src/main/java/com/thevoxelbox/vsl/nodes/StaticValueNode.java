@@ -23,6 +23,8 @@
  */
 package com.thevoxelbox.vsl.nodes;
 
+import java.lang.reflect.Type;
+
 import com.thevoxelbox.vsl.annotation.NodeInfo;
 import com.thevoxelbox.vsl.node.AbstractNode;
 import com.thevoxelbox.vsl.util.Provider;
@@ -45,10 +47,10 @@ public class StaticValueNode<T> extends AbstractNode
      * 
      * @param value The value
      */
-    public StaticValueNode(T value)
+    public StaticValueNode(T value, Class<T> type)
     {
-        this.input = new Provider<T>(this, value);
-        this.value = new Provider<T>(this);
+        this.input = new Provider<T>(this, type);
+        this.value = new Provider<T>(this, type);
     }
 
     /**
@@ -56,10 +58,10 @@ public class StaticValueNode<T> extends AbstractNode
      * 
      * @param value The value
      */
-    public StaticValueNode(Provider<T> value)
+    public StaticValueNode(Provider<T> value, Class<T> type)
     {
         this.input = value;
-        this.value = new Provider<T>(this);
+        this.value = new Provider<T>(this, type);
     }
 
     /**

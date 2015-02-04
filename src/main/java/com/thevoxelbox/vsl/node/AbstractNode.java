@@ -57,38 +57,5 @@ public abstract class AbstractNode implements Node
     {
         return this.next;
     }
-
-    /**
-     * Gets all input nodes to this node which are not static providers sourced
-     * by this node.
-     * 
-     * @return The input nodes.
-     */
-    public Node[] getInputs()
-    {
-        List<Node> inputs = Lists.newArrayList();
-
-        for (String s : this.getClass().getAnnotation(NodeInfo.class).inputs())
-        {
-            try
-            {
-                Field f = ReflectionHelper.getField(this.getClass(), s);
-                if (f == null)
-                {
-                    continue;
-                }
-                Provider<?> p = (Provider<?>) f.get(this);
-                if (p.getOwner() != this && !inputs.contains(p.getOwner()))
-                {
-                    inputs.add(p.getOwner());
-                }
-            } catch (Exception ignored)
-            {
-                ignored.printStackTrace();
-                continue;
-            }
-        }
-
-        return inputs.toArray(new Node[inputs.size()]);
-    }
+    
 }

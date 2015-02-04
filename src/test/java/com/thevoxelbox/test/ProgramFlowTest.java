@@ -54,9 +54,9 @@ public class ProgramFlowTest extends StandardTest
     public void testForEachLoop()
     {
 
-        StaticValueNode<String[]> array = new StaticValueNode<String[]>(new String[] { "Hel", "lo ", "Wor", "ld" });
+        StaticValueNode<String[]> array = new StaticValueNode<String[]>(new String[] { "Hel", "lo ", "Wor", "ld" }, String[].class);
 
-        ForEachNode<String> forloop = new ForEachNode<String>(array.getValue());
+        ForEachNode<String> forloop = new ForEachNode<String>(array.getValue(), String.class);
         StringArrayCheckNode check = new StringArrayCheckNode(forloop.getNextValue(), "Hel", "lo ", "Wor", "ld");
         forloop.setBody(check);
 
@@ -70,7 +70,7 @@ public class ProgramFlowTest extends StandardTest
     @Test
     public void isIf()
     {
-        IfStatement ifs = new IfStatement(mock(true));
+        IfStatement ifs = new IfStatement(mock(true, Boolean.class));
 
         CheckRunNode check = new CheckRunNode(1);
         ifs.setBody(check);
@@ -85,7 +85,7 @@ public class ProgramFlowTest extends StandardTest
     @Test
     public void isIfFalse()
     {
-        IfStatement ifs = new IfStatement(mock(false));
+        IfStatement ifs = new IfStatement(mock(false, Boolean.class));
 
         CheckRunNode check = new CheckRunNode(0);
         ifs.setBody(check);
@@ -100,10 +100,6 @@ public class ProgramFlowTest extends StandardTest
     @Test
     public void testFor1()
     {
-        // Provider<Integer> init = new Provider<Integer>(0);
-        // Provider<Integer> target = new Provider<Integer>(2);
-        // Provider<Integer> increment = new Provider<Integer>(1);
-
         ForLoop foor = new ForLoop(0, 2, 1);
 
         CheckRunNode check = new CheckRunNode(2);
@@ -119,7 +115,7 @@ public class ProgramFlowTest extends StandardTest
     @Test
     public void testFor2()
     {
-        ForLoop foor = new ForLoop(0, 2, mock(1));
+        ForLoop foor = new ForLoop(0, 2, mock(1, Integer.class));
 
         CheckRunNode check = new CheckRunNode(2);
         foor.setBody(check);
@@ -134,7 +130,7 @@ public class ProgramFlowTest extends StandardTest
     @Test
     public void testFor3()
     {
-        ForLoop foor = new ForLoop(0, mock(2), 1);
+        ForLoop foor = new ForLoop(0, mock(2, Integer.class), 1);
 
         CheckRunNode check = new CheckRunNode(2);
         foor.setBody(check);
@@ -149,7 +145,7 @@ public class ProgramFlowTest extends StandardTest
     @Test
     public void testFor4()
     {
-        ForLoop foor = new ForLoop(0, mock(2), mock(1));
+        ForLoop foor = new ForLoop(0, mock(2, Integer.class), mock(1, Integer.class));
 
         CheckRunNode check = new CheckRunNode(2);
         foor.setBody(check);
@@ -164,7 +160,7 @@ public class ProgramFlowTest extends StandardTest
     @Test
     public void testFor5()
     {
-        ForLoop foor = new ForLoop(mock(0), 2, 1);
+        ForLoop foor = new ForLoop(mock(0, Integer.class), 2, 1);
 
         CheckRunNode check = new CheckRunNode(2);
         foor.setBody(check);
@@ -179,7 +175,7 @@ public class ProgramFlowTest extends StandardTest
     @Test
     public void testFor6()
     {
-        ForLoop foor = new ForLoop(mock(0), 2, mock(1));
+        ForLoop foor = new ForLoop(mock(0, Integer.class), 2, mock(1, Integer.class));
 
         CheckRunNode check = new CheckRunNode(2);
         foor.setBody(check);
@@ -194,7 +190,7 @@ public class ProgramFlowTest extends StandardTest
     @Test
     public void testFor7()
     {
-        ForLoop foor = new ForLoop(mock(0), mock(2), 1);
+        ForLoop foor = new ForLoop(mock(0, Integer.class), mock(2, Integer.class), 1);
 
         CheckRunNode check = new CheckRunNode(2);
         foor.setBody(check);
@@ -209,7 +205,7 @@ public class ProgramFlowTest extends StandardTest
     @Test
     public void testFor8()
     {
-        ForLoop foor = new ForLoop(mock(0), mock(2), mock(1));
+        ForLoop foor = new ForLoop(mock(0, Integer.class), mock(2, Integer.class), mock(1, Integer.class));
 
         CheckRunNode check = new CheckRunNode(2);
         foor.setBody(check);

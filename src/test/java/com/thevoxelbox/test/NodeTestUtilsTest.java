@@ -42,7 +42,7 @@ public class NodeTestUtilsTest extends StandardTest
     @Test
     public void testStringCheckArrayNode()
     {
-        StringArrayCheckNode check = new StringArrayCheckNode(mock("hello"), "hello");
+        StringArrayCheckNode check = new StringArrayCheckNode(mock("hello", String.class), "hello");
 
         check.exec(this.state);
         check.end();
@@ -54,7 +54,7 @@ public class NodeTestUtilsTest extends StandardTest
     @Test(expected = UnsupportedOperationException.class)
     public void testStringCheckArrayNodeTooFew()
     {
-        StringArrayCheckNode check = new StringArrayCheckNode(mock("hello"), "hello", "world");
+        StringArrayCheckNode check = new StringArrayCheckNode(mock("hello", String.class), "hello", "world");
 
         check.exec(this.state);
         check.end();
@@ -66,7 +66,7 @@ public class NodeTestUtilsTest extends StandardTest
     @Test(expected = ArrayIndexOutOfBoundsException.class)
     public void testStringCheckArrayNodeTooMany()
     {
-        StringArrayCheckNode check = new StringArrayCheckNode(mock("hello"), "hello");
+        StringArrayCheckNode check = new StringArrayCheckNode(mock("hello", String.class), "hello");
 
         check.exec(this.state);
         check.exec(this.state);
@@ -79,7 +79,7 @@ public class NodeTestUtilsTest extends StandardTest
     @Test(expected = IllegalArgumentException.class)
     public void testStringCheckArrayNodeInvalid()
     {
-        StringArrayCheckNode check = new StringArrayCheckNode(mock("world"), "hello");
+        StringArrayCheckNode check = new StringArrayCheckNode(mock("world", String.class), "hello");
 
         check.exec(this.state);
         check.end();

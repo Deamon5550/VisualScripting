@@ -43,7 +43,7 @@ public abstract class NumberOperatorNode extends TwoNumberNode
     public NumberOperatorNode(Provider<? extends Number> a, Provider<? extends Number> b, boolean floating)
     {
         super(a, b, floating);
-        this.value = new Provider<Number>(this);
+        this.value = new Provider<Number>(this, Number.class);
     }
 
     /**
@@ -56,7 +56,7 @@ public abstract class NumberOperatorNode extends TwoNumberNode
     public NumberOperatorNode(Provider<? extends Number> a, Provider<? extends Number> b, Provider<Boolean> floating)
     {
         super(a, b, floating);
-        this.value = new Provider<Number>(this);
+        this.value = new Provider<Number>(this, Number.class);
     }
 
     /**

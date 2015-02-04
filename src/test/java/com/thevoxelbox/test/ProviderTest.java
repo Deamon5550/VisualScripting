@@ -44,7 +44,7 @@ public class ProviderTest extends StandardTest
     public void testOwner()
     {
         Node node = Mockito.mock(Node.class);
-        Provider<Object> p = new Provider<Object>(node);
+        Provider<Object> p = new Provider<Object>(node, Object.class);
         assertEquals(node, p.getOwner());
     }
 
@@ -55,7 +55,7 @@ public class ProviderTest extends StandardTest
     public void testStatic1()
     {
         Node node = Mockito.mock(Node.class);
-        Provider<Object> p = new Provider<Object>(node);
+        Provider<Object> p = new Provider<Object>(node, Object.class);
         assertEquals(false, p.isStatic());
     }
 
@@ -66,7 +66,7 @@ public class ProviderTest extends StandardTest
     public void testStatic2()
     {
         Node node = Mockito.mock(Node.class);
-        Provider<Object> p = new Provider<Object>(node, new Object());
+        Provider<Object> p = new Provider<Object>(node, new Object(), Object.class);
         assertEquals(true, p.isStatic());
     }
 
