@@ -83,5 +83,10 @@ public interface VariableHolder
      * @return The keyset
      */
     Set<String> keyset();
+    
+    /**
+     * Clears the values from this variable holder.
+     */
+    void clear();
 
 }

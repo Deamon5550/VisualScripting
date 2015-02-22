@@ -226,4 +226,13 @@ public class ParentedVariableScope implements VariableScope, Serializable
         return keyset;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void clear()
+    {
+        this.vars.clear();
+    }
+
 }
