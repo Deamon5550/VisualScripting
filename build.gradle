@@ -29,7 +29,7 @@ defaultTasks 'clean', 'licenseFormat', 'check', 'build'
 
 group 'com.thevoxelbox'
 archivesBaseName = 'VisualScripting'
-version '0.2.8-SNAPSHOT'
+version '0.3.0-SNAPSHOT'
 
 // Minimum version of Java required
 sourceCompatibility = 1.6

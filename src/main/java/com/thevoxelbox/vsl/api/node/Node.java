@@ -23,7 +23,7 @@
  */
 package com.thevoxelbox.vsl.api.node;
 
-import com.thevoxelbox.vsl.util.RuntimeState;
+import com.thevoxelbox.vsl.api.runtime.GraphRuntime;
 
 /**
  * Represents a node with a set of inputs and outputs which executes a single
@@ -37,7 +37,7 @@ public interface Node
      * 
      * @param state The runtime state
      */
-    void exec(RuntimeState state);
+    void exec(GraphRuntime state);
 
     /**
      * Sets the node to be executed after this node in the execution pathway.

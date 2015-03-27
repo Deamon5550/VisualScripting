@@ -24,8 +24,8 @@
 package com.thevoxelbox.vsl.nodes.math;
 
 import com.thevoxelbox.vsl.annotation.NodeInfo;
+import com.thevoxelbox.vsl.api.runtime.GraphRuntime;
 import com.thevoxelbox.vsl.util.Provider;
-import com.thevoxelbox.vsl.util.RuntimeState;
 
 /**
  * Returns the sub of two integer or floating-point numbers.
@@ -50,14 +50,14 @@ public class AdditionNode extends NumberOperatorNode
      * {@inheritDoc}
      */
     @Override
-    public void exec(RuntimeState state)
+    public void exec(GraphRuntime state)
     {
         if (this.floating)
         {
-            this.value.set(this.a.get(state).doubleValue() + this.b.get(state).doubleValue(), state.getUUID());
+            this.value.set(this.a.get(state).doubleValue() + this.b.get(state).doubleValue(), state);
         } else
         {
-            this.value.set(this.a.get(state).longValue() + this.b.get(state).longValue(), state.getUUID());
+            this.value.set(this.a.get(state).longValue() + this.b.get(state).longValue(), state);
         }
     }
 

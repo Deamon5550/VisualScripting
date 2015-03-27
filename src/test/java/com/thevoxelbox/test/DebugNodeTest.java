@@ -30,8 +30,10 @@ import org.junit.Test;
 import org.mockito.Mockito;
 
 import com.thevoxelbox.vsl.api.node.Node;
+import com.thevoxelbox.vsl.api.runtime.GraphRuntime;
 import com.thevoxelbox.vsl.nodes.StaticValueNode;
 import com.thevoxelbox.vsl.nodes.debug.PrintNode;
+import com.thevoxelbox.vsl.runtime.ObjectRuntime;
 import com.thevoxelbox.vsl.util.Provider;
 
 /**
@@ -39,6 +41,8 @@ import com.thevoxelbox.vsl.util.Provider;
  */
 public class DebugNodeTest extends StandardTest
 {
+    
+    private GraphRuntime state;
 
     /**
      * 
@@ -47,6 +51,7 @@ public class DebugNodeTest extends StandardTest
     public void setup()
     {
         super.setup();
+        this.state = new ObjectRuntime();
     }
 
     /**

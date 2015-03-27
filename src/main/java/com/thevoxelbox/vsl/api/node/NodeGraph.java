@@ -23,8 +23,7 @@
  */
 package com.thevoxelbox.vsl.api.node;
 
-import com.thevoxelbox.vsl.api.variables.VariableHolder;
-import com.thevoxelbox.vsl.node.RunnableNodeGraph;
+import com.thevoxelbox.vsl.api.runtime.GraphRuntime;
 
 /**
  * Represents a system on nodes which may be executed.
@@ -42,23 +41,9 @@ public interface NodeGraph
     /**
      * Runs this graph based on the given variables.
      * 
-     * @param vars The runtime variables
+     * @param state The runtime state
      */
-    void run(VariableHolder vars);
-
-    /**
-     * Chains this graph into another graph
-     * 
-     * @param next The next graph
-     */
-    void chain(RunnableNodeGraph next);
-
-    /**
-     * Gets the next graph.
-     * 
-     * @return The graph
-     */
-    RunnableNodeGraph getNextGraph();
+    void run(GraphRuntime state);
 
     /**
      * Gets the starting node in the graphs execution pathway.

@@ -25,19 +25,18 @@ package com.thevoxelbox.vsl.node;
 
 import com.thevoxelbox.vsl.api.node.Node;
 import com.thevoxelbox.vsl.api.node.NodeGraph;
-import com.thevoxelbox.vsl.api.variables.VariableHolder;
-import com.thevoxelbox.vsl.util.RuntimeState;
+import com.thevoxelbox.vsl.api.runtime.GraphRuntime;
 
 /**
  * A node graph is a directed acyclic graph of connected nodes which when
  * traversed will execute the program function. It is itself a node and may be
  * used in another {@link RunnableNodeGraph} recursively.
  */
-public class RunnableNodeGraph extends AbstractNode implements NodeGraph
+public class RunnableNodeGraph implements NodeGraph
 {
 
-    String name;
-    RunnableNodeGraph nextgraph = null;
+    private final String name;
+    private Node start = null;
 
     /**
      * Creates a new {@link RunnableNodeGraph}
@@ -62,55 +61,23 @@ public class RunnableNodeGraph extends AbstractNode implements NodeGraph
      * {@inheritDoc}
      */
     @Override
-    public void run(VariableHolder vars)
+    public void run(GraphRuntime state)
     {
-        RuntimeState state = new RuntimeState(vars);
-        exec(state);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void exec(RuntimeState state)
-    {
-        Node next = this.getStart();
+        Node next = getStart();
         while (next != null)
         {
             next.exec(state);
             next = next.getNext();
         }
-        if (this.nextgraph != null)
-        {
-            this.nextgraph.exec(state);
-        }
     }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void chain(RunnableNodeGraph next)
-    {
-        this.nextgraph = next;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public RunnableNodeGraph getNextGraph()
-    {
-        return this.nextgraph;
-    }
-
+    
     /**
      * {@inheritDoc}
      */
     @Override
     public Node getStart()
     {
-        return this.getNext();
+        return this.start;  
     }
 
     /**
@@ -119,7 +86,7 @@ public class RunnableNodeGraph extends AbstractNode implements NodeGraph
     @Override
     public void setStart(Node node)
     {
-        this.setNext(node);
+        this.start = node;
     }
 
 }

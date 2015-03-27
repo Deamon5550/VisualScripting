@@ -24,8 +24,8 @@
 package com.thevoxelbox.vsl.nodes.math.compare;
 
 import com.thevoxelbox.vsl.annotation.NodeInfo;
+import com.thevoxelbox.vsl.api.runtime.GraphRuntime;
 import com.thevoxelbox.vsl.util.Provider;
-import com.thevoxelbox.vsl.util.RuntimeState;
 
 /**
  * Tests if two numbers are equal.
@@ -50,14 +50,14 @@ public class NumberEqualsNode extends NumberCompareNode
      * {@inheritDoc}
      */
     @Override
-    public void exec(RuntimeState state)
+    public void exec(GraphRuntime state)
     {
         if (this.floating)
         {
-            this.result.set(this.a.get(state).doubleValue() == this.b.get(state).doubleValue(), state.getUUID());
+            this.result.set(this.a.get(state).doubleValue() == this.b.get(state).doubleValue(), state);
         } else
         {
-            this.result.set(this.a.get(state).longValue() == this.b.get(state).longValue(), state.getUUID());
+            this.result.set(this.a.get(state).longValue() == this.b.get(state).longValue(), state);
         }
     }
 

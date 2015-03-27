@@ -23,29 +23,29 @@
  */
 package com.thevoxelbox.vsl.util;
 
-import java.util.Map;
 import java.util.UUID;
 
-import com.google.common.collect.Maps;
+import com.google.common.base.Optional;
 import com.thevoxelbox.vsl.api.node.Node;
+import com.thevoxelbox.vsl.api.runtime.GraphRuntime;
 
 /**
  * Tracks values for an input or output of a node and stores them with an
- * associated UUID for a {@link RuntimeState}.
+ * associated UUID.
  * 
  * @param <T> The value type
  */
 public class Provider<T>
 {
 
-    private final Map<UUID, T> values;
     private final T value;
     private final boolean isStatic;
+    private final UUID uuid;
     private Node callback;
 
     /**
      * Creates a new {@link Provider} which will perform a callback to the given
-     * node if the value is not set and a call to {@link #get(RuntimeState)}
+     * node if the value is not set and a call to {@link #get(GraphRuntime)}
      * occurs.
      * 
      * @param n The node to call back to
@@ -53,9 +53,9 @@ public class Provider<T>
     public Provider(Node n)
     {
         this.callback = n;
-        this.values = Maps.newHashMap();
         this.isStatic = false;
         this.value = null;
+        this.uuid = UUID.randomUUID();
     }
 
     /**
@@ -69,39 +69,7 @@ public class Provider<T>
         this.callback = n;
         this.value = value;
         this.isStatic = true;
-        this.values = null;
-    }
-
-    /**
-     * Gets the value for the given {@link RuntimeState} from this provider. I
-     * decided not to use optionals here in preference of the debugging utility
-     * of null pointers over checking an optional value.
-     * 
-     * @param state The runtime state
-     * @return The value, or null
-     */
-    public T get(RuntimeState state)
-    {
-        if (this.isStatic)
-        {
-            return this.value;
-        }
-        if (!this.values.containsKey(state.getUUID()))
-        {
-            this.callback.exec(state);
-        }
-        return this.values.get(state.getUUID());
-    }
-
-    /**
-     * Sets the value for the given {@link UUID}.
-     * 
-     * @param newValue The new value
-     * @param uuid The UUID
-     */
-    public void set(T newValue, UUID uuid)
-    {
-        this.values.put(uuid, newValue);
+        this.uuid = UUID.randomUUID();
     }
 
     /**
@@ -123,6 +91,53 @@ public class Provider<T>
     public boolean isStatic()
     {
         return this.isStatic;
+    }
+
+    /**
+     * Gets the default value of this provider, if it is a static provider. If
+     * this provider is not a static provider then null will be returned.
+     * 
+     * @return The default value, if static
+     */
+    public T getDefaultValue()
+    {
+        return this.value;
+    }
+
+    /**
+     * Gets the value for this provider from the given runtime using the
+     * provider's UUID as key.
+     * 
+     * @param state The runtime
+     * @return The value
+     */
+    public T get(GraphRuntime state)
+    {
+        if (this.isStatic)
+        {
+            return this.value;
+        }
+        Optional<T> ovalue = state.<T> get(this.uuid);
+        if (ovalue.isPresent())
+        {
+            return ovalue.get();
+        } else
+        {
+            this.callback.exec(state);
+        }
+        return state.<T> get(this.uuid).orNull();
+    }
+
+    /**
+     * Sets the given value into the given runtime using the provider's UUID as
+     * key.
+     * 
+     * @param value The new value
+     * @param state The runtime
+     */
+    public void set(T value, GraphRuntime state)
+    {
+        state.<T> set(this.uuid, value);
     }
 
 }

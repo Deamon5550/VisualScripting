@@ -25,16 +25,29 @@ package com.thevoxelbox.test;
 
 import static com.thevoxelbox.test.util.MockUtility.mock;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import com.thevoxelbox.test.util.CheckRunNode;
 import com.thevoxelbox.test.util.StringArrayCheckNode;
+import com.thevoxelbox.vsl.api.runtime.GraphRuntime;
+import com.thevoxelbox.vsl.runtime.ObjectRuntime;
 
 /**
  * Tests the testing utility nodes.
  */
 public class NodeTestUtilsTest extends StandardTest
 {
+    
+    private GraphRuntime state;
+    
+    @Before
+    public void setup()
+    {
+        super.setup();
+        this.state = new ObjectRuntime();
+    }
+    
 
     /**
      * 

@@ -24,10 +24,12 @@
 package com.thevoxelbox.test;
 
 import static com.thevoxelbox.test.util.MockUtility.mock;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
 import org.junit.Test;
 
+import com.thevoxelbox.vsl.api.runtime.GraphRuntime;
 import com.thevoxelbox.vsl.nodes.math.AbsNode;
 import com.thevoxelbox.vsl.nodes.math.AdditionNode;
 import com.thevoxelbox.vsl.nodes.math.DivisionNode;
@@ -35,17 +37,22 @@ import com.thevoxelbox.vsl.nodes.math.ModuloNode;
 import com.thevoxelbox.vsl.nodes.math.MultiplicationNode;
 import com.thevoxelbox.vsl.nodes.math.SqrtNode;
 import com.thevoxelbox.vsl.nodes.math.SubtractionNode;
+import com.thevoxelbox.vsl.runtime.ObjectRuntime;
+import com.thevoxelbox.vsl.util.Provider;
 
 /**
  * Tests for number based nodes.
  */
 public class NumberNodeTest extends StandardTest
 {
+    
+    private GraphRuntime state;
 
     @Before
     public void setup()
     {
         super.setup();
+        this.state = new ObjectRuntime();
     }
 
     /**
@@ -218,4 +225,8 @@ public class NumberNodeTest extends StandardTest
         assertResult(1.0, add.getResult());
     }
 
+    protected <T> void assertResult(T expected, Provider<T> provider)
+    {
+        assertEquals(expected, provider.get(this.state));
+    }
 }

@@ -337,4 +337,21 @@ public class VariableScopeTest extends StandardTest
 
         assertEquals(2, child.keyset().size());
     }
+    
+    /**
+     * 
+     */
+    @Test
+    public void testClear()
+    {
+        ParentedVariableScope parent = new ParentedVariableScope();
+        parent.set("a", "b");
+
+        assertEquals(true, parent.hasValue("a"));
+        
+        parent.clear();
+
+        assertEquals(false, parent.hasValue("a"));
+    }
+    
 }

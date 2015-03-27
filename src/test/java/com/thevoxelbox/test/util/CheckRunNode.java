@@ -23,8 +23,8 @@
  */
 package com.thevoxelbox.test.util;
 
+import com.thevoxelbox.vsl.api.runtime.GraphRuntime;
 import com.thevoxelbox.vsl.node.AbstractNode;
-import com.thevoxelbox.vsl.util.RuntimeState;
 
 /**
  * A testing utility node to check that a node is run a specified number of
@@ -49,7 +49,7 @@ public class CheckRunNode extends AbstractNode
      * {@inheritDoc}
      */
     @Override
-    public void exec(RuntimeState state)
+    public void exec(GraphRuntime state)
     {
         this.expected--;
         if (this.expected < 0)

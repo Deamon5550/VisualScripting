@@ -32,8 +32,12 @@ import com.thevoxelbox.vsl.util.Provider;
 /**
  * A utility for easily mocking basic types.
  */
-public class MockUtility
+public final class MockUtility
 {
+
+    private MockUtility()
+    {
+    }
 
     private static Node mockNode;
 
@@ -45,7 +49,8 @@ public class MockUtility
     /**
      * Mocks a provider for the given type and initial value.
      * 
-     * @param value The value
+     * @param value
+     *            The value
      * @return The provider
      */
     public static <T> Provider<T> mock(T value)

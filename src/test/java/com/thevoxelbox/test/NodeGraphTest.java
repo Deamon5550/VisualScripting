@@ -32,6 +32,7 @@ import com.thevoxelbox.vsl.api.node.NodeGraph;
 import com.thevoxelbox.vsl.node.RunnableNodeGraph;
 import com.thevoxelbox.vsl.nodes.StaticValueNode;
 import com.thevoxelbox.vsl.nodes.debug.PrintNode;
+import com.thevoxelbox.vsl.runtime.ObjectRuntime;
 
 /**
  * Basic {@link RunnableNodeGraph} tests.
@@ -64,7 +65,7 @@ public class NodeGraphTest extends StandardTest
 
         NodeGraph graph = new RunnableNodeGraph("Test Graph");
         graph.setStart(print);
-        graph.run(this.vars);
+        new ObjectRuntime().run(graph);
 
         this.output.check("Hello World");
         this.output.reset();

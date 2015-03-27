@@ -66,8 +66,10 @@ public class ProviderTest extends StandardTest
     public void testStatic2()
     {
         Node node = Mockito.mock(Node.class);
-        Provider<Object> p = new Provider<Object>(node, new Object());
+        Object o = new Object();
+        Provider<Object> p = new Provider<Object>(node, o);
         assertEquals(true, p.isStatic());
+        assertEquals(o, p.getDefaultValue());
     }
 
 }

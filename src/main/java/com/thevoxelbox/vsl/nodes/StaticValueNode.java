@@ -25,9 +25,9 @@ package com.thevoxelbox.vsl.nodes;
 
 import com.thevoxelbox.vsl.annotation.NodeInfo;
 import com.thevoxelbox.vsl.annotation.Output;
+import com.thevoxelbox.vsl.api.runtime.GraphRuntime;
 import com.thevoxelbox.vsl.node.AbstractNode;
 import com.thevoxelbox.vsl.util.Provider;
-import com.thevoxelbox.vsl.util.RuntimeState;
 
 /**
  * A node for inserting a static value to a program.
@@ -55,9 +55,9 @@ public class StaticValueNode<T> extends AbstractNode
      * {@inheritDoc}
      */
     @Override
-    public void exec(RuntimeState state)
+    public void exec(GraphRuntime state)
     {
-
+        
     }
 
     /**

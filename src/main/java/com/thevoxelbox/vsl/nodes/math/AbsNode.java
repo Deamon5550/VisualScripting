@@ -26,9 +26,9 @@ package com.thevoxelbox.vsl.nodes.math;
 import com.thevoxelbox.vsl.annotation.Input;
 import com.thevoxelbox.vsl.annotation.NodeInfo;
 import com.thevoxelbox.vsl.annotation.Output;
+import com.thevoxelbox.vsl.api.runtime.GraphRuntime;
 import com.thevoxelbox.vsl.node.AbstractNode;
 import com.thevoxelbox.vsl.util.Provider;
-import com.thevoxelbox.vsl.util.RuntimeState;
 
 /**
  * Returns the absolute value of an integer or floating-point number.
@@ -60,14 +60,14 @@ public class AbsNode extends AbstractNode
      * {@inheritDoc}
      */
     @Override
-    public void exec(RuntimeState state)
+    public void exec(GraphRuntime state)
     {
         if (this.floating)
         {
-            this.value.set(Math.abs(this.a.get(state).doubleValue()), state.getUUID());
+            this.value.set(Math.abs(this.a.get(state).doubleValue()), state);
         } else
         {
-            this.value.set(Math.abs(this.a.get(state).longValue()), state.getUUID());
+            this.value.set(Math.abs(this.a.get(state).longValue()), state);
         }
     }
 

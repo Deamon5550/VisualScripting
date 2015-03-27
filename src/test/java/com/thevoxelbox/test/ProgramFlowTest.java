@@ -30,21 +30,26 @@ import org.junit.Test;
 
 import com.thevoxelbox.test.util.CheckRunNode;
 import com.thevoxelbox.test.util.StringArrayCheckNode;
+import com.thevoxelbox.vsl.api.runtime.GraphRuntime;
 import com.thevoxelbox.vsl.nodes.StaticValueNode;
 import com.thevoxelbox.vsl.nodes.control.ForEachNode;
 import com.thevoxelbox.vsl.nodes.control.ForLoop;
 import com.thevoxelbox.vsl.nodes.control.IfStatement;
+import com.thevoxelbox.vsl.runtime.ObjectRuntime;
 
 /**
  * Tests the control flow nodes.
  */
 public class ProgramFlowTest extends StandardTest
 {
+    
+    private GraphRuntime state;
 
     @Before
     public void setup()
     {
         super.setup();
+        this.state = new ObjectRuntime();
     }
 
     /**

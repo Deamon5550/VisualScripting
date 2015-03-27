@@ -23,8 +23,6 @@
  */
 package com.thevoxelbox.test;
 
-import static org.junit.Assert.assertEquals;
-
 import org.junit.Before;
 import org.junit.Test;
 
@@ -33,6 +31,7 @@ import com.thevoxelbox.vsl.nodes.StaticValueNode;
 import com.thevoxelbox.vsl.nodes.debug.PrintNode;
 import com.thevoxelbox.vsl.nodes.vars.ChainedInputNode;
 import com.thevoxelbox.vsl.nodes.vars.ChainedOutputNode;
+import com.thevoxelbox.vsl.runtime.ObjectRuntime;
 
 /**
  * A test for two node graphs chained together. TODO cleanup
@@ -63,7 +62,7 @@ public class ChainedNodeGraphTest extends StandardTest
         ChainedOutputNode<String> out2 = new ChainedOutputNode<String>("second", string2.getValue());
 
         RunnableNodeGraph graph1 = new RunnableNodeGraph("Chained Graph 1");
-        graph1.setNext(out1);
+        graph1.setStart(out1);
         out1.setNext(out2);
 
         ChainedInputNode<String> in1 = new ChainedInputNode<String>("first");
@@ -73,12 +72,9 @@ public class ChainedNodeGraphTest extends StandardTest
         print.setNext(print2);
 
         RunnableNodeGraph graph2 = new RunnableNodeGraph("Chained Graph 2");
-        graph2.setNext(print);
-        graph1.chain(graph2);
+        graph2.setStart(print);
 
-        graph1.run(this.vars);
-
-        assertEquals(graph2, graph1.getNextGraph());
+        new ObjectRuntime().run(graph1, graph2);
 
         this.output.check("Hello World");
         this.output.reset();

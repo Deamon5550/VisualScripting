@@ -26,9 +26,9 @@ package com.thevoxelbox.vsl.nodes.vars;
 import com.thevoxelbox.vsl.annotation.Input;
 import com.thevoxelbox.vsl.annotation.NodeInfo;
 import com.thevoxelbox.vsl.annotation.Output;
+import com.thevoxelbox.vsl.api.runtime.GraphRuntime;
 import com.thevoxelbox.vsl.node.AbstractNode;
 import com.thevoxelbox.vsl.util.Provider;
-import com.thevoxelbox.vsl.util.RuntimeState;
 
 /**
  * Gets a variable from the runtime variables with the given name.
@@ -71,9 +71,9 @@ public class VariableGetNode<T> extends AbstractNode
      */
     @SuppressWarnings("unchecked")
     @Override
-    public void exec(RuntimeState state)
+    public void exec(GraphRuntime state)
     {
-        this.value.set((T) state.getVars().get(this.varName.get(state)).get(), state.getUUID());
+        this.value.set((T) state.getVars().get(this.varName.get(state)).get(), state);
     }
 
     /**

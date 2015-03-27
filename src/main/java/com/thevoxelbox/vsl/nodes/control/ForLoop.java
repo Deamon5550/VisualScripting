@@ -26,9 +26,9 @@ package com.thevoxelbox.vsl.nodes.control;
 import com.thevoxelbox.vsl.annotation.Input;
 import com.thevoxelbox.vsl.annotation.NodeInfo;
 import com.thevoxelbox.vsl.api.node.Node;
+import com.thevoxelbox.vsl.api.runtime.GraphRuntime;
 import com.thevoxelbox.vsl.node.AbstractNode;
 import com.thevoxelbox.vsl.util.Provider;
-import com.thevoxelbox.vsl.util.RuntimeState;
 
 /**
  * Loops over a set of integers and executes a {@link Node} for each integer.
@@ -161,7 +161,7 @@ public class ForLoop extends AbstractNode
      * {@inheritDoc}
      */
     @Override
-    public void exec(RuntimeState state)
+    public void exec(GraphRuntime state)
     {
         int i = this.init.get(state);
         int t = this.target.get(state);

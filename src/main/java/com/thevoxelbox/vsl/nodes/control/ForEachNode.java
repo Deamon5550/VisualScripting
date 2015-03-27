@@ -27,9 +27,9 @@ import com.thevoxelbox.vsl.annotation.Input;
 import com.thevoxelbox.vsl.annotation.NodeInfo;
 import com.thevoxelbox.vsl.annotation.Output;
 import com.thevoxelbox.vsl.api.node.Node;
+import com.thevoxelbox.vsl.api.runtime.GraphRuntime;
 import com.thevoxelbox.vsl.node.AbstractNode;
 import com.thevoxelbox.vsl.util.Provider;
-import com.thevoxelbox.vsl.util.RuntimeState;
 
 /**
  * Loops over every value in the given array and calls another {@link Node} as
@@ -65,14 +65,14 @@ public class ForEachNode<T> extends AbstractNode
      * {@inheritDoc}
      */
     @Override
-    public void exec(RuntimeState state)
+    public void exec(GraphRuntime state)
     {
         int i = 0;
         T[] arr = this.array.get(state);
         for (T obj : arr)
         {
-            this.next.set(obj, state.getUUID());
-            this.index.set(i, state.getUUID());
+            this.next.set(obj, state);
+            this.index.set(i, state);
             Node next = this.body;
             while (next != null)
             {

@@ -24,17 +24,19 @@
 package com.thevoxelbox.test;
 
 import static com.thevoxelbox.test.util.MockUtility.mock;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mockito;
 
-import com.thevoxelbox.vsl.api.node.Node;
+import com.thevoxelbox.vsl.api.runtime.GraphRuntime;
 import com.thevoxelbox.vsl.nodes.math.compare.NumberEqualsNode;
 import com.thevoxelbox.vsl.nodes.math.compare.NumberGreaterThanNode;
 import com.thevoxelbox.vsl.nodes.math.compare.NumberGreaterThanOrEqualsNode;
 import com.thevoxelbox.vsl.nodes.math.compare.NumberLessThanNode;
 import com.thevoxelbox.vsl.nodes.math.compare.NumberLessThanOrEqualsNode;
+import com.thevoxelbox.vsl.runtime.ObjectRuntime;
+import com.thevoxelbox.vsl.util.Provider;
 
 /**
  * A set of tests for number comparison nodes
@@ -42,7 +44,7 @@ import com.thevoxelbox.vsl.nodes.math.compare.NumberLessThanOrEqualsNode;
 public class NumberComparisonTest extends StandardTest
 {
 
-    Node mockNode;
+    private GraphRuntime state;
 
     /**
      * 
@@ -51,7 +53,7 @@ public class NumberComparisonTest extends StandardTest
     public void setup()
     {
         super.setup();
-        this.mockNode = Mockito.mock(Node.class);
+        this.state = new ObjectRuntime();
     }
 
     /**
@@ -364,6 +366,11 @@ public class NumberComparisonTest extends StandardTest
         eq.exec(this.state);
 
         assertResult(false, eq.getComparisonResult());
+    }
+
+    protected <T> void assertResult(T expected, Provider<T> provider)
+    {
+        assertEquals(expected, provider.get(this.state));
     }
 
 }

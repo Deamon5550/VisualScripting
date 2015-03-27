@@ -59,7 +59,7 @@ public class OutputHelper
         String output = new String(this.newOut.toByteArray());
         output = output.replace("\n", "");
         output = output.replace("\r", "");
-        assertEquals(output, s);
+        assertEquals(s, output);
     }
 
     /**

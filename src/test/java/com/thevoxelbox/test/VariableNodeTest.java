@@ -30,10 +30,11 @@ import org.junit.Test;
 import org.mockito.Mockito;
 
 import com.thevoxelbox.vsl.api.node.Node;
+import com.thevoxelbox.vsl.api.runtime.GraphRuntime;
 import com.thevoxelbox.vsl.nodes.vars.VariableGetNode;
 import com.thevoxelbox.vsl.nodes.vars.VariableSetNode;
+import com.thevoxelbox.vsl.runtime.ObjectRuntime;
 import com.thevoxelbox.vsl.util.Provider;
-import com.thevoxelbox.vsl.util.RuntimeState;
 import com.thevoxelbox.vsl.variables.ParentedVariableScope;
 
 /**
@@ -61,7 +62,7 @@ public class VariableNodeTest
     {
         ParentedVariableScope vars = new ParentedVariableScope();
         vars.set("a", "b");
-        RuntimeState state = new RuntimeState(vars);
+        GraphRuntime state = new ObjectRuntime(vars);
 
         VariableGetNode<String> get = new VariableGetNode<String>("a");
         get.exec(state);
@@ -77,7 +78,7 @@ public class VariableNodeTest
     {
         ParentedVariableScope vars = new ParentedVariableScope();
         vars.set("a", "b");
-        RuntimeState state = new RuntimeState(vars);
+        GraphRuntime state = new ObjectRuntime(vars);
         Provider<String> target = new Provider<String>(this.mockNode, "a");
 
         VariableGetNode<String> get = new VariableGetNode<String>(target);
@@ -93,7 +94,7 @@ public class VariableNodeTest
     public void testVariableSetNode1()
     {
         ParentedVariableScope vars = new ParentedVariableScope();
-        RuntimeState state = new RuntimeState(vars);
+        GraphRuntime state = new ObjectRuntime(vars);
 
         VariableSetNode<String> get = new VariableSetNode<String>("a", "b");
         get.exec(state);
@@ -108,7 +109,7 @@ public class VariableNodeTest
     public void testVariableSetNode2()
     {
         ParentedVariableScope vars = new ParentedVariableScope();
-        RuntimeState state = new RuntimeState(vars);
+        GraphRuntime state = new ObjectRuntime(vars);
 
         Provider<String> value = new Provider<String>(this.mockNode, "b");
 
@@ -125,7 +126,7 @@ public class VariableNodeTest
     public void testVariableSetNode3()
     {
         ParentedVariableScope vars = new ParentedVariableScope();
-        RuntimeState state = new RuntimeState(vars);
+        GraphRuntime state = new ObjectRuntime(vars);
 
         Provider<String> target = new Provider<String>(this.mockNode, "a");
 
@@ -142,7 +143,7 @@ public class VariableNodeTest
     public void testVariableSetNode4()
     {
         ParentedVariableScope vars = new ParentedVariableScope();
-        RuntimeState state = new RuntimeState(vars);
+        GraphRuntime state = new ObjectRuntime(vars);
 
         Provider<String> target = new Provider<String>(this.mockNode, "a");
         Provider<String> value = new Provider<String>(this.mockNode, "b");
