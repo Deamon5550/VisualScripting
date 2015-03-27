@@ -337,7 +337,7 @@ public class VariableScopeTest extends StandardTest
 
         assertEquals(2, child.keyset().size());
     }
-    
+
     /**
      * 
      */
@@ -348,10 +348,10 @@ public class VariableScopeTest extends StandardTest
         parent.set("a", "b");
 
         assertEquals(true, parent.hasValue("a"));
-        
+
         parent.clear();
 
         assertEquals(false, parent.hasValue("a"));
     }
-    
+
 }

@@ -38,16 +38,18 @@ import com.thevoxelbox.vsl.runtime.ObjectRuntime;
  */
 public class NodeTestUtilsTest extends StandardTest
 {
-    
+
     private GraphRuntime state;
-    
+
+    /**
+     * 
+     */
     @Before
     public void setup()
     {
         super.setup();
         this.state = new ObjectRuntime();
     }
-    
 
     /**
      * 

@@ -45,9 +45,12 @@ import com.thevoxelbox.vsl.util.Provider;
  */
 public class NumberNodeTest extends StandardTest
 {
-    
+
     private GraphRuntime state;
 
+    /**
+     * 
+     */
     @Before
     public void setup()
     {
@@ -225,7 +228,7 @@ public class NumberNodeTest extends StandardTest
         assertResult(1.0, add.getResult());
     }
 
-    protected <T> void assertResult(T expected, Provider<T> provider)
+    private <T> void assertResult(T expected, Provider<T> provider)
     {
         assertEquals(expected, provider.get(this.state));
     }

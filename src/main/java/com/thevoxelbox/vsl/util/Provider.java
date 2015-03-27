@@ -117,7 +117,7 @@ public class Provider<T>
         {
             return this.value;
         }
-        Optional<T> ovalue = state.<T> get(this.uuid);
+        Optional<T> ovalue = state.<T>get(this.uuid);
         if (ovalue.isPresent())
         {
             return ovalue.get();
@@ -125,7 +125,7 @@ public class Provider<T>
         {
             this.callback.exec(state);
         }
-        return state.<T> get(this.uuid).orNull();
+        return state.<T>get(this.uuid).orNull();
     }
 
     /**
@@ -137,7 +137,7 @@ public class Provider<T>
      */
     public void set(T value, GraphRuntime state)
     {
-        state.<T> set(this.uuid, value);
+        state.<T>set(this.uuid, value);
     }
 
 }

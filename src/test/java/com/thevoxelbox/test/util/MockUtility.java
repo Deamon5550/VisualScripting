@@ -49,8 +49,8 @@ public final class MockUtility
     /**
      * Mocks a provider for the given type and initial value.
      * 
-     * @param value
-     *            The value
+     * @param value The value
+     * @param <T> The type
      * @return The provider
      */
     public static <T> Provider<T> mock(T value)

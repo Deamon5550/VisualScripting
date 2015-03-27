@@ -70,14 +70,14 @@ public class RunnableNodeGraph implements NodeGraph
             next = next.getNext();
         }
     }
-    
+
     /**
      * {@inheritDoc}
      */
     @Override
     public Node getStart()
     {
-        return this.start;  
+        return this.start;
     }
 
     /**

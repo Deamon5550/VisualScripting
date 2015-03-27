@@ -41,7 +41,7 @@ import com.thevoxelbox.vsl.util.Provider;
  */
 public class DebugNodeTest extends StandardTest
 {
-    
+
     private GraphRuntime state;
 
     /**

@@ -42,9 +42,12 @@ import com.thevoxelbox.vsl.runtime.ObjectRuntime;
  */
 public class ProgramFlowTest extends StandardTest
 {
-    
+
     private GraphRuntime state;
 
+    /**
+     * 
+     */
     @Before
     public void setup()
     {

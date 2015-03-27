@@ -57,7 +57,7 @@ public class StaticValueNode<T> extends AbstractNode
     @Override
     public void exec(GraphRuntime state)
     {
-        
+
     }
 
     /**

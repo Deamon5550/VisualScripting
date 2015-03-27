@@ -368,7 +368,7 @@ public class NumberComparisonTest extends StandardTest
         assertResult(false, eq.getComparisonResult());
     }
 
-    protected <T> void assertResult(T expected, Provider<T> provider)
+    private <T> void assertResult(T expected, Provider<T> provider)
     {
         assertEquals(expected, provider.get(this.state));
     }
